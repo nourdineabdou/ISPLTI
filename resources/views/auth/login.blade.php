@@ -6,8 +6,8 @@
                 <div class="card border-grey border-lighten-3 px-1 py-1 m-0">
                     <div class="card-header border-0">
                         <div class="card-title text-center">
-                            <img src="{{asset('app-assets/images/logo/logo-dark.png')}}"
-                                 alt="branding logo">
+                            <img width="100px" height="100px" src="{{asset('logo.jpeg')}}" alt="branding logo" class="brand-logo img-fluid">
+
                         </div>
                         <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
                             <span>
@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-outline-info btn-block"><i
-                                        class="ft-unlock"></i> Login
+                                        class="ft-unlock"></i> Se connecter
                                 </button>
                             </form>
                         </div>

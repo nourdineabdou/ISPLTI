@@ -12,7 +12,7 @@
     <title>
         {{ config('app.name', '') }} - {{ $title ?? '' }}
     </title>
-    <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/apple-icon-120.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('logo.jpeg') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
 
@@ -55,9 +55,9 @@
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
-                <li class="nav-item"><a class="navbar-brand" href="{{ route('home') }}"><img class="brand-logo" alt="modern admin logo" src="../../../app-assets/images/logo/logo.png">
+                <li class="nav-item"><a class="navbar-brand" href="{{ route('home') }}"><img class="brand-logo" alt="modern admin logo" src="{{ asset('logo.jpeg') }}">
                         <h3 class="brand-text">
-                            Institustion Name
+                            {{ config('app.name', '') }}
                         </h3>
                     </a></li>
                 <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="la la-ellipsis-v"></i></a></li>

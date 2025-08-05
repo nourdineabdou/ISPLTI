@@ -15,21 +15,8 @@ class DatabaseSeeder extends Seeder
     {
 
         $this->call([
-            UnitSeeder::class,
             PermissionTableSeeder::class,
             RoleAndPermissionSeeder::class,
-
-            MealCategorySeeder::class,
-            MealSeeder::class,
-            ProductSeeder::class,
-            TableSeeder::class,
-            PaymentMethodSeeder::class,
-            ServeurSeeder::class,
-
-            TypeEmballagesTableSeeder::class,
-            EmballagesProduitsTableSeeder::class,
-
-            StockSeeder::class,
         ]);
     }
 }
