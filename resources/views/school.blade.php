@@ -125,10 +125,10 @@
                     <div class="col-lg-6 @if(app()->getLocale() == 'ar') order-1 @endif" data-aos="fade-left" data-aos-delay="300">
                         <div class="image-stack">
                         <div class="image-stack-item image-stack-item-top" data-aos="zoom-in" data-aos-delay="400">
-                            <img src="assets-lib/img/education/campus-4.webp" alt="Campus Life" class="img-fluid rounded-4 shadow-lg">
+                            <img src="assets-lib/img/lisp/lisp1.webp" alt="Campus Life" class="img-fluid rounded-4 shadow-lg">
                         </div>
                         <div class="image-stack-item image-stack-item-bottom" data-aos="zoom-in" data-aos-delay="500">
-                            <img src="assets-lib/img/education/students-2.webp" alt="Students" class="img-fluid rounded-4 shadow-lg">
+                            <img src="assets-lib/img/lisp/info_2.webp" alt="Students" class="img-fluid rounded-4 shadow-lg">
                         </div>
                         </div>
                     </div>

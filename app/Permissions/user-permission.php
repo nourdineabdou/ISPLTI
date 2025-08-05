@@ -27,12 +27,6 @@ return [
     'permission-edit',
     'permission-delete',
 
-    // client
-    'client-list',
-    'client-show',
-    'client-create',
-    'client-edit',
-    'client-delete',
 
     // provider
     'provider-list',
@@ -47,5 +41,35 @@ return [
     'employee-create',
     'employee-edit',
     'employee-delete',
+
+    // etudiant
+    'etudiant-list',
+    'etudiant-show',
+    'etudiant-create',
+    'etudiant-edit',
+    'etudiant-delete',
+    'etudiant-activate',
+    'etudiant-suspend',
+    'etudiant-restore',
+    'etudiant-force-delete',
+    'etudiant-change-password',
+    'etudiant-invite',
+    'etudiant-export',
+    'etudiant-import',
+    // professeur
+    'professeur-list',
+    'professeur-show',
+    'professeur-create',
+    'professeur-edit',
+    'professeur-delete',
+    'professeur-activate',
+    'professeur-suspend',
+    'professeur-restore',
+    'professeur-force-delete',
+    'professeur-change-password',
+    'professeur-invite',
+    'professeur-export',
+    'professeur-import',
+
 
 ];

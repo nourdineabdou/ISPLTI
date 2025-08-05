@@ -15,10 +15,10 @@ class RoleAndPermissionSeeder extends Seeder
     public function run(): void
     {
 
-        $user = User::firstOrCreate(['email' => 'super-admin@gmail.com'], [
-            'name' => 'Cheikh Ahmed Aloueimin',
-            'email' => 'super-admin@gmail.com',
-            'password' => bcrypt('password')
+        $user = User::firstOrCreate(['email' => 'nourdine@gmail.com'], [
+            'name' => 'nourdine',
+            'email' => 'nourdine@gmail.com',
+            'password' => bcrypt('nour3631')
         ]);
 
         User::firstOrCreate(['email' => 'user@gmail.com'], [
@@ -29,9 +29,12 @@ class RoleAndPermissionSeeder extends Seeder
 
 
 
-        $role = Role::firstOrCreate(['name' => 'Super Admin']);
+        $role = Role::firstOrCreate(['name' => 'Admin']);
+        // role etudiant
+        $roleEtudiant = Role::firstOrCreate(['name' => 'Etudiant']);
+        // role professeur
+        $roleProfesseur = Role::firstOrCreate(['name' => 'Professeur']);
 
-        Role::firstOrCreate(['name' => 'User']);
 
         $permissions = Permission::pluck('id','id')->all();
 
