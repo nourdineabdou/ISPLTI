@@ -10,7 +10,7 @@
                 </li>
                 <li class="nav-item"><a class="navbar-brand" href="{{route('home')}}">
                         <img class="brand-logo" alt="modern admin logo"
-                             src="{{asset('app-assets/images/logo/logo.png')}}">
+                             src="{{asset('logo.jpeg')}}">
                         <h3 class="brand-text">
                             {{ config('app.name') }}
                         </h3>
@@ -58,19 +58,24 @@
                            data-toggle="dropdown"><i
                                 class="ficon ft-bell"></i><span
                                 class="badge badge-pill badge-danger badge-up badge-glow">
+                                0
+                                {{--
                                 @auth
                                     {{ count(auth()->user()->unreadNotifications)  ?? '' }}
-                                @endauth
+                                @endauth --}}
                             </span></a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                             <li class="dropdown-menu-header">
                                 <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span></h6>
+                                {{--
                                 @auth
                                     <span class="notification-tag badge badge-danger float-right m-0">
                                     {{ count(auth()->user()->unreadNotifications) }}
                                 </span>
                                 @endauth
+                                --}}
                             </li>
+                            {{--
                             @auth
                                 @if(count(auth()->user()->unreadNotifications) > 0)
                                     @foreach( auth()->user()->unreadNotifications()->get() as $notification)
@@ -99,11 +104,11 @@
                                                href="javascript:void(0)">
                                                 {{ __('Read all notifications') }}
                                             </a>
-                                        </li>--}}
 
                                     @endforeach
                                 @endif
                             @endauth
+                              --}}
                         </ul>
                     </li>
                     <li class="dropdown dropdown-user nav-item">

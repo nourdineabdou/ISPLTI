@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
     Route::get('', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
+
 Route::get('', [App\Http\Controllers\HomeController::class, 'page'])->name('page');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'structures'], function () {

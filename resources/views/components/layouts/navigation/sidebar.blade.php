@@ -43,18 +43,117 @@
                     <span class="menu-title">Dashboard
                     </span></a>
             </li>
-            <li class="nav-item {{ is_active(route("home_residence")) }}">
-                <a href="{{ route('home_residence') }}">
-                    <i class="la la-hotel"></i>
-                    <span class="menu-title">Dashboard Residence
-                    </span></a>
-            </li>
-            <li class="nav-item {{ is_active(route("home_css")) }}">
-                <a href="{{ route('home_css') }}">
-                    <i class="la la-building"></i>
-                    <span class="menu-title">Dashboard CSS
-                    </span></a>
-            </li>
+            @if(auth()->user()->hasRole('Admin'))
+                {{-- ajouter un etudiant --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-user-graduate"></i>
+                        <span class="menu-title">Gestion des Étudiants</span>
+                    </a>
+                </li>
+                {{-- ajouter un professeur --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-chalkboard-teacher"></i>
+                        <span class="menu-title">Gestion des Professeurs</span>
+                    </a>
+                </li>
+                {{-- ajouter un cours --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-book"></i>
+                        <span class="menu-title">Gestion des Cours</span>
+                    </a>
+                </li>
+
+                {{-- annee scolaire --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-calendar"></i>
+                        <span class="menu-title">Gestion des Années Scolaires</span>
+                    </a>
+                </li>
+                {{-- niveau etude --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-graduation-cap"></i>
+                        <span class="menu-title">Gestion des Niveaux d’Étude</span>
+                    </a>
+                </li>
+                {{-- ajouter un examen --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-pencil-alt"></i>
+                        <span class="menu-title">Gestion des Examens</span>
+                    </a>
+                </li>
+                {{-- ajouter un emploi du temps --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-clock"></i>
+                        <span class="menu-title">Gestion des Emplois du Temps</span>
+                    </a>
+                </li>
+                {{-- ajouter un document --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-file"></i>
+                        <span class="menu-title">Gestion des Documents</span>
+                    </a>
+                </li>
+                {{-- ajouter un parametre --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-cog"></i>
+                        <span class="menu-title">Paramètres</span>
+                    </a>
+                </li>
+                @elseif(auth()->user()->hasRole('Professeur'))
+                {{-- profill --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-user"></i>
+                        <span class="menu-title">Mon Profil</span>
+                    </a>
+                </li>
+                {{-- mes cours --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-book"></i>
+                        <span class="menu-title">Mes Cours</span>
+                    </a>
+                </li>
+                @elseif(auth()->user()->hasRole('Etudiant'))
+              {{-- profill --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-user"></i>
+                        <span class="menu-title">Mon Profil</span>
+                    </a>
+                </li>
+                {{-- attestation --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-file-alt"></i>
+                        <span class="menu-title">Attestation</span>
+                    </a>
+                </li>
+                {{-- les  cours  --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-book"></i>
+                        <span class="menu-title">Mes Cours</span>
+                    </a>
+                </li>
+                {{-- mes documents --}}
+                <li class="nav-item ">
+                    <a href="#">
+                        <i class="la la-file"></i>
+                        <span class="menu-title">Mes Documents</span>
+                    </a>
+                </li>
+
+            @endif
             {{--<li class=" nav-item"><a href="#"><i class="la la-television"></i>
                     <span class="menu-title">Templates</span></a>
                 <ul class="menu-content">
