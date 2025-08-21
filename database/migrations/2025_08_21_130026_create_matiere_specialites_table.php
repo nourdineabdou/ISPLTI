@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('matiere_specialites', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('matiere_id')->constrained('matieres')->cascadeOnDelete();
+            $table->integer('matiere_id');
             $table->string('elementprfl_id', 20)->nullable();
-            $table->foreignId('module_id')->nullable()->constrained('modules')->nullOnDelete();
-            $table->foreignId('specialite_id')->nullable()->constrained('specialites')->nullOnDelete();
-            $table->foreignId('semestre_id')->nullable()->constrained('semestres')->nullOnDelete();
-            $table->foreignId('annee_univ_id')->constrained('annee_univs')->cascadeOnDelete();
+            $table->integer('module_id')->nullable();
+            $table->integer('specialite_id')->nullable();
+            $table->integer('semestre_id')->nullable();
+            $table->integer('annee_univ_id');
 
             $table->double('credit')->default(0);
             $table->double('coefficient');
