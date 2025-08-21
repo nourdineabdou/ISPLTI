@@ -24,7 +24,7 @@ return new class extends Migration
             $table->double('total_credit')->nullable();
             $table->string('option_an_diplome', 2)->default('A');
 
-            $table->foreignId('annee_univ_id')->nullable()->constrained('annees_univ')->nullOnDelete();
+            $table->foreignId('annee_univ_id')->nullable();
             $table->boolean('etat_suppression')->default(0);
             $table->boolean('session')->default(0);
 
