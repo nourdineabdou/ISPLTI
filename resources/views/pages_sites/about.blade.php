@@ -30,7 +30,7 @@
                     <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h4>2015</h4>
+                        <h4>2014</h4>
                         <p>@lang('system.Timeline_2015')</p>
                     </div>
                     </div>
@@ -38,7 +38,15 @@
                     <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h4>2020</h4>
+                        <h4>2015-2016</h4>
+                        <p>@lang('system.Timeline_20152016')</p>
+                    </div>
+                    </div>
+
+                    <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>2017-2018</h4>
                         <p>@lang('system.Timeline_2020')</p>
                     </div>
                     </div>
@@ -46,7 +54,15 @@
                     <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h4>2022</h4>
+                        <h4>2020-2021</h4>
+                        <p>@lang('system.Timeline_202021')</p>
+                    </div>
+                    </div>
+
+                    <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>2021-2022 / 2024-2025</h4>
                         <p>@lang('system.Timeline_2022')</p>
                     </div>
                     </div>
@@ -54,7 +70,7 @@
                     <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h4>2023</h4>
+                        <h4>2022-2023</h4>
                         <p>@lang('system.Timeline_2023')</p>
                     </div>
                     </div>
