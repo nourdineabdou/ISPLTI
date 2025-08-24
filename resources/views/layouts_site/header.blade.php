@@ -9,8 +9,8 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('page') }}" class="active">@lang('system.Accueil')</a></li>
-          <li><a href="{{ route('pages.about') }}"><span>@lang('system.A_propos')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li><a href="{{ route('page') }}" class=" {{ request()->routeIs('page') ? 'active' : '' }}">@lang('system.Accueil')</a></li>
+          <li><a href="{{ route('pages.about') }}" class="{{ request()->routeIs('pages.about') ? 'active' : '' }}"><span>@lang('system.A_propos')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
            {{--
             <ul>
               <li><a href="about.html">@lang('system.Notre_Institut')</a></li>
@@ -22,9 +22,9 @@
             --}}
           </li>
 
-          <li><a href="{{ route('pages.viesEstudiantine') }}">@lang('system.Vie_Etudiante')</a></li>
-          <li><a href="{{ route('pages.actualite') }}">@lang('system.Actualites')</a></li>
-          <li><a href="{{ route('pages.events') }}">@lang('system.Evenements')</a></li>
+          <li><a href="{{ route('pages.viesEstudiantine') }}" class="{{ request()->routeIs('pages.viesEstudiantine') ? 'active' : '' }}">@lang('system.Vie_Etudiante')</a></li>
+          <li><a href="{{ route('pages.actualite') }}" class="{{ request()->routeIs('pages.actualite') ? 'active' : '' }}">@lang('system.Actualites')</a></li>
+          <li><a href="{{ route('pages.events') }}" class="{{ request()->routeIs('pages.events') ? 'active' : '' }}">@lang('system.Evenements')</a></li>
           {{--
           <li><a href="alumni.html">Anciens Élèves</a></li>
           --}}
