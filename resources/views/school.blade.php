@@ -10,7 +10,7 @@
                 <div class="row align-items-center @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
                         <div class="col-lg-7 @if(app()->getLocale() == 'ar') order-2 @endif" data-aos="zoom-out" data-aos-delay="100">
                         <div class="hero-content">
-                            <h1>ISPLTI</h1>
+                            <h1></h1>
                             <p>@lang('system.Institut_slogan')</p>
                             <div class="cta-buttons">
                             <a href="#" class="btn-primary">@lang('system.Cta_commencez_parcours')</a>
@@ -30,7 +30,7 @@
                                 <i class="bi bi-trophy-fill"></i>
                                 </div>
                                 <div class="stat-content">
-                                <h4>98%</h4>
+                                <h4>71%</h4>
                                 <p>@lang('system.Emploi_diplomes')</p>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                                 <i class="bi bi-globe"></i>
                                 </div>
                                 <div class="stat-content">
-                                <h4>45+</h4>
+                                <h4>2+</h4>
                                 <p>@lang('system.Partenaires_internationaux')</p>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                 <i class="bi bi-mortarboard"></i>
                                 </div>
                                 <div class="stat-content">
-                                <h4>15:1</h4>
+                                <h4>185</h4>
                                 <p>@lang('system.Ratio_etudiants_enseignants')</p>
                                 </div>
                             </div>
@@ -57,7 +57,7 @@
                                 <i class="bi bi-building"></i>
                                 </div>
                                 <div class="stat-content">
-                                <h4>120+</h4>
+                                <h4>9+</h4>
                                 <p>@lang('system.Programmes_diplomants')</p>
                                 </div>
                             </div>
@@ -127,15 +127,15 @@
                             </div>
                         <div class="d-flex flex-wrap gap-4 mb-4">
                         <div class="stat-box">
-                            <span class="stat-number"><span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>+</span>
+                            <span class="stat-number"><span data-purecounter-start="0" data-purecounter-end="9" data-purecounter-duration="1" class="purecounter"></span>+</span>
                             <span class="stat-label">@lang('system.Années')</span>
                         </div>
                         <div class="stat-box">
-                            <span class="stat-number"><span data-purecounter-start="0" data-purecounter-end="2500" data-purecounter-duration="1" class="purecounter"></span>+</span>
+                            <span class="stat-number"><span data-purecounter-start="0" data-purecounter-end="1222" data-purecounter-duration="1" class="purecounter"></span>+</span>
                             <span class="stat-label">@lang('system.Étudiants')</span>
                         </div>
                         <div class="stat-box">
-                            <span class="stat-number"><span data-purecounter-start="0" data-purecounter-end="125" data-purecounter-duration="1" class="purecounter"></span>+</span>
+                            <span class="stat-number"><span data-purecounter-start="0" data-purecounter-end="18" data-purecounter-duration="1" class="purecounter"></span>+</span>
                             <span class="stat-label">@lang('system.Enseignants')</span>
                         </div>
                         </div>
@@ -224,13 +224,13 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="program-content">
-                                <h3>@lang('system.Informatique')</h3>
+                                <h3>@lang('system.Langue_ang_ar')</h3>
                                 <div class="program-highlights">
-                                <span><i class="bi bi-clock"></i> 4 ans</span>
-                                <span><i class="bi bi-people-fill"></i> 120 crédits</span>
-                                <span><i class="bi bi-calendar3"></i> Automne &amp; Printemps</span>
+                                <span><i class="bi bi-clock"></i> 3 سنوات  </span>
+                                <span><i class="bi bi-people-fill"></i> الأرصدة 180 </span>
+                                <span><i class="bi bi-calendar3"></i> اكتوبر &amp; يونيو</span>
                                 </div>
-                                <p>@lang('system.Formation_informatique')</p>
+                                <p>@lang('system.Formation_langues')</p>
                                 <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </div>
@@ -249,13 +249,13 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="program-content">
-                                <h3>Administration des affaires</h3>
+                                <h3>@lang('system.Langue_ang_fr')</h3>
                                 <div class="program-highlights">
-                                <span><i class="bi bi-clock"></i> 3 ans</span>
-                                <span><i class="bi bi-people-fill"></i> 90 crédits</span>
-                                <span><i class="bi bi-calendar3"></i> Automne uniquement</span>
+                                <span><i class="bi bi-clock"></i> 3 سنوات  </span>
+                                <span><i class="bi bi-people-fill"></i> الأرصدة 180 </span>
+                                <span><i class="bi bi-calendar3"></i> اكتوبر &amp; يونيو</span>
                                 </div>
-                                <p>@lang('system.Formation_gestion')</p>
+                                <p>@lang('system.Formation_langues')</p>
                                 <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </div>
@@ -274,13 +274,13 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="program-content">
-                                <h3>@lang('system.Sciences_médicales')</h3>
+                                <h3>@lang('system.Langue_ar_fr')</h3>
                                 <div class="program-highlights">
-                                <span><i class="bi bi-clock"></i> 5 ans</span>
-                                <span><i class="bi bi-people-fill"></i> 150 crédits</span>
-                                <span><i class="bi bi-calendar3"></i> Automne uniquement</span>
+                                <span><i class="bi bi-clock"></i> 3 سنوات  </span>
+                                <span><i class="bi bi-people-fill"></i> الأرصدة 180 </span>
+                                <span><i class="bi bi-calendar3"></i> اكتوبر &amp; يونيو</span>
                                 </div>
-                                <p>@lang('system.Formation_medicale')</p>
+                                <p>@lang('system.Formation_langues')</p>
                                 <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </div>
@@ -299,13 +299,13 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="program-content">
-                                <h3>@lang('system.Génie_mécanique')</h3>
+                                <h3>@lang('system.master_ang_ar')</h3>
                                 <div class="program-highlights">
-                                <span><i class="bi bi-clock"></i> 2 ans</span>
-                                <span><i class="bi bi-people-fill"></i> 60 crédits</span>
-                                <span><i class="bi bi-calendar3"></i> Printemps uniquement</span>
+                                <span><i class="bi bi-clock"></i> سنتين</span>
+                                <span><i class="bi bi-people-fill"></i> 120 رصيد </span>
+                                <span><i class="bi bi-calendar3"></i>  اكتوبر &amp; يونيو</span>
                                 </div>
-                                <p>@lang('system.Formation_environnement')</p>
+                                <p>@lang('system.Formation_langues')</p>
                                 <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
                                 </div>
                             </div>
@@ -315,7 +315,7 @@
 
                         <div class="col-lg-6 isotope-item filter-master" data-aos="zoom-in" data-aos-delay="200">
                         <div class="program-item">
-                            <div class="program-badge">@lang('system.Master')</div>
+                            <div class="program-badge">@lang('system.Formation_continue')</div>
                             <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="program-image-wrapper">
@@ -324,11 +324,11 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="program-content">
-                                <h3>@lang('system.Génie_mécanique')</h3>
+                                <h3>@lang('system.Formation_continue')</h3>
                                 <div class="program-highlights">
-                                <span><i class="bi bi-clock"></i> 2 ans</span>
-                                <span><i class="bi bi-people-fill"></i> 64 crédits</span>
-                                <span><i class="bi bi-calendar3"></i> Automne &amp; Printemps</span>
+                                <span><i class="bi bi-clock"></i> </span>
+                                <span><i class="bi bi-people-fill"></i>50 ساعة</span>
+                                <span><i class="bi bi-calendar3"></i> </span>
                                 </div>
                                 <p>@lang('system.Formation_mecanique')</p>
                                 <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
@@ -338,30 +338,7 @@
                         </div>
                         </div><!-- End Program Item -->
 
-                        <div class="col-lg-6 isotope-item filter-certificate" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="program-item">
-                            <div class="program-badge">@lang('system.Certificat')</div>
-                            <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="program-image-wrapper">
-                                <img src="assets-lib/img/education/education-2.webp" class="img-fluid" alt="Program">
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="program-content">
-                                <h3>@lang('system.Science_des_données')</h3>
-                                <div class="program-highlights">
-                                <span><i class="bi bi-clock"></i> 6 mois</span>
-                                <span><i class="bi bi-people-fill"></i> 24 crédits</span>
-                                <span><i class="bi bi-calendar3"></i> Toute l'année</span>
-                                </div>
-                                <p>@lang('system.Formation_data')</p>
-                                <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        </div><!-- End Program Item -->
+                       <!-- End Program Item -->
 
                     </div>
                     </div>
@@ -610,7 +587,7 @@
                             <i class="bi bi-person-workspace"></i>
                         </div>
                         <div class="stats-number">
-                            <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>:1
+                            <span data-purecounter-start="0" data-purecounter-end="185" data-purecounter-duration="1" class="purecounter"></span>
                         </div>
                         <div class="stats-label">@lang('system.Ratio_etudiants_enseignants')</div>
                         </div>
@@ -621,7 +598,7 @@
                             <i class="bi bi-award"></i>
                         </div>
                         <div class="stats-number">
-                            <span data-purecounter-start="0" data-purecounter-end="125" data-purecounter-duration="1" class="purecounter"></span>+
+                            <span data-purecounter-start="0" data-purecounter-end="1" data-purecounter-duration="1" class="purecounter"></span>+
                         </div>
                         <div class="stats-label">@lang('system.Programmes_academiques')</div>
                         </div>
@@ -631,7 +608,7 @@
                         <div class="stats-icon">
                             <i class="bi bi-cash-stack"></i>
                         </div>
-                        <div class="stats-number">MRU<span data-purecounter-start="0" data-purecounter-end="42" data-purecounter-duration="1" class="purecounter"></span>M
+                        <div class="stats-number"><span data-purecounter-start="0" data-purecounter-end="" data-purecounter-duration="1" class="purecounter"></span>
                         </div>
                         <div class="stats-label">@lang('system.Financement_recherche')</div>
                         </div>
