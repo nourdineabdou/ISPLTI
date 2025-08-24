@@ -30,32 +30,32 @@
                     <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h4>1965</h4>
-                        <p>@lang('system.Timeline_1965')</p>
+                        <h4>2015</h4>
+                        <p>@lang('system.Timeline_2015')</p>
                     </div>
                     </div>
 
                     <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h4>1982</h4>
-                        <p>@lang('system.Timeline_1982')</p>
+                        <h4>2020</h4>
+                        <p>@lang('system.Timeline_2020')</p>
                     </div>
                     </div>
 
                     <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h4>1998</h4>
-                        <p>@lang('system.Timeline_1998')</p>
+                        <h4>2022</h4>
+                        <p>@lang('system.Timeline_2022')</p>
                     </div>
                     </div>
 
                     <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h4>2010</h4>
-                        <p>@lang('system.Timeline_2010')</p>
+                        <h4>2023</h4>
+                        <p>@lang('system.Timeline_2023')</p>
                     </div>
                     </div>
                 </div>
@@ -80,56 +80,63 @@
                 </div>
             </div>
             </div>
-
+            {{-- Core Values Section --}}
             <div class="row mt-5">
-            <div class="col-lg-12">
-                <div class="core-values" data-aos="fade-up" data-aos-delay="500">
-                <h3 class="text-center mb-4">@lang('system.Core_Values')</h3>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-                    <div class="col">
-                    <div class="value-card">
-                        <div class="value-icon">
-                        <i class="bi bi-book"></i>
-                        </div>
-                        <h4>@lang('system.Academic_Excellence')</h4>
-                        <p>@lang('system.Academic_Excellence_Desc')</p>
-                    </div>
-                    </div>
 
-                    <div class="col">
-                    <div class="value-card">
-                        <div class="value-icon">
-                        <i class="bi bi-people"></i>
+                <div class="col-lg-12">
+                    <div class="core-values" data-aos="fade-up" data-aos-delay="500">
+                        <h3 class="text-center mb-4">معطيات عن المعهد</h3>
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" dir="rtl" lang="ar" style="font-family: 'Cairo', 'Tajawal', Arial, sans-serif;">
+                            <div class="col">
+                                <div class="value-card">
+                                    <div class="value-icon"><i class="bi bi-people"></i></div>
+                                    <h4>عدد الطلاب المسجلين من 2015 إلى 2024</h4>
+                                    <p>1222</p>
+                                    <h4>عدد الطلاب (2025-2024)</h4>
+                                    <p>395</p>
+                                    <h4>عدد الخريجين</h4>
+                                    <p>185 توجوا بشهادة الليسانس مهنية مزدوجة في مجال اللغات والتواصل.</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="value-card">
+                                    <div class="value-icon"><i class="bi bi-person-badge"></i></div>
+                                    <h4>عدد الأساتذة</h4>
+                                    <p>18 بينهم 9 رسميون</p>
+                                    <h4>عدد العمال</h4>
+                                    <p>14</p>
+                                    <h4>مدرج بسعة</h4>
+                                    <p>240 مقعداً</p>
+                                    <h4>14 قاعة للتدريس</h4>
+                                    <p>قاعتان للمحاضرات</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="value-card">
+                                    <div class="value-icon"><i class="bi bi-laptop"></i></div>
+                                    <h4>مختبرات للغات</h4>
+                                    <p>مجهزة بـ 60 جهاز كمبيوتر</p>
+                                    <h4>أكشاك ترجمة فورية</h4>
+                                    <p>4 أكشاك</p>
+                                    <h4>قاعة مطالعة</h4>
+                                    <p>الشراكات:</p>
+                                    <p>المعهد العالي للتعليم التكنولوجي بروصو<br>معهد كوفشيوس</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="value-card">
+                                    <div class="value-icon"><i class="bi bi-stars"></i></div>
+                                    <h4>آفاق التوسع</h4>
+                                    <p>شراكة بين المعهد ومدرسة فهد العليا للترجمة<br>شراكة بين المعهد وإيراسموس ابلاس<br>انطلاق التكوين المستمر</p>
+                                    <h4>الميزات</h4>
+                                    <p>يشكل المعهد فرصة لأبناء الولاية من أجل الاستمرار في الدراسات العليا بين ذويهم دون الحاجة إلى السفر خارج العاصمة الاقتصادية، مما سيحد من التسرب المدرسي، ويزيد من الكفاءات في مجال مهن اللغات. كما أنه لا يتأثر كثيراً بالمشاكل التي تعاني منها المدينة في مجال الماء والكهرباء، حيث يمتلك مولداً كهربائياً وخزانات مياه، يتم تسييرها بشكل محكم.</p>
+                                </div>
+                            </div>
                         </div>
-                        <h4>@lang('system.Community_Engagement')</h4>
-                        <p>@lang('system.Community_Engagement_Desc')</p>
-                    </div>
-                    </div>
-
-                    <div class="col">
-                    <div class="value-card">
-                        <div class="value-icon">
-                        <i class="bi bi-lightbulb"></i>
-                        </div>
-                        <h4>@lang('system.Innovation')</h4>
-                        <p>@lang('system.Innovation_Desc')</p>
-                    </div>
-                    </div>
-
-                    <div class="col">
-                    <div class="value-card">
-                        <div class="value-icon">
-                        <i class="bi bi-globe"></i>
-                        </div>
-                        <h4>@lang('system.Global_Perspective')</h4>
-                        <p>@lang('system.Global_Perspective_Desc')</p>
-                    </div>
                     </div>
                 </div>
-                </div>
             </div>
-            </div>
-
+            {{-- end Core Values Section --}}
         </div>
 
         </section><!-- /History Section -->

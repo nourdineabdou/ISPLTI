@@ -95,14 +95,39 @@
             <section id="about" class="about section">
 
                 <div class="container" data-aos="fade-up" data-aos-delay="100">
-
+                    {{-- start --}}
                     <div class="row mb-5 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
                     <div class="col-lg-6 pe-lg-5 @if(app()->getLocale() == 'ar') order-2 @endif" data-aos="fade-right" data-aos-delay="200">
                         <h2 class="display-6 fw-bold mb-4">@lang('system.Eveiller_les_esprits'), <span>@lang('system.Façonner_les_avenirs')</span></h2>
                         <p class="lead mb-4">@lang('system.Institut_engagement')</p>
+                            <!-- Présentation de l'institut (RTL pour arabe, LTR autrement) -->
+                            @if(app()->getLocale() == 'ar')
+                                <div class="col-md-12 mt-4" dir="rtl" lang="ar" style="font-family: 'Cairo', 'Tajawal', Arial, sans-serif;">
+                            @else
+                                <div class="col-md-12 mt-4" lang="{{ app()->getLocale() }}" style="font-family: 'Cairo', 'Tajawal', Arial, sans-serif;">
+                            @endif
+                                <p>@lang('system.Institut_description')</p>
+                                <h5 class="fw-bold mt-3 mb-2">@lang('system.Training_Offers_Title')</h5>
+                                <ul>
+                                    <li>@lang('system.Training_Offer_1')</li>
+                                    <li>@lang('system.Training_Offer_2')</li>
+                                    <li>@lang('system.Training_Offer_3')</li>
+                                </ul>
+                                <h5 class="fw-bold mt-3 mb-2">@lang('system.Employment_Opportunities_Title')</h5>
+                                <ul>
+                                    <li>@lang('system.Employment_Opportunity_1')</li>
+                                    <li>@lang('system.Employment_Opportunity_2')</li>
+                                    <li>@lang('system.Employment_Opportunity_3')</li>
+                                    <li>@lang('system.Employment_Opportunity_4')</li>
+                                    <li>@lang('system.Employment_Opportunity_5')</li>
+                                    <li>@lang('system.Employment_Opportunity_6')</li>
+                                    <li>@lang('system.Employment_Opportunity_7')</li>
+                                    <li>@lang('system.Employment_Opportunity_8')</li>
+                                </ul>
+                            </div>
                         <div class="d-flex flex-wrap gap-4 mb-4">
                         <div class="stat-box">
-                            <span class="stat-number"><span data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="1" class="purecounter"></span>+</span>
+                            <span class="stat-number"><span data-purecounter-start="0" data-purecounter-end="10" data-purecounter-duration="1" class="purecounter"></span>+</span>
                             <span class="stat-label">@lang('system.Années')</span>
                         </div>
                         <div class="stat-box">
@@ -135,35 +160,35 @@
                     </div>
 
                     <div class="row mission-vision-row g-4 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="value-card h-100">
-                        <div class="card-icon">
-                            <i class="bi bi-rocket-takeoff"></i>
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="value-card h-100">
+                            <div class="card-icon">
+                                <i class="bi bi-rocket-takeoff"></i>
+                            </div>
+                            <h3>@lang('system.Notre_mission')</h3>
+                            <p>@lang('system.Notre_mission_desc')</p>
+                            </div>
                         </div>
-                        <h3>@lang('system.Notre_mission')</h3>
-                        <p>@lang('system.Notre_mission_desc')</p>
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="value-card h-100">
+                            <div class="card-icon">
+                                <i class="bi bi-eye"></i>
+                            </div>
+                            <h3>@lang('system.Notre_vision')</h3>
+                            <p>@lang('system.Notre_vision_desc')</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                            <div class="value-card h-100">
+                            <div class="card-icon">
+                                <i class="bi bi-star"></i>
+                            </div>
+                            <h3>@lang('system.Nos_valeurs')</h3>
+                            <p>@lang('system.Nos_valeurs_desc')</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="value-card h-100">
-                        <div class="card-icon">
-                            <i class="bi bi-eye"></i>
-                        </div>
-                        <h3>@lang('system.Notre_vision')</h3>
-                        <p>@lang('system.Notre_vision_desc')</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="value-card h-100">
-                        <div class="card-icon">
-                            <i class="bi bi-star"></i>
-                        </div>
-                        <h3>@lang('system.Nos_valeurs')</h3>
-                        <p>@lang('system.Nos_valeurs_desc')</p>
-                        </div>
-                    </div>
-                    </div>
-
+                     {{-- end --}}
                 </div>
 
             </section><!-- /About Section -->
@@ -171,177 +196,177 @@
             <!-- Section Programmes phares -->
             <section id="featured-programs" class="featured-programs section">
 
-            <!-- Section Title -->
-            <div class="container section-title @if(app()->getLocale() == 'ar') text-end @endif" data-aos="fade-up">
-                <h2>@lang('system.Programmes_phares')</h2>
-                <p>@lang('system.Programmes_phares_desc')</p>
-            </div><!-- End Section Title -->
+                <!-- Section Title -->
+                <div class="container section-title @if(app()->getLocale() == 'ar') text-end @endif" data-aos="fade-up">
+                    <h2>@lang('system.Programmes_phares')   </h2>
+                    <p>@lang('system.Programmes_phares_desc')</p>
+                </div><!-- End Section Title -->
 
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-                <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-                <ul class="program-filters isotope-filters @if(app()->getLocale() == 'ar') justify-content-end @endif" data-aos="fade-up" data-aos-delay="100">
-                    <li data-filter="*" class="filter-active">@lang('system.Tous_les_programmes')</li>
-                    <li data-filter=".filter-bachelor">@lang('system.Licence')</li>
-                    <li data-filter=".filter-master">@lang('system.Master')</li>
-                    <li data-filter=".filter-certificate">@lang('system.Certificats')</li>
-                </ul>
+                    <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+                    <ul class="program-filters isotope-filters @if(app()->getLocale() == 'ar') justify-content-end @endif" data-aos="fade-up" data-aos-delay="100">
+                        <li data-filter="*" class="filter-active">@lang('system.Tous_les_programmes')</li>
+                        <li data-filter=".filter-bachelor">@lang('system.Licence')</li>
+                        <li data-filter=".filter-master">@lang('system.Master')</li>
+                        <li data-filter=".filter-certificate">@lang('system.Certificats')</li>
+                    </ul>
 
-                <div class="row g-4 isotope-container @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
-                    <div class="col-lg-6 isotope-item filter-bachelor" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="program-item">
-                        <div class="program-badge">@lang('system.Licence')</div>
-                        <div class="row g-0">
-                        <div class="col-md-4">
-                            <div class="program-image-wrapper">
-                            <img src="assets-lib/img/education/education-1.webp" class="img-fluid" alt="Program">
+                    <div class="row g-4 isotope-container @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
+                        <div class="col-lg-6 isotope-item filter-bachelor" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="program-item">
+                            <div class="program-badge">@lang('system.Licence')</div>
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="program-image-wrapper">
+                                <img src="assets-lib/img/education/education-1.webp" class="img-fluid" alt="Program">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="program-content">
+                                <h3>@lang('system.Informatique')</h3>
+                                <div class="program-highlights">
+                                <span><i class="bi bi-clock"></i> 4 ans</span>
+                                <span><i class="bi bi-people-fill"></i> 120 crédits</span>
+                                <span><i class="bi bi-calendar3"></i> Automne &amp; Printemps</span>
+                                </div>
+                                <p>@lang('system.Formation_informatique')</p>
+                                <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="program-content">
-                            <h3>@lang('system.Informatique')</h3>
-                            <div class="program-highlights">
-                            <span><i class="bi bi-clock"></i> 4 ans</span>
-                            <span><i class="bi bi-people-fill"></i> 120 crédits</span>
-                            <span><i class="bi bi-calendar3"></i> Automne &amp; Printemps</span>
+                        </div><!-- End Program Item -->
+
+                        <div class="col-lg-6 isotope-item filter-bachelor" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="program-item">
+                            <div class="program-badge">@lang('system.Licence')</div>
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="program-image-wrapper">
+                                <img src="assets-lib/img/education/education-3.webp" class="img-fluid" alt="Program">
+                                </div>
                             </div>
-                            <p>@lang('system.Formation_informatique')</p>
-                            <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
+                            <div class="col-md-8">
+                                <div class="program-content">
+                                <h3>Administration des affaires</h3>
+                                <div class="program-highlights">
+                                <span><i class="bi bi-clock"></i> 3 ans</span>
+                                <span><i class="bi bi-people-fill"></i> 90 crédits</span>
+                                <span><i class="bi bi-calendar3"></i> Automne uniquement</span>
+                                </div>
+                                <p>@lang('system.Formation_gestion')</p>
+                                <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
                             </div>
                         </div>
+                        </div><!-- End Program Item -->
+
+                        <div class="col-lg-6 isotope-item filter-bachelor" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="program-item">
+                            <div class="program-badge">@lang('system.Licence')</div>
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="program-image-wrapper">
+                                <img src="assets-lib/img/education/education-5.webp" class="img-fluid" alt="Program">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="program-content">
+                                <h3>@lang('system.Sciences_médicales')</h3>
+                                <div class="program-highlights">
+                                <span><i class="bi bi-clock"></i> 5 ans</span>
+                                <span><i class="bi bi-people-fill"></i> 150 crédits</span>
+                                <span><i class="bi bi-calendar3"></i> Automne uniquement</span>
+                                </div>
+                                <p>@lang('system.Formation_medicale')</p>
+                                <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            </div>
                         </div>
+                        </div><!-- End Program Item -->
+
+                        <div class="col-lg-6 isotope-item filter-master" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="program-item">
+                            <div class="program-badge">@lang('system.Master')</div>
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="program-image-wrapper">
+                                <img src="assets-lib/img/education/education-7.webp" class="img-fluid" alt="Program">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="program-content">
+                                <h3>@lang('system.Génie_mécanique')</h3>
+                                <div class="program-highlights">
+                                <span><i class="bi bi-clock"></i> 2 ans</span>
+                                <span><i class="bi bi-people-fill"></i> 60 crédits</span>
+                                <span><i class="bi bi-calendar3"></i> Printemps uniquement</span>
+                                </div>
+                                <p>@lang('system.Formation_environnement')</p>
+                                <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div><!-- End Program Item -->
+
+                        <div class="col-lg-6 isotope-item filter-master" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="program-item">
+                            <div class="program-badge">@lang('system.Master')</div>
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="program-image-wrapper">
+                                <img src="assets-lib/img/education/education-9.webp" class="img-fluid" alt="Program">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="program-content">
+                                <h3>@lang('system.Génie_mécanique')</h3>
+                                <div class="program-highlights">
+                                <span><i class="bi bi-clock"></i> 2 ans</span>
+                                <span><i class="bi bi-people-fill"></i> 64 crédits</span>
+                                <span><i class="bi bi-calendar3"></i> Automne &amp; Printemps</span>
+                                </div>
+                                <p>@lang('system.Formation_mecanique')</p>
+                                <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div><!-- End Program Item -->
+
+                        <div class="col-lg-6 isotope-item filter-certificate" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="program-item">
+                            <div class="program-badge">@lang('system.Certificat')</div>
+                            <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="program-image-wrapper">
+                                <img src="assets-lib/img/education/education-2.webp" class="img-fluid" alt="Program">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="program-content">
+                                <h3>@lang('system.Science_des_données')</h3>
+                                <div class="program-highlights">
+                                <span><i class="bi bi-clock"></i> 6 mois</span>
+                                <span><i class="bi bi-people-fill"></i> 24 crédits</span>
+                                <span><i class="bi bi-calendar3"></i> Toute l'année</span>
+                                </div>
+                                <p>@lang('system.Formation_data')</p>
+                                <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div><!-- End Program Item -->
+
                     </div>
-                    </div><!-- End Program Item -->
-
-                    <div class="col-lg-6 isotope-item filter-bachelor" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="program-item">
-                        <div class="program-badge">@lang('system.Licence')</div>
-                        <div class="row g-0">
-                        <div class="col-md-4">
-                            <div class="program-image-wrapper">
-                            <img src="assets-lib/img/education/education-3.webp" class="img-fluid" alt="Program">
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="program-content">
-                            <h3>Administration des affaires</h3>
-                            <div class="program-highlights">
-                            <span><i class="bi bi-clock"></i> 3 ans</span>
-                            <span><i class="bi bi-people-fill"></i> 90 crédits</span>
-                            <span><i class="bi bi-calendar3"></i> Automne uniquement</span>
-                            </div>
-                            <p>@lang('system.Formation_gestion')</p>
-                            <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        </div>
                     </div>
-                    </div><!-- End Program Item -->
-
-                    <div class="col-lg-6 isotope-item filter-bachelor" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="program-item">
-                        <div class="program-badge">@lang('system.Licence')</div>
-                        <div class="row g-0">
-                        <div class="col-md-4">
-                            <div class="program-image-wrapper">
-                            <img src="assets-lib/img/education/education-5.webp" class="img-fluid" alt="Program">
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="program-content">
-                            <h3>@lang('system.Sciences_médicales')</h3>
-                            <div class="program-highlights">
-                            <span><i class="bi bi-clock"></i> 5 ans</span>
-                            <span><i class="bi bi-people-fill"></i> 150 crédits</span>
-                            <span><i class="bi bi-calendar3"></i> Automne uniquement</span>
-                            </div>
-                            <p>@lang('system.Formation_medicale')</p>
-                            <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div><!-- End Program Item -->
-
-                    <div class="col-lg-6 isotope-item filter-master" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="program-item">
-                        <div class="program-badge">@lang('system.Master')</div>
-                        <div class="row g-0">
-                        <div class="col-md-4">
-                            <div class="program-image-wrapper">
-                            <img src="assets-lib/img/education/education-7.webp" class="img-fluid" alt="Program">
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="program-content">
-                            <h3>@lang('system.Génie_mécanique')</h3>
-                            <div class="program-highlights">
-                            <span><i class="bi bi-clock"></i> 2 ans</span>
-                            <span><i class="bi bi-people-fill"></i> 60 crédits</span>
-                            <span><i class="bi bi-calendar3"></i> Printemps uniquement</span>
-                            </div>
-                            <p>@lang('system.Formation_environnement')</p>
-                            <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div><!-- End Program Item -->
-
-                    <div class="col-lg-6 isotope-item filter-master" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="program-item">
-                        <div class="program-badge">@lang('system.Master')</div>
-                        <div class="row g-0">
-                        <div class="col-md-4">
-                            <div class="program-image-wrapper">
-                            <img src="assets-lib/img/education/education-9.webp" class="img-fluid" alt="Program">
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="program-content">
-                            <h3>@lang('system.Génie_mécanique')</h3>
-                            <div class="program-highlights">
-                            <span><i class="bi bi-clock"></i> 2 ans</span>
-                            <span><i class="bi bi-people-fill"></i> 64 crédits</span>
-                            <span><i class="bi bi-calendar3"></i> Automne &amp; Printemps</span>
-                            </div>
-                            <p>@lang('system.Formation_mecanique')</p>
-                            <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div><!-- End Program Item -->
-
-                    <div class="col-lg-6 isotope-item filter-certificate" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="program-item">
-                        <div class="program-badge">@lang('system.Certificat')</div>
-                        <div class="row g-0">
-                        <div class="col-md-4">
-                            <div class="program-image-wrapper">
-                            <img src="assets-lib/img/education/education-2.webp" class="img-fluid" alt="Program">
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="program-content">
-                            <h3>@lang('system.Science_des_données')</h3>
-                            <div class="program-highlights">
-                            <span><i class="bi bi-clock"></i> 6 mois</span>
-                            <span><i class="bi bi-people-fill"></i> 24 crédits</span>
-                            <span><i class="bi bi-calendar3"></i> Toute l'année</span>
-                            </div>
-                            <p>@lang('system.Formation_data')</p>
-                            <a href="#" class="program-btn"><span>@lang('system.En_savoir_plus')</span> <i class="bi bi-arrow-right"></i></a>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div><!-- End Program Item -->
 
                 </div>
-                </div>
-
-            </div>
 
             </section><!-- /Featured Programs Section -->
 
