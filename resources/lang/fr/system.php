@@ -1,10 +1,11 @@
 <?php
 return [
-  'About_Title' => 'À propos de l\'institut',
-  'actions' => 'Actions',
-  'home' => 'Accueil',
-  'dashboard' => 'Tableau de bord',
-  'system' => 'Système',
+"action" => "Action",
+'About_Title' => 'À propos de l\'institut',
+'actions' => 'Actions',
+'home' => 'Accueil',
+'dashboard' => 'Tableau de bord',
+'system' => 'Système',
   'Accueil' => 'Accueil',
   'A_propos' => 'À propos',
   'Notre_Institut' => 'Notre institut',
