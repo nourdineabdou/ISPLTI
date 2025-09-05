@@ -110,7 +110,7 @@ return [
     'Flexibilite' => "مرونة",
     'Conditions_utilisation' => "شروط الاستخدام",
     'Politique_confidentialite' => "سياسة الخصوصية",
-    'Institut_slogan' => "​​المعهد العالي المهني للغات وللترجمة والترجمة الفورية بنواذيبو​",
+    'Institut_slogan' => "المعهد العالي المهني للغات وللترجمة والترجمة الفورية وهو مؤسسة من مؤسسات التعليم العالي الواقعة تحت وصاية وزارة التعليم العالي والبحث العلمي.",
     'Cta_commencez_parcours' => "ابدأ رحلتك",
     'Cta_decouvrir_programmes' => "اكتشف البرامج",
     'Eveiller_les_esprits' => "إيقاظ العقول",
@@ -408,5 +408,22 @@ return [
     'Employment_Opportunity_8' => 'التعليم',
 
      'Timeline_202021' => 'انتقال الى المقر الرسمي في انواذيبو',
+
+
+
+
+
+    'num_inscription' => 'Numéro d’inscription :',
+    'statit_inscription' => 'Statut d’inscription :',
+    'valide' => 'Validée',
+    'noninscrit' => 'Non inscrit',
+    'anneeAcademique' => 'Année académique active :',
+    'suvidepresence' => 'Suivi de présence',
+    'emploidetemps' => 'Emplois de temps',
+    'imprimerATTESTATIONiNSCRIPTION' => 'ATTESTATION D\'INSCRIPTION',
+    'semestre' => 'Semestre',
+     'resultats' => 'Resultats',
+
+
 
 ];
