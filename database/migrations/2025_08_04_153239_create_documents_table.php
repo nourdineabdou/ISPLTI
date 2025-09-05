@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('etudiant_id')->constrained()->onDelete('cascade');
-            $table->foreignId('annee_scolaire_id')->constrained()->onDelete('cascade');
-            $table->string('type'); // relevé, demande manuscrite, diplôme, etc.
+            $table->foreignId('etudiant_id')->nullable();
+            $table->foreignId('bachelier_orientation_id')->nullable();
+            // enum type
+            $table->enum('type', ['releve', 'demande_manu', 'diplome' , 'attestation' , "photo", 'certificat medical' , 'formulaire signe' , "nni" , 'paiement'])->default('attestation');
             $table->string('fichier_path');
             $table->timestamps();
         });

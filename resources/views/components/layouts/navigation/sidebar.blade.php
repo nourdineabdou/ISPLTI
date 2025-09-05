@@ -51,56 +51,37 @@
                         <span class="menu-title">Gestion des Étudiants</span>
                     </a>
                 </li>
-                {{-- ajouter un professeur --}}
+                {{-- ajouter bachelier --}}
                 <li class="nav-item ">
-                    <a href="#">
+                    <a href="{{ route('bacheliers.index') }}">
                         <i class="la la-chalkboard-teacher"></i>
-                        <span class="menu-title">Gestion des Professeurs</span>
+                        <span class="menu-title">Gestion des Bacheliers</span>
                     </a>
                 </li>
                 {{-- ajouter un cours --}}
                 <li class="nav-item ">
                     <a href="#">
                         <i class="la la-book"></i>
-                        <span class="menu-title">Gestion des Cours</span>
+                        <span class="menu-title">Gestion des Emplois</span>
                     </a>
                 </li>
 
-                {{-- annee scolaire --}}
+
+                {{-- emplois du temps / par specialite --}}
                 <li class="nav-item ">
-                    <a href="#">
-                        <i class="la la-calendar"></i>
-                        <span class="menu-title">Gestion des Années Scolaires</span>
-                    </a>
-                </li>
-                {{-- niveau etude --}}
-                <li class="nav-item ">
-                    <a href="#">
-                        <i class="la la-graduation-cap"></i>
-                        <span class="menu-title">Gestion des Niveaux d’Étude</span>
-                    </a>
-                </li>
-                {{-- ajouter un examen --}}
-                <li class="nav-item ">
-                    <a href="#">
-                        <i class="la la-pencil-alt"></i>
-                        <span class="menu-title">Gestion des Examens</span>
-                    </a>
-                </li>
-                {{-- ajouter un emploi du temps --}}
-                <li class="nav-item ">
-                    <a href="#">
+                    <a href="{{ route('etudiants.emplois') }}">
                         <i class="la la-clock"></i>
-                        <span class="menu-title">Gestion des Emplois du Temps</span>
+                        <span class="menu-title"> Emplois du temps/Spécialités</span>
                     </a>
                 </li>
-                {{-- ajouter un document --}}
+                {{-- emplois du temps de professeur --}}
                 <li class="nav-item ">
-                    <a href="#">
-                        <i class="la la-file"></i>
-                        <span class="menu-title">Gestion des Documents</span>
+                    <a href="{{ route('professeurs.emploi_du_temps') }}">
+                        <i class="la la-clock"></i>
+                        <span class="menu-title"> Emplois du temps/Professeurs</span>
                     </a>
                 </li>
+
                 {{-- ajouter un parametre --}}
                 <li class="nav-item ">
                     <a href="#">

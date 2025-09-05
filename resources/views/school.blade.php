@@ -65,8 +65,7 @@
                         </div>
                         </div>
                     </div>
-                    </div>
-                </div>
+                    </div>                </div>
 
                 <div class="event-ticker">
                     <div class="container">
