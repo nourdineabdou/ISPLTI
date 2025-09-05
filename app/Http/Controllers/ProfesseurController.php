@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Professeur;
-
+//EmploisTempsProfesseur
+use App\Models\EmploisTempsProfesseur;
+// AnneeUniversitaire
+use App\Models\AnneeUniversitaire;
+use Illuminate\Support\Facades\File;
 class ProfesseurController extends Controller
 {
     /**
@@ -135,4 +139,50 @@ class ProfesseurController extends Controller
             ]
         );
     }
+
+    // form blade pour fixe un emploi du temps pour un professeur
+    public function emploiDuTemps()
+    {
+        return view('pages.professeurs.emploi_du_temps',['professeurs' => Professeur::all(),
+            'annees' => AnneeUniversitaire::all(),
+            "title" => "Emploi du temps pour un professeur"
+        ]);
+    }
+
+    // post emploi du temps pour un professeur
+    public function storeEmploiDuTemps(Request $request)
+    {
+
+        $validated = $request->validate([
+            'professeur_id' => 'required|string|max:255',
+            'annee_id' => 'required|string|max:20',
+            'emplacement' => 'required',
+        ]);
+
+
+        $emloisTemps = new EmploisTempsProfesseur;
+        $emloisTemps->professeur_id = $validated['professeur_id'];
+        $emloisTemps->annee_id = $validated['annee_id'];
+        // emplacement photo emplois dans public/emplois/
+        $emloisTemps->save();
+        if ($request->hasFile('emplacement')) {
+            $file = $request->file('emplacement');
+            // le path de l'emploi du temps doit être stocké dans public/emplois/ et le fichier porte le id EmploisTempsProfesseur
+            $emloisTemps->emplacement = 'emplois/' . $emloisTemps->id . '.' . $file->getClientOriginalExtension();
+
+            // movement de fichier d'emplois dans public/emplois/
+            // utilise FILE class
+            File::move($file->getRealPath(), public_path($emloisTemps->emplacement));
+        }
+
+        $emloisTemps->save();
+
+        return response()->json(
+            [
+                'message' => 'Emploi du temps créé avec succès',
+                'success' => true,
+            ]
+        );
+    }
+
 }

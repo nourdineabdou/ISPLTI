@@ -64,7 +64,8 @@
             <li class="dropdown"><a href="#"><span>@lang('system.Connexion')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
                     <li><a href="{{ route('login') }}">@lang('system.Se_connecter')</a></li>
-                    <li><a href="{{ route('register') }}">@lang('system.S_inscrire')</a></li>
+                    <li><a href="{{ route('inscriptions.login1') }}">@lang('system.S_inscrire')</a></li>
+                    <li><a href="{{ route('inscriptions.login2') }}">@lang('system.rescription')</a></li>
                 </ul>
             </li>
             <li class="dropdown"><a href="#"><span>@lang('system.Langue')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>

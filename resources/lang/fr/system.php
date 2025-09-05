@@ -1,6 +1,7 @@
 <?php
 return [
-"action" => "Action",
+'rescription'=>"Réinscription",
+'action' => "Action",
 'About_Title' => 'À propos de l\'institut',
 'actions' => 'Actions',
 'home' => 'Accueil',

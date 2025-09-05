@@ -12,4 +12,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'professeurs'], function () 
     Route::get('/{id}/edit', [ProfesseurController::class, 'edit'])->name('professeurs.edit');
     Route::put('/{id}', [ProfesseurController::class, 'update'])->name('professeurs.update');
     Route::delete('/{id}', [ProfesseurController::class, 'destroy'])->name('professeurs.destroy');
+    // emploi du temps
+    Route::get('emplois/du_temps', [ProfesseurController::class, 'emploiDuTemps'])->name('professeurs.emploi_du_temps');
+    Route::post('emplois/du_temps', [ProfesseurController::class, 'storeEmploiDuTemps'])->name('professeurs.emploi_du_temps_store');
 });

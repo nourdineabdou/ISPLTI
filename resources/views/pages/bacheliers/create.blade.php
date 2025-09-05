@@ -1,6 +1,5 @@
 <x-modal-header-body
     :title="__('etudiants.create')"
-    :actions="$actions"
 >
     <div id="create-etudiant-form">
         <form

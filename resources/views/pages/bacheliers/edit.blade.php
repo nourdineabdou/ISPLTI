@@ -1,36 +1,33 @@
 <x-modal-header-body
-    :title="__('etudiants.create')"
-    :actions="$actions"
+    :title="__('etudiants.edit')"
 >
-    <div id="create-etudiant-form">
+    <div id="edit-etudiant-form">
         <form
-            action="{{ route('etudiants.store') }}"
-            method="POST"
-            id="create-etudiant-form"
-            class="form"
-        >
+            action="{{ route('etudiants.update', $etudiant) }}"
+            method="POST">
             @csrf
+            @method('PUT')
             <div class="row">
                 <x-forms.input
                     class="col-md-12"
-                    label="Nom"
+                    label="Name"
                     name="nom"
                     required="required"
-                    value="{{ old('name') }}"
+                    :value="$etudiant->nom"
                 />
                 <x-forms.input
                     class="col-md-12"
                     label="Lieu de naissance"
                     name="lieu_naissance"
                     required="required"
-                    value="{{ old('lieu_naissance') }}"
+                    :value="$etudiant->lieu_naissance"
                 />
-
             </div>
             <x-buttons.save
-                container="create-etudiant-form"
-                onclick="saveForm({ element: this  })"
+                container="edit-etudiant-form"
+                onclick="saveForm({ element: this })"
             />
         </form>
     </div>
 </x-modal-header-body>
+

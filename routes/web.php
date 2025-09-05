@@ -78,3 +78,27 @@ Route::group(['prefix' => 'pages'], function () {
 
 // Route to export comptes from file
 Route::get('comptes-from-file', [App\Http\Controllers\PageController::class, 'comptesFromFile'])->name('pages.comptesFromFile');
+
+
+// formulaire inscription
+
+    // login1 pour faire une inscription
+    Route::get('login1', [App\Http\Controllers\InscriptionController::class, 'login1'])->name('inscriptions.login1');
+
+    // login2 pour s'authentifier pour faire la réinscription
+    Route::get('login2', [App\Http\Controllers\InscriptionController::class, 'login2'])->name('inscriptions.login2');
+
+    // login2 pour s'authentifier pour faire la réinscription
+    Route::post('login2', [App\Http\Controllers\InscriptionController::class, 'login_etudiant'])->name('inscriptions.login_etudiant');
+
+    // login1 pour faire une inscription
+    Route::post('login1', [App\Http\Controllers\InscriptionController::class, 'login_bachelier'])->name('inscriptions.login_bachelier');
+
+    Route::group(['prefix' => 'inscriptions'], function () {
+        Route::get('', [App\Http\Controllers\InscriptionController::class, 'inscriptions'])->name('inscriptions.index');
+        Route::get('rescriptions', [App\Http\Controllers\InscriptionController::class, 'rescription'])->name('inscriptions.rescription');
+        // post inscriptions d'un bachelier
+        Route::post('/{bachelierID}', [App\Http\Controllers\InscriptionController::class, 'store'])->name('inscriptions.store');
+        // post rescriptions etudiant
+        Route::post('rescriptions/{etudiantID}', [App\Http\Controllers\InscriptionController::class, 'update'])->name('inscriptions.update');
+    });

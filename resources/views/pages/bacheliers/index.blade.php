@@ -1,18 +1,19 @@
 <x-layouts.main
     :title="$title"
     :actions="$actions"
->
+    >
     <div class="card">
         <div class="card-body">
             <div class="table-container">
                 <table
                     class="table table-striped table-bordered w-100"
-                    data-url="{{ route('etudiants.index') }}"
-                    data-column='nodos,nom_fr,lieu_naissance_fr,date_naissance,telephone,etat_inscription,action'
+                    data-url="{{ route('bacheliers.index') }}"
+                    data-column='num_bac,nni,nom_fr,lieun,datn,tel,etat_inscription,action'
                 >
                     <thead>
                     <tr>
-                        <td>{{ __("etudiants.nodos") }}</td>
+                        <td>{{ __("etudiants.num_bac") }}</td>
+                        <td>{{ __("etudiants.nni") }}</td>
                         <td>{{ __("etudiants.nom") }}</td>
                         <td>{{ __("etudiants.lieu_naissance") }}</td>
                         <td>{{ __("etudiants.date_naissance") }}</td>
