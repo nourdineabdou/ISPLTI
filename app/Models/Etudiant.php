@@ -10,6 +10,7 @@ class Etudiant extends Model
      use SoftDeletes;
      protected $fillable = [
         'nodos',
+        'user_id',
         'nom_ar',
         'nom_fr',
         'lieu_naissance_ar',

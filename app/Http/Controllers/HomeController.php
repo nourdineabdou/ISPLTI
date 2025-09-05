@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Etudiant;
+use App\Models\AnneeUniversitaire;
+use App\Models\InscriptionAdm;
+use App\Models\Etablissement;
 use App\Models\Auth\User;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -41,16 +44,28 @@ class HomeController extends Controller
         // $professeur->assignRole([$roleProfesseur->id]);
         if (auth()->check()) {
             if (auth()->user()->hasRole('Etudiant')) {
-                return view('espace_etudiant');
+                $etudiant=Etudiant::where('user_id',auth()->user()->id)->get()->first();
+                $ndos=substr($etudiant->nodos,-4);
+                $inscrit=InscriptionAdm::where('annee_univ_id',$this->anneeActive()->id)->where('etudiant_id',$etudiant->id)->get();
+                $inscritEtat=0;
+                if($inscrit->count()>0){ 
+                        $inscritEtat=1;
+                }
+                return view('espace_etudiant', ['etudiant'=>$etudiant,'ndos'=>$ndos,'inscritEtat'=>$inscritEtat,'anneeActive'=>$this->anneeActive()] );
             } elseif (auth()->user()->hasRole('Professeur')) {
                 return view('espace_professeur');
             }
         }
         return view('admin_espace');
     }
+    public function anneeActive(){
+         $annee=AnneeUniversitaire::where('etat',1)->get()->first();
+        return $annee;
+    }
     public function page()
     {
-        return view('school');
+         $news=Etablissement::find(1);
+        return view('school',['news'=>$news]);
     }
 
 }

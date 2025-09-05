@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Exports\ComptesExport;
 use Maatwebsite\Excel\Facades\Excel;
-
+use App\Models\Etablissement;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
    public function actualite()
    {
+      
        return view('pages_sites.actualite');
    }
 
