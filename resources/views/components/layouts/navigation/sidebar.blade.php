@@ -46,7 +46,7 @@
             @if(auth()->user()->hasRole('Admin'))
                 {{-- ajouter un etudiant --}}
                 <li class="nav-item ">
-                    <a href="#">
+                    <a href="{{ route('etudiants.index') }}">
                         <i class="la la-user-graduate"></i>
                         <span class="menu-title">Gestion des Étudiants</span>
                     </a>
