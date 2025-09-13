@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\BachelierController;
+use App\Http\Controllers\ActualiteController;
 
 // route groupe etudiant
 Route::group(['middleware' => ['auth'], 'prefix' => 'etudiants'], function () {
@@ -40,4 +41,17 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'bacheliers'], function () {
     Route::get('/image/{id}', [BachelierController::class, 'getImage']);
     // attestation pdf bachelier
     Route::get('/{id}/attestation', [BachelierController::class, 'attestation'])->name('bacheliers.attestation');
+});
+
+
+// fin routes etudiant
+
+// route groupe actualites
+Route::group(['middleware' => ['auth'], 'prefix' => 'news'], function () {
+    Route::get('/', [App\Http\Controllers\ActualiteController::class, 'index'])->name('actualites.index');
+    Route::get('/create', [App\Http\Controllers\ActualiteController::class, 'create'])->name('actualites.create');
+    Route::post('/store', [App\Http\Controllers\ActualiteController::class, 'store'])->name('actualites.store');
+    Route::get('/{id}/edit', [App\Http\Controllers\ActualiteController::class, 'edit'])->name('actualites.edit');
+    Route::put('/{id}/update', [App\Http\Controllers\ActualiteController::class, 'update'])->name('actualites.update');
+    Route::get('/{id}/statut', [App\Http\Controllers\ActualiteController::class, 'statut'])->name('actualites.statut');
 });

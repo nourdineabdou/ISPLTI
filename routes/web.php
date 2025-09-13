@@ -23,7 +23,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('test', [App\Http\Controllers\MealController::class, 'test']);
 
 Auth::routes();
 

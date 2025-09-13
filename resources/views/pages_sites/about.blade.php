@@ -198,153 +198,28 @@
             </div>
 
             <div class="leadership-team">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="leader-card">
-                    <div class="leader-image">
-                    <img src="{{ asset('assets-lib/img/person/person-m-2.webp') }}" alt="Principal" class="img-fluid">
-                    <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-envelope"></i></a>
+                <div class="row">
+                    @foreach (\App\Models\Professeur::all() as $professeur)
+                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="leader-card">
+                                <div class="leader-image">
+                            <img src="{{ asset($professeur->image) }}" alt="Principal" class="img-fluid">
+                            <div class="social-links">
+                                <a href="#"><i class="bi bi-linkedin"></i></a>
+                                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                                <a href="#"><i class="bi bi-envelope"></i></a>
+                            </div>
+                            </div>
+                            <div class="leader-info">
+                            <h4>{{ $professeur->nom }}</h4>
+                            <p class="position">{{ $professeur->specialite }}</p>
+                            {{-- cv telechargement lien --}}
+                            <a href="{{ asset($professeur->cv) }}" class="btn btn-primary" download>@lang('system.download_cv_prof')</a>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                    <div class="leader-info">
-                    <h4>@lang('Nom1')</h4>
-                    <p class="position">@lang('system.Principal')</p>
-                    <p class="bio">@lang('system.Principal_Bio')</p>
-                    </div>
+                    @endforeach
                 </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="leader-card">
-                    <div class="leader-image">
-                    <img src="{{ asset('assets-lib/img/person/person-f-3.webp') }}" alt="Vice Principal" class="img-fluid">
-                    <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-envelope"></i></a>
-                    </div>
-                    </div>
-                    <div class="leader-info">
-                    <h4>@lang('Nom2')</h4>
-                    <p class="position">@lang('system.Vice_Principal')</p>
-                    <p class="bio">@lang('system.Vice_Principal_Bio')</p>
-                    </div>
-                </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="leader-card">
-                    <div class="leader-image">
-                    <img src="{{ asset('assets-lib/img/person/person-m-5.webp') }}" alt="Dean of Students" class="img-fluid">
-                    <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-envelope"></i></a>
-                    </div>
-                    </div>
-                    <div class="leader-info">
-                    <h4>@lang('Nom2')</h4>
-                    <p class="position">@lang('system.Dean_of_Students')</p>
-                    <p class="bio">@lang('system.Dean_of_Students_Bio')</p>
-                    </div>
-                </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
-                <div class="leader-card">
-                    <div class="leader-image">
-                    <img src="{{ asset('assets-lib/img/person/person-f-8.webp') }}" alt="Academic Director" class="img-fluid">
-                    <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-envelope"></i></a>
-                    </div>
-                    </div>
-                    <div class="leader-info">
-                    <h4>@lang('Nom1')</h4>
-                    <p class="position">@lang('system.Academic_Director')</p>
-                    <p class="bio">@lang('system.Academic_Director_Bio')</p>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="leader-card">
-                    <div class="leader-image">
-                    <img src="{{ asset('assets-lib/img/person/person-m-7.webp') }}" alt="Financial Director" class="img-fluid">
-                    <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-envelope"></i></a>
-                    </div>
-                    </div>
-                    <div class="leader-info">
-                    <h4>@lang('Nom3')</h4>
-                    <p class="position">@lang('system.Financial_Director')</p>
-                    <p class="bio">@lang('system.Financial_Director_Bio')</p>
-                    </div>
-                </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="leader-card">
-                    <div class="leader-image">
-                    <img src="{{ asset('assets-lib/img/person/person-f-10.webp') }}" alt="Head of Admissions" class="img-fluid">
-                    <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-envelope"></i></a>
-                    </div>
-                    </div>
-                    <div class="leader-info">
-                    <h4>@lang('Nom4')</h4>
-                    <p class="position">@lang('system.Head_of_Admissions')</p>
-                    <p class="bio">@lang('system.Head_of_Admissions_Bio')</p>
-                    </div>
-                </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
-                <div class="leader-card">
-                    <div class="leader-image">
-                    <img src="{{ asset('assets-lib/img/person/person-m-11.webp') }}" alt="IT Director" class="img-fluid">
-                    <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-envelope"></i></a>
-                    </div>
-                    </div>
-                    <div class="leader-info">
-                    <h4>@lang('Nom5')</h4>
-                    <p class="position">@lang('system.IT_Director')</p>
-                    <p class="bio">@lang('system.IT_Director_Bio')</p>
-                    </div>
-                </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
-                <div class="leader-card">
-                    <div class="leader-image">
-                    <img src="{{ asset('assets-lib/img/person/person-f-12.webp') }}" alt="Student Welfare Officer" class="img-fluid">
-                    <div class="social-links">
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#"><i class="bi bi-envelope"></i></a>
-                    </div>
-                    </div>
-                    <div class="leader-info">
-                    <h4>@lang('Nom6')</h4>
-                    <p class="position">@lang('system.Student_Welfare_Officer')</p>
-                    <p class="bio">@lang('system.Student_Welfare_Officer_Bio')</p>
-                    </div>
-                </div>
-                </div>
-            </div>
             </div>
 
         </div>

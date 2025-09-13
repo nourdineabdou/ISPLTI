@@ -58,6 +58,13 @@
                         <span class="menu-title">Gestion des Bacheliers</span>
                     </a>
                 </li>
+                {{-- ajouter un professeur --}}
+                <li class="nav-item ">
+                    <a href="{{ route('professeurs.index') }}">
+                        <i class="la la-chalkboard-teacher"></i>
+                        <span class="menu-title">Gestion des Professeurs</span>
+                    </a>
+                </li>
                 {{-- ajouter un cours --}}
                 <li class="nav-item ">
                     <a href="#">
@@ -87,6 +94,13 @@
                     <a href="#">
                         <i class="la la-cog"></i>
                         <span class="menu-title">Paramètres</span>
+                    </a>
+                </li>
+                {{-- ajouter une actualité --}}
+                <li class="nav-item ">
+                    <a href="{{ route('actualites.index') }}">
+                        <i class="la la-newspaper"></i>
+                        <span class="menu-title">Actualités</span>
                     </a>
                 </li>
                 @elseif(auth()->user()->hasRole('Professeur'))

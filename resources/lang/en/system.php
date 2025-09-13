@@ -417,4 +417,11 @@ return [
   'Employment_Opportunity_6' => 'Journalisme',
   'Employment_Opportunity_7' => 'Tourisme',
   'Employment_Opportunity_8' => 'Enseignement',
+  'download_cv_prof'=>"Download CV",
+'connexion' => "Login",
+'inscription'  => "Registration",
+'rescription' => "Subscription",
+'inscription_desc' => "Create a new account to get started.",
+'rescription_desc' => "Subscribe to access exclusive features.",
+'connexion_desc'   => "Sign in to your account.",
 ];

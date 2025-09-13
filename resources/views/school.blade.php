@@ -9,11 +9,11 @@
                     <div class="container">
                 <div class="row align-items-center @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
                         <div class="col-lg-7 @if(app()->getLocale() == 'ar') order-2 @endif" data-aos="zoom-out" data-aos-delay="100">
-                         
+
                         <div class="hero-content">
                            <h1>
-                          
-                              
+
+
                                  @if(app()->getLocale() == 'ar')
                                  <marquee direction="right" scrollamount="5" bgcolor="yellow" style="color: white; padding: 10px;" dir="rtl">
                                          {{ $news->lib_etab_ar }}
@@ -23,7 +23,7 @@
                                         {{ $news->lib_etab_fr }}
                                      </marquee>
                                  @endif
-                               
+
                             </h1>
                             <p>@lang('system.Institut_slogan')</p>
                             <div class="cta-buttons">
@@ -85,19 +85,16 @@
                     <div class="container">
                     <div class="row gy-4">
                         <div class="col-md-6 col-xl-4 col-12 ticker-item">
-                        <span class="date">15 NOV</span>
-                        <span class="title">@lang('system.Journee_portes_ouvertes')</span>
-                        <a href="#" class="btn-register">@lang('system.S_inscrire')</a>
+                        <span class="title">@lang('system.connexion_desc')</span>
+                        <a href="{{ route('login') }}" class="btn-register">@lang('system.connexion')</a>
                         </div>
                         <div class="col-md-6 col-12 col-xl-4  ticker-item">
-                        <span class="date">5 DÉC</span>
-                        <span class="title">@lang('system.Atelier_candidature')</span>
-                        <a href="#" class="btn-register">@lang('system.S_inscrire')</a>
+                        <span class="title">@lang('system.inscription_desc')</span>
+                        <a href="{{ route('inscriptions.login1') }}" class="btn-register">@lang('system.inscription')</a>
                         </div>
                         <div class="col-md-6 col-12 col-xl-4 ticker-item">
-                        <span class="date">10 JAN</span>
-                        <span class="title">@lang('system.Orientation_etudiants_internationaux')</span>
-                        <a href="#" class="btn-register">@lang('system.S_inscrire')</a>
+                        <span class="title">@lang('system.rescription_desc')</span>
+                        <a href="{{ route('inscriptions.login2') }}" class="btn-register">@lang('system.rescription')</a>
                         </div>
                     </div>
                     </div>
@@ -682,91 +679,32 @@
             <div class="container @if(app()->getLocale() == 'ar') text-end @endif">
 
                 <div class="row gy-4 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
-
-                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <article>
-
-                    <div class="post-img">
-                        <img src="assets-lib/img/blog/blog-post-1.webp" alt="" class="img-fluid">
-                    </div>
-
-                    <p class="post-category">Politique</p>
-
-                    <h2 class="title">
-                        <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
-                    </h2>
-
-                    <div class="d-flex align-items-center">
-                        <img src="assets-lib/img/person/person-f-12.webp" alt="" class="img-fluid post-author-img flex-shrink-0">
-                        <div class="post-meta">
-                        <p class="post-author">Maria Doe</p>
-                        <p class="post-date">
-                            <time datetime="2022-01-01">1 Janv. 2022</time>
-                        </p>
-                        </div>
-                    </div>
-
-                    </article>
-                </div><!-- End post list item -->
-
-                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <article>
-
-                    <div class="post-img">
-                        <img src="assets-lib/img/blog/blog-post-2.webp" alt="" class="img-fluid">
-                    </div>
-
-                    <p class="post-category">Sports</p>
-
-                    <h2 class="title">
-                        <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-                    </h2>
-
-                    <div class="d-flex align-items-center">
-                        <img src="assets-lib/img/person/person-f-13.webp" alt="" class="img-fluid post-author-img flex-shrink-0">
-                        <div class="post-meta">
-                        <p class="post-author">Allisa Mayer</p>
-                        <p class="post-date">
-                            <time datetime="2022-01-01">5 Juin 2022</time>
-                        </p>
-                        </div>
-                    </div>
-
-                    </article>
-                </div><!-- End post list item -->
-
-                <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <article>
-
-                    <div class="post-img">
-                        <img src="assets-lib/img/blog/blog-post-3.webp" alt="" class="img-fluid">
-                    </div>
-
-                    <p class="post-category">Divertissement</p>
-
-                    <h2 class="title">
-                        <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-                    </h2>
-
-                    <div class="d-flex align-items-center">
-                        <img src="assets-lib/img/person/person-m-10.webp" alt="" class="img-fluid post-author-img flex-shrink-0">
-                        <div class="post-meta">
-                        <p class="post-author">Mark Dower</p>
-                        <p class="post-date">
-                            <time datetime="2022-01-01">22 Juin 2022</time>
-                        </p>
-                        </div>
-                    </div>
-
-                    </article>
-                </div><!-- End post list item -->
-
+                    {{-- 4 previous articles --}}
+                    @foreach (\App\Models\Actualite::where('statut', 'publie')->orderBy('id', 'desc')->limit(3)->get() as $actualite)
+                        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                <article>
+                                <div class="post-img">
+                                    <img src="{{ asset($actualite->image) }}" alt="" class="img-fluid">
+                                </div>
+                                {{-- titre est afficher selon la langue --}}
+                                <p class="post-category">{{ app()->getLocale() == 'fr' ? $actualite->titre_fr : (app()->getLocale() == 'en' ? $actualite->titre_en : $actualite->titre_ar) }}</p>
+                                <h2 class="title">
+                                    <a href="#">{{ app()->getLocale() == 'fr' ? $actualite->contenu_fr : (app()->getLocale() == 'en' ? $actualite->contenu_en : $actualite->contenu_ar) }}</a>
+                                </h2>
+                                <div class="d-flex align-items-center">
+                                    <div class="post-meta">
+                                    <p class="post-author-name">{{ $actualite->auteur }}</p>
+                                    <p class="post-date">
+                                        <time datetime="2023-01-01">{{ \Carbon\Carbon::parse($actualite->created_at)->locale(app()->getLocale())->isoFormat('LL') }}</time>
+                                    </p>
+                                    </div>
+                                </article>
+                            </div>
+                    @endforeach
+                <!-- End post list item -->
                 </div><!-- End recent posts list -->
-
             </div>
-
             </section><!-- /Recent News Section -->
-
             <!-- Section Événements -->
             <section id="events" class="events section">
 
