@@ -9,6 +9,9 @@ use App\Models\EmploisTempsProfesseur;
 // AnneeUniversitaire
 use App\Models\AnneeUniversitaire;
 use Illuminate\Support\Facades\File;
+use App\Models\Auth\User;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 class ProfesseurController extends Controller
 {
     /**
@@ -19,20 +22,12 @@ class ProfesseurController extends Controller
         // faire la partie index
         if (request()->ajax()) {
               return datatables()->of(Professeur::query())
-                ->addColumn('user', function ($professeur) {
-                    return $professeur?->user->nom;
-                 })
                   ->addColumn('action', function ($professeur) {
                       $actions = [
                           [
                               'label' => 'Modifier professeur',
                               'onclick' => 'openInModal({ link: \'' . route('professeurs.edit', $professeur->id) . '\', size: \'lg\' })',
                               'permission' => true
-                          ],
-                          [
-                              'label' => 'Supprimer professeur',
-                              'onclick' => 'confirmDelete(\'' . route('professeurs.destroy', $professeur->id) . '\')',
-                              'permission' =>true
                           ],
                       ];
                       return view('components.buttons.action', compact('actions'));
@@ -67,13 +62,48 @@ class ProfesseurController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'telephone' => 'required|string|max:20',
-            "specialite" => "required|string|max:255"
+            'nom' => 'required|string|max:255',
+            'telephone' => 'required|string|max:8',
+            "specialite" => "required|string|max:255",
+            "nni" => "required|string|max:10|unique:professeurs,nni",
+            "cv" => "nullable|file|mimes:pdf|max:2048",
+            "image" => "nullable|file|mimes:jpeg,png,jpg,gif|max:2048",
         ]);
 
-        $professeur = Professeur::create($validated);
+        $professeur = new Professeur();
+        $professeur->nom = $validated['nom'];
+        $professeur->telephone = $validated['telephone'];
+        $professeur->specialite = $validated['specialite'];
+        $professeur->nni = $validated['nni'];
+        $professeur->prenom = $request->prenom;
+        $professeur->email = $request->email;
+        $professeur->save();
+        if ($request->hasFile('cv')) {
+            //professeurs
+            // faire le mouvement de fichier dans public/cvs_professeurs/
+            File::move($request->file('cv')->getRealPath(), public_path('cvs_professeurs/' . $professeur->id . '.' . $request->file('cv')->getClientOriginalExtension()));
+            $professeur->cv = 'cvs_professeurs/' . $professeur->id . '.' . $request->file('cv')->getClientOriginalExtension();
+        }
 
+        if ($request->hasFile('image')) {
+            // faire le mouvement de fichier dans public/images_professeurs/
+            File::move($request->file('image')->getRealPath(), public_path('images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension()));
+            $professeur->image = 'images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension();
+        }else{
+            $professeur->image = 'images_professeurs/default.png';
+        }
+
+         // créer user professeur
+        $user = new User();
+        $user->name = $professeur->nom;
+        $user->email = $professeur->email;
+        $user->password = Hash::make('password');
+        $user->save();
+        // assigner le role professeur
+        $role = Role::where('name', 'Professeur')->first();
+        $professeur->user_id = $user->id;
+        $professeur->save();
+        $user->assignRole($role);
         // return success response
         return response()->json(
             [
@@ -81,7 +111,6 @@ class ProfesseurController extends Controller
                 'success' => true,
             ]
         );
-
     }
 
     /**
@@ -109,12 +138,35 @@ class ProfesseurController extends Controller
         $professeur = Professeur::findOrFail($id);
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'telephone' => 'required|string|max:20',
-            "specialite" => "required|string|max:255"
+            'nom' => 'required|string|max:255',
+            'telephone' => 'required|string|max:8',
+            "specialite" => "required|string|max:255",
+            "nni" => "required|string|max:10|unique:professeurs,nni," . $professeur->id,
+            "cv" => "nullable|file|mimes:pdf|max:2048",
+            "image" => "nullable|file|mimes:jpeg,png,jpg,gif|max:2048",
         ]);
 
-        $professeur->update($validated);
+        $professeur->nom = $validated['nom'];
+        $professeur->telephone = $validated['telephone'];
+        $professeur->specialite = $validated['specialite'];
+        $professeur->nni = $validated['nni'];
+        $professeur->prenom = $request->prenom;
+        $professeur->email = $request->email;
+        if ($request->hasFile('cv')) {
+            // faire le mouvement de fichier dans public/cvs_professeurs/
+            File::move($request->file('cv')->getRealPath(), public_path('cvs_professeurs/' . $professeur->id . '.' . $request->file('cv')->getClientOriginalExtension()));
+            $professeur->cv = 'cvs_professeurs/' . $professeur->id . '.' . $request->file('cv')->getClientOriginalExtension();
+        }
+        if ($request->hasFile('image')) {
+            // faire le mouvement de fichier dans public/images_professeurs/
+            File::move($request->file('image')->getRealPath(), public_path('images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension()));
+            $professeur->image = 'images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension();
+        }elseif($professeur->image !== 'images_professeurs/default.png' ){
+            // ne rien faire
+        }else{
+            $professeur->image = 'images_professeurs/default.png';
+        }
+        $professeur->save();
 
         return response()->json(
             [

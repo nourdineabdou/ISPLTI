@@ -8,5 +8,10 @@ return [
     'specialite' => 'Spécialité',
     "index" => "Liste des professeurs",
     "list" => "Liste des professeurs",
+    "nni" => "NNI",
+    "cv" => "CV",
+    "image" => "Image",
+    "email" => "Email",
+    'prenom' => 'Prénom',
 
 ];

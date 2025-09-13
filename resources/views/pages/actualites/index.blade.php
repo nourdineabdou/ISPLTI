@@ -7,16 +7,16 @@
             <div class="table-container">
                 <table
                     class="table table-striped table-bordered w-100"
-                    data-url="{{ route('professeurs.index') }}"
-                    data-column='nom,prenom,email,telephone,specialite,action'
+                    data-url="{{ route('actualites.index') }}"
+                    data-column='titre_fr,titre_en,titre_ar,auteur,statut,action'
                 >
                     <thead>
                     <tr>
-                        <td>{{ __("professeurs.nom") }}</td>
-                        <td>{{ __("professeurs.prenom") }}</td>
-                        <td>{{ __("professeurs.email") }}</td>
-                        <td>{{ __("professeurs.telephone") }}</td>
-                        <td>{{ __("professeurs.specialite") }}</td>
+                        <td>{{ __("actualites.titre_fr") }}</td>
+                        <td>{{ __("actualites.titre_en") }}</td>
+                        <td>{{ __("actualites.titre_ar") }}</td>
+                        <td>{{ __("actualites.auteur") }}</td>
+                        <td>{{ __("actualites.statut") }}</td>
                         <td>{{ __("system.action") }}</td>
                     </tr>
                     </thead>

@@ -417,4 +417,11 @@ return [
   'Employment_Opportunity_6' => 'Journalisme',
   'Employment_Opportunity_7' => 'Tourisme',
   'Employment_Opportunity_8' => 'Enseignement',
+  'download_cv_prof' => 'Télécharger CV ',
+  'connexion' => 'Connexion',
+  "inscription" => "S'inscrire",
+  "rescription" => "Réinscription",
+  'inscription_desc' => 'Inscrivez-vous dès maintenant pour rejoindre notre institut et commencer votre parcours éducatif.',
+  'rescription_desc' => 'Réinscrivez-vous pour continuer votre formation et atteindre vos objectifs académiques.',
+  'connexion_desc' => 'Connectez-vous à votre compte pour accéder à vos cours, ressources et informations académiques.',
 ];
