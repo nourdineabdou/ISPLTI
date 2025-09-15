@@ -55,3 +55,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'news'], function () {
     Route::put('/{id}/update', [App\Http\Controllers\ActualiteController::class, 'update'])->name('actualites.update');
     Route::get('/{id}/statut', [App\Http\Controllers\ActualiteController::class, 'statut'])->name('actualites.statut');
 });
+
+//
