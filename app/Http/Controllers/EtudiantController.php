@@ -14,9 +14,32 @@ use App\Models\EmploisTempsSpecialite;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 use Illuminate\Support\Facades\File;
-
+use App\Imports\EtudiantsImport;
+use App\Exports\EtudiantsExport;
+use Maatwebsite\Excel\Facades\Excel;
 class EtudiantController extends Controller
 {
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv,xls'
+        ]);
+
+        Excel::import(new EtudiantsImport, $request->file('file'));
+
+        return back()->with('success', 'Étudiants importés avec succès !');
+    }
+
+    public function export()
+    {
+        $fileName = 'etudiants_' . now()->format('Y-m-d_H-i') . '.xlsx';
+
+        return Excel::download(
+            new EtudiantsExport(),
+            $fileName
+        );
+    }
 
 public function getImage($id)
 {
