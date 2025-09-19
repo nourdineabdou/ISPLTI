@@ -1395,3 +1395,10 @@ window.replaceEmballage = function ({ element, elements}) {
         hideModal('product');
     })
 };
+
+//exportTable function
+window.exportTable = function (url) {
+    // redirect to the url
+    window.location.href = url;
+    //console.log(url)
+};

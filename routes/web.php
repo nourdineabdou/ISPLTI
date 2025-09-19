@@ -71,7 +71,8 @@ Route::group(['prefix' => 'pages'], function () {
     Route::get('vies-estudiantine', [App\Http\Controllers\PageController::class, 'viesEstudiantine'])->name('pages.viesEstudiantine');
     // about
     Route::get('about', [App\Http\Controllers\PageController::class, 'about'])->name('pages.about');
-    //
+    // page directeur
+    Route::get('directeur/isptli', [App\Http\Controllers\PageController::class, 'directeur'])->name('pages.directeur');
 });
 
 

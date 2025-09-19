@@ -7,8 +7,32 @@ use App\Models\BachelierOrientation;
 // storage
 use Illuminate\Support\Facades\Storage;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\BacheliersImport;
+use App\Exports\BacheliersExport;
 class BachelierController extends Controller
 {
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv,xls'
+        ]);
+
+        Excel::import(new BacheliersImport, $request->file('file'));
+
+        return back()->with('success', 'Bacheliers importés avec succès !');
+    }
+
+    public function exporter()
+    {
+        $fileName = 'bacheliers_' . now()->format('Y-m-d_H-i') . '.xlsx';
+
+        return Excel::download(
+            new BacheliersExport(),
+            $fileName
+        );
+    }
 
 public function getImage($id)
 {
@@ -94,7 +118,7 @@ public function getImage($id)
                 ],
                 [
                     'label' => __('Exporter Les Bacheliers'),
-                    'onclick' => 'openInModal({ link: \'' . route('bacheliers.exporter') . '\', size: \'sm\' })',
+                    'onclick' => 'exportTable(\'' . route('bacheliers.exporter') . '\')',
                     'permission' => true,
                 ]
 
@@ -161,13 +185,7 @@ public function getImage($id)
         ]);
     }
 
-    // Exporter les bacheliers
-    public function exporter()
-    {
-        return view('pages.bacheliers.exporter', [
-            'title' => __('bacheliers.exporter'),
-        ]);
-    }
+
 
     // attestation pdf bachelier
     public function attestation($id)

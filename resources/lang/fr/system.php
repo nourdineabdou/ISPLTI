@@ -424,4 +424,16 @@ return [
   'inscription_desc' => 'Inscrivez-vous dès maintenant pour rejoindre notre institut et commencer votre parcours éducatif.',
   'rescription_desc' => 'Réinscrivez-vous pour continuer votre formation et atteindre vos objectifs académiques.',
   'connexion_desc' => 'Connectez-vous à votre compte pour accéder à vos cours, ressources et informations académiques.',
+  // Traductions pour la page du directeur
+  'Directeur_title' => ':title',
+  'Directeur_intro' => ':name est un responsable académique expérimenté avec une longue carrière dans l\'enseignement des langues et la traduction.',
+  'Cursus' => 'Formation & diplômes',
+  'Cursus_item_1' => 'Doctorat en études de traduction (:year)',
+  'Cursus_item_2' => 'Master en linguistique appliquée (:year)',
+  'Cursus_item_3' => 'Licence en arabe et français (:year)',
+  'Parcours' => 'Parcours professionnel',
+  'Parcours_desc' => 'A occupé plusieurs postes académiques et administratifs, notamment chef de département et maître de conférences.',
+  'Telecharger_cv' => 'Télécharger le CV',
+  'Contacter' => 'Contacter',
+  'Directrice' => 'Directrice',
 ];

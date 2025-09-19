@@ -1,80 +1,57 @@
-<footer id="footer" class="footer position-relative dark-background @if(app()->getLocale() == 'ar') text-end @endif">
-    <div class="container footer-top">
-      <div class="row gy-4 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
-        <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span class="sitename">ISPLTI</span>
-          </a>
-          <div class="footer-contact pt-3">
-            <p>Rue 108 Adam</p>
-            <p>Dakar, Sénégal</p>
-            <p class="mt-3"><strong>Téléphone :</strong> <span>+221 33 123 45 67</span></p>
-            <p><strong>Email :</strong> <span>contact@isplti.sn</span></p>
-          </div>
-          <div class="social-links d-flex mt-4">
-            <a href=""><i class="bi bi-twitter-x"></i></a>
-            <a href=""><i class="bi bi-facebook"></i></a>
-            <a href=""><i class="bi bi-instagram"></i></a>
-            <a href=""><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
+<footer id="footer" class="bg-dark text-white py-5 @if(app()->getLocale() == 'ar') text-end @endif">
+  <div class="container">
+    <div class="row gy-4 align-items-start @if(app()->getLocale() == 'ar') flex-row-reverse @endif">
 
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>@lang('system.Liens_utiles')</h4>
-          <ul>
-            <li><a href="#">@lang('system.Accueil')</a></li>
-            <li><a href="#">@lang('system.A_propos')</a></li>
-            <li><a href="#">@lang('system.Services')</a></li>
-            <li><a href="#">@lang('system.Conditions_utilisation')</a></li>
-            <li><a href="#">@lang('system.Politique_confidentialite')</a></li>
-          </ul>
-        </div>
+      <div class="col-lg-3 col-md-6">
+        <a href="{{ url('/') }}" class="d-flex align-items-center mb-3">
+          @if(file_exists(public_path('logo.jpeg')))
+            <img src="{{ asset('logo.jpeg') }}" alt="ISPLTI" style="height:64px; object-fit:contain;">
+          @else
+            <span class="h4 mb-0">ISPLTI</span>
+          @endif
+        </a>
+        <p class="muted small">@lang('system.Description_courte', ['name' => 'ISPLTI'])</p>
 
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>@lang('system.Nos_services')</h4>
-          <ul>
-            <li><a href="#">@lang('system.Conception_web')</a></li>
-            <li><a href="#">@lang('system.Developpement_web')</a></li>
-            <li><a href="#">@lang('system.Gestion_projet')</a></li>
-            <li><a href="#">@lang('system.Marketing')</a></li>
-            <li><a href="#">@lang('system.Design_graphique')</a></li>
-          </ul>
+        <div class="d-flex gap-3 mt-3">
+          <a href="#" class="text-white"><i class="bi bi-linkedin fs-4"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-twitter fs-4"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-facebook fs-4"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-rss fs-4"></i></a>
         </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>@lang('system.Ressources')</h4>
-          <ul>
-            <li><a href="#">@lang('system.Documents_officiels')</a></li>
-            <li><a href="#">@lang('system.Dignites')</a></li>
-            <li><a href="#">@lang('system.Distinctions')</a></li>
-            <li><a href="#">@lang('system.Evenements')</a></li>
-            <li><a href="#">@lang('system.Contact')</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>@lang('system.Informations')</h4>
-          <ul>
-            <li><a href="#">@lang('system.Infos_pratiques')</a></li>
-            <li><a href="#">@lang('system.Reunions')</a></li>
-            <li><a href="#">@lang('system.Diner_annuel')</a></li>
-            <li><a href="#">@lang('system.Conferences')</a></li>
-            <li><a href="#">@lang('system.Flexibilite')</a></li>
-          </ul>
-        </div>
-
       </div>
+
+      <div class="col-lg-3 col-md-6">
+        <h6 class="fw-semibold">@lang('system.Administrations')</h6>
+        <ul class="list-unstyled mt-3">
+          <li class="py-1"> <a href="{{ route('pages.directeur') }}" class="text-white">@lang('system.Directeur')</a> </li>
+          <li class="py-1">@lang('system.Secretaire_general')</li>
+          <li class="py-1">@lang('system.Services')</li>
+          <li class="py-1">@lang('system.Service_financier')</li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <h6 class="fw-semibold">@lang('system.Textes_legaux')</h6>
+        <ul class="list-unstyled mt-3">
+          <li class="py-1"><a href="#" class="text-white">@lang('system.Reglements')</a></li>
+          <li class="py-1"><a href="#" class="text-white">@lang('system.Politique_confidentialite')</a></li>
+          <li class="py-1"><a href="#" class="text-white">@lang('system.Documents_officiels')</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <h6 class="fw-semibold">@lang('system.Contact')</h6>
+        <p class="small muted mb-1">@lang('system.Adresse') : Rue 108 Adam, Dakar</p>
+        <p class="small muted mb-1">@lang('system.Telephone') : +221 33 123 45 67</p>
+        <p class="small muted mb-1">Email : <a href="mailto:contact@isplti.sn" class="text-white">contact@isplti.sn</a></p>
+      </div>
+
     </div>
 
-    <div class="container copyright text-center mt-4">
-      <p>© <span>@lang('system.Droits_auteur')</span> <strong class="px-1 sitename">ISPLTI</strong> <span>@lang('system.Tous_droits_reserves')</span></p>
-      <div class="credits">
-        <!-- Tous les liens du pied de page doivent rester intacts. -->
-        <!-- Vous pouvez supprimer les liens uniquement si vous avez acheté la version pro. -->
-        <!-- Informations sur la licence : https://bootstrapmade.com/license/ -->
-        <!-- Achetez la version pro avec formulaire de contact PHP/AJAX fonctionnel : [buy-url] -->
-        @lang('system.Conception_par')
-        <a href="https://bootstrapmade.com/">Nourdine</a>
+    <div class="row mt-4">
+      <div class="col-12 text-center small muted">
+        <p class="mb-1">© @lang('system.Droits_auteur') <strong class="px-1">ISPLTI</strong> @lang('system.Tous_droits_reserves')</p>
+        <p class="mb-0">@lang('system.Conception_par') <a href="https://nourdine.dev" class="text-white">Nourdine</a></p>
       </div>
     </div>
 

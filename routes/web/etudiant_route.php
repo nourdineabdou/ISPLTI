@@ -15,7 +15,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'etudiants'], function () {
     // importer
     Route::get('/importer/etudiants', [EtudiantController::class, 'importer'])->name('etudiants.importer');
     Route::post('/importer/etudiants', [EtudiantController::class, 'importerStore'])->name('etudiants.importer.store');
-    Route::post('/exporter/etudiants', [EtudiantController::class, 'exporterStore'])->name('etudiants.exporter.store');
     Route::get('/image/{id}', [EtudiantController::class, 'getImage']);
     // attestation pdf etudiant
     Route::get('/{id}/attestation', [EtudiantController::class, 'attestation'])->name('etudiants.attestation');
@@ -39,6 +38,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'bacheliers'], function () {
     Route::post('/importer/bacheliers', [BachelierController::class, 'importerStore'])->name('bacheliers.importer.store');
     Route::post('/exporter/bacheliers', [BachelierController::class, 'exporterStore'])->name('bacheliers.exporter.store');
     Route::get('/image/{id}', [BachelierController::class, 'getImage']);
+    // import et export excel
+    Route::post('/import', [BachelierController::class, 'import'])->name('bacheliers.import');
+    Route::get('/export', [BachelierController::class, 'export'])->name('bacheliers.export');
+
     // attestation pdf bachelier
     Route::get('/{id}/attestation', [BachelierController::class, 'attestation'])->name('bacheliers.attestation');
 });
