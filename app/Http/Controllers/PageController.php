@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+
+    // directeur
+    public function directeur()
+    {
+        return view('pages_sites.directeur');
+    }
    public function actualite()
    {
-      
+
        return view('pages_sites.actualite');
    }
 

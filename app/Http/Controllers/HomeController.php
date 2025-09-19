@@ -12,6 +12,8 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+// actualite
+use App\Models\Actualite;
 class HomeController extends Controller
 {
     /**
@@ -48,7 +50,7 @@ class HomeController extends Controller
                 $ndos=substr($etudiant->nodos,-4);
                 $inscrit=InscriptionAdm::where('annee_univ_id',$this->anneeActive()->id)->where('etudiant_id',$etudiant->id)->get();
                 $inscritEtat=0;
-                if($inscrit->count()>0){ 
+                if($inscrit->count()>0){
                         $inscritEtat=1;
                 }
                 return view('espace_etudiant', ['etudiant'=>$etudiant,'ndos'=>$ndos,'inscritEtat'=>$inscritEtat,'anneeActive'=>$this->anneeActive()] );
@@ -64,8 +66,10 @@ class HomeController extends Controller
     }
     public function page()
     {
-         $news=Etablissement::find(1);
+        // dernieres actualites et son etat publiée
+         $news=Actualite::latest()->where('statut','publie')->take(1)->first();
         return view('school',['news'=>$news]);
     }
+
 
 }

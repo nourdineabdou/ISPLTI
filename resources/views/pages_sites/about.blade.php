@@ -2,16 +2,16 @@
     @section('content')
         <!-- Page Title -->
         <div class="page-title dark-background" style="background-image: url(  {{asset('assets-lib/img/education/showcase-1.webp') }});">
-        <div class="container position-relative">
-            <h1>@lang('system.About_Title')</h1>
-            <p>@lang('system.About_Desc')</p>
-            <nav class="breadcrumbs">
-            <ol>
-                <li><a href="index.html">@lang('system.Home')</a></li>
-                <li class="current">@lang('system.About_Title')</li>
-            </ol>
-            </nav>
-        </div>
+            <div class="container position-relative">
+                <h1>@lang('system.About_Title')</h1>
+                <p>@lang('system.About_Desc')</p>
+                <nav class="breadcrumbs">
+                <ol>
+                    <li><a href="index.html">@lang('system.Home')</a></li>
+                    <li class="current">@lang('system.About_Title')</li>
+                </ol>
+                </nav>
+            </div>
         </div><!-- End Page Title -->
 
         <!-- History Section -->

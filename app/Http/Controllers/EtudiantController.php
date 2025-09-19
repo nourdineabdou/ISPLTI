@@ -20,7 +20,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class EtudiantController extends Controller
 {
 
-    public function import(Request $request)
+    public function importerStore(Request $request)
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,csv,xls'
@@ -28,10 +28,14 @@ class EtudiantController extends Controller
 
         Excel::import(new EtudiantsImport, $request->file('file'));
 
-        return back()->with('success', 'Étudiants importés avec succès !');
+        // response json
+        return response()->json([
+            'success' => true,
+            'message' => 'Étudiants importés avec succès !'
+        ]);
     }
 
-    public function export()
+    public function exporter()
     {
         $fileName = 'etudiants_' . now()->format('Y-m-d_H-i') . '.xlsx';
 
@@ -130,7 +134,7 @@ public function getImage($id)
                 ],
                 [
                     'label' => __('Exporter Les Étudiants'),
-                    'onclick' => 'openInModal({ link: \'' . route('etudiants.exporter') . '\', size: \'sm\' })',
+                    'onclick' => 'exportTable(\'' . route('etudiants.exporter') . '\')',
                     'permission' => true,
                 ]
 
@@ -253,13 +257,7 @@ public function getImage($id)
         ]);
     }
 
-    // Exporter les étudiants
-    public function exporter()
-    {
-        return view('pages.etudiants.exporter', [
-            'title' => __('etudiants.exporter'),
-        ]);
-    }
+
 
     // attestation pdf etudiant
     public function attestation($id)
