@@ -99,23 +99,21 @@ class InscriptionController extends Controller
         ]);
         $credentials = $request->only('matricule', 'nni');
         $etudiant = Etudiant::where("nodos", $credentials['matricule'])->where("nni", $credentials['nni'])->first();
-
-        if (!$etudiant) {
+        if (!$etudiant)
             return back()->withErrors([
-                'matricule' => 'Données invalides veuillez réessayer.',
+                'matricule' => 'Donnees invalides veuillez reessayer.',
             ]);
-        }
-        // créer une session pour l'étudiant
-         $etudiantId = Session(['etudiant_id' => $etudiant->id]);
-         if($etudiantId) {
-             $etudiant = Etudiant::find($etudiantId);
-             // retourner la vue de réinscription avec les données de l'étudiant
-             if($etudiant->inscription == 2 || $etudiant->inscription == 1){
-                 return view('inscriptions.reponse_etudiant', compact('etudiant'));
-             }
-         }
-        // supprimer la session de bachelier
         Session::forget('bachelier_id');
+        Session(['etudiant_id' => $etudiant->id]);
+        // créer une session pour l'étudiant
+         if($etudiant && ($etudiant->inscription == 2 || $etudiant->inscription == 1)){
+             return view('inscriptions.reponse_etudiant', compact('etudiant'));
+         }
+
+        // supprimer la session de bachelier
+
+        // créer le session etudiant_id
+        //Session(['etudiant_id' => $etudiant->id]);
         return view('inscriptions.rescription', compact('etudiant'));
     }
 
@@ -129,7 +127,6 @@ class InscriptionController extends Controller
         ]);
         $credentials = $request->only('nii', 'bac');
         $bachelier = BachelierOrientation::where("nni", $credentials['nii'])->where("num_bac", $credentials['bac'])->first();
-
         if (!$bachelier)
             return back()->withErrors([
                 'nii' => 'Donnees invalides veuillez reessayer.',
@@ -141,6 +138,9 @@ class InscriptionController extends Controller
                 Session(['bachelier_id' => $bachelier->id]);
                 //supprimer la session de l'étudiant
                 Session::forget('etudiant_id');
+                if($bachelier && ($bachelier->inscription == 2 || $bachelier->inscription == 1)){
+                    return view('inscriptions.reponse_bachelier', compact('bachelier'));
+                }
                 return view('inscriptions.inscriptions', compact('bachelier'));
 
         }

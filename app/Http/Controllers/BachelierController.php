@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\BacheliersImport;
 use App\Exports\BacheliersExport;
+use ZipArchive;
 class BachelierController extends Controller
 {
 
@@ -195,5 +196,34 @@ public function getImage($id)
             'bachelier' => $bachelier
         ]);
         return $pdf->stream('attestation.pdf');
+    }
+    public function downloadFolder($bachelierId)
+    {
+        $bachelier = BachelierOrientation::findOrFail($bachelierId);
+        $folderPath = storage_path("app/bacheliers/temp-$bachelierId");
+
+        if (!file_exists($folderPath)) {
+            return response()->json(['error' => 'Dossier introuvable.'], 404);
+        }
+
+        $zipFileName = "bachelier_{$bachelier->num_bac}_".'.zip';
+        $zipFilePath = storage_path("app/bacheliers/$zipFileName");
+
+        $zip = new ZipArchive();
+        if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+            $files = scandir($folderPath);
+            foreach ($files as $file) {
+                if ($file !== '.' && $file !== '..') {
+                    $filePath = $folderPath . '/' . $file;
+                    if (is_file($filePath)) {
+                        $zip->addFile($filePath, $file);
+                    }
+                }
+            }
+            $zip->close();
+        } else {
+            return response()->json(['error' => 'Impossible de créer le fichier ZIP.'], 500);
+        }
+        return response()->download($zipFilePath)->deleteFileAfterSend(true);
     }
 }

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\File;
 use App\Imports\EtudiantsImport;
 use App\Exports\EtudiantsExport;
 use Maatwebsite\Excel\Facades\Excel;
+use ZipArchive;
 class EtudiantController extends Controller
 {
 
@@ -312,5 +313,33 @@ public function getImage($id)
             ]
         );
     }
+
+    public function downloadFolder($etudiantId)
+    {
+        $etudiant = Etudiant::findOrFail($etudiantId);
+        $zip = new ZipArchive();
+        $zipFileName = 'rescription_' . $etudiant->nodos . '_files.zip';
+        // telecharger dans le downloads
+        $zipFilePath = storage_path('app/' . $zipFileName);
+        if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+            $directory = storage_path('app/etudiants/temp-' . $etudiantId);
+            if (is_dir($directory)) {
+                $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory));
+                foreach ($files as $file) {
+                    if (!$file->isDir()) {
+                        $filePath = $file->getRealPath();
+                        $relativePath = 'etudiant_' . $etudiantId . '/' . substr($filePath, strlen($directory) + 1);
+                        $zip->addFile($filePath, $relativePath);
+                    }
+                }
+            }
+            $zip->close();
+
+            return response()->download($zipFilePath)->deleteFileAfterSend(true);
+        } else {
+            return response()->json(['error' => 'Impossible de créer le fichier ZIP.'], 500);
+        }
+    }
+
 
 }

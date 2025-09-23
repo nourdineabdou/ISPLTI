@@ -22,6 +22,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'etudiants'], function () {
     // emplois etudiant
     Route::get('emplois/du_temps', [EtudiantController::class, 'emploiDuTemps'])->name('etudiants.emplois');
     Route::post('/emplois/du_temps', [EtudiantController::class, 'storeEmploiDuTemps'])->name('etudiants.emploi_du_temps_store');
+
+    // export le dossier etudiant
+    Route::get('/{id}/exporter_dossier', [EtudiantController::class, 'downloadFolder'])->name('etudiants.exporter_dossier');
 });
 
 // bacheliers routes
@@ -44,6 +47,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'bacheliers'], function () {
 
     // attestation pdf bachelier
     Route::get('/{id}/attestation', [BachelierController::class, 'attestation'])->name('bacheliers.attestation');
+    // exporter le dossier bachelier
+    Route::get('/{id}/exporter_dossier', [BachelierController::class, 'downloadFolder'])->name('bacheliers.exporter_dossier');
 });
 
 
