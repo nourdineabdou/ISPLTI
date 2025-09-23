@@ -86,6 +86,7 @@
                         <span class="title">@lang('system.connexion_desc')</span>
                             <a href="{{ route('login') }}" class="btn-register">@lang('system.connexion')</a>
                         </div>
+                        {{--
                         <div class="col-md-6 col-12 col-xl-4  ticker-item">
                             <span class="title"></span>
                             <a href="#" class="btn-register"></a>
@@ -94,6 +95,7 @@
                             <span class="title"></span>
                             <a href="#" class="btn-register"></a>
                         </div>
+                        --}}
                     </div>
                     </div>
                 </div>
@@ -252,7 +254,7 @@
                             <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="program-image-wrapper">
-                                <img src="assets-lib/img/education/education-3.webp" class="img-fluid" alt="Program">
+                                     <img src="assets-lib/img/education/education-3.webp" class="img-fluid" alt="Program">
                                 </div>
                             </div>
                             <div class="col-md-8">
