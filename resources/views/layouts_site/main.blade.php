@@ -34,6 +34,13 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+    <style>
+    .link-disabled {
+    pointer-events: none;   /* ignore les clics */
+    color: #888;            /* style visuel de disabled */
+    text-decoration: none;
+    }
+    </style>
 </head>
  <body class="index-page @if(app()->getLocale() == 'ar') rtl-body @endif">
    {{-- header --}}

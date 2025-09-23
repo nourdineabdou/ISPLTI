@@ -191,11 +191,31 @@ public function getImage($id)
     // attestation pdf bachelier
     public function attestation($id)
     {
-        $bachelier = BachelierOrientation::findOrFail($id);
-        $pdf = PDF::loadView('pages.bacheliers.attestation', [
-            'bachelier' => $bachelier
-        ]);
-        return $pdf->stream('attestation.pdf');
+        // Exemple de données. Remplacez par vos modèles/db.
+        $institution = [
+            'nom' => 'Institut Supérieur XYZ',
+            'adresse' => 'Avenue de l’Excellence, Nouakchott',
+            'telephone' => '+222 44 44 44 44',
+            'email' => 'contact@xyz.edu.mr',
+            'logo_base64' => null,
+        ];
+        $etudiant = [
+            'matricule' => '2025-00123',
+            'nom' => 'Nourdine Med Souleymane',
+            'date_naissance' => '1999-08-15',
+            'lieu_naissance' => 'Nouakchott',
+            'filiere' => 'Informatique',
+            'niveau' => 'Licence 2',
+        ];
+        $annee = '2025/2026';
+        $stats = [
+            'ects_acquis' => 48,
+            'moyenne_generale' => 13.75,
+            'rang' => '15 / 220',
+            'taux_presence' => '92%',
+            'ue_validees' => 10,
+        ];
+        return view('pages.bacheliers.export-attestation', compact('institution', 'etudiant', 'annee', 'stats'));
     }
     public function downloadFolder($bachelierId)
     {

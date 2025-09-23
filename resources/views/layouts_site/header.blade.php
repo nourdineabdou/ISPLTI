@@ -1,3 +1,4 @@
+
 <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
@@ -9,8 +10,8 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="{{ route('page') }}" class=" {{ request()->routeIs('page') ? 'active' : '' }}">@lang('system.Accueil')</a></li>
-          <li><a href="{{ route('pages.about') }}" class="{{ request()->routeIs('pages.about') ? 'active' : '' }}"><span>@lang('system.A_propos')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li><a  href="{{ route('page') }}" class=" {{ request()->routeIs('page') ? 'active' : '' }}">@lang('system.Accueil')</a></li>
+          <li><a class="link-disabled" href="{{ route('pages.about') }}" class="{{ request()->routeIs('pages.about') ? 'active' : '' }}"><span>@lang('system.A_propos')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
            {{--
             <ul>
               <li><a href="about.html">@lang('system.Notre_Institut')</a></li>
@@ -22,9 +23,9 @@
             --}}
           </li>
 
-          <li><a href="{{ route('pages.viesEstudiantine') }}" class="{{ request()->routeIs('pages.viesEstudiantine') ? 'active' : '' }}">@lang('system.Vie_Etudiante')</a></li>
-          <li><a href="{{ route('pages.actualite') }}" class="{{ request()->routeIs('pages.actualite') ? 'active' : '' }}">@lang('system.Actualites')</a></li>
-          <li><a href="{{ route('pages.events') }}" class="{{ request()->routeIs('pages.events') ? 'active' : '' }}">@lang('system.Evenements')</a></li>
+          <li><a class="link-disabled" href="{{ route('pages.viesEstudiantine') }}" class="{{ request()->routeIs('pages.viesEstudiantine') ? 'active' : '' }}">@lang('system.Vie_Etudiante')</a></li>
+          <li><a class="link-disabled" href="{{ route('pages.actualite') }}" class="{{ request()->routeIs('pages.actualite') ? 'active' : '' }}">@lang('system.Actualites')</a></li>
+          <li><a class="link-disabled" href="{{ route('pages.events') }}" class="{{ request()->routeIs('pages.events') ? 'active' : '' }}">@lang('system.Evenements')</a></li>
           {{--
           <li><a href="alumni.html">Anciens Élèves</a></li>
           --}}
@@ -59,20 +60,21 @@
             </ul>
           </li>
           --}}
-          <li><a href="{{ route('pages.contact') }}">@lang('system.Contact')</a></li>
-          {{-- li connexion ou deconnexion --}}
-            <li class="dropdown"><a href="#"><span>@lang('system.Connexion')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li><a class="link-disabled" href="{{ route('pages.contact') }}">@lang('system.Contact')</a></li>
+          {{-- li connexion ou deconnexion
+        <li class="dropdown"><a href="#"><span>@lang('system.Connexion')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+                <li><a href="{{ route('login') }}">@lang('system.Se_connecter')</a></li>
+                <li><a href="{{ route('inscriptions.login1') }}">@lang('system.S_inscrire')</a></li>
+                <li><a href="{{ route('inscriptions.login2') }}">@lang('system.rescription')</a></li>
+            </ul>
+        </li>
+        --}}
+            <li class="dropdown"><a disabled href="#"><span>@lang('system.Langue')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                    <li><a href="{{ route('login') }}">@lang('system.Se_connecter')</a></li>
-                    <li><a href="{{ route('inscriptions.login1') }}">@lang('system.S_inscrire')</a></li>
-                    <li><a href="{{ route('inscriptions.login2') }}">@lang('system.rescription')</a></li>
-                </ul>
-            </li>
-            <li class="dropdown"><a href="#"><span>@lang('system.Langue')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                    <li><a href="{{ route('language.switch', ['locale' => 'fr']) }}">@lang('system.Français')</a></li>
-                    <li><a href="{{ route('language.switch', ['locale' => 'en']) }}">@lang('system.English')</a></li>
-                    <li><a href="{{ route('language.switch', ['locale' => 'ar']) }}">@lang('system.Arabe')</a></li>
+                    <li><a href="{{ route('language.switch', ['locale' => 'fr']) }}">@lang('system.fr')</a></li>
+                    <li><a href="{{ route('language.switch', ['locale' => 'en']) }}">@lang('system.en')</a></li>
+                    <li><a href="{{ route('language.switch', ['locale' => 'ar']) }}">@lang('system.ar')</a></li>
                 </ul>
             </li>
         </ul>

@@ -436,4 +436,7 @@ return [
   'Telecharger_cv' => 'Télécharger le CV',
   'Contacter' => 'Contacter',
   'Directrice' => 'Directrice',
+  'fr' => 'français',
+  'en' => 'anglais',
+  'ar' => 'arabe',
 ];

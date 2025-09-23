@@ -1,121 +1,134 @@
+{{-- resources/views/attestations/print.blade.php --}}
+@php
+    $now = \Carbon\Carbon::now()->locale('fr')->translatedFormat('d F Y');
+@endphp
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Attestation d'inscription - Étudiant</title>
-    <style>
-        @page { margin:40mm 24mm 36mm 24mm; }
-        body { font-family: DejaVu Sans, Arial, Helvetica, sans-serif; color:#0f172a; }
-        .pdf-header { position: fixed; top: 0; left: 0; right: 0; height: 40mm; padding:8px 24mm; }
-        .pdf-footer { position: fixed; bottom: 0; left: 0; right: 0; height: 36mm; padding:8px 24mm; font-size:11px; color:#475569; }
-        .page { width:210mm; min-height:297mm; margin:0; padding:0; box-sizing:border-box; }
-        .content { border:1px solid #e6e9ef; padding:18px; border-radius:8px; margin-top:8px; }
-        .logo { width:96px; height:96px; object-fit:contain; }
-        .title { text-align:center; }
-        h1 { font-size:20px; margin:0; }
-        h2 { font-size:16px; margin:6px 0 12px 0; }
-        .center { text-align:center; }
-        .muted { color:#6b7280; }
-        .field { margin:6px 0; }
-        .field strong { display:inline-block; width:160px; }
-        .stamp { margin-top:24px; display:flex; justify-content:space-between; align-items:center; page-break-inside:avoid; }
-        .seal { border-radius:6px; padding:10px 16px; border:2px solid #0f172a; font-weight:700; }
-        .pagenum:before { content: counter(page); }
-        .page-break { page-break-after: always; }
-        .avoid-break { page-break-inside: avoid; }
-    </style>
+<meta charset="utf-8">
+<title>Attestation d’inscription — {{ $etudiant['nom'] }}</title>
+<style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { font-family: "DejaVu Sans", Arial, sans-serif; color: #111; font-size: 12pt; line-height: 1.35; }
+    @page { size: A4; margin: 16mm; }
+    .brand { display:flex; align-items:center; gap:12px; border-bottom:2px solid #f1f1f1; padding-bottom:8px; }
+    .logo { width:70px; height:70px; object-fit:contain; }
+    h1 { margin:0; font-size:18pt; }
+    .meta { margin-top:4px; font-size:10pt; color:#555; }
+    h2 { text-align:center; font-size:20pt; margin:16px 0 8px; text-transform:uppercase; letter-spacing:1px; }
+    .subtitle { text-align:center; color:#666; margin-bottom:10px; }
+    .bloc { border:1px solid #e9e9e9; border-radius:8px; background:#fafafa; padding:12px; margin-top:12px; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; }
+    .label{ color:#666; font-size:10pt; }
+    .val{ font-weight:600; }
+    table { width:100%; border-collapse:collapse; font-size:11pt; margin-top:6px; }
+    th, td { border:1px solid #e5e5e5; padding:8px 10px; text-align:left; }
+    th { background:#f5f5f5; }
+    .parag{ margin-top:12px; text-align:justify; }
+    .footer{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:22mm; }
+    .line{ height:60px; border-bottom:1px dashed #bbb; margin-bottom:6px; }
+    .who{ font-size:10pt; color:#555; }
+    .muted{ color:#777; font-size:10pt; margin-top:6px; }
+    .stamp{
+        position: fixed; right: 40mm; bottom: 40mm;
+        width: 120px; height: 120px; border: 2px dashed #d2d2d2; border-radius: 50%;
+        display:flex; align-items:center; justify-content:center; color:#c0c0c0; font-size:10pt; transform:rotate(-12deg);
+    }
+</style>
 </head>
 <body>
-@php
-    $logoUrl = null;
-    if(isset($etudiant->etablissement_logo) && $etudiant->etablissement_logo) {
-        if(request()->has('web')) {
-            $logoUrl = asset('storage/' . $etudiant->etablissement_logo);
-        } else {
-            $logoUrl = public_path('storage/' . $etudiant->etablissement_logo);
-        }
-    }
-@endphp
-
-<div class="pdf-header">
-    <div style="display:flex;align-items:center;justify-content:space-between;">
+    <header class="brand">
+        @if(!empty($institution['logo_base64']))
+            <img class="logo" src="{{ $institution['logo_base64'] }}" alt="Logo">
+        @endif
         <div>
-            @if($logoUrl)
-                <img src="{{ $logoUrl }}" alt="logo" class="logo">
-            @else
-                <div style="width:96px;height:96px;background:#eef2ff;display:flex;align-items:center;justify-content:center;border-radius:8px;font-weight:700;color:#1e293b;">LOGO</div>
-            @endif
+            <h1>{{ $institution['nom'] }}</h1>
+            <div class="meta">{{ $institution['adresse'] }} — Tél: {{ $institution['telephone'] }} — Email: {{ $institution['email'] }}</div>
         </div>
+    </header>
 
-        <div class="title">
-            <h1>INSTITUT SUPERIEUR</h1>
-            <h2>Attestation d'inscription - Étudiant</h2>
-            <div class="muted">Réf : {{ $etudiant->nodos ?? ($etudiant->id ?? '-') }}</div>
-        </div>
+    <h2>Attestation d’inscription</h2>
+    <div class="subtitle">Année universitaire {{ $annee }}</div>
 
-        <div style="width:96px; text-align:right;">
-            <small class="muted">Date: {{ date('d/m/Y') }}</small>
-        </div>
-    </div>
-</div>
-
-<div class="pdf-footer">
-    <div style="display:flex;justify-content:space-between;align-items:center;">
-        <div>Institut - Adresse complète - Téléphone</div>
-        <div>www.example.edu</div>
-        <div>Page <span class="pagenum"></span></div>
-    </div>
-</div>
-
-<div class="page">
-    <div class="content">
-        <p class="center" style="font-size:14px; margin-bottom:12px;">Nous attestons que l'étudiant(e) suivant(e) est inscrit(e) au sein de notre établissement :</p>
-
-        <div style="max-width:640px;margin:0 auto;">
-            <p class="field"><strong>Nom (FR) :</strong> {{ $etudiant->nom_fr ?? '-' }}</p>
-            <p class="field"><strong>Date de naissance :</strong> {{ $etudiant->date_naissance ? date('d/m/Y', strtotime($etudiant->date_naissance)) : '-' }}</p>
-            <p class="field"><strong>Lieu de naissance :</strong> {{ $etudiant->lieu_naissance_fr ?? $etudiant->lieu_naissance ?? '-' }}</p>
-            <p class="field"><strong>Genre :</strong> {{ $etudiant->genre ?? '-' }}</p>
-            <p class="field"><strong>Nationalité :</strong> {{ $etudiant->nationalite ?? '-' }}</p>
-            <p class="field"><strong>Téléphone :</strong> {{ $etudiant->telephone ?? '-' }}</p>
-            <p class="field"><strong>Email :</strong> {{ $etudiant->email ?? '-' }}</p>
-            <p class="field"><strong>Adresse :</strong> {{ $etudiant->adresse ?? '-' }}</p>
-            <p class="field"><strong>NNI :</strong> {{ $etudiant->nni ?? '-' }}</p>
-            <p class="field"><strong>Numéro BAC :</strong> {{ $etudiant->num_bac ?? '-' }}</p>
-            <p class="field"><strong>Année d'entrée :</strong> {{ $etudiant->annee_entree_etabliss ?? '-' }}</p>
-            <p class="field"><strong>Établissement (ID) :</strong> {{ $etudiant->id_etablissement ?? '-' }}</p>
-            <p class="field"><strong>Numéro dérogation :</strong> {{ $etudiant->num_derogation ?? '-' }}</p>
-            <p class="field"><strong>Date dérogation :</strong> {{ $etudiant->date_derogation ? date('d/m/Y', strtotime($etudiant->date_derogation)) : '-' }}</p>
-        </div>
-
-        <p style="margin-top:14px;">La présente attestation est délivrée pour servir et valoir ce que de droit.</p>
-
-        <div class="stamp">
-            <div class="muted">
-                <div><strong>N° dossier :</strong> {{ $etudiant->nodos ?? ($etudiant->id ?? '-') }}</div>
-                <div><strong>État bourse :</strong> {{ isset($etudiant->etat_bourse) ? ($etudiant->etat_bourse ? 'Oui' : 'Non') : '-' }}</div>
+    <section class="bloc">
+        <div class="grid-2">
+            <div>
+                <div class="label">Nom & Prénom</div>
+                <div class="val">{{ $etudiant['nom'] }}</div>
             </div>
-
-            <div style="text-align:right">
-                <div class="seal">Cachet officiel</div>
-                <div style="font-size:12px;margin-top:6px;">Signature du responsable</div>
+            <div>
+                <div class="label">Matricule</div>
+                <div class="val">{{ $etudiant['matricule'] }}</div>
+            </div>
+            <div>
+                <div class="label">Date & lieu de naissance</div>
+                <div class="val">
+                    {{ \Carbon\Carbon::parse($etudiant['date_naissance'])->format('d/m/Y') }}
+                    à {{ $etudiant['lieu_naissance'] }}
+                </div>
+            </div>
+            <div>
+                <div class="label">Filière / Niveau</div>
+                <div class="val">{{ $etudiant['filiere'] }} — {{ $etudiant['niveau'] }}</div>
             </div>
         </div>
-    </div>
+
+        <p class="parag">
+            Nous soussignés, {{ $institution['nom'] }}, certifions que l’étudiant(e)
+            <strong>{{ $etudiant['nom'] }}</strong> (matricule <strong>{{ $etudiant['matricule'] }}</strong>)
+            est régulièrement inscrit(e) pour l’année universitaire <strong>{{ $annee }}</strong>, en
+            <strong>{{ $etudiant['filiere'] }}</strong> (niveau <strong>{{ $etudiant['niveau'] }}</strong>).
+            La présente attestation est délivrée pour servir et valoir ce que de droit.
+        </p>
+    </section>
+
+    <section class="bloc">
+        <div class="label" style="margin-bottom:6px;">Indicateurs académiques (à titre informatif)</div>
+        <table>
+            <tbody>
+            <tr><th>ECTS acquis</th><td>{{ $stats['ects_acquis'] }}</td></tr>
+            <tr><th>Moyenne générale</th><td>{{ $stats['moyenne_generale'] }}</td></tr>
+            <tr><th>Rang</th><td>{{ $stats['rang'] }}</td></tr>
+            <tr><th>Taux de présence</th><td>{{ $stats['taux_presence'] }}</td></tr>
+            <tr><th>UE validées</th><td>{{ $stats['ue_validees'] }}</td></tr>
+            </tbody>
+        </table>
+        <div class="muted">* Ces données sont indicatives et ne remplacent pas un relevé officiel.</div>
+    </section>
+
+    <section class="bloc">
+        <div class="grid-2">
+            <div>
+                <div class="label">Fait à</div>
+                <div class="val">Nouakchott</div>
+            </div>
+            <div>
+                <div class="label">Le</div>
+                <div class="val">{{ $now }}</div>
+            </div>
+        </div>
+    </section>
 
     <div class="footer">
-        <div style="display:flex;justify-content:space-between;">
-            <div>Institut - Adresse complète - Téléphone</div>
-            <div>www.example.edu</div>
+        <div style="width:52%;">
+            <div class="line"></div>
+            <div class="who">Le/La Directeur·trice / Service de la Scolarité</div>
+        </div>
+        <div style="width:46%; text-align:right;">
+            {{-- QR éventuel ici --}}
         </div>
     </div>
-</div>
+
+    <div class="stamp">Cachet officiel</div>
+
+    {{-- Auto-ouvrir la boîte d’impression (optionnel) --}}
+    <script>
+        // Ouvrir la boîte d’impression au chargement.
+        // Commentez si vous préférez le faire manuellement.
+        window.addEventListener('load', () => {
+            window.print();
+        });
+    </script>
 </body>
 </html>
-
-@if(request()->has('print'))
-    <script>
-        window.addEventListener('load', function(){ setTimeout(function(){ window.print(); }, 200); });
-    </script>
-@endif

@@ -450,4 +450,7 @@ return [
 'inscription_desc' => "Create a new account to get started.",
 'rescription_desc' => "Subscribe to access exclusive features.",
 'connexion_desc'   => "Sign in to your account.",
+'fr'=>'French',
+'en'=>'English',
+'ar'=>'Arabic',
 ];

@@ -263,11 +263,30 @@ public function getImage($id)
     // attestation pdf etudiant
     public function attestation($id)
     {
-        $etudiant = Etudiant::findOrFail($id);
-        $pdf = PDF::loadView('pages.etudiants.export-attestation', [
-            'etudiant' => $etudiant
-        ]);
-        return $pdf->stream('attestation.pdf');
+       $institution = [
+            'nom' => 'Institut Supérieur XYZ',
+            'adresse' => 'Avenue de l’Excellence, Nouakchott',
+            'telephone' => '+222 44 44 44 44',
+            'email' => 'contact@xyz.edu.mr',
+            'logo_base64' => null,
+        ];
+        $etudiant = [
+            'matricule' => '2025-00123',
+            'nom' => 'Nourdine Med Souleymane',
+            'date_naissance' => '1999-08-15',
+            'lieu_naissance' => 'Nouakchott',
+            'filiere' => 'Informatique',
+            'niveau' => 'Licence 2',
+        ];
+        $annee = '2025/2026';
+        $stats = [
+            'ects_acquis' => 48,
+            'moyenne_generale' => 13.75,
+            'rang' => '15 / 220',
+            'taux_presence' => '92%',
+            'ue_validees' => 10,
+        ];
+        return view('pages.etudiants.export-attestation', compact('institution', 'etudiant', 'annee', 'stats'));
     }
 
     // emplois etudiant
