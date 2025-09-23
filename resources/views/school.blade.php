@@ -3,7 +3,7 @@
             <section id="hero" class="hero section dark-background">
                 <div class="hero-container">
                     <video autoplay muted loop playsinline class="video-background">
-                    <source src="assets-lib/img/education/video-2.mp4" type="video/mp4">
+                      <source src="assets-lib/img/education/video-2.mp4" type="video/mp4">
                     </video>
                     <div class="overlay"></div>
                     <div class="container">
@@ -25,8 +25,8 @@
                             </h1>
                             <p>@lang('system.Institut_slogan')</p>
                             <div class="cta-buttons">
-                            <a href="#" class="btn-primary">@lang('system.Cta_commencez_parcours')</a>
-                            <a href="#" class="btn-secondary">@lang('system.Cta_decouvrir_programmes')</a>
+                            <a href="{{ route('inscriptions.login1') }}" class="btn-primary">@lang('system.inscription')</a>
+                            <a href="{{ route('inscriptions.login2') }}" class="btn-secondary">@lang('system.rescription')</a>
                             </div>
                         </div>
                         </div>
@@ -84,15 +84,15 @@
                     <div class="row gy-4">
                         <div class="col-md-6 col-xl-4 col-12 ticker-item">
                         <span class="title">@lang('system.connexion_desc')</span>
-                        <a href="{{ route('login') }}" class="btn-register">@lang('system.connexion')</a>
+                            <a href="{{ route('login') }}" class="btn-register">@lang('system.connexion')</a>
                         </div>
                         <div class="col-md-6 col-12 col-xl-4  ticker-item">
-                        <span class="title">@lang('system.inscription_desc')</span>
-                        <a href="{{ route('inscriptions.login1') }}" class="btn-register">@lang('system.inscription')</a>
+                            <span class="title"></span>
+                            <a href="#" class="btn-register"></a>
                         </div>
                         <div class="col-md-6 col-12 col-xl-4 ticker-item">
-                        <span class="title">@lang('system.rescription_desc')</span>
-                        <a href="{{ route('inscriptions.login2') }}" class="btn-register">@lang('system.rescription')</a>
+                            <span class="title"></span>
+                            <a href="#" class="btn-register"></a>
                         </div>
                     </div>
                     </div>

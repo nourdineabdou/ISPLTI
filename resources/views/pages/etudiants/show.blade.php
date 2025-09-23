@@ -20,6 +20,13 @@
                             <h5 class="mb-0">{{ $etudiant->nom_fr  }}</h5>
                             <small class="text-muted">{{ $etudiant->nodos ? 'N° DOS: '.$etudiant->nodos : '' }}</small>
                         </div>
+
+                        <!-- Download ZIP button -->
+                        <div class="mt-3">
+                            <a href="{{ route('etudiants.exporter_dossier', $etudiant->id) }}" class="btn btn-primary" target="_blank">
+                                <i class="bi bi-file-earmark-zip"></i> @lang('Télécharger le dossier ZIP')
+                            </a>
+                        </div>
                     </div>
 
                     <div class="col-12 col-md-8">
