@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'ajax' => \App\Http\Middleware\AjaxRequestOnly::class,
         'permission' => PermissionMiddleware::class,
+        'middleware.sldown' => \App\Http\Middleware\SlowDown::class,
     ];
 }
