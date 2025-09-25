@@ -1,0 +1,40 @@
+----
+time: 2025-09-24 00:09:31
+action: update
+user: Administrateur
+cwd: C:\laragon\www\school
+php_version: 8.2.28
+php_uname: Windows NT NKCM00001056 10.0 build 17763 (Windows 10) AMD64
+argv: scripts/composer-guard.php update
+env_COMPOSER_ALLOW: 0
+
+----
+time: 2025-09-24 00:11:42
+action: update
+cwd: C:\laragon\www\school
+php_version: 8.2.28
+user: Administrateur
+argv: scripts/composer-guard.php update
+php_uname: Windows NT NKCM00001056 10.0 build 17763 (Windows 10) AMD64
+env_COMPOSER_ALLOW: 0
+
+----
+time: 2025-09-24 00:19:06
+action: install
+cwd: C:\laragon\www\school
+php_version: 8.2.28
+user: Administrateur
+argv: scripts/composer-guard.php install
+php_uname: Windows NT NKCM00001056 10.0 build 17763 (Windows 10) AMD64
+env_COMPOSER_ALLOW: 0
+
+----
+time: 2025-09-25 20:20:46
+action: update
+cwd: C:\laragon\www\school
+php_version: 8.2.28
+user: Administrateur
+argv: scripts/composer-guard.php update
+php_uname: Windows NT NKCM00001056 10.0 build 17763 (Windows 10) AMD64
+env_COMPOSER_ALLOW: 0
+

@@ -18,20 +18,21 @@ use Illuminate\Support\Facades\File;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('home');
-});
 
+//  Route::get('/', function () {
+//     return redirect()->route('home');
+// });
 
 
 Auth::routes();
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
+
     Route::get('', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
 
-Route::get('', [App\Http\Controllers\HomeController::class, 'page'])->name('page');
+Route::get('', [App\Http\Controllers\HomeController::class, 'page'])->name('page')->middleware('middleware.sldown');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'structures'], function () {
     Route::get('', function () {
