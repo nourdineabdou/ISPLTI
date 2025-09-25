@@ -111,7 +111,7 @@ return [
   'Flexibilite' => 'Flexibilité',
   'Conditions_utilisation' => 'Conditions d\'utilisation',
   'Politique_confidentialite' => 'Politique de confidentialité',
-  'Institut_slogan' => 'Institut Supérieur Professionnel des Langues, de la Traduction et de l\'Interprétation',
+  'Institut_slogan' => 'L’Institut Supérieur Professionnel des Langues, de la Traduction et de l’Interprétation est un établissement d’enseignement supérieur placé sous la tutelle du Ministère de l’Enseignement Supérieur et de la Recherche Scientifique.',
   'Cta_commencez_parcours' => 'Commencez votre parcours',
   'Cta_decouvrir_programmes' => 'Découvrir les programmes',
   'Eveiller_les_esprits' => 'Éveiller les esprits',
@@ -423,7 +423,7 @@ return [
   "rescription" => "Réinscription",
   'inscription_desc' => 'Inscrivez-vous dès maintenant pour rejoindre notre institut et commencer votre parcours éducatif.',
   'rescription_desc' => 'Réinscrivez-vous pour continuer votre formation et atteindre vos objectifs académiques.',
-  'connexion_desc' => 'Connectez-vous à votre compte pour accéder à vos cours, ressources et informations académiques.',
+  'connexion_desc' => ' ',
   // Traductions pour la page du directeur
   'Directeur_title' => ':title',
   'Directeur_intro' => ':name est un responsable académique expérimenté avec une longue carrière dans l\'enseignement des langues et la traduction.',

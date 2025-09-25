@@ -31,50 +31,7 @@
                         </div>
                         </div>
                         <div class="col-lg-5 @if(app()->getLocale() == 'ar') order-1 @endif" data-aos="zoom-out" data-aos-delay="200">
-                        <div class="stats-card">
-                            <div class="stats-header">
-                            <h3>@lang('system.Pourquoi_nous_choisir')</h3>
-                            <div class="decoration-line"></div>
-                            </div>
-                            <div class="stats-grid">
-                            <div class="stat-item">
-                                <div class="stat-icon">
-                                <i class="bi bi-trophy-fill"></i>
-                                </div>
-                                <div class="stat-content">
-                                <h4>71%</h4>
-                                <p>@lang('system.Emploi_diplomes')</p>
-                                </div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-icon">
-                                <i class="bi bi-globe"></i>
-                                </div>
-                                <div class="stat-content">
-                                <h4>2+</h4>
-                                <p>@lang('system.Partenaires_internationaux')</p>
-                                </div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-icon">
-                                <i class="bi bi-mortarboard"></i>
-                                </div>
-                                <div class="stat-content">
-                                <h4>185</h4>
-                                <p>@lang('system.Ratio_etudiants_enseignants')</p>
-                                </div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-icon">
-                                <i class="bi bi-building"></i>
-                                </div>
-                                <div class="stat-content">
-                                <h4>9+</h4>
-                                <p>@lang('system.Programmes_diplomants')</p>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
+                        
                         </div>
                     </div>
                     </div>                </div>
