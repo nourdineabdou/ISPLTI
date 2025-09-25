@@ -63,14 +63,18 @@ class InscriptionController extends Controller
         // $user->assignRole([$roleBachelier->id]);
         // get session bachelier
          $bachelierId = Session::get('bachelier_id');
+
          if($bachelierId) {
              $bachelier = BachelierOrientation::find($bachelierId);
              // retourner la vue d'inscription avec les données du bachelier
              if($bachelier->inscription == 2 || $bachelier->inscription == 1){
+                abort(403, 'Unauthorized action.');
                 return view('inscriptions.reponse_bachelier', compact('bachelier'));
              }
+             abort(403, 'Unauthorized action.');
              return view('inscriptions.inscriptions', compact('bachelier'));
          }
+
         return view('auth.Login_bachelier');
     }
 
@@ -107,6 +111,7 @@ class InscriptionController extends Controller
         Session(['etudiant_id' => $etudiant->id]);
         // créer une session pour l'étudiant
          if($etudiant && ($etudiant->inscription == 2 || $etudiant->inscription == 1)){
+            abort(403, 'Unauthorized action.');
              return view('inscriptions.reponse_etudiant', compact('etudiant'));
          }
 
