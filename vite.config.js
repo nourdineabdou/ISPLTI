@@ -32,4 +32,6 @@ export default defineConfig({
         },
     },
 });*/
-//
+// COMPOSER_ALLOW=1 composer install
+//COMPOSER_ALLOW=1 composer update
+
