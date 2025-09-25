@@ -114,7 +114,7 @@ return [
     'Flexibilite' => "مرونة",
     'Conditions_utilisation' => "شروط الاستخدام",
     'Politique_confidentialite' => "سياسة الخصوصية",
-    'Institut_slogan' => "​​المعهد العالي المهني للغات وللترجمة والترجمة الفورية بنواذيبو​",
+    'Institut_slogan' => "​​ المعهد العالي المهني للغات وللترجمة والترجمة الفورية وهو مؤسسة من مؤسسات التعليم العال الواقعة تحت وصاية وزارة التعليم العالي والبحث العلمي.",
     'Cta_commencez_parcours' => "ابدأ رحلتك",
     'Cta_decouvrir_programmes' => "اكتشف البرامج",
     'Eveiller_les_esprits' => "إيقاظ العقول",
@@ -433,7 +433,7 @@ return [
   "rescription" => "إعادة التسجيل",
   'inscription_desc' => 'قم بإنشاء حساب جديد للبدء.',
   'rescription_desc' => 'قم بإعادة التسجيل لمتابعة دراستك.',
-  'connexion_desc' => 'قم بتسجيل الدخول إلى حسابك.',
+  'connexion_desc' => '',
   // ترجمة لصفحة المدير
   'Directeur_title' => ':title',
   'Directeur_intro' => ':name هو قائد أكاديمي ذو خبرة طويلة في تعليم اللغات والترجمة.',
