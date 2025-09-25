@@ -14,7 +14,7 @@
         "laravel/ui": "^4.6",
         "maatwebsite/excel": "^3.1",
         "microsoft/microsoft-graph": "^2.21",
-        "spatie/laravel-permission": "^6.10",
+        "spatie/laravel-permission": "^6.21",
         "twilio/sdk": "*",
         "yajra/laravel-datatables-oracle": "^10.11"
     },
