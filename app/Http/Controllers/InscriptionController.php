@@ -206,6 +206,7 @@ class InscriptionController extends Controller
             $newPath = $bachelierDir . '/photo.' . $request->file('photo')->getClientOriginalExtension();
             File::move($path, $newPath);
         }
+
         // capture_paiement
         if ($request->hasFile('capture_paiement')) {
             $path = $request->file('capture_paiement');

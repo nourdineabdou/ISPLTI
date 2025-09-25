@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
 });
 
 
-Route::get('', [App\Http\Controllers\HomeController::class, 'page'])->name('page');
+Route::get('', [App\Http\Controllers\HomeController::class, 'page'])->name('page')->middleware('middleware.sldown');
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'structures'], function () {
     Route::get('', function () {
