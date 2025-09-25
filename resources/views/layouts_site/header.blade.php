@@ -4,7 +4,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- <img src="assets-lib/img/logo.webp" alt=""> -->
-        <i class="bi bi-buildings"></i>
+        
         <h1 class="sitename">ISPLTI</h1>
       </a>
 
