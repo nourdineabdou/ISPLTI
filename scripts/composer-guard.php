@@ -39,8 +39,5 @@ foreach ($serverVars as $k => $v) {
     $logEntry .= "{$k}: {$v}\n";
 }
 $logEntry .= "\n";
-
-
 @safeAppendLog($logFile, $logEntry);
-
 exit(1);
