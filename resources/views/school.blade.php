@@ -13,15 +13,15 @@
                            <h1>
                                @if($news)
                                  @if(app()->getLocale() == 'ar')
-                                <marquee direction="right"  scrollamount="15" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;font-size: 14px;" >
+                                <marquee direction="right"  scrollamount="5" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;font-size: 14px;" >
                                          {{ $news->titre_ar }}
                                     </marquee>
                                  @elseif(app()->getLocale() == 'fr')
-                                    <marquee  scrollamount="15" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;display: block;font-size: 13px;" >
+                                    <marquee  scrollamount="5" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;display: block;font-size: 13px;" >
                                     {{ $news->titre_fr }}
                                      </marquee>
 								@else
-									 <marquee  scrollamount="15" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;display: block;font-size: 13px;" >
+									 <marquee  scrollamount="5" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;display: block;font-size: 13px;" >
                                     {{ $news->titre_en }}
                                      </marquee>
                                  @endif
