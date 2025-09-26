@@ -25,13 +25,40 @@
                             </h1>
                             <p>@lang('system.Institut_slogan')</p>
                             <div class="cta-buttons">
-                            <a href="{{ route('inscriptions.login1') }}" class="btn-primary">@lang('system.inscription')</a>
-                            <a href="{{ route('inscriptions.login2') }}" class="btn-secondary">@lang('system.rescription')</a>
+                            <a href="#" class="btn-primary">@lang('system.inscription')</a>
+                            <a  href="#" class="btn-secondary">@lang('system.rescription')</a>
                             </div>
+                                <!-- Bloc Liens Téléchargement PDF -->
+                                <div class="row justify-content-center g-3 mt-4">
+                                    <div class="col-md-3 col-6">
+                                    <a href="{{ asset('pdfs/AR_Avis_inscription_2025-2026.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                            <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
+                                            <div class="fw-bold">@lang('system.avis_insc_ar')</div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                        <a href="{{ asset('pdfs/FR_avis inscription 2025-2026.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                            <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-primary" style="font-size:2rem;"></i></div>
+                                            <div class="fw-bold">@lang('system.avis_insc_fr')</div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                    <a href="{{ asset('pdfs/AR_avis réinscription 2025-2026.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                            <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-success" style="font-size:2rem;"></i></div>
+                                            <div class="fw-bold">@lang('system.avis_resc_ar')</div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 col-6">
+                                    <a href="{{ asset('pdfs/FR_avis réinscription 2025-2026.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                            <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
+                                            <div class="fw-bold">@lang('system.avis_resc_fr')</div>
+                                        </a>
+                                    </div>
+                                </div>
                         </div>
                         </div>
                         <div class="col-lg-5 @if(app()->getLocale() == 'ar') order-1 @endif" data-aos="zoom-out" data-aos-delay="200">
-                        
+
                         </div>
                     </div>
                     </div>                </div>
@@ -41,7 +68,7 @@
                     <div class="row gy-4">
                         <div class="col-md-6 col-xl-4 col-12 ticker-item">
                         <span class="title">@lang('system.connexion_desc')</span>
-                            <a href="{{ route('login') }}" class="btn-register">@lang('system.connexion')</a>
+                            <a  href="#" class="btn-register">@lang('system.connexion')</a>
                         </div>
                         {{--
                         <div class="col-md-6 col-12 col-xl-4  ticker-item">
@@ -57,12 +84,11 @@
                     </div>
                 </div>
             </section><!-- /Section Héros -->
-
+            {{--
             <!-- Section À propos -->
             <section id="about" class="about section">
 
                 <div class="container" data-aos="fade-up" data-aos-delay="100">
-                    {{-- start --}}
                     <div class="row mb-5 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
                     <div class="col-lg-6 pe-lg-5 @if(app()->getLocale() == 'ar') order-2 @endif" data-aos="fade-right" data-aos-delay="200">
                         <h2 class="display-6 fw-bold mb-4">@lang('system.Eveiller_les_esprits'), <span>@lang('system.Façonner_les_avenirs')</span></h2>
@@ -155,7 +181,6 @@
                             </div>
                         </div>
                     </div>
-                     {{-- end --}}
                 </div>
 
             </section><!-- /About Section -->
@@ -636,14 +661,14 @@
             <div class="container @if(app()->getLocale() == 'ar') text-end @endif">
 
                 <div class="row gy-4 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
-                    {{-- 4 previous articles --}}
+
                     @foreach (\App\Models\Actualite::where('statut', 'publie')->orderBy('id', 'desc')->limit(3)->get() as $actualite)
                         <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                                 <article>
                                 <div class="post-img">
                                     <img src="{{ asset($actualite->image) }}" alt="" class="img-fluid">
                                 </div>
-                                {{-- titre est afficher selon la langue --}}
+
                                 <p class="post-category">{{ app()->getLocale() == 'fr' ? $actualite->titre_fr : (app()->getLocale() == 'en' ? $actualite->titre_en : $actualite->titre_ar) }}</p>
                                 <h2 class="title">
                                     <a href="#">{{ app()->getLocale() == 'fr' ? $actualite->contenu_fr : (app()->getLocale() == 'en' ? $actualite->contenu_en : $actualite->contenu_ar) }}</a>
@@ -665,164 +690,164 @@
             <!-- Section Événements -->
             <section id="events" class="events section">
 
-            <!-- Section Title -->
-            <div class="container section-title @if(app()->getLocale() == 'ar') text-end @endif" data-aos="fade-up">
-                <h2>@lang('system.Evenements')</h2>
-                <p>@lang('system.Evenements_desc')</p>
-            </div><!-- End Section Title -->
+                <!-- Section Title -->
+                <div class="container section-title @if(app()->getLocale() == 'ar') text-end @endif" data-aos="fade-up">
+                    <h2>@lang('system.Evenements')</h2>
+                    <p>@lang('system.Evenements_desc')</p>
+                </div><!-- End Section Title -->
 
-            <div class="container @if(app()->getLocale() == 'ar') text-end @endif" data-aos="fade-up" data-aos-delay="100">
+                <div class="container @if(app()->getLocale() == 'ar') text-end @endif" data-aos="fade-up" data-aos-delay="100">
 
-                <div class="event-filters mb-4 @if(app()->getLocale() == 'ar') text-end @endif">
-                <div class="row justify-content-center g-3 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
-                    <div class="col-md-4">
-                    <select class="form-select">
-                        <option selected="">@lang('system.Tous_les_mois')</option>
-                        <option>@lang('system.Janvier')</option>
-                        <option>@lang('system.Fevrier')</option>
-                        <option>@lang('system.Mars')</option>
-                        <option>@lang('system.Avril')</option>
-                        <option>@lang('system.Mai')</option>
-                        <option>@lang('system.Juin')</option>
-                    </select>
+                    <div class="event-filters mb-4 @if(app()->getLocale() == 'ar') text-end @endif">
+                    <div class="row justify-content-center g-3 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
+                        <div class="col-md-4">
+                        <select class="form-select">
+                            <option selected="">@lang('system.Tous_les_mois')</option>
+                            <option>@lang('system.Janvier')</option>
+                            <option>@lang('system.Fevrier')</option>
+                            <option>@lang('system.Mars')</option>
+                            <option>@lang('system.Avril')</option>
+                            <option>@lang('system.Mai')</option>
+                            <option>@lang('system.Juin')</option>
+                        </select>
+                        </div>
+                        <div class="col-md-4">
+                        <select class="form-select">
+                            <option selected="">@lang('system.Toutes_les_categories')</option>
+                            <option>@lang('system.Academique')</option>
+                            <option>@lang('system.Arts')</option>
+                            <option>@lang('system.Sports')</option>
+                            <option>@lang('system.Communaute')</option>
+                        </select>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                    <select class="form-select">
-                        <option selected="">@lang('system.Toutes_les_categories')</option>
-                        <option>@lang('system.Academique')</option>
-                        <option>@lang('system.Arts')</option>
-                        <option>@lang('system.Sports')</option>
-                        <option>@lang('system.Communaute')</option>
-                    </select>
                     </div>
+
+                    <div class="row g-4 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
+
+                    <div class="col-lg-6">
+                        <div class="event-card">
+                        <div class="event-date">
+                            <span class="month">FEB</span>
+                            <span class="day">15</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-tag academic">@lang('system.Academique')</div>
+                            <h3>@lang('system.Exposition_scientifique')</h3>
+                            <p>@lang('system.Exposition_scientifique_desc')</p>
+                            <div class="event-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>09:00 AM - 03:00 PM</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>Main Auditorium</span>
+                            </div>
+                            </div>
+                            <div class="event-actions">
+                            <a href="#" class="btn-learn-more">Learn More</a>
+                            <a href="#" class="btn-calendar"><i class="bi bi-calendar-plus"></i> Add to Calendar</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="event-card">
+                        <div class="event-date">
+                            <span class="month">MAR</span>
+                            <span class="day">10</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-tag sports">@lang('system.Sports')</div>
+                            <h3>@lang('system.Journee_sportive_annuelle')</h3>
+                            <p>@lang('system.Journee_sportive_annuelle_desc')</p>
+                            <div class="event-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>08:30 AM - 05:00 PM</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>School Playground</span>
+                            </div>
+                            </div>
+                            <div class="event-actions">
+                            <a href="#" class="btn-learn-more">Learn More</a>
+                            <a href="#" class="btn-calendar"><i class="bi bi-calendar-plus"></i> Add to Calendar</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="event-card">
+                        <div class="event-date">
+                            <span class="month">APR</span>
+                            <span class="day">22</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-tag arts">@lang('system.Arts')</div>
+                            <h3>@lang('system.Concert_printemps')</h3>
+                            <p>@lang('system.Concert_printemps_desc')</p>
+                            <div class="event-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>06:30 PM - 08:30 PM</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>Performing Arts Center</span>
+                            </div>
+                            </div>
+                            <div class="event-actions">
+                            <a href="#" class="btn-learn-more">Learn More</a>
+                            <a href="#" class="btn-calendar"><i class="bi bi-calendar-plus"></i> Add to Calendar</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="event-card">
+                        <div class="event-date">
+                            <span class="month">MAY</span>
+                            <span class="day">8</span>
+                            <span class="year">2025</span>
+                        </div>
+                        <div class="event-content">
+                            <div class="event-tag community">@lang('system.Communaute')</div>
+                            <h3>@lang('system.Rencontre_parents_professeurs')</h3>
+                            <p>@lang('system.Rencontre_parents_professeurs_desc')</p>
+                            <div class="event-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span>01:00 PM - 07:00 PM</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-geo-alt"></i>
+                                <span>Various Classrooms</span>
+                            </div>
+                            </div>
+                            <div class="event-actions">
+                            <a href="#" class="btn-learn-more">Learn More</a>
+                            <a href="#" class="btn-calendar"><i class="bi bi-calendar-plus"></i> Add to Calendar</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <div class="text-center mt-5 @if(app()->getLocale() == 'ar') text-end @endif">
+                    <a href="#" class="btn-view-all">@lang('system.Voir_tous_evenements')</a>
+                    </div>
+
                 </div>
-                </div>
 
-                <div class="row g-4 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
-
-                <div class="col-lg-6">
-                    <div class="event-card">
-                    <div class="event-date">
-                        <span class="month">FEB</span>
-                        <span class="day">15</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="event-content">
-                        <div class="event-tag academic">@lang('system.Academique')</div>
-                        <h3>@lang('system.Exposition_scientifique')</h3>
-                        <p>@lang('system.Exposition_scientifique_desc')</p>
-                        <div class="event-meta">
-                        <div class="meta-item">
-                            <i class="bi bi-clock"></i>
-                            <span>09:00 AM - 03:00 PM</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="bi bi-geo-alt"></i>
-                            <span>Main Auditorium</span>
-                        </div>
-                        </div>
-                        <div class="event-actions">
-                        <a href="#" class="btn-learn-more">Learn More</a>
-                        <a href="#" class="btn-calendar"><i class="bi bi-calendar-plus"></i> Add to Calendar</a>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="event-card">
-                    <div class="event-date">
-                        <span class="month">MAR</span>
-                        <span class="day">10</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="event-content">
-                        <div class="event-tag sports">@lang('system.Sports')</div>
-                        <h3>@lang('system.Journee_sportive_annuelle')</h3>
-                        <p>@lang('system.Journee_sportive_annuelle_desc')</p>
-                        <div class="event-meta">
-                        <div class="meta-item">
-                            <i class="bi bi-clock"></i>
-                            <span>08:30 AM - 05:00 PM</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="bi bi-geo-alt"></i>
-                            <span>School Playground</span>
-                        </div>
-                        </div>
-                        <div class="event-actions">
-                        <a href="#" class="btn-learn-more">Learn More</a>
-                        <a href="#" class="btn-calendar"><i class="bi bi-calendar-plus"></i> Add to Calendar</a>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="event-card">
-                    <div class="event-date">
-                        <span class="month">APR</span>
-                        <span class="day">22</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="event-content">
-                        <div class="event-tag arts">@lang('system.Arts')</div>
-                        <h3>@lang('system.Concert_printemps')</h3>
-                        <p>@lang('system.Concert_printemps_desc')</p>
-                        <div class="event-meta">
-                        <div class="meta-item">
-                            <i class="bi bi-clock"></i>
-                            <span>06:30 PM - 08:30 PM</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="bi bi-geo-alt"></i>
-                            <span>Performing Arts Center</span>
-                        </div>
-                        </div>
-                        <div class="event-actions">
-                        <a href="#" class="btn-learn-more">Learn More</a>
-                        <a href="#" class="btn-calendar"><i class="bi bi-calendar-plus"></i> Add to Calendar</a>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="event-card">
-                    <div class="event-date">
-                        <span class="month">MAY</span>
-                        <span class="day">8</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="event-content">
-                        <div class="event-tag community">@lang('system.Communaute')</div>
-                        <h3>@lang('system.Rencontre_parents_professeurs')</h3>
-                        <p>@lang('system.Rencontre_parents_professeurs_desc')</p>
-                        <div class="event-meta">
-                        <div class="meta-item">
-                            <i class="bi bi-clock"></i>
-                            <span>01:00 PM - 07:00 PM</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="bi bi-geo-alt"></i>
-                            <span>Various Classrooms</span>
-                        </div>
-                        </div>
-                        <div class="event-actions">
-                        <a href="#" class="btn-learn-more">Learn More</a>
-                        <a href="#" class="btn-calendar"><i class="bi bi-calendar-plus"></i> Add to Calendar</a>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-
-                </div>
-
-                <div class="text-center mt-5 @if(app()->getLocale() == 'ar') text-end @endif">
-                <a href="#" class="btn-view-all">@lang('system.Voir_tous_evenements')</a>
-                </div>
-
-            </div>
-
-            </section><!-- /Events Section -->
+            </section> --}}
 @endsection
