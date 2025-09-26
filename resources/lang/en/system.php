@@ -111,7 +111,7 @@ return [
   'Flexibilite' => 'Flexibilité',
   'Conditions_utilisation' => 'Conditions d\'utilisation',
   'Politique_confidentialite' => 'Politique de confidentialité',
-  'Institut_slogan' => 'The Higher Vocational Institute of Languages, Translation and Interpretation is a higher education institution under the supervision of the Ministry of Higher Education and Scientific Research.',
+  'Institut_slogan' => 'The Higher Vocational Institute of Languages, Translation and Interpretation in Nouadhibou is a higher education institution under the supervision of the Ministry of Higher Education and Scientific Research.',
   'Cta_commencez_parcours' => 'Commencez votre parcours',
   'Cta_decouvrir_programmes' => 'Découvrir les programmes',
   'Eveiller_les_esprits' => 'Éveiller les esprits',
@@ -450,12 +450,11 @@ return [
 'inscription_desc' => "Create a new account to get started.",
 'rescription_desc' => "Subscribe to access exclusive features.",
 'connexion_desc'   => "",
-'fr'=>'French',
+'fr'=>'Français',
 'en'=>'English',
-'ar'=>'Arabic',
+'ar'=>'عربية',
 //english
-'avis_insc_ar' => "Arabic registration notice",
-'avis_insc_fr' => "French registration notice",
-'avis_resc_ar' => "Arabic re-registration notice",
-'avis_resc_fr' => "French re-registration notice",
+
+'avis_insc' => "REGISTRATION NOTICE",
+  "avis_resc" => "RE-REGISTRATION NOTICE",
 ];

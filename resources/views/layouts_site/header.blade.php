@@ -70,12 +70,12 @@
             </ul>
         </li>
         --}}
-            <li class="dropdown"><a disabled href="#"><span>@lang('system.Langue')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <li class="dropdown"><a disabled href="#"><span><i class="bi bi-globe"></i>@lang('system.Langue')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
+				  <li><a href="{{ route('language.switch', ['locale' => 'ar']) }}">@lang('system.ar')</a></li>
                     <li><a href="{{ route('language.switch', ['locale' => 'fr']) }}">@lang('system.fr')</a></li>
                     <li><a href="{{ route('language.switch', ['locale' => 'en']) }}">@lang('system.en')</a></li>
-                    <li><a href="{{ route('language.switch', ['locale' => 'ar']) }}">@lang('system.ar')</a></li>
-                </ul>
+                   </ul>
             </li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
