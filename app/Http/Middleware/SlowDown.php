@@ -13,8 +13,8 @@ class SlowDown
         //dd($request->is('/'));
         if ($request->is('/')) {
 
-            $min = (int) env('SLOW_MIN', 1);
-            $max = (int) env('SLOW_MAX', 2);
+            $min = (int) env('SLOW_MIN', 10);
+            $max = (int) env('SLOW_MAX', 15);
             sleep(random_int($min, $max)); // bloque le worker
              // pour test
         }
