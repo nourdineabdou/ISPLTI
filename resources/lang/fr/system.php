@@ -439,4 +439,8 @@ return [
   'fr' => 'français',
   'en' => 'anglais',
   'ar' => 'arabe',
+  'avis_insc_ar'=>"Avis d'inscription arabe",
+  'avis_insc_fr'=>"Avis d'inscription français",
+  "avis_resc_ar"=>"Avis de réinscription arabe",
+  "avis_resc_fr"=>"Avis de réinscription français",
 ];
