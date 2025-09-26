@@ -111,7 +111,7 @@ return [
   'Flexibilite' => 'Flexibilité',
   'Conditions_utilisation' => 'Conditions d\'utilisation',
   'Politique_confidentialite' => 'Politique de confidentialité',
-  'Institut_slogan' => 'The Higher Vocational Institute of Languages, Translation and Interpretation in Nouadhibou is a higher education institution under the supervision of the Ministry of Higher Education and Scientific Research.',
+  'Institut_slogan' => 'The Higher Professional Institute of Languages, Translation and Interpretation is a public higher education institution located in the city of Nouadhibou, and directed by the Ministry of Higher Education and Scientific Research.',
   'Cta_commencez_parcours' => 'Commencez votre parcours',
   'Cta_decouvrir_programmes' => 'Découvrir les programmes',
   'Eveiller_les_esprits' => 'Éveiller les esprits',
@@ -455,6 +455,6 @@ return [
 'ar'=>'عربية',
 //english
 
-'avis_insc' => "REGISTRATION NOTICE",
-  "avis_resc" => "RE-REGISTRATION NOTICE",
+'avis_insc' => "Enrolment notice",
+  "avis_resc" => "Re-enrolment notice",
 ];
