@@ -41,9 +41,9 @@
 
       <div class="col-lg-3 col-md-6">
         <h6 class="fw-semibold">@lang('system.Contact')</h6>
-        <p class="small muted mb-1">@lang('system.Adresse') : Rue 108 Adam, Dakar</p>
-        <p class="small muted mb-1">@lang('system.Telephone') : +221 33 123 45 67</p>
-        <p class="small muted mb-1">Email : <a href="mailto:contact@isplti.sn" class="text-white">contact@isplti.sn</a></p>
+        <p class="small muted mb-1">@lang('system.Adresse') : </p>
+        <p class="small muted mb-1">@lang('system.Telephone') : </p>
+        <p class="small muted mb-1">Email : <a href="mailto:istisplti16@gmail.com" class="text-white">istisplti16@gmail.com</a></p>
       </div>
 
     </div>
@@ -51,7 +51,7 @@
     <div class="row mt-4">
       <div class="col-12 text-center small muted">
         <p class="mb-1">© @lang('system.Droits_auteur') <strong class="px-1">ISPLTI</strong> @lang('system.Tous_droits_reserves')</p>
-        <p class="mb-0">@lang('system.Conception_par') <a href="https://nourdine.dev" class="text-white">Nourdine</a></p>
+        <p class="mb-0">@lang('system.Conception_par') <a href="https://nourdine.dev" class="text-white">SPF-SARL</a></p>
       </div>
     </div>
 
