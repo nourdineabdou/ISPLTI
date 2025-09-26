@@ -6,19 +6,23 @@
                       <source src="assets-lib/img/education/video-2.mp4" type="video/mp4">
                     </video>
                     <div class="overlay"></div>
-                    <div class="container">
+                    <div class="container"> 
                 <div class="row align-items-center @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
-                        <div class="col-lg-7 @if(app()->getLocale() == 'ar') order-2 @endif" data-aos="zoom-out" data-aos-delay="100">
+                        <div class="col-lg-12 @if(app()->getLocale() == 'ar') order-2 @endif" data-aos="zoom-out" data-aos-delay="100">
                         <div class="hero-content">
                            <h1>
                                @if($news)
                                  @if(app()->getLocale() == 'ar')
-                                 <marquee direction="right" scrollamount="5" bgcolor="yellow" style="color: white; padding: 10px;" dir="rtl">
+                                <marquee direction="right"  scrollamount="15" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;font-size: 14px;" >
                                          {{ $news->titre_ar }}
                                     </marquee>
-                                 @else
-                                    <marquee style="background-color: yellow; color: white; padding: 10px;">
-                                        {{ $news->titre_fr }}
+                                 @elseif(app()->getLocale() == 'fr')
+                                    <marquee  scrollamount="15" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;display: block;font-size: 13px;" >
+                                    {{ $news->titre_fr }}
+                                     </marquee>
+								@else
+									 <marquee  scrollamount="15" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;display: block;font-size: 13px;" >
+                                    {{ $news->titre_en }}
                                      </marquee>
                                  @endif
                                 @endif
@@ -31,29 +35,19 @@
                                 <!-- Bloc Liens Téléchargement PDF -->
                                 <div class="row justify-content-center g-3 mt-4">
                                     <div class="col-md-3 col-6">
-                                    <a href="{{ asset('pdfs/AR_Avis_inscription_2025-2026.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                            <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
-                                            <div class="fw-bold">@lang('system.avis_insc_ar')</div>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-3 col-6">
-                                        <a href="{{ asset('pdfs/FR_avis inscription 2025-2026.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                            <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-primary" style="font-size:2rem;"></i></div>
-                                            <div class="fw-bold">@lang('system.avis_insc_fr')</div>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-3 col-6">
-                                    <a href="{{ asset('pdfs/AR_avis réinscription 2025-2026.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                            <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-success" style="font-size:2rem;"></i></div>
-                                            <div class="fw-bold">@lang('system.avis_resc_ar')</div>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-3 col-6">
-                                    <a href="{{ asset('pdfs/FR_avis réinscription 2025-2026.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                    <a href="{{ asset('pdfs/avis_inscription.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
                                             <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
-                                            <div class="fw-bold">@lang('system.avis_resc_fr')</div>
+                                            <div class="fw-bold">@lang('system.avis_insc')</div>
                                         </a>
                                     </div>
+                                    
+                                    <div class="col-md-3 col-6">
+                                    <a href="{{ asset('pdfs/avisréinscription.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                            <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-success" style="font-size:2rem;"></i></div>
+                                            <div class="fw-bold">@lang('system.avis_resc')</div>
+                                        </a>
+                                    </div>
+                                   
                                 </div>
                         </div>
                         </div>
