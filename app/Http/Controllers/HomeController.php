@@ -8,8 +8,8 @@ use App\Models\AnneeUniversitaire;
 use App\Models\InscriptionAdm;
 use App\Models\Etablissement;
 use App\Models\Auth\User;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+//use Spatie\Permission\Models\Permission;
+//use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 // actualite
