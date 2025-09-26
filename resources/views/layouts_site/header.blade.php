@@ -70,13 +70,17 @@
             </ul>
         </li>
         --}}
-            <li class="dropdown"><a disabled href="#"><span><i class="bi bi-globe"></i>@lang('system.Langue')</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-				  <li><a href="{{ route('language.switch', ['locale' => 'ar']) }}">@lang('system.ar')</a></li>
-                    <li><a href="{{ route('language.switch', ['locale' => 'fr']) }}">@lang('system.fr')</a></li>
-                    <li><a href="{{ route('language.switch', ['locale' => 'en']) }}">@lang('system.en')</a></li>
-                   </ul>
-            </li>
+		 @if(app()->getLocale() == 'ar')
+			        <li><a href="{{ route('language.switch', ['locale' => 'fr']) }}"><i class="bi bi-globe"></i>@lang('system.fr')</a></li>
+                    <li><a href="{{ route('language.switch', ['locale' => 'en']) }}"><i class="bi bi-globe"></i>@lang('system.en')</a></li>
+		 @elseif(app()->getLocale() == 'fr')
+					<li><a href="{{ route('language.switch', ['locale' => 'ar']) }}"><i class="bi bi-globe"></i>@lang('system.ar')</a></li>
+					<li><a href="{{ route('language.switch', ['locale' => 'en']) }}"><i class="bi bi-globe"></i>@lang('system.en')</a></li>
+		 @elseif(app()->getLocale() == 'en')
+					<li><a href="{{ route('language.switch', ['locale' => 'ar']) }}"><i class="bi bi-globe"></i>@lang('system.ar')</a></li>
+				    <li><a href="{{ route('language.switch', ['locale' => 'fr']) }}"><i class="bi bi-globe"></i>@lang('system.fr')</a></li>         	
+		 @endif
+		    
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 
