@@ -36,9 +36,7 @@
   ======================================================== -->
     <style>
     .link-disabled {
-    pointer-events: none;   /* ignore les clics */
-    color: #888;            /* style visuel de disabled */
-    text-decoration: none;
+    pointer-events: none;
     }
     </style>
 </head>

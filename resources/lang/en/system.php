@@ -453,4 +453,9 @@ return [
 'fr'=>'French',
 'en'=>'English',
 'ar'=>'Arabic',
+//english
+'avis_insc_ar' => "Arabic registration notice",
+'avis_insc_fr' => "French registration notice",
+'avis_resc_ar' => "Arabic re-registration notice",
+'avis_resc_fr' => "French re-registration notice",
 ];
