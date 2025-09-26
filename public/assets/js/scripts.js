@@ -1,12 +1,8 @@
 (function (window, undefined) {
     'use strict';
-
     //fetchTranslations();
-
     //fetchPaymentMethods();
-
     initJs()
-
     const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -28,27 +24,7 @@
                 {responsivePriority: 1, targets: -1}
             ],
             ajax: {
-                url: url,
-                type: 'GET',
-                data: function (d) {
-                    d.customRequest = {}
-                    d.filters = {};
-                    d.params = params;
-                    $('[data-filter]').each(function () {
-                        let filterInput = $(this);
-                        let filterType = filterInput.data('filter');
-                        d.filters[filterType] = filterInput.val();
-                    });
-
-                    // add custom request data
-                    $('[data-request]').each(function () {
-                        let requestInput = $(this);
-                        let requestType = requestInput.data('request');
-                        d.customRequest[requestType] = requestInput.val();
-                    });
-
-                    return d;
-                } // Pass filters as data to your server
+                // Pass filters as data to your server
             },
             columns: columns.map(function (col) {
                 return {
