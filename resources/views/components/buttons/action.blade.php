@@ -7,13 +7,6 @@
     'class' => 'btn btn-info',
 ])
 
-@php
-    $filteredActions = array_filter($actions, function ($action) {
-//        dd($action['permission']);
-//        dd((is_bool($action['permission']) && $action['permission']) || (\Illuminate\Support\Facades\Gate::allows($action['permission'])));
-        return (is_bool($action['permission']) && $action['permission']) || (\Illuminate\Support\Facades\Gate::allows($action['permission']));
-    });
-@endphp
 
 @if(!empty($filteredActions))
     <div class="btn-group btn-group-sm float-md-right"
