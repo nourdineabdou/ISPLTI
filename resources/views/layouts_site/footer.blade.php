@@ -23,7 +23,7 @@
       <div class="col-lg-3 col-md-6">
         <h6 class="fw-semibold">@lang('system.Administrations')</h6>
         <ul class="list-unstyled mt-3">
-          <li class="py-1"> <a href="{{ route('pages.directeur') }}" class="text-white">@lang('system.Directeur')</a> </li>
+          <li class="py-1"> <a href="#" class="text-white">@lang('system.Directeur')</a> </li>
           <li class="py-1">@lang('system.Secretaire_general')</li>
           <li class="py-1">@lang('system.Services')</li>
           <li class="py-1">@lang('system.Service_financier')</li>
