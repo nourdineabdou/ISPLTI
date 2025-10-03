@@ -15,7 +15,7 @@
         <div class="d-flex gap-3 mt-3">
           <a href="#" class="text-white"><i class="bi bi-linkedin fs-4"></i></a>
           <a href="#" class="text-white"><i class="bi bi-twitter fs-4"></i></a>
-          <a href="#" class="text-white"><i class="bi bi-facebook fs-4"></i></a>
+          <a href="https://www.facebook.com/share/p/1A6NwD62eT/" class="text-white"><i class="bi bi-facebook fs-4"></i></a>
           <a href="#" class="text-white"><i class="bi bi-rss fs-4"></i></a>
         </div>
       </div>
@@ -23,7 +23,7 @@
       <div class="col-lg-3 col-md-6">
         <h6 class="fw-semibold">@lang('system.Administrations')</h6>
         <ul class="list-unstyled mt-3">
-          <li class="py-1"> <a href="{{ route('pages.directeur') }}" class="text-white">@lang('system.Directeur')</a> </li>
+          <li class="py-1"> <a href="#" class="text-white">@lang('system.Directeur')</a> </li>
           <li class="py-1">@lang('system.Secretaire_general')</li>
           <li class="py-1">@lang('system.Services')</li>
           <li class="py-1">@lang('system.Service_financier')</li>
@@ -39,13 +39,13 @@
         </ul>
       </div>
 
-      <div class="col-lg-3 col-md-6">
         <h6 class="fw-semibold">@lang('system.Contact')</h6>
         <p class="small muted mb-1">@lang('system.Adresse') : </p>
         <p class="small muted mb-1">@lang('system.Telephone') : </p>
         <p class="small muted mb-1">Email : <a href="mailto:istisplti16@gmail.com" class="text-white">istisplti16@gmail.com</a></p>
       </div>
 
+      <div class="col-lg-3 col-md-6">
     </div>
 
     <div class="row mt-4">
