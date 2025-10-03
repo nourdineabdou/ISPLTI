@@ -138,6 +138,7 @@
             </div>
         </div>
         <div class="content-body">
+            {{ $slot }}
         </div>
     </div>
 </div>

@@ -6,63 +6,63 @@
                       <source src="assets-lib/img/education/video-2.mp4" type="video/mp4">
                     </video>
                     <div class="overlay"></div>
-                    <div class="container"> 
-                <div class="row align-items-center @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
-                        <div class="col-lg-12 @if(app()->getLocale() == 'ar') order-2 @endif" data-aos="zoom-out" data-aos-delay="100">
-                        <div class="hero-content">
-                           <h1>
-                               @if($news)
-                                 @if(app()->getLocale() == 'ar')
-                                <marquee direction="right"  scrollamount="5" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;font-size: 14px;" >
-                                         {{ $news->titre_ar }}
-                                    </marquee>
-                                 @elseif(app()->getLocale() == 'fr')
-                                    <marquee  scrollamount="5" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;display: block;font-size: 13px;" >
-                                    {{ $news->titre_fr }}
-                                     </marquee>
-								@else
-									 <marquee  scrollamount="5" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;display: block;font-size: 13px;" >
-                                    {{ $news->titre_en }}
-                                     </marquee>
-                                 @endif
-                                @endif
-                            </h1>
-                            <p>@lang('system.Institut_slogan')</p>
-                            <div class="cta-buttons">
-                            <a href="#" class="btn-primary">@lang('system.inscription')</a>
-                            <a  href="#" class="btn-secondary">@lang('system.rescription')</a>
-                            </div>
-                                <!-- Bloc Liens Téléchargement PDF -->
-                                <div class="row justify-content-center g-3 mt-4">
-                                    <div class="col-md-3 col-6">
-                                    <a href="{{ asset('pdfs/avis_inscription.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                            <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
-                                            <div class="fw-bold">@lang('system.avis_insc')</div>
-                                        </a>
+                    <div class="container">
+                        <div class="row align-items-center @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
+                            <div class="col-lg-12 @if(app()->getLocale() == 'ar') order-2 @endif" data-aos="zoom-out" data-aos-delay="100">
+                                <div class="hero-content">
+                                <h1>
+                                    @if($news)
+                                        @if(app()->getLocale() == 'ar')
+                                        <marquee direction="right"  scrollamount="5" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;font-size: 14px;" >
+                                                {{ $news->titre_ar }}
+                                            </marquee>
+                                        @elseif(app()->getLocale() == 'fr')
+                                            <marquee  scrollamount="5" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;display: block;font-size: 13px;" >
+                                            {{ $news->titre_fr }}
+                                            </marquee>
+                                        @else
+                                            <marquee  scrollamount="5" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;display: block;font-size: 13px;" >
+                                            {{ $news->titre_en }}
+                                            </marquee>
+                                        @endif
+                                        @endif
+                                    </h1>
+                                    <p>@lang('system.Institut_slogan')</p>
+                                    <div class="cta-buttons">
+                                    <a href="{{ route('inscriptions.login1') }}" class="btn-primary">@lang('system.inscription')</a>
+                                    <a  href="{{ route('inscriptions.login2') }}" class="btn-secondary">@lang('system.rescription')</a>
                                     </div>
-                                    
-                                    <div class="col-md-3 col-6">
-                                    <a href="{{ asset('pdfs/avisréinscription.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                            <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-success" style="font-size:2rem;"></i></div>
-                                            <div class="fw-bold">@lang('system.avis_resc')</div>
-                                        </a>
-                                    </div>
-                                   
-                                </div>
-                        </div>
-                        </div>
-                        <div class="col-lg-5 @if(app()->getLocale() == 'ar') order-1 @endif" data-aos="zoom-out" data-aos-delay="200">
+                                        <!-- Bloc Liens Téléchargement PDF -->
+                                        <div class="row justify-content-center g-3 mt-4">
+                                            <div class="col-md-3 col-6">
+                                            <a href="{{ asset('pdfs/avis_inscription.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.avis_insc')</div>
+                                                </a>
+                                            </div>
 
+                                            <div class="col-md-3 col-6">
+                                            <a href="{{ asset('pdfs/avisréinscription.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-success" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.avis_resc')</div>
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 @if(app()->getLocale() == 'ar') order-1 @endif" data-aos="zoom-out" data-aos-delay="200">
+
+                            </div>
                         </div>
                     </div>
-                    </div>                </div>
-
+                </div>
                 <div class="event-ticker">
                     <div class="container">
                     <div class="row gy-4">
                         <div class="col-md-6 col-xl-4 col-12 ticker-item">
                         <span class="title">@lang('system.connexion_desc')</span>
-                            <a  href="#" class="btn-register">@lang('system.connexion')</a>
+                            <a  href="{{ route('login') }}" class="btn-register">@lang('system.connexion')</a>
                         </div>
                         {{--
                         <div class="col-md-6 col-12 col-xl-4  ticker-item">
