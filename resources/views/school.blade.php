@@ -29,8 +29,8 @@
                                     </h1>
                                     <p>@lang('system.Institut_slogan')</p>
                                     <div class="cta-buttons">
-                                    <a href="{{ route('inscriptions.login1') }}" class="btn-primary">@lang('system.inscription')</a>
-                                    <a  href="{{ route('inscriptions.login2') }}" class="btn-secondary">@lang('system.rescription')</a>
+                                    <a href="#" class="btn-primary">@lang('system.inscription')</a>
+                                    <a  href="#" class="btn-secondary">@lang('system.rescription')</a>
                                     </div>
                                         <!-- Bloc Liens Téléchargement PDF -->
                                         <div class="row justify-content-center g-3 mt-4">
@@ -62,7 +62,7 @@
                     <div class="row gy-4">
                         <div class="col-md-6 col-xl-4 col-12 ticker-item">
                         <span class="title">@lang('system.connexion_desc')</span>
-                            <a  href="{{ route('login') }}" class="btn-register">@lang('system.connexion')</a>
+                            <a  href="#" class="btn-register">@lang('system.connexion')</a>
                         </div>
                         {{--
                         <div class="col-md-6 col-12 col-xl-4  ticker-item">
