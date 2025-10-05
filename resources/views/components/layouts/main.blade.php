@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@php use Illuminate\Support\Facades\Gate;use Illuminate\Support\Facades\Session; @endphp
+    <!DOCTYPE html>
 <html class="loading" lang="fr" data-textdirection="ltr">
 <!-- BEGIN: Head-->
 
@@ -12,18 +13,29 @@
     <meta name="keywords" content="">
     <meta name="author" content="{{ config('app.name') }}">
     <title>{{ config('app.name') }} - {{ $title ?? '' }}</title>
-    <link rel="apple-touch-icon" href="{{asset('logo.jpeg')}}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('logo.jpeg')}}">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
+    <link rel="apple-touch-icon" href="{{asset('app-assets/images/ico/apple-icon-120.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('app-assets/images/ico/favicon.ico')}}">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700"
+        rel="stylesheet">
+
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/vendors.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/ui/prism.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/forms/selects/select2.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/vendors/css/tables/extensions/responsive.dataTables.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('app-assets/vendors/css/tables/datatable/datatables.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+          href="{{asset('app-assets/vendors/css/tables/extensions/responsive.dataTables.min.css')}}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -42,16 +54,20 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <!-- END: Custom CSS-->
 
-{{--    @vite('resources/sass/app.scss')--}}
 
-{{--@vite('resources/sass/app.scss')--}}
+    {{--    @vite('resources/sass/app.scss')--}}
+
+    {{--@vite('resources/sass/app.scss')--}}
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet'/>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
 
 </head>
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu 2-columns fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="2-columns">
+<body class="vertical-layout vertical-menu 2-columns fixed-navbar" data-open="click" data-menu="vertical-menu"
+      data-col="2-columns">
 
 
 {{--@foreach(auth()->user()->unreadNotifications()->get() as $notification)
@@ -61,7 +77,11 @@
 <x-layouts.navigation.navbar/>
 <!-- BEGIN: Main Menu-->
 
-<x-layouts.navigation.sidebar/>
+<x-layouts.navigation.sidebar
+    :section="Session::get('current_module') ?? ''"
+/>
+
+{{--@dd(Session::get('current_module'))--}}
 
 <!-- END: Main Menu-->
 <!-- BEGIN: Content-->
@@ -102,30 +122,30 @@
             </div>
             <div class="content-header-right col-md-6 col-12">
                 @php
-                    $filteredActions = array_filter($actions, function ($action) {
-                        return (is_bool($action['permission']) && $action['permission']) || (\Illuminate\Support\Facades\Gate::allows($action['permission']));
+                    $filteredActions = array_filter($actions ?? [], function ($action) {
+                        return (is_bool($action['permission']) && $action['permission']) || (Gate::allows($action['permission']));
                     });
                 @endphp
                 @if(!empty($filteredActions))
-                   @if(count($filteredActions) > 1)
-                    <div class="btn-group float-md-right" role="group"
-                         aria-label="Button group with nested dropdown">
-                        <button class="btn btn-info dropdown-toggle dropdown-menu-right box-shadow-2 px-2 mb-1"
-                                id="btnGroupDrop" type="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                            {{ __('system.actions') }}
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
-                            @foreach($filteredActions as $action)
-                                <a onclick="{{ $action['onclick'] ?? null }}"
-                                   class="dropdown-item"
-                                   href="{{ $action['url'] ?? '#' }}"
-                                >
-                                    {{ $action['label'] }}
-                                </a>
-                            @endforeach
+                    @if(count($filteredActions) > 1)
+                        <div class="btn-group float-md-right" role="group"
+                             aria-label="Button group with nested dropdown">
+                            <button class="btn btn-info dropdown-toggle dropdown-menu-right box-shadow-2 px-2 mb-1"
+                                    id="btnGroupDrop" type="button" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                {{ __('system.actions') }}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop">
+                                @foreach($filteredActions as $action)
+                                    <a onclick="{{ $action['onclick'] ?? null }}"
+                                       class="dropdown-item"
+                                       href="{{ $action['url'] ?? '#' }}"
+                                    >
+                                        {{ $action['label'] }}
+                                    </a>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
                     @else
                         <a onclick="{{ $filteredActions[0]['onclick'] ?? null }}"
                            class="btn btn-info float-md-right box-shadow-2 px-2 mb-1"
@@ -196,6 +216,7 @@
 
 <script src="{{asset('assets/js/scripts.js')}}"></script>
 <script src="{{asset('assets/js/scripts2.js')}}"></script>
+
 <!-- END: Theme JS-->
 
 {{--@vite(['resources/js/app.js', 'resources/js/scripts.js'])--}}
