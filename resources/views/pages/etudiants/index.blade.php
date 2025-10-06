@@ -8,7 +8,7 @@
                 <table
                     class="table table-striped table-bordered w-100"
                     data-url="{{ route('etudiants.index') }}"
-                    data-column='nodos,nom_fr,lieu_naissance_fr,date_naissance,telephone,etat_inscription,action'
+                    data-column='nodos,nom_fr,lieu_naissance_fr,date_naissance,telephone,inscription,action'
                 >
                     <thead>
                     <tr>

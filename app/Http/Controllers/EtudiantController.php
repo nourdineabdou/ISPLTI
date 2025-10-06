@@ -119,7 +119,7 @@ public function getImage($id)
                     return view('components.buttons.action', compact('actions'));
                 })
                 // etat inscription
-                ->editColumn('etat_inscription', function ($etudiant) {
+                ->editColumn('inscription', function ($etudiant) {
                     // 3 en attente , 2 donnes emis par etudiant 3 inscription valider
                     return $etudiant->inscription === 3 ? 'En attente' : ($etudiant->inscription === 2 ? 'Données émises par l\'étudiant' : 'Inscription validée');
                 })
