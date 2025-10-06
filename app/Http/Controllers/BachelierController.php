@@ -154,9 +154,19 @@ public function getImage($id)
                 ->editColumn('inscription', function ($bachelier) {
                     // 3 en attente , 2 donnes emis par etudiant 3 inscription valider
                     // 4 rejeté
-                    return $bachelier->inscription === '3' ? 'En attente' : ($bachelier->inscription === '2' ? 'Données émises par le bachelier' : ($bachelier->inscription === '4' ? 'Rejeté' : 'Inscription validée'));
+                    if ($bachelier->inscription == '1') {
+                        return '<span class="badge bg-success">Inscription Validée</span>';
+                    } elseif ($bachelier->inscription == '2') {
+                        return '<span class="badge bg-info text-dark">Données émises</span>';
+                    } elseif ($bachelier->inscription == '3') {
+                        return '<span class="badge bg-warning text-dark">En attente de validation</span>';
+                    } elseif ($bachelier->inscription == '4') {
+                        return '<span class="badge bg-danger">Inscription Rejetée</span>';
+                    } else {
+                        return '<span class="badge bg-secondary">Non Inscrit</span>';
+                    }
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action' , 'inscription'])
                 ->make(true);
         }
         return view('pages.bacheliers.index', [

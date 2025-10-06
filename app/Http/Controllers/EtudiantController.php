@@ -120,10 +120,21 @@ public function getImage($id)
                 })
                 // etat inscription
                 ->editColumn('inscription', function ($etudiant) {
-                    // 3 en attente , 2 donnes emis par etudiant 3 inscription valider
-                    return $etudiant->inscription === 3 ? 'En attente' : ($etudiant->inscription === 2 ? 'Données émises par l\'étudiant' : 'Inscription validée');
+                    // 3 en attente , 2 donnes emis par etudiant 1 inscriptioion valider 4 rejeter
+
+                    if ($etudiant->inscription == "3") {
+                        return '<span class="badge bg-warning">En attente</span>';
+                    } elseif ($etudiant->inscription == '2') {
+                        return '<span class="badge bg-info text-dark">Dossier reçu</span>';
+                    } elseif ($etudiant->inscription == '1') {
+                        return '<span class="badge bg-success">Validé</span>';
+                    } elseif ($etudiant->inscription == '4') {
+                        return '<span class="badge bg-danger">Rejeté</span>';
+                    } else {
+                        return '<span class="badge bg-secondary">Non soumis</span>';
+                    }
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action' , 'inscription'])
                 ->make(true);
         }
         return view('pages.etudiants.index', [
