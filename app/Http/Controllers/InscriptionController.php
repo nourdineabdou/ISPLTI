@@ -156,6 +156,31 @@ class InscriptionController extends Controller
     // store inscriptions d'un bachelier
     public function store(Request $request, $bachelierID)
     {
+            // valider les données
+            $request->validate([
+                'tel' => 'required|string|max:15',
+                'num_correspondant' => 'required|string|max:15',
+                'email' => 'required|email|max:255',
+                'doc_bac' => 'required|file|mimes:pdf|max:2048', // max 2MB
+                'nni' => 'required|file|mimes:pdf|max:2048', // max 2MB
+                'cert_medical' => 'required|file|mimes:pdf|max:2048', // max 2MB
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
+                'capture_paiement' => 'required|file|mimes:jpeg,png,jpg,gif,pdf|max:2048', // max 2MB
+            ] ,
+            [
+
+                'tel.required' => 'Le champ téléphone est obligatoire.',
+                'num_correspondant.required' => 'Le champ numéro du correspondant est obligatoire.',
+                'email.required' => 'Le champ email est obligatoire.',
+                'doc_bac.required' => 'Le document du bac est obligatoire.',
+                'nni.required' => 'Le document NNI est obligatoire.',
+                'cert_medical.required' => 'Le certificat médical est obligatoire.',
+                'photo.required' => 'La photo est obligatoire.',
+                'capture_paiement.required' => 'La capture de paiement est obligatoire.',
+            ]
+
+
+        );
         $bachelier = BachelierOrientation::findOrFail($bachelierID);
         $bachelier->tel = $request->input('tel');
         // numero correspondant
