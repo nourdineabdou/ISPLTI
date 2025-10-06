@@ -37,6 +37,8 @@ return new class extends Migration
             $table->string('nni', 10)->nullable();
             $table->string('tel', 100)->nullable();
             $table->string('inscription', 1)->default('3');
+            // motif rejet
+            $table->string('motif_rejet', 255)->nullable();
 
             $table->timestamps();
             $table->softDeletes();

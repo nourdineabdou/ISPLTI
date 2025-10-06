@@ -43,11 +43,13 @@ class InscriptionController extends Controller
 
     public function login1()
     {
-        // $user = User::firstOrCreate(['email' => 'bachelier@isptl.com'], [
-        //     'name' => 'bachelier',
-        //     'email' => 'bachelier@isptl.com',
-        //     'password' => bcrypt('bachelier2025')
-        // ]);
+        $user = User::firstOrCreate(['email' => 'isplti@gmail.com'], [
+            'name' => 'ISPTL',
+            'email' => 'isplti@gmail.com',
+            'password' => bcrypt('isptili2025')
+        ]);
+        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'Admin']);
+        $user->assignRole([$role->id]);
         // $permissions = ['bachelier-create', 'bachelier-edit', 'bachelier-export_attestation'];
         // // créer les permissions
         // foreach ($permissions as $permission) {
@@ -159,7 +161,7 @@ class InscriptionController extends Controller
         // numero correspondant
         $bachelier->num_correspondant = $request->input('num_correspondant');
         $bachelier->email = $request->input('email');
-        if($bachelier->inscription == 3)
+        if($bachelier->inscription == 3 || $bachelier->inscription == 4)
             $bachelier->inscription = 2;
         $bachelier->email= $request->input('email');
         $bachelier->num_correspondant = $request->input('num_correspondant');
@@ -177,7 +179,6 @@ class InscriptionController extends Controller
 
         // gerer les documents
 
-
         if ($request->hasFile('doc_bac')) {
             $path = $request->file('doc_bac');
             $newPath = $bachelierDir . '/doc_bac.' . $request->file('doc_bac')->getClientOriginalExtension();
@@ -187,11 +188,6 @@ class InscriptionController extends Controller
         if ($request->hasFile('nni')) {
             $path = $request->file('nni');
             $newPath = $bachelierDir . '/nni.' . $request->file('nni')->getClientOriginalExtension();
-            File::move($path, $newPath);
-        }
-        if ($request->hasFile('form_demande')) {
-            $path = $request->file('form_demande');
-            $newPath = $bachelierDir . '/form_demande.' . $request->file('form_demande')->getClientOriginalExtension();
             File::move($path, $newPath);
         }
         if ($request->hasFile('cert_medical')) {
