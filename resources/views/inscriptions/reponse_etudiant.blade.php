@@ -74,13 +74,14 @@
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-2" viewBox="0 0 16 16">
 							  <path d="M.5 9.9a.5.5 0 0 1 .5-.4H5V1.5a.5.5 0 0 1 1 0V9.5h3.999a.5.5 0 0 1 .354.854l-4.5 4.5a.5.5 0 0 1-.707 0l-4.5-4.5A.5.5 0 0 1 .5 9.9z"/>
 							</svg>
-							Télécharger l'attestation PDF
+                               Attestation d'inscription année passée
 						</a>
 						<a href="{{ url('/') }}" class="btn btn-outline-secondary">Retour</a>
 					@elseif(isset($etudiant) && $etudiant->inscription == 2)
 						<button class="btn btn-outline-primary" disabled>
 							<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-							En attente
+							En attentes
+
 						</button>
 						<a href="{{ url('/') }}" class="btn btn-link">Retour à l'accueil</a>
 					@else

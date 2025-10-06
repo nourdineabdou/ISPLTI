@@ -124,10 +124,6 @@
 											<input type="file" name="nni" class="form-control" required />
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Formulaire de demande signé (pdf)</label>
-											<input type="file" name="form_demande" class="form-control" required />
-										</div>
-										<div class="mb-3">
 											<label class="form-label">Certificat médical (pdf)</label>
 											<input type="file" name="cert_medical" class="form-control" required />
 										</div>
@@ -139,7 +135,8 @@
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Capture du paiement (100 MRU)</label>
-											<input type="file" name="capture_paiement" class="form-control" required />
+											<input type="file" name="capture_paiement" class="form-control " required />
+
 										</div>
 										<div class="d-flex justify-content-between mt-4 actions-mobile">
 											<button type="button" id="ins-back" class="btn btn-outline-secondary btn-lg rounded-pill px-4">Retour</button>

@@ -11,6 +11,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\BacheliersImport;
 use App\Exports\BacheliersExport;
 use ZipArchive;
+// Email
+use Illuminate\Support\Facades\Mail as Email;
+use App\Mail\BachelierEmail;
 class BachelierController extends Controller
 {
 
@@ -33,6 +36,30 @@ class BachelierController extends Controller
             new BacheliersExport(),
             $fileName
         );
+    }
+    // edit bachelier
+    public function edit($id)
+    {
+        $bachelier = BachelierOrientation::findOrFail($id);
+        return view('pages.bacheliers.edit', compact('bachelier'));
+    }
+    // update bachelier
+    public function update(Request $request, $id)
+    {
+        $bachelier = BachelierOrientation::findOrFail($id);
+        $request->validate([
+            'motif_rejet' => 'nullable|string|max:255',
+        ]);
+        $bachelier->motif_rejet = $request->motif_rejet;
+        $bachelier->save();
+        $this->sendEmailForm($id);
+        // return json
+        return response()->json([
+            'success' => true,
+            'message' => 'Bachelier mis à jour avec succès !',
+            'data' => $bachelier
+        ]);
+        //return redirect()->route('bacheliers.index')->with('success', 'Bachelier mis à jour avec succès !');
     }
 
 public function getImage($id)
@@ -85,6 +112,28 @@ public function getImage($id)
                                 'onclick' => 'confirmAction({ title: \'Confirmer la validation\', text: \'Voulez-vous vraiment valider l inscription de cet étudiant ?\', confirmButtonText: \'Oui, valider !\', url: \'' . route('bacheliers.valider', $bachelier->id) . '\', method: \'GET\' })',
                                 'permission' => true
                             ]
+                            ,
+                            // deque je rejeter le bachelier je veux qui mafiche visulier etudiant rejeter
+                            [
+                                'label' => 'Rejeter L\'inscription',
+                                'onclick' => 'confirmAction({ title: \'Confirmer le rejet\', text: \'Voulez-vous vraiment rejeter l inscription de cet étudiant ?\', confirmButtonText: \'Oui, rejeter !\', url: \'' . route('bacheliers.rejeter', $bachelier->id) . '\', method: \'GET\' })',
+                                'permission' => true
+                            ]
+                        ];
+                    }
+                    elseif($bachelier->inscription == 4)
+                    {
+                        $actions = [
+                            [
+                                'label' => 'visualiser Bachelier',
+                                'onclick' => 'openInModal({ link: \'' . route('bacheliers.show', $bachelier->id) . '\', size: \'lg\' })',
+                                'permission' => true
+                            ],
+                            [
+                                'label' => 'Modifier le motif de rejet',
+                                'onclick' => 'openInModal({ link: \'' . route('bacheliers.edit', $bachelier->id) . '\', size: \'lg\' })',
+                                'permission' => true
+                            ],
                         ];
                     }
                     else
@@ -104,8 +153,8 @@ public function getImage($id)
                 // etat inscription
                 ->editColumn('etat_inscription', function ($bachelier) {
                     // 3 en attente , 2 donnes emis par etudiant 3 inscription valider
-
-                    return $bachelier->inscription === '3' ? 'En attente' : ($bachelier->inscription === '2' ? 'Données émises par le bachelier' : 'Inscription validée');
+                    // 4 rejeté
+                    return $bachelier->inscription === '3' ? 'En attente' : ($bachelier->inscription === '2' ? 'Données émises par le bachelier' : ($bachelier->inscription === '4' ? 'Rejeté' : 'Inscription validée'));
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -178,6 +227,21 @@ public function getImage($id)
               'message' => 'Bachelier validé avec succès.'
           ]);
     }
+
+    // rejeter le bachelier
+    public function rejeter($id)
+    {
+        // Find the Bachelier instance and reject it.
+        $bachelier = BachelierOrientation::findOrFail($id);
+        $bachelier->inscription = 4;
+        $bachelier->save();
+
+        // Redirect or return a response.
+         return response()->json([
+              'success' => true,
+              'message' => 'Bachelier rejeté avec succès.'
+          ]);
+    }
     // Importer les bacheliers
     public function importer()
     {
@@ -246,4 +310,21 @@ public function getImage($id)
         }
         return response()->download($zipFilePath)->deleteFileAfterSend(true);
     }
+
+    // send email to bachelier GET
+    public function sendEmailForm($id)
+    {
+
+        $bachelier = BachelierOrientation::findOrFail($id);
+        try {
+            $data['name'] = $bachelier->nom_fr;
+            $data['email'] = $bachelier->email;
+            $data['content'] = $bachelier ->motif_rejet ;
+            Email::to($bachelier->email)->send(new BachelierEmail($data));
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Erreur lors de l\'envoi de l\'email : ' . $e->getMessage()], 500);
+        }
+        return response()->json(['success' => true]);
+    }
+
 }

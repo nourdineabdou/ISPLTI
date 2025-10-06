@@ -29,6 +29,26 @@ You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you
 
 If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
+### Envoi d'un email professionnel (exemple)
+
+Voici un petit exemple en français montrant comment utiliser la mailable `App\Mail\ProfessionalEmail` et la vue `resources/views/emails/professional.blade.php` :
+
+```php
+use App\Mail\ProfessionalEmail;
+use Illuminate\Support\Facades\Mail;
+
+$to = 'destinataire@example.com';
+Mail::to($to)->send(new ProfessionalEmail(
+	'Nom Destinataire', // $name
+	"Bonjour,\nVoici le contenu du message.\nCordialement,\nL'équipe.", // $messageText
+	asset('logo.png'), // $photoUrl (ex : asset('logo.png'))
+	'Mon Institution', // $institutionName
+	'https://example.com/action', // $actionUrl (optionnel)
+	'Voir le détail' // $actionText (optionnel)
+));
+```
+
+Remarque : vérifiez votre configuration mail dans `config/mail.php` et vos variables d'environnement pour que l'envoi fonctionne (SMTP, Mailgun, etc.).
 ## Laravel Sponsors
 
 We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).

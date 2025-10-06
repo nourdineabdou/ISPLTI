@@ -30,9 +30,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'etudiants'], function () {
 
 Route::group(['middleware' => ['auth'], 'prefix' => 'bacheliers'], function () {
     Route::get('/', [BachelierController::class, 'index'])->name('bacheliers.index');
+    // edit
+    Route::get('/{id}/edit', [BachelierController::class, 'edit'])->name('bacheliers.edit');
+    // update
+    Route::put('/{id}', [BachelierController::class, 'update'])->name('bacheliers.update');
     Route::get('/create', [BachelierController::class, 'create'])->name('bacheliers.create');
     Route::get('/{id}', [BachelierController::class, 'show'])->name('bacheliers.show');
     Route::get('/{id}/valider', [BachelierController::class, 'valider'])->name('bacheliers.valider');
+    Route::get('/{id}/rejeter', [BachelierController::class, 'rejeter'])->name('bacheliers.rejeter');
     // exporter
     Route::get('/exporter/bacheliers', [BachelierController::class, 'exporter'])->name('bacheliers.exporter');
     // importer
@@ -71,4 +76,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'news'], function () {
     Route::get('/{id}/statut', [App\Http\Controllers\ActualiteController::class, 'statut'])->name('actualites.statut');
 });
 
-//
+//test email bachelier
+Route::get('/send-email/{id}', [BachelierController::class, 'sendEmailForm'])->name('bacheliers.send_email');
