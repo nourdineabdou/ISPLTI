@@ -1,5 +1,6 @@
 
-<x-layouts.main :title="'Tableau de bord administrateur'">
+<x-layouts.main
+:title="'Tableau de bord administrateur'">
     <div class="container py-4">
         <h2 class="mb-4">Tableau de bord</h2>
         <div class="row mb-4">

@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+@props([
+    'title' => null,
+    'breadcrumbs' => [],
+    'actions' => [],
+])
 <html class="loading" lang="fr" data-textdirection="ltr">
 <!-- BEGIN: Head-->
 
@@ -103,7 +108,7 @@
             <div class="content-header-right col-md-6 col-12">
                 @php
                     $filteredActions = array_filter($actions, function ($action) {
-                        return (is_bool($action['permission']) && $action['permission']) || (\Illuminate\Support\Facades\Gate::allows($action['permission']));
+                      return (is_bool($action['permission']) && $action['permission']) || (\Illuminate\Support\Facades\Gate::allows($action['permission']));
                     });
                 @endphp
                 @if(!empty($filteredActions))
