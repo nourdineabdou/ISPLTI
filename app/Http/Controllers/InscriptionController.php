@@ -240,13 +240,33 @@ class InscriptionController extends Controller
     // update inscription d'un etudiant
     public function update(Request $request, $etudiantID)
     {
+        // valider les données
+        $request->validate([
+            'tel' => 'required|string|max:15',
+            'num_correspondant' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
+            'nni' => 'required|file|mimes:pdf|max:2048',
+            'capture_paiement' => 'required|file|mimes:jpeg,png,jpg,gif,pdf|max:2048', // max 2MB
+            'attestation_reussite' => 'required|file|mimes:pdf|max:2048', // max 2MB
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
+        ],
+        [
+            'tel.required' => 'Le champ téléphone est obligatoire.',
+            'num_correspondant.required' => 'Le champ numéro du correspondant est obligatoire.',
+            'email.required' => 'Le champ email est obligatoire.',
+            'nni.required' => 'Le document NNI est obligatoire.',
+            'capture_paiement.required' => 'La capture de paiement est obligatoire.',
+            'attestation_reussite.required' => 'L\'attestation de réussite est obligatoire.',
+            'photo.required' => 'La photo est obligatoire.',
+        ]
+    );
         $etudiant = Etudiant::findOrFail($etudiantID);
-        $etudiant->telephone = $request->input('tel');
+        $etudiant->tel = $request->input('tel');
+        // numero correspondant
         $etudiant->num_correspondant = $request->input('num_correspondant');
         $etudiant->email = $request->input('email');
-        if($etudiant->inscription == 3)
+        if($etudiant->inscription == 3 || $etudiant->inscription == 4)
             $etudiant->inscription = 2;
-
         // créer un dossier pour l'étudiant dans app/etudiants
         $etudiantDir = storage_path('app/etudiants/temp-' . $etudiant->id);
         if (!File::exists($etudiantDir)) {

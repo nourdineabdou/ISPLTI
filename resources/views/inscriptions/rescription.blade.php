@@ -61,17 +61,27 @@
                                             </div>
                                             {{-- email --}}
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label">Email</label>
-                                                <input value="{{ old('email' , $etudiant->email) }}" name="email" type="email" class="form-control form-control-lg rounded-pill" required />
+                                                <label class="form-label @error('email') is-invalid @enderror">Email</label>
+                                                <input value="{{ old('email' , $etudiant->email) }}" name="email" type="email" class="form-control form-control-lg rounded-pill"  />
+                                                @error('email')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+
+                                                @enderror
                                             </div>
                                             {{-- numero correspondant --}}
 											<div class="mb-3 col-md-6">
-												<label class="form-label">Numéro correspondant</label>
-												<input value="{{ old('num_correspondant' , $etudiant->num_correspondant) }}" name="num_correspondant" class="form-control form-control-lg rounded-pill" required />
+												<label class="form-label @error('num_correspondant') is-invalid @enderror">Numéro correspondant</label>
+												<input value="{{ old('num_correspondant' , $etudiant->num_correspondant) }}" name="num_correspondant" class="form-control form-control-lg rounded-pill"  />
+                                                @error('num_correspondant')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
 											</div>
 											<div class="mb-3 col-md-6">
-												<label class="form-label">Téléphone</label>
+												<label class="form-label @error('tel') is-invalid @enderror">Téléphone</label>
 												<input value="{{ old('tel' , $etudiant->telephone) }}" name="tel" class="form-control form-control-lg rounded-pill" />
+                                                @error('tel')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
 											</div>
 										</div>
 										<div class="d-flex justify-content-end mt-4 actions-mobile">
@@ -85,18 +95,27 @@
 											<input type="file" name="attestation_reussite" class="form-control" required />
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Copie pièce d'identité</label>
-											<input type="file" name="nni" class="form-control" required />
+											<label class="form-label @error('nni') is-invalid @enderror">Copie pièce d'identité</label>
+											<input type="file" name="nni" class="form-control"  />
+                                            @error('nni')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Capture du paiement (100 MRU)</label>
-											<input type="file" name="capture_paiement" class="form-control" required />
+											<label class="form-label @error('capture_paiement') is-invalid @enderror">Capture du paiement (100 MRU)</label>
+											<input type="file" name="capture_paiement" class="form-control"  />
+                                            @error('capture_paiement')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
 										</div>
                                         {{-- photo --}}
 										<div class="mb-3">
-											<label class="form-label">Photo</label>
-											<input type="file" name="photo" class="form-control" required
+											<label class="form-label @error('photo') is-invalid @enderror">Photo</label>
+											<input type="file" name="photo" class="form-control"
                                             accept="png,jpg,jpeg,jfif,PNG,"/>
+                                            @error('photo')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
 										</div>
 										<div class="d-flex justify-content-between mt-4 actions-mobile">
 											<button type="button" id="ins-back" class="btn btn-outline-secondary btn-lg rounded-pill px-4">Retour</button>
