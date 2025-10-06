@@ -161,11 +161,11 @@ class InscriptionController extends Controller
                 'tel' => 'required|string|max:15',
                 'num_correspondant' => 'required|string|max:15',
                 'email' => 'required|email|max:255',
-                'doc_bac' => 'required|file|mimes:pdf|max:2048', // max 2MB
-                'nni' => 'required|file|mimes:pdf|max:2048', // max 2MB
-                'cert_medical' => 'required|file|mimes:pdf|max:2048', // max 2MB
-                'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
-                'capture_paiement' => 'required|file|mimes:jpeg,png,jpg,gif,pdf|max:2048', // max 2MB
+                'doc_bac' => 'required|file|max:2048', // max 2MB
+                'nni' => 'required|file|max:2048', // max 2MB
+                'cert_medical' => 'required|file|max:2048', // max 2MB
+                'photo' => 'required|image|max:2048', // max 2MB
+                'capture_paiement' => 'required|file|max:2048', // max 2MB
             ] ,
             [
 
@@ -245,10 +245,10 @@ class InscriptionController extends Controller
             'tel' => 'required|string|max:15',
             'num_correspondant' => 'required|string|max:15',
             'email' => 'required|email|max:255',
-            'nni' => 'required|file|mimes:pdf|max:2048',
-            'capture_paiement' => 'required|file|mimes:jpeg,png,jpg,gif,pdf|max:2048', // max 2MB
-            'attestation_reussite' => 'required|file|mimes:pdf|max:2048', // max 2MB
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
+            'nni' => 'required|file|max:2048',
+            'capture_paiement' => 'required|file|max:2048', // max 2MB
+            'attestation_reussite' => 'required|file|max:2048', // max 2MB
+            'photo' => 'required|image|max:2048', // max 2MB
         ],
         [
             'tel.required' => 'Le champ téléphone est obligatoire.',
