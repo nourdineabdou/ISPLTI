@@ -151,7 +151,7 @@ public function getImage($id)
 
                 })
                 // etat inscription
-                ->editColumn('etat_inscription', function ($bachelier) {
+                ->editColumn('inscription', function ($bachelier) {
                     // 3 en attente , 2 donnes emis par etudiant 3 inscription valider
                     // 4 rejeté
                     return $bachelier->inscription === '3' ? 'En attente' : ($bachelier->inscription === '2' ? 'Données émises par le bachelier' : ($bachelier->inscription === '4' ? 'Rejeté' : 'Inscription validée'));

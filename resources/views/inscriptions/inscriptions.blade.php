@@ -56,17 +56,26 @@
 										<div class="row">
                                             {{-- email --}}
                                             <div class="mb-3 col-md-6">
-                                                <label class="form-label">Email</label>
-                                                <input value="{{ old('email' , $bachelier->email) }}" name="email" type="email" class="form-control form-control-lg rounded-pill" required />
+                                                <label class="form-label @error('email') is-invalid @enderror">Email</label>
+                                                <input value="{{ old('email' , $bachelier->email) }}" name="email" type="email" class="form-control form-control-lg rounded-pill"  />
+                                                @error('email')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             {{-- numero correspondant --}}
 											<div class="mb-3 col-md-6">
-												<label class="form-label">Numéro correspondant</label>
-												<input value="{{ old('num_correspondant' , $bachelier->num_correspondant) }}" name="num_correspondant" class="form-control form-control-lg rounded-pill" required />
+												<label class="form-label @error('num_correspondant') is-invalid @enderror">Numéro correspondant</label>
+												<input value="{{ old('num_correspondant' , $bachelier->num_correspondant) }}" name="num_correspondant" class="form-control form-control-lg rounded-pill"  />
+                                                @error('num_correspondant')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
 											</div>
 											<div class="mb-3 col-md-6">
-												<label class="form-label">Téléphone</label>
+												<label class="form-label @error('tel') is-invalid @enderror">Téléphone</label>
 												<input value="{{ old('tel' , $bachelier->tel) }}" name="tel" class="form-control form-control-lg rounded-pill" />
+                                                @error('tel')
+                                                    <div class="invalid-feedback d-block">{{ $message }}</div>
+                                                @enderror
 											</div>
 											<div class="mb-3 col-md-6">
 												<label class="form-label">Nom (FR)</label>
@@ -82,23 +91,23 @@
 											</div>
 											<div class="mb-3 col-md-6">
 												<label class="form-label">Lieu de naissance</label>
-												<input value="{{ old('lieun' , $bachelier->lieun) }}" name="lieun" class="form-control form-control-lg rounded-pill" required />
+												<input value="{{ old('lieun' , $bachelier->lieun) }}" name="lieun" class="form-control form-control-lg rounded-pill" readonly />
 											</div>
 											<div class="mb-3 col-md-6">
 												<label class="form-label">Numéro BAC</label>
-												<input value="{{ old('num_bac' , $bachelier->num_bac) }}" name="num_bac" class="form-control form-control-lg rounded-pill" required />
+												<input value="{{ old('num_bac' , $bachelier->num_bac) }}" name="num_bac" class="form-control form-control-lg rounded-pill" readonly />
 											</div>
 											<div class="mb-3 col-md-6">
 												<label class="form-label">Centre examen</label>
-												<input value="{{ old('centre_examen' , $bachelier->centre_examen) }}" name="centre_examen" class="form-control form-control-lg rounded-pill" required />
+												<input value="{{ old('centre_examen' , $bachelier->centre_examen) }}" name="centre_examen" class="form-control form-control-lg rounded-pill" readonly />
 											</div>
 											<div class="mb-3 col-md-6">
 												<label class="form-label">Année BAC</label>
-												<input value="{{ old('annee_bac' , $bachelier->annee_bac) }}" name="annee_bac" type="number" class="form-control form-control-lg rounded-pill" required />
+												<input value="{{ old('annee_bac' , $bachelier->annee_bac) }}" name="annee_bac" type="number" class="form-control form-control-lg rounded-pill" readonly />
 											</div>
 											<div class="mb-3 col-md-6">
 												<label class="form-label">Moyenne BAC</label>
-												<input value="{{ old('moyenne_bac' , $bachelier->moyenne_bac) }}" name="moyenne_bac" step="0.01" type="number" class="form-control form-control-lg rounded-pill" required />
+												<input value="{{ old('moyenne_bac' , $bachelier->moyenne_bac) }}" name="moyenne_bac" step="0.01" type="number" class="form-control form-control-lg rounded-pill"  readonly />
 											</div>
 											<div class="mb-3 col-md-6">
 												<label class="form-label">Genre</label>
@@ -116,27 +125,41 @@
 									<div id="ins-step-2" style="display:none;">
 										<h5 class="mb-3">Documents</h5>
 										<div class="mb-3">
-											<label class="form-label">Document BAC</label>
-											<input type="file" name="doc_bac" class="form-control" required />
+											<label class="form-label  @error('doc_bac') is-invalid @enderror">Document BAC</label>
+											<input type="file" name="doc_bac" class="form-control"  />
+                                            @error('doc_bac')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Copie pièce d'identité</label>
-											<input type="file" name="nni" class="form-control" required />
+											<label class="form-label @error('nni') is-invalid @enderror">Copie pièce d'identité</label>
+											<input type="file" name="nni" class="form-control"  />
+                                            @error('nni')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Certificat médical (pdf)</label>
-											<input type="file" name="cert_medical" class="form-control" required />
+											<input type="file" name="cert_medical" class="form-control @error('cert_medical') is-invalid @enderror"  />
+                                            @error('cert_medical')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Photo</label>
+											<label class="form-label @error('photo') is-invalid @enderror">Photo</label>
                                             {{-- la photo doit etre en png ou jpg , jpeg , gif ,   --}}
-											<input  type="file" name="photo" class="form-control" required
+											<input  type="file" name="photo" class="form-control"
                                             accept=".png, .jpg, .jpeg, .gif" />
+                                            @error('photo')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
 										</div>
 										<div class="mb-3">
 											<label class="form-label">Capture du paiement (100 MRU)</label>
-											<input type="file" name="capture_paiement" class="form-control " required />
-
+											<input type="file" name="capture_paiement" class="form-control @error('capture_paiement') is-invalid @enderror "  />
+                                            @error('capture_paiement')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
 										</div>
 										<div class="d-flex justify-content-between mt-4 actions-mobile">
 											<button type="button" id="ins-back" class="btn btn-outline-secondary btn-lg rounded-pill px-4">Retour</button>
