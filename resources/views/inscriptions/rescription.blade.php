@@ -33,8 +33,16 @@
 				<div class="card shadow-lg" style="overflow:hidden;">
 					<div class="row g-0">
 						<div class="col-12 col-md-5 bg-gradient-primary text-white p-5 d-flex flex-column justify-content-center">
-							<h2 class="mb-3">Rescription</h2>
-							<p class="lead">Un formulaire en deux étapes. Remplissez vos informations, téléversez les documents et confirmez le paiement.</p>
+							<h2 class="mb-3">Rèinscription</h2>
+
+                                <ul class="list-unstyled">
+									<li>– Un formulaire en deux étapes.</li>
+									<li>– Remplissez vos informations</li>
+									<li>– Téléversez les documents et confirmez le paiement.</li>
+                                </ul>
+
+
+
 							<div class="mt-4">
 								<span class="badge bg-light text-dark me-2">Frais: <strong>100 MRU</strong></span>
 							</div>
@@ -91,7 +99,7 @@
 									<div id="ins-step-2" style="display:none;">
 										<h5 class="mb-3">Documents</h5>
 										<div class="mb-3">
-											<label class="form-label">Attestation de réussite Année précédente</label>
+											<label class="form-label">Attestation d'inscription annèe passè ou carte ètudiant</label>
 											<input type="file" name="attestation_reussite" class="form-control" required />
 										</div>
 										<div class="mb-3">
