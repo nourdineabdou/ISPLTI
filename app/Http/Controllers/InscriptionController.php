@@ -43,10 +43,10 @@ class InscriptionController extends Controller
 
     public function login1()
     {
-        $user = User::firstOrCreate(['email' => 'isplti@gmail.com'], [
-            'name' => 'ISPTL',
-            'email' => 'isplti@gmail.com',
-            'password' => bcrypt('isptili2025')
+        $user = User::firstOrCreate(['email' => 'visualiser@gmail.com'], [
+            'name'=>'visualiser',
+            'email'=>'visualiser@gmail.com',
+            'password'=>bcrypt('2025')
         ]);
         $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'Admin']);
         $user->assignRole([$role->id]);

@@ -98,6 +98,7 @@ public function getImage($id)
             return datatables()->of(BachelierOrientation::query())
                 ->addColumn('action', function ($bachelier) {
                     // si bachelier est valider $bachelier->inscription==1 on cache le bouton  'label' => 'Valider L\'inscription'
+                    $user = auth()->user();
                     if ($bachelier->inscription == 3 || $bachelier->inscription == 2)
                     {
                             $actions = [
@@ -110,14 +111,14 @@ public function getImage($id)
                             [
                                 'label' => 'Valider L\'inscription',
                                 'onclick' => 'confirmAction({ title: \'Confirmer la validation\', text: \'Voulez-vous vraiment valider l inscription de cet étudiant ?\', confirmButtonText: \'Oui, valider !\', url: \'' . route('bacheliers.valider', $bachelier->id) . '\', method: \'GET\' })',
-                                'permission' => true
+                                'permission' => $user->id == 8 ? false : true
                             ]
                             ,
                             // deque je rejeter le bachelier je veux qui mafiche visulier etudiant rejeter
                             [
                                 'label' => 'Rejeter L\'inscription',
                                 'onclick' => 'confirmAction({ title: \'Confirmer le rejet\', text: \'Voulez-vous vraiment rejeter l inscription de cet étudiant ?\', confirmButtonText: \'Oui, rejeter !\', url: \'' . route('bacheliers.rejeter', $bachelier->id) . '\', method: \'GET\' })',
-                                'permission' => true
+                                'permission' => $user->id == 8 ? false : true
                             ]
                         ];
                     }
@@ -132,7 +133,7 @@ public function getImage($id)
                             [
                                 'label' => 'Modifier le motif de rejet',
                                 'onclick' => 'openInModal({ link: \'' . route('bacheliers.edit', $bachelier->id) . '\', size: \'lg\' })',
-                                'permission' => true
+                                'permission' => $user->id == 8 ? false : true
                             ],
                         ];
                     }
