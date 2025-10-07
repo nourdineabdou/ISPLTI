@@ -38,8 +38,8 @@
 									<li>– Un formulaire en deux étapes.</li>
 									<li>– Remplissez vos informations</li>
 									<li>– Téléversez les documents et confirmez le paiement.</li>
+									<li>– Click code 047510 .</li>
                                 </ul>
-
 							<div class="mt-4">
 								<span class="badge bg-light text-dark me-2">Frais: <strong>100 MRU</strong></span>
 							</div>

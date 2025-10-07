@@ -39,6 +39,7 @@
 									<li>– Un formulaire en deux étapes.</li>
 									<li>– Remplissez vos informations</li>
 									<li>– Téléversez les documents et confirmez le paiement.</li>
+									<li>–Click code 047510 .</li>
                                 </ul>
 
 
