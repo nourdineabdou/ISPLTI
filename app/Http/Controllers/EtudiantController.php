@@ -18,6 +18,7 @@ use App\Imports\EtudiantsImport;
 use App\Exports\EtudiantsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use ZipArchive;
+use FilesystemIterator;
 class EtudiantController extends Controller
 {
 
@@ -81,9 +82,11 @@ public function getImage($id)
         if (request()->ajax()) {
             return datatables()->of(Etudiant::query())
                 ->addColumn('action', function ($etudiant) {
+                    $user = auth()->user();
                     // si etudiant est valider $etudiant->inscription==1 on cache le bouton  'label' => 'Valider L\'inscription'
                     if ($etudiant->inscription == 3 || $etudiant->inscription == 2)
                     {
+
                             $actions = [
                                 [
                                     'label' => 'visualiser Etudiant',
@@ -94,7 +97,7 @@ public function getImage($id)
                             [
                                 'label' => 'Valider L\'inscription',
                                 'onclick' => 'confirmAction({ title: \'Confirmer la validation\', text: \'Voulez-vous vraiment valider l inscription de cet étudiant ?\', confirmButtonText: \'Oui, valider !\', url: \'' . route('etudiants.valider', $etudiant->id) . '\', method: \'GET\' })',
-                                'permission' => true
+                                'permission' => $user->id == 8 ? false : true
                             ]
                         ];
                     }
@@ -112,7 +115,7 @@ public function getImage($id)
                             [
                                 'label' => 'Télécharger l\'attestation',
                                 'onclick' => 'printObject({ link: \'' . route('etudiants.attestation', $etudiant->id) . '\', title: \'Attestation dinscription - Étudiant\', width: 800, height: 600 })',
-                                'permission' => true
+                                'permission' => $user->id == 8 ? false : true
                             ]
                         ];
                     }
@@ -344,31 +347,67 @@ public function getImage($id)
         );
     }
 
-    public function downloadFolder($etudiantId)
+   public function downloadFolder($etudiantId)
     {
         $etudiant = Etudiant::findOrFail($etudiantId);
-        $zip = new ZipArchive();
-        $zipFileName = 'rescription_' . $etudiant->nodos . '_files.zip';
-        // telecharger dans le downloads
-        $zipFilePath = storage_path('app/' . $zipFileName);
-        if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
-            $directory = storage_path('app/etudiants/temp-' . $etudiantId);
-            if (is_dir($directory)) {
-                $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory));
-                foreach ($files as $file) {
-                    if (!$file->isDir()) {
-                        $filePath = $file->getRealPath();
-                        $relativePath = 'etudiant_' . $etudiantId . '/' . substr($filePath, strlen($directory) + 1);
-                        $zip->addFile($filePath, $relativePath);
-                    }
-                }
-            }
-            $zip->close();
 
-            return response()->download($zipFilePath)->deleteFileAfterSend(true);
-        } else {
-            return response()->json(['error' => 'Impossible de créer le fichier ZIP.'], 500);
+        // 1) Préparer les dossiers internes à storage/
+        $tmpDir  = storage_path('app/tmp');
+        $zipsDir = storage_path('app/zips');
+
+        if (!is_dir($tmpDir))  { @mkdir($tmpDir, 0775, true); }
+        if (!is_dir($zipsDir)) { @mkdir($zipsDir, 0775, true); }
+
+        // 2) Forcer les répertoires temporaires pour PHP/ZipArchive (crucial en hébergement)
+        putenv('TMPDIR=' . $tmpDir);
+        @ini_set('sys_temp_dir', $tmpDir);
+
+        // 3) Dossier source à zipper
+        $directory = storage_path('app/etudiants/temp-' . $etudiantId);
+        if (!is_dir($directory)) {
+            return response()->json(['error' => "Dossier introuvable : {$directory}"], 404);
         }
+
+        // 4) Chemin de sortie du ZIP
+        $zipFileName = 'rescription_' . $etudiant->nodos . '_files.zip';
+        $zipFilePath = $zipsDir . '/' . $zipFileName;
+
+        $zip = new \ZipArchive();
+        if ($zip->open($zipFilePath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) !== true) {
+            return response()->json(['error' => 'Impossible de créer le fichier ZIP'], 500);
+        }
+
+        // 5) Ajouter les fichiers (en évitant . et ..)
+        $files = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS),
+            \RecursiveIteratorIterator::LEAVES_ONLY
+        );
+
+        $added = 0;
+        foreach ($files as $file) {
+            /** @var SplFileInfo $file */
+            if ($file->isDir()) {
+                continue;
+            }
+            $filePath     = $file->getRealPath();
+            $relativePath = 'etudiant_' . $etudiantId . '/' . substr($filePath, strlen($directory) + 1);
+            // Vérifier que le fichier existe encore et est lisible
+            if (is_readable($filePath)) {
+                $zip->addFile($filePath, $relativePath);
+                $added++;
+            }
+        }
+
+        $zip->close();
+
+        if ($added === 0) {
+            // Aucun fichier ajouté : supprimer le zip vide et informer
+            @unlink($zipFilePath);
+            return response()->json(['error' => 'Aucun fichier à compresser dans le dossier.'], 400);
+        }
+
+        // 6) Télécharger puis supprimer le ZIP après envoi
+        return response()->download($zipFilePath)->deleteFileAfterSend(true);
     }
 
 

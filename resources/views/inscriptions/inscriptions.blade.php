@@ -34,15 +34,37 @@
 					<div class="row g-0">
 						<div class="col-12 col-md-5 bg-gradient-primary text-white p-5 d-flex flex-column justify-content-center">
 							<h2 class="mb-3">Inscription</h2>
-                                <ul class="list-unstyled">
+								<ul class="list-unstyled">
 									<li>– Un formulaire en deux étapes.</li>
 									<li>– Remplissez vos informations</li>
 									<li>– Téléversez les documents et confirmez le paiement.</li>
-									<li>– Click code 047510 .</li>
-                                </ul>
-							<div class="mt-4">
-								<span class="badge bg-light text-dark me-2">Frais: <strong>100 MRU</strong></span>
-							</div>
+								</ul>
+
+								{{-- Bloc QR paiement (affiche l'image si $qrPhotoUrl ou $data['qrPhotoUrl'] fourni) --}}
+								@php
+									$qrUrl = asset('clique.jpeg');
+									$qrCodeText = '047510';
+								@endphp
+
+								@if(!empty($qrUrl))
+									<div class="mt-3 text-center">
+										<a href="{{ $qrUrl }}" target="_blank" rel="noopener noreferrer">
+											<img src="{{ $qrUrl }}" alt="QR paiement" style="max-width:180px;width:100%;border-radius:10px;border:4px solid rgba(255,255,255,0.12);background:#fff;padding:6px;">
+										</a>
+										<div class="mt-2 badge bg-white text-dark" style="font-size:0.95rem;padding:8px 12px;border-radius:20px;">{{ $qrCodeText }}</div>
+									</div>
+								@else
+									<div class="mt-3 text-center">
+										<div style="max-width:180px;margin:0 auto;padding:18px;border-radius:10px;background:rgba(255,255,255,0.06);">
+											<div style="color:rgba(255,255,255,0.9);font-weight:600">Paiement via Click</div>
+											<div style="margin-top:8px;color:rgba(255,255,255,0.85)">Code: <strong>{{ $qrCodeText }}</strong></div>
+										</div>
+									</div>
+								@endif
+
+								<div class="mt-4">
+									<span class="badge bg-light text-dark me-2">Frais: <strong>100 MRU</strong></span>
+								</div>
 						</div>
 						<div class="col-12 col-md-7 p-4">
 							<div class="px-2">
