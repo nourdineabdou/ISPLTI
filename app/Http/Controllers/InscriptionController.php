@@ -261,7 +261,7 @@ class InscriptionController extends Controller
         ]
     );
         $etudiant = Etudiant::findOrFail($etudiantID);
-        $etudiant->tel = $request->input('tel');
+        $etudiant->telephone = $request->input('tel');
         // numero correspondant
         $etudiant->num_correspondant = $request->input('num_correspondant');
         $etudiant->email = $request->input('email');
