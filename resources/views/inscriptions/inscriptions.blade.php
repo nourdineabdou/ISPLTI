@@ -108,6 +108,7 @@
 												<label class="form-label">Nom (FR)</label>
 												<input value="{{ old('nom_fr' , $bachelier->nom_fr) }}" name="nom_fr" class="form-control form-control-lg rounded-pill" readonly />
 											</div>
+                                            {{--
 											<div class="mb-3 col-md-6">
 												<label class="form-label">Nom (AR)</label>
 												<input value="{{ old('nom_ar' , $bachelier->nom_ar) }}" name="nom_ar" class="form-control form-control-lg rounded-pill" readonly/>
@@ -120,6 +121,8 @@
 												<label class="form-label">Lieu de naissance</label>
 												<input value="{{ old('lieun' , $bachelier->lieun) }}" name="lieun" class="form-control form-control-lg rounded-pill" readonly />
 											</div>
+                                            --}}
+                                            {{--
 											<div class="mb-3 col-md-6">
 												<label class="form-label">Numéro BAC</label>
 												<input value="{{ old('num_bac' , $bachelier->num_bac) }}" name="num_bac" class="form-control form-control-lg rounded-pill" readonly />
@@ -136,6 +139,7 @@
 												<label class="form-label">Moyenne BAC</label>
 												<input value="{{ old('moyenne_bac' , $bachelier->moyenne_bac) }}" name="moyenne_bac" step="0.01" type="number" class="form-control form-control-lg rounded-pill"  readonly />
 											</div>
+                                            --}}
 											<div class="mb-3 col-md-6">
 												<label class="form-label">Genre</label>
 												<select name="genre" class="form-control form-control-lg rounded-pill">
