@@ -18,7 +18,6 @@ use App\Imports\EtudiantsImport;
 use App\Exports\EtudiantsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use ZipArchive;
-use FilesystemIterator;
 class EtudiantController extends Controller
 {
 
@@ -347,66 +346,30 @@ public function getImage($id)
         );
     }
 
-   public function downloadFolder($etudiantId)
+    public function downloadFolder($etudiantId)
     {
         $etudiant = Etudiant::findOrFail($etudiantId);
-
-        // 1) Préparer les dossiers internes à storage/
-        $tmpDir  = storage_path('app/tmp');
-        $zipsDir = storage_path('app/zips');
-
-        if (!is_dir($tmpDir))  { @mkdir($tmpDir, 0775, true); }
-        if (!is_dir($zipsDir)) { @mkdir($zipsDir, 0775, true); }
-
-        // 2) Forcer les répertoires temporaires pour PHP/ZipArchive (crucial en hébergement)
-        putenv('TMPDIR=' . $tmpDir);
-        @ini_set('sys_temp_dir', $tmpDir);
-
-        // 3) Dossier source à zipper
-        $directory = storage_path('app/etudiants/temp-' . $etudiantId);
-        if (!is_dir($directory)) {
-            return response()->json(['error' => "Dossier introuvable : {$directory}"], 404);
+        $folderPath = storage_path("app/etudiants/temp-$etudiantId");
+        if (!file_exists($folderPath)) {
+            return response()->json(['error' => 'Dossier introuvable.'], 404);
         }
+        $zipFileName = "etudiant_{$etudiant->matricule}_files.zip";
+        $zipFilePath = storage_path("app/etudiants/$zipFileName");
+        $zip = new ZipArchive();
 
-        // 4) Chemin de sortie du ZIP
-        $zipFileName = 'rescription_' . $etudiant->nodos . '_files.zip';
-        $zipFilePath = $zipsDir . '/' . $zipFileName;
-
-        $zip = new \ZipArchive();
-        if ($zip->open($zipFilePath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) !== true) {
-            return response()->json(['error' => 'Impossible de créer le fichier ZIP'], 500);
-        }
-
-        // 5) Ajouter les fichiers (en évitant . et ..)
-        $files = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::LEAVES_ONLY
-        );
-
-        $added = 0;
-        foreach ($files as $file) {
-            /** @var SplFileInfo $file */
-            if ($file->isDir()) {
-                continue;
+        if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE) === TRUE) {
+            $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($folderPath));
+            foreach ($files as $file) {
+                if (!$file->isDir()) {
+                    $filePath = $file->getRealPath();
+                    $relativePath = substr($filePath, strlen($folderPath) + 1);
+                    $zip->addFile($filePath, $relativePath);
+                }
             }
-            $filePath     = $file->getRealPath();
-            $relativePath = 'etudiant_' . $etudiantId . '/' . substr($filePath, strlen($directory) + 1);
-            // Vérifier que le fichier existe encore et est lisible
-            if (is_readable($filePath)) {
-                $zip->addFile($filePath, $relativePath);
-                $added++;
-            }
+            $zip->close();
+        } else {
+            return response()->json(['error' => 'Impossible de créer le fichier ZIP.'], 500);
         }
-
-        $zip->close();
-
-        if ($added === 0) {
-            // Aucun fichier ajouté : supprimer le zip vide et informer
-            @unlink($zipFilePath);
-            return response()->json(['error' => 'Aucun fichier à compresser dans le dossier.'], 400);
-        }
-
-        // 6) Télécharger puis supprimer le ZIP après envoi
         return response()->download($zipFilePath)->deleteFileAfterSend(true);
     }
 
