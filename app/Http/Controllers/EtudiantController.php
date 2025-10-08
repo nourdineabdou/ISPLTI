@@ -18,6 +18,8 @@ use App\Imports\EtudiantsImport;
 use App\Exports\EtudiantsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use ZipArchive;
+use App\Mail\BachelierEmail;
+use Illuminate\Support\Facades\Mail as Email;
 class EtudiantController extends Controller
 {
 
@@ -88,7 +90,7 @@ public function getImage($id)
 
                             $actions = [
                                 [
-                                    'label' => 'visualiser Etudiant',
+                                    'label' => 'Visualiser Etudiant',
                                     'onclick' => 'openInModal({ link: \'' . route('etudiants.show', $etudiant->id) . '\', size: \'lg\' })',
                                     'permission' => true
                             ],
@@ -96,7 +98,13 @@ public function getImage($id)
                             [
                                 'label' => 'Valider L\'inscription',
                                 'onclick' => 'confirmAction({ title: \'Confirmer la validation\', text: \'Voulez-vous vraiment valider l inscription de cet étudiant ?\', confirmButtonText: \'Oui, valider !\', url: \'' . route('etudiants.valider', $etudiant->id) . '\', method: \'GET\' })',
-                                'permission' => $user->id == 8 ? false : true
+                                'permission' => $user->id == 9 ? false : true
+                            ]
+                            ,
+                            [
+                                'label' => 'Rejeter L\'inscription',
+                                'onclick' => 'confirmAction({ title: \'Confirmer le rejet\', text: \'Voulez-vous vraiment rejeter l inscription de cet étudiant ?\', confirmButtonText: \'Oui, rejeter !\', url: \'' . route('etudiants.rejeter', $etudiant->id) . '\', method: \'GET\' })',
+                                'permission' => $user->id == 9 ? false : true
                             ]
                         ];
                     }
@@ -104,17 +112,18 @@ public function getImage($id)
                     {
                         $actions = [
                             [
-                                'label' => 'visualiser Etudiant',
+                                'label' => 'Visualiser Etudiant',
                                 'onclick' => 'openInModal({ link: \'' . route('etudiants.show', $etudiant->id) . '\', size: \'lg\' })',
                                 'permission' => true
                             ],
                             // attestation pdf etudiant
                             //printObject({ link, callback = null, title = 'Print', width = 800, height = 600 })
                             // A4 pour attestation width: 210mm, height: 297mm
+                            // motif de rejet
                             [
-                                'label' => 'Télécharger l\'attestation',
-                                'onclick' => 'printObject({ link: \'' . route('etudiants.attestation', $etudiant->id) . '\', title: \'Attestation dinscription - Étudiant\', width: 800, height: 600 })',
-                                'permission' => $user->id == 8 ? false : true
+                                'label' => 'Motif de rejet',
+                                'onclick' => 'openInModal({ link: \'' . route('etudiants.edit', $etudiant->id) . '\', size: \'md\' })',
+                                'permission' => $user->id == 9 ? false : true
                             ]
                         ];
                     }
@@ -218,7 +227,6 @@ public function getImage($id)
     {
         $etudiant = Etudiant::findOrFail($id);
         return view('pages.etudiants.edit', [
-            'title' => __('etudiants.edit'),
             'etudiant' => $etudiant
         ]);
     }
@@ -230,20 +238,19 @@ public function getImage($id)
     {
         // Validate the request data.
         $request->validate([
-            'nom' => 'required|string|max:255',
-            'lieu_naissance' => 'required|string|max:255',
+            'motif_rejet' => 'required',
         ]);
 
         // Find the Etudiant instance and update it with the request data.
         $etudiant = Etudiant::findOrFail($id);
-        $etudiant->nom = $request->input('nom');
-        $etudiant->lieu_naissance = $request->input('lieu_naissance');
+        $etudiant->motif_rejet = $request->input('motif_rejet');
         $etudiant->save();
+        $this->sendEmailForm($id);
 
         // Redirect or return a response.
         return response()->json([
             'success' => true,
-            'message' => 'Etudiant mis à jour avec succès.'
+            'message' => 'Motif de rejet est envoyé avec succès.'
         ]);
     }
 
@@ -372,6 +379,34 @@ public function getImage($id)
         }
         return response()->download($zipFilePath)->deleteFileAfterSend(true);
     }
+    // rejeter etudiant
+    public function rejeter($id)
+    {
+        // Find the Etudiant instance and validate it.
+        $etudiant = Etudiant::findOrFail($id);
+        $etudiant->inscription = 4;
+        $etudiant->save();
+        // Redirect or return a response.
+         return response()->json([
+              'success' => true,
+              'message' => 'Etudiant rejeté avec succès.'
+          ]);
+      }
 
+       // send email to bachelier GET
+    public function sendEmailForm($id)
+    {
+
+        $etudiant = Etudiant::findOrFail($id);
+        try {
+            $data['name'] = $etudiant->nom_fr;
+            $data['email'] = $etudiant->email;
+            $data['content'] = $etudiant->motif_rejet;
+            Email::to($etudiant->email)->send(new BachelierEmail($data));
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Erreur lors de l\'envoi de l\'email : ' . $e->getMessage()], 500);
+        }
+        return response()->json(['success' => true]);
+    }
 
 }

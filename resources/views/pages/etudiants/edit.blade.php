@@ -1,5 +1,5 @@
 <x-modal-header-body
-    :title="__('etudiants.edit')"
+    :title="'Motif de rejet de l\'étudiant ' . $etudiant->nom_fr"
 >
     <div id="edit-etudiant-form">
         <form
@@ -10,17 +10,10 @@
             <div class="row">
                 <x-forms.input
                     class="col-md-12"
-                    label="Name"
-                    name="nom"
+                    label="Motif de rejet"
+                    name="motif_rejet"
                     required="required"
-                    :value="$etudiant->nom"
-                />
-                <x-forms.input
-                    class="col-md-12"
-                    label="Lieu de naissance"
-                    name="lieu_naissance"
-                    required="required"
-                    :value="$etudiant->lieu_naissance"
+                    :value="$etudiant->motif_rejet"
                 />
             </div>
             <x-buttons.save
