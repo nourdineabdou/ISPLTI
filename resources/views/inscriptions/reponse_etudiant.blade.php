@@ -5,13 +5,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Réponse inscription</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	<style>
+    <link rel="apple-touch-icon" href="{{ asset('logo.jpeg') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('logo.jpeg') }}">
+    <style>
 		body { background: linear-gradient(135deg,#f8fafc 0%,#eef2ff 100%); min-height:100vh; display:flex; align-items:center; }
 		.card-center { max-width:720px; margin:32px auto; border-radius:14px; box-shadow:0 10px 30px rgba(2,6,23,0.08); }
 		.status-icon { width:72px; height:72px; display:inline-flex; align-items:center; justify-content:center; border-radius:50%; }
 		.muted { color:#64748b; }
 		@media (max-width:576px){ .card-center{ margin:16px; } }
 	</style>
+
 </head>
 <body>
 <div class="container">
