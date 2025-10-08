@@ -5,6 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Inscription - ISPLTI</title>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="apple-touch-icon" href="{{ asset('logo1.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('logo1.png') }}">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 	<style>
 		body{background:#f5f8fb;font-family:Inter,system-ui,Arial,Helvetica,sans-serif}
