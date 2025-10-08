@@ -10,6 +10,11 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'etudiants'], function () {
     Route::get('/create', [EtudiantController::class, 'create'])->name('etudiants.create');
     Route::get('/{id}', [EtudiantController::class, 'show'])->name('etudiants.show');
     Route::get('/{id}/valider', [EtudiantController::class, 'valider'])->name('etudiants.valider');
+    Route::get('/{id}/rejeter', [EtudiantController::class, 'rejeter'])->name('etudiants.rejeter');
+    // edit
+    Route::get('/{id}/edit', [EtudiantController::class, 'edit'])->name('etudiants.edit');
+    // update
+    Route::put('/{id}', [EtudiantController::class, 'update'])->name('etudiants.update');
     // exporter
     Route::get('/exporter/etudiants', [EtudiantController::class, 'exporter'])->name('etudiants.exporter');
     // importer

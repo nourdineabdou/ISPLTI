@@ -14,6 +14,7 @@ use ZipArchive;
 // Email
 use Illuminate\Support\Facades\Mail as Email;
 use App\Mail\BachelierEmail;
+
 class BachelierController extends Controller
 {
 
