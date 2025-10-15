@@ -16,6 +16,7 @@ class InscriptionPdg extends Model
         'annee_univ_id',
         'matiere_id',
         'module_id',
+        'element_id',
         'nb_inscription',
         'annee_premiere_attribution',
         'credit',

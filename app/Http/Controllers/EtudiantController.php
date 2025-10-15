@@ -16,6 +16,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\File;
 use App\Imports\EtudiantsImport;
 use App\Exports\EtudiantsExport;
+use App\Imports\InscriptionAdmImport;
+use App\Imports\InscriptionPdgImport;
 use Maatwebsite\Excel\Facades\Excel;
 use ZipArchive;
 use App\Mail\BachelierEmail;
@@ -160,7 +162,17 @@ public function getImage($id)
                     'onclick' => 'exportTable(\'' . route('etudiants.exporter') . '\')',
                     'permission' => true,
                 ]
-
+                // ,adm inscription
+                ,[
+                    'label' => __('Importer Inscription Adm'),
+                    'onclick' => 'openInModal({ link: \'' . route('etudiants.importer.inscriptions_adm') . '\', size: \'sm\' })',
+                    'permission' => true,
+                ],
+                [
+                    'label' => __('Importer Inscription Pdg'),
+                    'onclick' => 'openInModal({ link: \'' . route('etudiants.importer.inscriptions_pdg') . '\', size: \'sm\' })',
+                    'permission' => true,
+                ]
             ],
             'title' => "Liste des étudiants",
         ]);
@@ -407,6 +419,49 @@ public function getImage($id)
             return response()->json(['error' => 'Erreur lors de l\'envoi de l\'email : ' . $e->getMessage()], 500);
         }
         return response()->json(['success' => true]);
+    }
+
+    // InscriptionAdmImport
+    public function importerInscriptionAdmStore(Request $request)
+    {
+        $request->validate([
+            'document' => 'required|mimes:xlsx,csv,xls'
+        ]);
+
+        Excel::import(new InscriptionAdmImport, $request->file('document'));
+
+        // response json
+        return response()->json([
+            'success' => true,
+            'message' => 'Inscriptions administratives importées avec succès !'
+        ]);
+    }
+
+    // InscriptionPdgImport
+    public function importerInscriptionPdgStore(Request $request)
+    {
+        $request->validate([
+            'document' => 'required|mimes:xlsx,csv,xls'
+        ]);
+
+        Excel::import(new InscriptionPdgImport, $request->file('document'));
+
+        // response json
+        return response()->json([
+            'success' => true,
+            'message' => 'Inscriptions PDG importées avec succès !'
+        ]);
+    }
+
+    // vue importer inscription adm
+    public function importerInscriptionAdm()
+    {
+        return view('pages.etudiants.importer-adm');
+    }
+    // vue importer inscription pdg
+    public function importerInscriptionPdg()
+    {
+        return view('pages.etudiants.importer-pdg');
     }
 
 }

@@ -29,6 +29,13 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'etudiants'], function () {
 
     // export le dossier etudiant
     Route::get('/{id}/exporter_dossier', [EtudiantController::class, 'downloadFolder'])->name('etudiants.exporter_dossier');
+    // import inscription adm
+    Route::get('/importer/inscriptions_adm', [EtudiantController::class, 'importerInscriptionAdm'])->name('etudiants.importer.inscriptions_adm');
+    Route::post('/importer/inscriptions_adm', [EtudiantController::class, 'importerInscriptionAdmStore'])->name('etudiants.importer.inscriptions_adm.store');
+    // import inscription pdg
+    Route::get('/importer/inscriptions_pdg', [EtudiantController::class, 'importerInscriptionPdg'])->name('etudiants.importer.inscriptions_pdg');
+    Route::post('/importer/inscriptions_pdg', [EtudiantController::class, 'importerInscriptionPdgStore'])->name('etudiants.importer.inscriptions_pdg.store');
+    // modal pour importer les etudiants
 });
 
 // bacheliers routes
