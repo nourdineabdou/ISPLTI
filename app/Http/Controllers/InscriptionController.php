@@ -18,6 +18,16 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 class InscriptionController extends Controller
 {
+    // créer moi une methode qui permet de predre en paremètre un tableau et afficher le nombre premiere
+    public function afficherNombrePremiere(array $nombres)
+    {
+        $nombresPremiers = array_filter($nombres, function ($nombre) {
+            return $this->estPremier($nombre);
+        });
+
+        return response()->json($nombresPremiers);
+    }
+
     public function inscriptions()
     {
         $bachelierId = Session::get('bachelier_id');
