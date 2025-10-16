@@ -10,67 +10,63 @@
 <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
-    body { font-family: "DejaVu Sans", Arial, sans-serif; color: #111; font-size: 12pt; line-height: 1.35; }
+    body { font-family: "DejaVu Sans", Arial, sans-serif; color: #111; font-size: 10pt; line-height: 1.35; }
     @page { size: A4; margin: 16mm; }
-    .brand { display:flex; align-items:flex-start; gap:16px; border-bottom:3px solid #1a365d; padding-bottom:15px; margin-bottom:15px; }
-    .logo { width:85px; height:85px; object-fit:contain; }
-    .inst-info { flex:1; }
-    .inst-name { margin:0; font-size:18pt; color:#1a365d; font-weight:700; text-align:center; }
-    .inst-subtitle { font-size:14pt; color:#2d3748; margin:4px 0; font-weight:600; text-align:center; }
-    .inst-meta { font-size:10pt; color:#555; line-height:1.5; text-align:center; }
-    .header-fr { text-align:center; margin-bottom:8px; }
-    .header-ar { text-align:center; direction:rtl; font-family:"Arial Unicode MS", "Tahoma", sans-serif; }
-    .republic { font-weight:700; color:#1a365d; font-size:12pt; }
-    .motto { font-style:italic; color:#666; margin:2px 0; }
-    .ministry { font-weight:600; color:#2d3748; }
-    .institute { font-weight:700; color:#1a365d; font-size:11pt; margin:3px 0; }
-    .service { color:#555; font-size:10pt; }
-    h2 { text-align:center; font-size:20pt; margin:16px 0 8px; text-transform:uppercase; letter-spacing:1px; }
+    .brand { display:flex; align-items:flex-start; justify-content:space-between; border-bottom:3px solid #1a365d; padding-bottom:15px; margin-bottom:15px; }
+    .logo { width:100px; height:100px; object-fit:contain; align-self:center; }
+    .header-fr { flex:1; text-align:left; font-size:7pt; line-height:1.4; }
+    .header-ar { flex:1; text-align:right; direction:rtl; font-family:"Arial Unicode MS", "Tahoma", sans-serif; font-size:7pt; line-height:1.4; }
+    .republic { font-weight:700; color:#1a365d; margin-bottom:3px; }
+    .motto { font-style:italic; color:#666; margin-bottom:6px; }
+    .ministry { font-weight:600; color:#2d3748; margin-bottom:3px; }
+    .institute { font-weight:700; color:#1a365d; margin-bottom:3px; }
+    .service { color:#555; }
+    h2 { text-align:center; font-size:16pt; margin:16px 0 8px; text-transform:uppercase; letter-spacing:1px; }
     .subtitle { text-align:center; color:#666; margin-bottom:10px; }
-    .bloc { border:1px solid #e9e9e9; border-radius:8px; background:#fafafa; padding:12px; margin-top:12px; }
-    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; }
-    .grid-with-photo { display:grid; grid-template-columns:1fr 120px; gap:15px; align-items:start; }
+    .bloc { border:1px solid #e9e9e9; border-radius:6px; background:#fafafa; padding:8px; margin-top:6px; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; }
+    .grid-with-photo { display:grid; grid-template-columns:1fr 120px; gap:10px; align-items:start; }
     .student-photo { width:120px; height:150px; object-fit:cover; border:2px solid #e5e5e5; border-radius:8px; background:#f8f8f8; }
-    .label{ color:#666; font-size:10pt; }
+    .label{ color:#666; font-size:8pt; }
     .val{ font-weight:600; }
-    table { width:100%; border-collapse:collapse; font-size:11pt; margin-top:6px; }
-    th, td { border:1px solid #e5e5e5; padding:8px 10px; text-align:left; }
-    th { background:#f5f5f5; }
+    table { width:100%; border-collapse:collapse; font-size:8pt; margin-top:6px; }
+    th, td { border:1px solid #e5e5e5; padding:4px 6px; text-align:left; line-height:1.2; }
+    th { background:#f5f5f5; font-weight:600; }
     .parag{ margin-top:12px; text-align:justify; }
-    .footer{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:22mm; }
-    .line{ height:60px; border-bottom:1px dashed #bbb; margin-bottom:6px; }
-    .who{ font-size:10pt; color:#555; }
-    .muted{ color:#777; font-size:10pt; margin-top:6px; }
+    .footer{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:15mm; }
+    .line{ height:50px; border-bottom:1px dashed #bbb; margin-bottom:4px; }
+    .who{ font-size:7pt; color:#555; }
+    .muted{ color:#777; font-size:7pt; margin-top:4px; }
     .stamp{
         position: fixed; right: 40mm; bottom: 40mm;
         width: 120px; height: 120px; border: 2px dashed #d2d2d2; border-radius: 50%;
-        display:flex; align-items:center; justify-content:center; color:#c0c0c0; font-size:10pt; transform:rotate(-12deg);
+        display:flex; align-items:center; justify-content:center; color:#c0c0c0; font-size:8pt; transform:rotate(-12deg);
     }
 </style>
 </head>
 <body>
     <header class="brand">
-        @if(asset('logo2.png'))
-            <img class="logo" src="{{ asset('logo2.png') }}" alt="Logo ISPLTI">
-        @endif
-        <div class="inst-info">
-            {{-- En-tête en français --}}
-            <div class="header-fr">
-                <div class="republic">République Islamique de Mauritanie</div>
-                <div class="motto">Honneur – Fraternité – Justice</div>
-                <div class="ministry">Ministère de l'Enseignement Supérieur et de la Recherche Scientifique</div>
-                <div class="institute">INSTITUT SUPÉRIEUR PROFESSIONNEL DE LANGUES, DE TRADUCTION & D'INTERPRÉTARIAT</div>
-                <div class="service">SERVICE DES AFFAIRES ÉTUDIANTINES</div>
-            </div>
+        {{-- En-tête en français (à gauche) --}}
+        <div class="header-fr">
+            <div class="republic">République Islamique de Mauritanie</div>
+            <div class="motto">Honneur – Fraternité – Justice</div>
+            <div class="ministry">Ministère de l'Enseignement Supérieur et de la Recherche Scientifique</div>
+            <div class="institute">INSTITUT SUPÉRIEUR PROFESSIONNEL DE LANGUES, DE TRADUCTION & D'INTERPRÉTARIAT</div>
+            <div class="service">SERVICE DES AFFAIRES ÉTUDIANTINES</div>
+        </div>
 
-            {{-- En-tête en arabe --}}
-            <div class="header-ar" style="margin-top:12px;">
-                <div class="republic">الجمهورية الإسلامية الموريتانية</div>
-                <div class="motto">شرف – إخاء – عدل</div>
-                <div class="ministry">وزارة التعليم العالي والبحث العلمي</div>
-                <div class="institute">المعهد العالي المهني للغات وللترجمة والترجمة الفورية</div>
-                <div class="service">مصلحة الشؤون الطلابية</div>
-            </div>
+        {{-- Logo au centre --}}
+        @if(asset('logo-centre.png'))
+            <img class="logo" src="{{ asset('logo-centre.png') }}" alt="Logo ISPLTI">
+        @endif
+
+        {{-- En-tête en arabe (à droite) --}}
+        <div class="header-ar">
+            <div class="republic">الجمهورية الإسلامية الموريتانية</div>
+            <div class="motto">شرف – إخاء – عدل</div>
+            <div class="ministry">وزارة التعليم العالي والبحث العلمي</div>
+            <div class="institute">المعهد العالي المهني للغات وللترجمة والترجمة الفورية</div>
+            <div class="service">مصلحة الشؤون الطلابية</div>
         </div>
     </header>
 
@@ -78,32 +74,27 @@
     <div class="subtitle">Année universitaire {{ $annee ?? '2025-2026' }}</div>
 
     <section class="bloc">
-        <p class="parag" style="margin-bottom:16px;">
+        <p class="parag" style="margin-bottom:4px;">
             Le Directeur de l'Institut Supérieur Professionnel de Langues, de Traduction et d'Interprétariat,<br>
             <strong>atteste que l'étudiant(e) :</strong>
         </p>
-
-        <div class="grid-with-photo" style="margin-bottom:16px;">
+        <div class="grid-with-photo" style="margin-bottom:2px;">
             <div>
-                <div class="grid-2">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; margin-bottom:6px;">
                     <div>
-                        <div class="label">Mr (Mme)</div>
-                        <div class="val">{{ $etudiant['nom']  }}</div>
+                        <span class="label">Mr (Mme) :</span> <span class="val">{{ $etudiant['nom']  }}</span>
                     </div>
                     <div>
-                        <div class="label">NNI</div>
-                        <div class="val">{{ $etudiant['nni']  }}</div>
+                        <span class="label">Né(e) le :</span>
+                        <span class="val">{{  \Carbon\Carbon::parse($etudiant['date_naissance'])->format('d/m/Y') }} à {{ $etudiant['lieu_naissance']  }}</span>
+                    </div>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 12px;">
+                    <div>
+                        <span class="label">NNI :</span> <span class="val">{{ $etudiant['nni']  }}</span>
                     </div>
                     <div>
-                        <div class="label">Né(e) le</div>
-                        <div class="val">
-                            {{  \Carbon\Carbon::parse($etudiant['date_naissance'])->format('d/m/Y') }}
-                            à {{ $etudiant['lieu_naissance']  }}
-                        </div>
-                    </div>
-                    <div>
-                        <div class="label">Numéro d'inscription</div>
-                        <div class="val">{{ $etudiant['numero_inscription'] ?? '24-25/1099' }}</div>
+                        <span class="label">Numéro d'inscription :</span> <span class="val">{{ $etudiant['numero_inscription'] ?? '24-25/1099' }}</span>
                     </div>
                 </div>
             </div>
@@ -122,19 +113,19 @@
                 <div style="font-size:8pt; color:#666; margin-top:4px;">Photo officielle</div>
             </div>
         </div>
-
-        <p class="parag">
-            est inscrit administrativement sous le numéro <strong>{{ $etudiant['matricule'] ?? '24-25/1099' }}</strong>
+        <p class="parag" style="margin-top:2px; line-height:1.4;">
+            est inscrit administrativement
             en formation initiale <strong>{{ $etudiant['formation'] ?? 'licence professionnelle' }}</strong>
-            niveau <strong>{{ $etudiant['niveau'] ?? 'L1' }}</strong>,<br>
-            <strong>{{ $etudiant['tronc_commun'] ?? 'Tronc commun Langues' }}</strong> et pédagogiquement aux semestres, modules et éléments ci-dessous,<br>
+            niveau <strong>{{ $etudiant['niveau'] ?? '1' }}</strong>,
+            <strong>{{ $etudiant['tronc_commun'] ?? 'Tronc commun Langues' }}</strong> et pédagogiquement aux semestres, modules et éléments ci-dessous,
             combinaison majeure : <strong>{{ $etudiant['combinaison_majeure'] ?? 'Anglais – Arabe' }}</strong>
         </p>
 
-        {{-- Numéro de référence en bas à droite --}}
+        {{-- Numéro de référence en bas à droite
         <div style="text-align:right; margin-top:20px; font-size:14pt; font-weight:700; color:#1a365d;">
             {{ $etudiant['id'] ?? '1099' }}
         </div>
+        --}}
     </section>
 
     <section class="bloc">
@@ -142,11 +133,11 @@
         <table>
             <thead>
                 <tr>
-                    <th style="text-align:center;">Semestre</th>
-                    <th style="text-align:center;">Module</th>
-                    <th style="text-align:center;">Éléments</th>
-                    <th style="text-align:center;">Volume horaire</th>
-                    <th style="text-align:center;">Crédits</th>
+                    <th style="text-align:center; width:12%;">Sem.</th>
+                    <th style="text-align:center; width:35%;">Module</th>
+                    <th style="text-align:center; width:38%;">Éléments</th>
+                    <th style="text-align:center; width:8%;">Vol. H</th>
+                    <th style="text-align:center; width:7%;">Crédits</th>
                 </tr>
             </thead>
             <tbody>
@@ -162,54 +153,36 @@
                         @foreach($elements as $index => $element)
                             <tr>
                                 @if($index === 0)
-                                    <td style="text-align:center; vertical-align:top; font-weight:600; border-right:2px solid #1a365d;" rowspan="{{ $elementCount }}">
+                                    <td style="text-align:center; vertical-align:top; font-weight:600; border-right:2px solid #1a365d; font-size:7pt;" rowspan="{{ $elementCount }}">
                                         {{ $semestreName }}
                                     </td>
                                 @endif
-                                <td>{{ $element['module'] ?? '' }}</td>
-                                <td>{{ $element['matiere'] ?? '' }}</td>
-                                <td style="text-align:center;">{{ $element['volume_horaire'] ?? '' }}</td>
-                                <td style="text-align:center;">{{ $element['credits'] ?? '' }}</td>
+                                <td style="font-size:7pt;">{{ $element['module'] ?? '' }}</td>
+                                <td style="font-size:7pt;">{{ $element['matiere'] ?? '' }}</td>
+                                <td style="text-align:center; font-size:7pt;">{{ $element['volume_horaire'] ?? '' }}</td>
+                                <td style="text-align:center; font-size:7pt;">{{ $element['credits'] ?? '' }}</td>
                             </tr>
                         @endforeach
                     @endforeach
                 @else
-                    {{-- Exemple de données par défaut --}}
-                    <tr>
-                        <td style="text-align:center;">S1</td>
-                        <td>Langue Anglaise I</td>
-                        <td>Grammaire anglaise, Expression orale, Compréhension écrite</td>
-                        <td style="text-align:center;">60h</td>
-                        <td style="text-align:center;">6</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center;">S1</td>
-                        <td>Langue Arabe I</td>
-                        <td>Grammaire arabe, Expression écrite, Littérature</td>
-                        <td style="text-align:center;">60h</td>
-                        <td style="text-align:center;">6</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center;">S1</td>
-                        <td>Méthodologie</td>
-                        <td>Techniques de recherche, Rédaction académique</td>
-                        <td style="text-align:center;">30h</td>
-                        <td style="text-align:center;">3</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center;">S2</td>
-                        <td>Langue Anglaise II</td>
-                        <td>Phonétique, Syntaxe, Expression écrite</td>
-                        <td style="text-align:center;">60h</td>
-                        <td style="text-align:center;">6</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align:center;">S2</td>
-                        <td>Langue Arabe II</td>
-                        <td>Rhétorique, Poésie classique, Traduction</td>
-                        <td style="text-align:center;">60h</td>
-                        <td style="text-align:center;">6</td>
-                    </tr>
+                    {{-- Exemple de données par défaut pour 16 matières --}}
+                    <tr><td style="text-align:center; font-size:7pt;" rowspan="8">S1</td><td style="font-size:7pt;">Langue Anglaise I</td><td style="font-size:7pt;">Grammaire anglaise, Expression orale</td><td style="text-align:center; font-size:7pt;">60h</td><td style="text-align:center; font-size:7pt;">6</td></tr>
+                    <tr><td style="font-size:7pt;">Langue Arabe I</td><td style="font-size:7pt;">Grammaire arabe, Expression écrite</td><td style="text-align:center; font-size:7pt;">60h</td><td style="text-align:center; font-size:7pt;">6</td></tr>
+                    <tr><td style="font-size:7pt;">Méthodologie</td><td style="font-size:7pt;">Techniques de recherche</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
+                    <tr><td style="font-size:7pt;">Informatique I</td><td style="font-size:7pt;">Bureautique, Internet</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
+                    <tr><td style="font-size:7pt;">Culture Générale I</td><td style="font-size:7pt;">Histoire, Géographie</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
+                    <tr><td style="font-size:7pt;">Phonétique I</td><td style="font-size:7pt;">Sons anglais, Transcription</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
+                    <tr><td style="font-size:7pt;">Littérature I</td><td style="font-size:7pt;">Poésie, Roman</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
+                    <tr><td style="font-size:7pt;">Traduction I</td><td style="font-size:7pt;">Techniques de base</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
+
+                    <tr><td style="text-align:center; font-size:7pt;" rowspan="8">S2</td><td style="font-size:7pt;">Langue Anglaise II</td><td style="font-size:7pt;">Syntaxe, Expression écrite</td><td style="text-align:center; font-size:7pt;">60h</td><td style="text-align:center; font-size:7pt;">6</td></tr>
+                    <tr><td style="font-size:7pt;">Langue Arabe II</td><td style="font-size:7pt;">Rhétorique, Poésie classique</td><td style="text-align:center; font-size:7pt;">60h</td><td style="text-align:center; font-size:7pt;">6</td></tr>
+                    <tr><td style="font-size:7pt;">Linguistique</td><td style="font-size:7pt;">Morphologie, Sémantique</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
+                    <tr><td style="font-size:7pt;">Informatique II</td><td style="font-size:7pt;">Outils de traduction</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
+                    <tr><td style="font-size:7pt;">Culture Générale II</td><td style="font-size:7pt;">Civilisation, Art</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
+                    <tr><td style="font-size:7pt;">Phonétique II</td><td style="font-size:7pt;">Prosodie, Intonation</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
+                    <tr><td style="font-size:7pt;">Littérature II</td><td style="font-size:7pt;">Théâtre, Critique</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
+                    <tr><td style="font-size:7pt;">Traduction II</td><td style="font-size:7pt;">Pratique avancée</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
                 @endif
             </tbody>
             @if(!empty($programme) && is_array($programme))
