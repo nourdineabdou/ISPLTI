@@ -10,6 +10,8 @@ use App\Models\AnneeUniversitaire;
 use App\Models\Semestre;
 use App\Models\Specialite;
 use App\Models\EmploisTempsSpecialite;
+use App\Models\InscriptionPdg;
+use App\Models\InscriptionAdm;
 // PDF
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -295,6 +297,9 @@ public function getImage($id)
     // attestation pdf etudiant
     public function attestation($id)
     {
+
+        $etudiant_ob = Etudiant::findOrFail($id);
+
        $institution = [
             'nom' => 'Institut Supérieur XYZ',
             'adresse' => 'Avenue de l’Excellence, Nouakchott',
@@ -302,23 +307,46 @@ public function getImage($id)
             'email' => 'contact@xyz.edu.mr',
             'logo_base64' => null,
         ];
+        $inscription_adm = InscriptionAdm::where('etudiant_id', $id);
         $etudiant = [
-            'matricule' => '2025-00123',
-            'nom' => 'Nourdine Med Souleymane',
-            'date_naissance' => '1999-08-15',
-            'lieu_naissance' => 'Nouakchott',
-            'filiere' => 'Informatique',
-            'niveau' => 'Licence 2',
+            'id' => $etudiant_ob->id,
+            'matricule' => $etudiant_ob->nodos,
+            'nom' => $etudiant_ob->nom_fr,
+            'nni' => $etudiant_ob->nni,
+            'date_naissance' => $etudiant_ob->date_naissance,
+            'lieu_naissance' => $etudiant_ob->lieu_naissance_fr,
+            'filiere' => $etudiant_ob->filiere,
+            'niveau' => InscriptionAdm::where('etudiant_id', $id)->with('specialite')->first()->specialite->niveau ?? 'N/A',
+            'formation' => InscriptionAdm::where('etudiant_id', $id)->with('specialite')->first()->specialite->lib_annee_diplome_fr ?? 'N/A',
         ];
         $annee = '2025/2026';
-        $stats = [
-            'ects_acquis' => 48,
-            'moyenne_generale' => 13.75,
-            'rang' => '15 / 220',
-            'taux_presence' => '92%',
-            'ue_validees' => 10,
-        ];
-        return view('pages.etudiants.export-attestation', compact('institution', 'etudiant', 'annee', 'stats'));
+        $inscriptions_pdg = InscriptionPdg::where('etudiant_id', $id)
+            ->with(['semestre', 'matiere', 'module'])
+            ->get();
+
+
+        // Transformer les inscriptions PDG en programme d'enseignement
+        // recuperer les  deux semestres
+        $semestres = Semestre::whereIn('id', $inscriptions_pdg->pluck('semestre_id')->unique())->get();
+
+        $programme =
+            $semestres->map(function ($semestre) use ($id) {
+                return [
+                    'semestre' => $semestre->lib_semestre_fr,
+                    "elements" => InscriptionPdg::where('semestre_id', $semestre->id)
+                    ->where('etudiant_id', $id)->get()->map(function ($inscription) {
+                        return [
+                            'module' => $inscription->module->nom ?? ($inscription->matiere->nom ?? 'N/A'),
+                            'elements' => $inscription->element_id ?? 'N/A',
+                            'volume_horaire' => $inscription->nb_heure ? $inscription->nb_heure . 'h' : 'N/A',
+                            'credits' => $inscription->credit ?? 'N/A',
+                            'volume_horaire_numeric' => $inscription->nb_heure ?? 0,
+                            'credits_numeric' => $inscription->credit ?? 0,
+                        ];
+                    })->toArray(),
+                ];
+            })->toArray();
+        return view('pages.etudiants.export-attestation', compact('institution', 'etudiant', 'annee', 'programme'));
     }
 
     // emplois etudiant

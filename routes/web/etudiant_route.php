@@ -20,7 +20,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'etudiants'], function () {
     // importer
     Route::get('/importer/etudiants', [EtudiantController::class, 'importer'])->name('etudiants.importer');
     Route::post('/importer/etudiants', [EtudiantController::class, 'importerStore'])->name('etudiants.importer.store');
-    Route::get('/image/{id}', [EtudiantController::class, 'getImage']);
+    Route::get('/image/{id}', [EtudiantController::class, 'getImage'])->name('etudiants.image');
     // attestation pdf etudiant
 
     // emplois etudiant
@@ -71,8 +71,7 @@ Route::group(['prefix' => 'bacheliers'], function () {
 
 });
 Route::group(['prefix' => 'etudiants'], function () {
-Route::get('/{id}/attestation', [EtudiantController::class, 'attestation'])->name('etudiants.attestation');
-
+  Route::get('/{id}/attestation', [EtudiantController::class, 'attestation'])->name('etudiants.attestation');
 });
 
 
