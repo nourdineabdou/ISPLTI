@@ -197,7 +197,7 @@
         </table>
         <div class="muted">* Programme conforme au référentiel de formation de l'établissement.</div>
     </section>
-
+    {{--
     <section class="bloc">
         <div class="grid-2">
             <div>
@@ -210,6 +210,7 @@
             </div>
         </div>
     </section>
+    --}}
 
     <div class="footer">
         <div style="width:52%;">
