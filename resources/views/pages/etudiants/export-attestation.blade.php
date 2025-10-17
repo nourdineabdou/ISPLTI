@@ -76,9 +76,8 @@
     <section class="bloc" style="position:relative;">
         {{-- Photo de l'étudiant positionnée en haut à droite --}}
         <div style="position:absolute; top:8px; right:8px; text-align:center;">
-            @if(!empty($etudiant['photo_url']))
-                <img src="{{ $etudiant['photo_url'] }}" alt="Photo {{ $etudiant['nom'] }}" class="student-photo">
-            @elseif(!empty($etudiant['id']))
+
+            @if(!empty($etudiant['id']))
                 <img src="{{ route('etudiants.image', $etudiant['id']) }}" alt="Photo {{ $etudiant['nom'] }}" class="student-photo">
             @else
                 <div class="student-photo" style="display:flex; align-items:center; justify-content:center; color:#999; font-size:9pt; text-align:center;">
