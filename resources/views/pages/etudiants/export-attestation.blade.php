@@ -217,7 +217,12 @@
             <div class="who">Le/La Directeur·trice / Service de la Scolarité</div>
         </div>
         <div style="width:46%; text-align:right;">
-            {{-- QR éventuel ici --}}
+            {{-- QR Code pour le site ISPLTI --}}
+            <div style="text-align:center;">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://isplti.mr/"
+                     alt="QR Code ISPLTI"
+                     style="width:80px; height:80px; border:1px solid #ddd;">
+            </div>
         </div>
     </div>
 
