@@ -112,14 +112,14 @@
                     </div>
                 </div>
             </div>
+            <p class="parag" style="margin-top:2px; line-height:1.4;">
+                est inscrit administrativement
+                en formation initiale <strong>{{ $etudiant['formation'] ?? 'licence professionnelle' }}</strong>
+                niveau <strong>{{ $etudiant['niveau'] ?? '1' }}</strong>,
+                <strong>{{ $etudiant['tronc_commun'] ?? 'Tronc commun Langues' }}</strong> et pédagogiquement aux semestres, modules et éléments ci-dessous,
+                combinaison majeure : <strong>{{ $etudiant['combinaison_majeure'] ?? 'Anglais – Arabe' }}</strong>
+            </p>
         </div>
-        <p class="parag" style="margin-top:2px; line-height:1.4;">
-            est inscrit administrativement
-            en formation initiale <strong>{{ $etudiant['formation'] ?? 'licence professionnelle' }}</strong>
-            niveau <strong>{{ $etudiant['niveau'] ?? '1' }}</strong>,
-            <strong>{{ $etudiant['tronc_commun'] ?? 'Tronc commun Langues' }}</strong> et pédagogiquement aux semestres, modules et éléments ci-dessous,
-            combinaison majeure : <strong>{{ $etudiant['combinaison_majeure'] ?? 'Anglais – Arabe' }}</strong>
-        </p>
 
         {{-- Numéro de référence en bas à droite
         <div style="text-align:right; margin-top:20px; font-size:14pt; font-weight:700; color:#1a365d;">
