@@ -73,13 +73,28 @@
     <h2>Attestation d'inscription</h2>
     <div class="subtitle">Année universitaire {{ $annee ?? '2025-2026' }}</div>
 
-    <section class="bloc">
-        <p class="parag" style="margin-bottom:4px;">
-            Le Directeur de l'Institut Supérieur Professionnel de Langues, de Traduction et d'Interprétariat,<br>
-            <strong>atteste que l'étudiant(e) :</strong>
-        </p>
-        <div class="grid-with-photo" style="margin-bottom:2px;">
-            <div>
+    <section class="bloc" style="position:relative;">
+        {{-- Photo de l'étudiant positionnée en haut à droite --}}
+        <div style="position:absolute; top:8px; right:8px; text-align:center;">
+            @if(!empty($etudiant['photo_url']))
+                <img src="{{ $etudiant['photo_url'] }}" alt="Photo {{ $etudiant['nom'] }}" class="student-photo">
+            @elseif(!empty($etudiant['id']))
+                <img src="{{ route('etudiants.image', $etudiant['id']) }}" alt="Photo {{ $etudiant['nom'] }}" class="student-photo">
+            @else
+                <div class="student-photo" style="display:flex; align-items:center; justify-content:center; color:#999; font-size:9pt; text-align:center;">
+                    Photo<br>étudiant
+                </div>
+            @endif
+            <div style="font-size:8pt; color:#666; margin-top:4px;">Photo officielle</div>
+        </div>
+
+        {{-- Contenu principal avec marge pour éviter la superposition avec la photo --}}
+        <div style="margin-right:130px;">
+            <p class="parag" style="margin-bottom:4px;">
+                Le Directeur de l'Institut Supérieur Professionnel de Langues, de Traduction et d'Interprétariat,<br>
+                <strong>atteste que l'étudiant(e) :</strong>
+            </p>
+            <div style="margin-bottom:2px;">
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; margin-bottom:6px;">
                     <div>
                         <span class="label">Mr (Mme) :</span> <span class="val">{{ $etudiant['nom']  }}</span>
@@ -97,20 +112,6 @@
                         <span class="label">Numéro d'inscription :</span> <span class="val">{{ $etudiant['numero_inscription'] ?? '24-25/1099' }}</span>
                     </div>
                 </div>
-            </div>
-
-            {{-- Photo de l'étudiant --}}
-            <div style="text-align:center;">
-                @if(!empty($etudiant['photo_url']))
-                    <img src="{{ $etudiant['photo_url'] }}" alt="Photo {{ $etudiant['nom'] }}" class="student-photo">
-                @elseif(!empty($etudiant['id']))
-                    <img src="{{ route('etudiants.image', $etudiant['id']) }}" alt="Photo {{ $etudiant['nom'] }}" class="student-photo">
-                @else
-                    <div class="student-photo" style="display:flex; align-items:center; justify-content:center; color:#999; font-size:9pt; text-align:center;">
-                        Photo<br>étudiant
-                    </div>
-                @endif
-                <div style="font-size:8pt; color:#666; margin-top:4px;">Photo officielle</div>
             </div>
         </div>
         <p class="parag" style="margin-top:2px; line-height:1.4;">
