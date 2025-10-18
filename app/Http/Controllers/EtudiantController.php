@@ -342,6 +342,7 @@ public function getImage($id)
                             'credits' => $inscription->credit ?? 'N/A',
                             'volume_horaire_numeric' => $inscription->nb_heure ?? 0,
                             'credits_numeric' => $inscription->credit ?? 0,
+                            'matiere' => $inscription->matiere->nom ?? 'N/A',
                         ];
                     })->toArray(),
                 ];
