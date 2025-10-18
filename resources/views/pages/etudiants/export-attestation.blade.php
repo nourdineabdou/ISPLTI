@@ -158,7 +158,7 @@
                                     </td>
                                 @endif
                                 <td style="font-size:7pt;">{{ $element['module'] ?? '' }}</td>
-                                <td style="font-size:7pt;">{{ 'Grammaire anglaise, Expression orale UUUUUUUUU'. $element['element']  }}</td>
+                                <td style="font-size:7pt;">{{  $element['matiere'] }} {{ $element['element']  }}</td>
                                 <td style="text-align:center; font-size:7pt;">{{ $element['volume_horaire'] ?? '' }}</td>
                                 <td style="text-align:center; font-size:7pt;">{{ $element['credits'] ?? '' }}</td>
                             </tr>
@@ -227,8 +227,8 @@
                 Cette attestation lui est délivrée pour servir et valoir ce que de droit
             </div>
         </div>
+        {{--
         <div style="width:50%; text-align:right;">
-            {{-- Cachet et signature à droite --}}
             <div style="display:flex; justify-content:flex-end; gap:10px; align-items:flex-end;">
                 @if(file_exists(public_path('cacher.jpeg')))
                     <div style="text-align:center;">
@@ -244,6 +244,7 @@
                 @endif
             </div>
         </div>
+        --}}
     </div>
 
     {{-- Auto-ouvrir la boîte d’impression (optionnel) --}}
