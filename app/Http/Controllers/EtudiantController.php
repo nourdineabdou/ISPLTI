@@ -336,7 +336,7 @@ public function getImage($id)
                     "elements" => InscriptionPdg::where('semestre_id', $semestre->id)
                     ->where('etudiant_id', $id)->get()->map(function ($inscription) {
                         return [
-                            'module' => $inscription->module->nom ?? ($inscription->matiere->nom ?? 'N/A'),
+                            'module' => $inscription->module->nom ?? 'N/A',
                             'elements' => $inscription->element_id ?? 'N/A',
                             'volume_horaire' => $inscription->nb_heure ? $inscription->nb_heure . 'h' : 'N/A',
                             'credits' => $inscription->credit ?? 'N/A',
