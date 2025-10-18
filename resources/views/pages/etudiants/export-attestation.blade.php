@@ -197,6 +197,7 @@
         </table>
         <div class="muted">* Programme conforme au référentiel de formation de l'établissement.</div>
     </section>
+
     {{--
     <section class="bloc">
         <div class="grid-2">
@@ -213,21 +214,37 @@
     --}}
 
     <div class="footer">
-        <div style="width:52%;">
-            <div class="line"></div>
-            <div class="who">Le/La Directeur·trice / Service de la Scolarité</div>
-        </div>
-        <div style="width:46%; text-align:right;">
-            {{-- QR Code pour le site ISPLTI --}}
-            <div style="text-align:center;">
+        <div style="width:30%;">
+            {{-- QR Code à gauche --}}
+            <div style="text-align:left;">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://isplti.mr/"
                      alt="QR Code ISPLTI"
                      style="width:80px; height:80px; border:1px solid #ddd;">
+                <div style="font-size:6pt; color:#666; margin-top:2px;">isplti.mr</div>
+            </div>
+        </div>
+        <div style="width:35%; text-align:center;">
+            <div class="line"></div>
+            <div class="who">Cette attestation lui est délivrée pour servir et valoir ce que de droit</div>
+        </div>
+        <div style="width:35%; text-align:right;">
+            {{-- Cachet et signature à droite --}}
+            <div style="display:flex; justify-content:flex-end; gap:10px; align-items:flex-end;">
+                @if(file_exists(public_path('cacher.jpeg')))
+                    <div style="text-align:center;">
+                        <img src="{{ asset('cacher.jpeg') }}" alt="Cachet officiel"
+                             style="width:70px; height:70px; object-fit:contain; mix-blend-mode:multiply; opacity:0.8; background:transparent;">
+                    </div>
+                @endif
+                @if(file_exists(public_path('signatur.jpeg')))
+                    <div style="text-align:center;">
+                        <img src="{{ asset('signatur.jpeg') }}" alt="Signature"
+                             style="width:80px; height:60px; object-fit:contain; mix-blend-mode:multiply; opacity:0.9; background:transparent; filter:contrast(1.2);">
+                    </div>
+                @endif
             </div>
         </div>
     </div>
-
-    <div class="stamp">Cachet officiel</div>
 
     {{-- Auto-ouvrir la boîte d’impression (optionnel) --}}
     <script>
