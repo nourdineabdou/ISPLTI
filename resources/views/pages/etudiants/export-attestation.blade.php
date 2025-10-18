@@ -165,25 +165,6 @@
                             </tr>
                         @endforeach
                     @endforeach
-                @else
-                    {{-- Exemple de données par défaut pour 16 matières --}}
-                    <tr><td style="text-align:center; font-size:7pt;" rowspan="8">S1</td><td style="font-size:7pt;">Langue Anglaise I</td><td style="font-size:7pt;">Grammaire anglaise, Expression orale</td><td style="text-align:center; font-size:7pt;">60h</td><td style="text-align:center; font-size:7pt;">6</td></tr>
-                    <tr><td style="font-size:7pt;">Langue Arabe I</td><td style="font-size:7pt;">Grammaire arabe, Expression écrite</td><td style="text-align:center; font-size:7pt;">60h</td><td style="text-align:center; font-size:7pt;">6</td></tr>
-                    <tr><td style="font-size:7pt;">Méthodologie</td><td style="font-size:7pt;">Techniques de recherche</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
-                    <tr><td style="font-size:7pt;">Informatique I</td><td style="font-size:7pt;">Bureautique, Internet</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
-                    <tr><td style="font-size:7pt;">Culture Générale I</td><td style="font-size:7pt;">Histoire, Géographie</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
-                    <tr><td style="font-size:7pt;">Phonétique I</td><td style="font-size:7pt;">Sons anglais, Transcription</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
-                    <tr><td style="font-size:7pt;">Littérature I</td><td style="font-size:7pt;">Poésie, Roman</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
-                    <tr><td style="font-size:7pt;">Traduction I</td><td style="font-size:7pt;">Techniques de base</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
-
-                    <tr><td style="text-align:center; font-size:7pt;" rowspan="8">S2</td><td style="font-size:7pt;">Langue Anglaise II</td><td style="font-size:7pt;">Syntaxe, Expression écrite</td><td style="text-align:center; font-size:7pt;">60h</td><td style="text-align:center; font-size:7pt;">6</td></tr>
-                    <tr><td style="font-size:7pt;">Langue Arabe II</td><td style="font-size:7pt;">Rhétorique, Poésie classique</td><td style="text-align:center; font-size:7pt;">60h</td><td style="text-align:center; font-size:7pt;">6</td></tr>
-                    <tr><td style="font-size:7pt;">Linguistique</td><td style="font-size:7pt;">Morphologie, Sémantique</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
-                    <tr><td style="font-size:7pt;">Informatique II</td><td style="font-size:7pt;">Outils de traduction</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
-                    <tr><td style="font-size:7pt;">Culture Générale II</td><td style="font-size:7pt;">Civilisation, Art</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
-                    <tr><td style="font-size:7pt;">Phonétique II</td><td style="font-size:7pt;">Prosodie, Intonation</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
-                    <tr><td style="font-size:7pt;">Littérature II</td><td style="font-size:7pt;">Théâtre, Critique</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
-                    <tr><td style="font-size:7pt;">Traduction II</td><td style="font-size:7pt;">Pratique avancée</td><td style="text-align:center; font-size:7pt;">30h</td><td style="text-align:center; font-size:7pt;">3</td></tr>
                 @endif
             </tbody>
             @if(!empty($programme) && is_array($programme))
