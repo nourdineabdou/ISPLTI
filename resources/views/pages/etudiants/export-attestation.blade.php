@@ -158,6 +158,7 @@
                                     </td>
                                 @endif
                                 <td style="font-size:7pt;">{{ $element['module'] ?? '' }}</td>
+                                @dd($element['element'])
                                 <td style="font-size:7pt;">{{  $element['matiere'] }} {{ $element['element']  }}</td>
                                 <td style="text-align:center; font-size:7pt;">{{ $element['volume_horaire'] ?? '' }}</td>
                                 <td style="text-align:center; font-size:7pt;">{{ $element['credits'] ?? '' }}</td>
