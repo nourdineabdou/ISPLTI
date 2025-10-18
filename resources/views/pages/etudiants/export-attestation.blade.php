@@ -158,7 +158,7 @@
                                     </td>
                                 @endif
                                 <td style="font-size:7pt;">{{ $element['module'] ?? '' }}</td>
-                                <td style="font-size:7pt;">{{ $element['matiere'] ?? '' }}</td>
+                                <td style="font-size:7pt;">{{  $element['matiere'] ?? '' }} {{ $element['element'] ?? '' }}</td>
                                 <td style="text-align:center; font-size:7pt;">{{ $element['volume_horaire'] ?? '' }}</td>
                                 <td style="text-align:center; font-size:7pt;">{{ $element['credits'] ?? '' }}</td>
                             </tr>
@@ -214,7 +214,7 @@
     --}}
 
     <div class="footer">
-        <div style="width:30%;">
+        <div style="width:50%;">
             {{-- QR Code à gauche --}}
             <div style="text-align:left;">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://isplti.mr/"
@@ -222,12 +222,12 @@
                      style="width:80px; height:80px; border:1px solid #ddd;">
                 <div style="font-size:6pt; color:#666; margin-top:2px;">isplti.mr</div>
             </div>
+            {{-- Texte officiel en bas --}}
+            <div style="font-size:8pt; color:#555; margin-top:10px; line-height:1.3;">
+                Cette attestation lui est délivrée pour servir et valoir ce que de droit
+            </div>
         </div>
-        <div style="width:35%; text-align:center;">
-            <div class="line"></div>
-            <div class="who">Cette attestation lui est délivrée pour servir et valoir ce que de droit</div>
-        </div>
-        <div style="width:35%; text-align:right;">
+        <div style="width:50%; text-align:right;">
             {{-- Cachet et signature à droite --}}
             <div style="display:flex; justify-content:flex-end; gap:10px; align-items:flex-end;">
                 @if(file_exists(public_path('cacher.jpeg')))
