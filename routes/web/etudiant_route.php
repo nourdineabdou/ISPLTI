@@ -20,7 +20,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'etudiants'], function () {
     // importer
     Route::get('/importer/etudiants', [EtudiantController::class, 'importer'])->name('etudiants.importer');
     Route::post('/importer/etudiants', [EtudiantController::class, 'importerStore'])->name('etudiants.importer.store');
-    Route::get('/image/{id}', [EtudiantController::class, 'getImage'])->name('etudiants.image');
     // attestation pdf etudiant
 
     // emplois etudiant
@@ -56,7 +55,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'bacheliers'], function () {
     Route::get('/importer/bacheliers', [BachelierController::class, 'importer'])->name('bacheliers.importer');
     Route::post('/importer/bacheliers', [BachelierController::class, 'importerStore'])->name('bacheliers.importer.store');
     Route::post('/exporter/bacheliers', [BachelierController::class, 'exporterStore'])->name('bacheliers.exporter.store');
-    Route::get('/image/{id}', [BachelierController::class, 'getImage']);
+
     // import et export excel
     Route::post('/import', [BachelierController::class, 'import'])->name('bacheliers.import');
     Route::get('/export', [BachelierController::class, 'export'])->name('bacheliers.export');
@@ -67,10 +66,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'bacheliers'], function () {
     Route::get('/{id}/exporter_dossier', [BachelierController::class, 'downloadFolder'])->name('bacheliers.exporter_dossier');
 });
 Route::group(['prefix' => 'bacheliers'], function () {
+     Route::get('/image/{id}', [BachelierController::class, 'getImage'])->name('bacheliers.image');
     Route::get('/{id}/attestation', [BachelierController::class, 'attestation'])->name('bacheliers.attestation');
 
 });
 Route::group(['prefix' => 'etudiants'], function () {
+    Route::get('/image/{id}', [EtudiantController::class, 'getImage'])->name('etudiants.image');
   Route::get('/{id}/attestation', [EtudiantController::class, 'attestation'])->name('etudiants.attestation');
 });
 
