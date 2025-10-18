@@ -69,7 +69,6 @@
             <div class="service">مصلحة الشؤون الطلابية</div>
         </div>
     </header>
-
     <h2>Attestation d'inscription</h2>
     <div class="subtitle">Année universitaire {{ $annee ?? '2025-2026' }}</div>
 
@@ -84,9 +83,7 @@
                     Photo<br>étudiant
                 </div>
             @endif
-            <div style="font-size:8pt; color:#666; margin-top:4px;">Photo officielle</div>
         </div>
-
         {{-- Contenu principal avec marge pour éviter la superposition avec la photo --}}
         <div style="margin-right:130px;">
             <p class="parag" style="margin-bottom:4px;">
@@ -120,7 +117,6 @@
                 combinaison majeure : <strong>{{ $etudiant['combinaison_majeure'] ?? 'Anglais – Arabe' }}</strong>
             </p>
         </div>
-
         {{-- Numéro de référence en bas à droite
         <div style="text-align:right; margin-top:20px; font-size:14pt; font-weight:700; color:#1a365d;">
             {{ $etudiant['id'] ?? '1099' }}
@@ -129,7 +125,9 @@
     </section>
 
     <section class="bloc">
+        {{--
         <div class="label" style="margin-bottom:10px; font-weight:700; color:#1a365d;">Programme d'enseignement</div>
+        --}}
         <table>
             <thead>
                 <tr>
@@ -158,7 +156,6 @@
                                     </td>
                                 @endif
                                 <td style="font-size:7pt;">{{ $element['module'] ?? '' }}</td>
-
                                 <td style="font-size:7pt;">{{  $element['matiere'] }} {{ $element['element']  }}</td>
                                 <td style="text-align:center; font-size:7pt;">{{ $element['volume_horaire'] ?? '' }}</td>
                                 <td style="text-align:center; font-size:7pt;">{{ $element['credits'] ?? '' }}</td>
@@ -177,7 +174,9 @@
                 </tfoot>
             @endif
         </table>
+        {{--
         <div class="muted">* Programme conforme au référentiel de formation de l'établissement.</div>
+        --}}
     </section>
 
     {{--
@@ -202,7 +201,6 @@
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://isplti.mr/"
                      alt="QR Code ISPLTI"
                      style="width:80px; height:80px; border:1px solid #ddd;">
-                <div style="font-size:6pt; color:#666; margin-top:2px;">isplti.mr</div>
             </div>
             {{-- Texte officiel en bas --}}
             <div style="font-size:8pt; color:#555; margin-top:10px; line-height:1.3;">
