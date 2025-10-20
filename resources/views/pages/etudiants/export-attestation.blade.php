@@ -139,6 +139,10 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $volumeHoraireNumeric = 0;
+                    $creditsNumeric = 0;
+                @endphp
                 {{-- Boucle sur les semestres et leurs éléments --}}
                 @if(!empty($programme) && is_array($programme))
                     @foreach($programme as $semestre)
