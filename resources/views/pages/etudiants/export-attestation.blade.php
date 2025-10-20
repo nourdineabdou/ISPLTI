@@ -10,9 +10,9 @@
 <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
-    body { font-family: "DejaVu Sans", Arial, sans-serif; color: #111; font-size: 10pt; line-height: 1.35; }
-    @page { size: A4; margin: 16mm; }
-    .brand { display:flex; align-items:flex-start; justify-content:space-between; border-bottom:3px solid #1a365d; padding-bottom:15px; margin-bottom:15px; }
+    body { font-family: "DejaVu Sans", Arial, sans-serif; color: #111; font-size: 9pt; line-height: 1.25; }
+    @page { size: A4; margin: 12mm; }
+    .brand { display:flex; align-items:flex-start; justify-content:space-between; border-bottom:2px solid #1a365d; padding-bottom:10px; margin-bottom:10px; }
     .logo { width:100px; height:100px; object-fit:contain; align-self:center; }
     .header-fr { flex:1; text-align:left; font-size:7pt; line-height:1.4; }
     .header-ar { flex:1; text-align:right; direction:rtl; font-family:"Arial Unicode MS", "Tahoma", sans-serif; font-size:7pt; line-height:1.4; }
@@ -21,19 +21,19 @@
     .ministry { font-weight:600; color:#2d3748; margin-bottom:3px; }
     .institute { font-weight:700; color:#1a365d; margin-bottom:3px; }
     .service { color:#555; }
-    h2 { text-align:center; font-size:16pt; margin:16px 0 8px; text-transform:uppercase; letter-spacing:1px; }
-    .subtitle { text-align:center; color:#666; margin-bottom:10px; }
-    .bloc { border:1px solid #e9e9e9; border-radius:6px; background:#fafafa; padding:8px; margin-top:6px; }
-    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:6px 12px; }
-    .grid-with-photo { display:grid; grid-template-columns:1fr 120px; gap:10px; align-items:start; }
+    h2 { text-align:center; font-size:14pt; margin:10px 0 6px; text-transform:uppercase; letter-spacing:1px; }
+    .subtitle { text-align:center; color:#666; margin-bottom:6px; }
+    .bloc { border:1px solid #e9e9e9; border-radius:4px; background:#fafafa; padding:6px; margin-top:4px; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:4px 8px; }
+    .grid-with-photo { display:grid; grid-template-columns:1fr 120px; gap:8px; align-items:start; }
     .student-photo { width:120px; height:150px; object-fit:cover; border:2px solid #e5e5e5; border-radius:8px; background:#f8f8f8; }
-    .label{ color:#666; font-size:8pt; }
+    .label{ color:#666; font-size:7pt; }
     .val{ font-weight:600; }
-    table { width:100%; border-collapse:collapse; font-size:8pt; margin-top:6px; }
-    th, td { border:1px solid #e5e5e5; padding:4px 6px; text-align:left; line-height:1.2; }
+    table { width:100%; border-collapse:collapse; font-size:7pt; margin-top:4px; }
+    th, td { border:1px solid #e5e5e5; padding:2px 4px; text-align:left; line-height:1.1; }
     th { background:#f5f5f5; font-weight:600; }
-    .parag{ margin-top:12px; text-align:justify; }
-    .footer{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:15mm; }
+    .parag{ margin-top:6px; text-align:justify; }
+    .footer{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:10mm; }
     .line{ height:50px; border-bottom:1px dashed #bbb; margin-bottom:4px; }
     .who{ font-size:7pt; color:#555; }
     .muted{ color:#777; font-size:7pt; margin-top:4px; }
@@ -152,17 +152,17 @@
                             $elementCount = count($elements);
                         @endphp
 
-                        @foreach($elements as $index => $element)
+                                                @foreach($elements as $index => $element)
                             <tr>
                                 @if($index === 0)
-                                    <td style="text-align:center; vertical-align:top; font-weight:600; border-right:2px solid #1a365d; font-size:7pt;" rowspan="{{ $elementCount }}">
+                                    <td style="text-align:center; vertical-align:top; font-weight:600; border-right:2px solid #1a365d; font-size:6pt; padding:1px 3px;" rowspan="{{ $elementCount }}">
                                         {{ $semestreName }}
                                     </td>
                                 @endif
-                                <td style="font-size:7pt;">{{ $element['module'] ?? '' }}</td>
-                                <td style="font-size:7pt;">{{ $element['element']  }} {{  $element['matiere'] }} </td>
-                                <td style="text-align:center; font-size:7pt;">{{ $element['volume_horaire']  }}</td>
-                                <td style="text-align:center; font-size:7pt;">{{ $element['credits']  }}</td>
+                                <td style="font-size:6pt; padding:1px 3px;">{{ $element['module'] ?? '' }}</td>
+                                <td style="font-size:6pt; padding:1px 3px;">{{ $element['element']  }} {{  $element['matiere'] }} </td>
+                                <td style="text-align:center; font-size:6pt; padding:1px 3px;">{{ $element['volume_horaire']  }}</td>
+                                <td style="text-align:center; font-size:6pt; padding:1px 3px;">{{ $element['credits']  }}</td>
                                 {{-- cumuler le volume horaire numeric --}}
                                 @php
                                     $volumeHoraireNumeric += $element['volume_horaire_numeric'] ?? 0;
