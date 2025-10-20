@@ -334,14 +334,14 @@ public function getImage($id)
                 return [
                     'semestre' => $semestre->lib_semestre_fr,
                     "elements" => InscriptionPdg::where('semestre_id', $semestre->id)
-                    ->where('etudiant_id', $id)->get()->map(function ($inscription) {
+                   ->where('etudiant_id', $id)->get()->map(function ($inscription) {
                         //dd();
                         return [
                             'module' => \App\Models\Module::find($inscription->module_id)->lib_module_fr,
                             'element' => $inscription->element_id ?? 'N/A',
-                            'volume_hosraire' => $inscription->nb_heure ? $inscription->nb_heure . 'h' : 0,
+                            'volume_horaire' => $inscription->nb_heure . 'h',
                             'credits' => $inscription->credit ?? 'N/A',
-                            'volume_horaire_numeric' => $inscription->nb_heure ?? 0,
+                            'volume_horaire_numeric' => $inscription->nb_heure ,
                             'credits_numeric' => $inscription->credit ?? 0,
                             'matiere' => $inscription->matiere->lib_element_fr ?? 'N/A',
                         ];

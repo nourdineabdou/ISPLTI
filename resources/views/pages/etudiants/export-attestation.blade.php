@@ -157,8 +157,8 @@
                                 @endif
                                 <td style="font-size:7pt;">{{ $element['module'] ?? '' }}</td>
                                 <td style="font-size:7pt;">{{ $element['element']  }} {{  $element['matiere'] }} </td>
-                                <td style="text-align:center; font-size:7pt;">{{ $element['volume_horaire'] ?? '' }}</td>
-                                <td style="text-align:center; font-size:7pt;">{{ $element['credits'] ?? '' }}</td>
+                                <td style="text-align:center; font-size:7pt;">{{ $element['volume_horaire']  }}</td>
+                                <td style="text-align:center; font-size:7pt;">{{ $element['credits']  }}</td>
                             </tr>
                         @endforeach
                     @endforeach
