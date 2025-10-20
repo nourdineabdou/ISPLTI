@@ -211,7 +211,7 @@
                 @if(file_exists(public_path('cacher.jpeg')))
                     <div style="text-align:center;">
                         <img src="{{ asset('cacher.jpeg') }}" alt="Cachet officiel"
-                             style="width:70px; height:70px; object-fit:contain; mix-blend-mode:multiply; opacity:0.8; background:transparent;">
+                             style="width:80px; height:80px; object-fit:contain; mix-blend-mode:multiply; opacity:0.8; background:transparent;">
                     </div>
                 @endif
                 {{--
