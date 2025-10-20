@@ -159,6 +159,11 @@
                                 <td style="font-size:7pt;">{{ $element['element']  }} {{  $element['matiere'] }} </td>
                                 <td style="text-align:center; font-size:7pt;">{{ $element['volume_horaire']  }}</td>
                                 <td style="text-align:center; font-size:7pt;">{{ $element['credits']  }}</td>
+                                {{-- cumuler le volume horaire numeric --}}
+                                @php
+                                    $volumeHoraireNumeric += $element['volume_horaire_numeric'] ?? 0;
+                                    $creditsNumeric += $element['credits_numeric'] ?? 0;
+                                @endphp
                             </tr>
                         @endforeach
                     @endforeach
@@ -168,8 +173,8 @@
                 <tfoot>
                     <tr style="background:#f0f8ff; font-weight:700;">
                         <td colspan="3" style="text-align:right; padding-right:20px;">Total :</td>
-                        <td style="text-align:center;">{{ collect($programme)->sum('volume_horaire_numeric') ?? '' }}h</td>
-                        <td style="text-align:center;">{{ collect($programme)->sum('credits_numeric') ?? '' }}</td>
+                        <td style="text-align:center;">{{ $volumeHoraireNumeric }} h</td>
+                        <td style="text-align:center;">{{ $creditsNumeric }}</td>
                     </tr>
                 </tfoot>
             @endif
