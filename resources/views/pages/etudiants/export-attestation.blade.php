@@ -125,9 +125,14 @@
     </section>
 
     <section class="bloc">
-        {{--
-        <div class="label" style="margin-bottom:10px; font-weight:700; color:#1a365d;">Programme d'enseignement</div>
-        --}}
+        {{-- Totaux en haut --}}
+        @if(!empty($programme) && is_array($programme))
+            <div style="display:flex; justify-content:flex-end; gap:20px; margin-bottom:6px; padding:4px 8px; background:#f0f8ff; border-radius:4px; font-size:8pt; font-weight:600; color:#1a365d;">
+                <div>Volume horaire : <strong>{{ $volumeHoraireNumeric }} h</strong></div>
+                <div>Crédits : <strong>{{ $creditsNumeric }}</strong></div>
+            </div>
+        @endif
+
         <table>
             <thead>
                 <tr>
@@ -139,10 +144,6 @@
                 </tr>
             </thead>
             <tbody>
-                @php
-                    $volumeHoraireNumeric = 0;
-                    $creditsNumeric = 0;
-                @endphp
                 {{-- Boucle sur les semestres et leurs éléments --}}
                 @if(!empty($programme) && is_array($programme))
                     @foreach($programme as $semestre)
@@ -164,24 +165,12 @@
                                 <td style="text-align:center; font-size:6pt; padding:1px 3px;">{{ $element['volume_horaire']  }}</td>
                                 <td style="text-align:center; font-size:6pt; padding:1px 3px;">{{ $element['credits']  }}</td>
                                 {{-- cumuler le volume horaire numeric --}}
-                                @php
-                                    $volumeHoraireNumeric += $element['volume_horaire_numeric'] ?? 0;
-                                    $creditsNumeric += $element['credits_numeric'] ?? 0;
-                                @endphp
+
                             </tr>
                         @endforeach
                     @endforeach
                 @endif
             </tbody>
-            @if(!empty($programme) && is_array($programme))
-                <tfoot>
-                    <tr style="background:#f0f8ff; font-weight:700;">
-                        <td colspan="3" style="text-align:right; padding-right:20px;">Total :</td>
-                        <td style="text-align:center;">{{ $volumeHoraireNumeric }} h</td>
-                        <td style="text-align:center;">{{ $creditsNumeric }}</td>
-                    </tr>
-                </tfoot>
-            @endif
         </table>
         {{--
         <div class="muted">* Programme conforme au référentiel de formation de l'établissement.</div>
@@ -216,7 +205,7 @@
                 Cette attestation lui est délivrée pour servir et valoir ce que de droit
             </div>
         </div>
-        {{--
+
         <div style="width:50%; text-align:right;">
             <div style="display:flex; justify-content:flex-end; gap:10px; align-items:flex-end;">
                 @if(file_exists(public_path('cacher.jpeg')))
@@ -225,15 +214,17 @@
                              style="width:70px; height:70px; object-fit:contain; mix-blend-mode:multiply; opacity:0.8; background:transparent;">
                     </div>
                 @endif
+                {{--
                 @if(file_exists(public_path('signatur.jpeg')))
                     <div style="text-align:center;">
                         <img src="{{ asset('signatur.jpeg') }}" alt="Signature"
                              style="width:80px; height:60px; object-fit:contain; mix-blend-mode:multiply; opacity:0.9; background:transparent; filter:contrast(1.2);">
                     </div>
                 @endif
+                --}}
             </div>
         </div>
-        --}}
+
     </div>
 
     {{-- Auto-ouvrir la boîte d’impression (optionnel) --}}

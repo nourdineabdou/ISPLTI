@@ -328,7 +328,8 @@ public function getImage($id)
         // Transformer les inscriptions PDG en programme d'enseignement
         // recuperer les  deux semestres
         $semestres = Semestre::whereIn('id', $inscriptions_pdg->pluck('semestre_id')->unique())->get();
-
+        $volumeHoraireNumeric = InscriptionPdg::where('etudiant_id', $id)->sum('nb_heure');
+        $creditsNumeric = InscriptionPdg::where('etudiant_id', $id)->sum('credit');
         $programme =
             $semestres->map(function ($semestre) use ($id) {
                 return [
@@ -348,7 +349,8 @@ public function getImage($id)
                     })->toArray(),
                 ];
             })->toArray();
-        return view('pages.etudiants.export-attestation', compact('institution', 'etudiant', 'annee', 'programme'));
+        return view('pages.etudiants.export-attestation', compact('institution', 'etudiant', 'annee', 'programme'
+        , 'volumeHoraireNumeric', 'creditsNumeric'));
     }
 
     // emplois etudiant
