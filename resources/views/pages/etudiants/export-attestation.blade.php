@@ -193,38 +193,32 @@
     --}}
 
     <div class="footer">
-        <div style="width:50%;">
-            {{-- QR Code à gauche --}}
-            <div style="text-align:left;">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://isplti.mr/"
-                     alt="QR Code ISPLTI"
-                     style="width:80px; height:80px; border:1px solid #ddd;">
-            </div>
-            {{-- Texte officiel en bas --}}
-            <div style="font-size:8pt; color:#555; margin-top:10px; line-height:1.3;">
-                Cette attestation lui est délivrée pour servir et valoir ce que de droit
-            </div>
+        {{-- QR Code totalement à gauche --}}
+        <div style="text-align:left;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://isplti.mr/"
+                 alt="QR Code ISPLTI"
+                 style="width:80px; height:80px; border:1px solid #ddd;">
         </div>
 
-        <div style="width:50%; text-align:right;">
-            <div style="display:flex; justify-content:flex-end; gap:10px; align-items:flex-end;">
-                @if(file_exists(public_path('cacher.jpeg')))
-                    <div style="text-align:center;">
-                        <img src="{{ asset('cacher.jpeg') }}" alt="Cachet officiel"
-                             style="width:80px; height:80px; object-fit:contain; mix-blend-mode:multiply; opacity:0.8; background:transparent;">
-                    </div>
-                @endif
-                {{--
-                @if(file_exists(public_path('signatur.jpeg')))
-                    <div style="text-align:center;">
-                        <img src="{{ asset('signatur.jpeg') }}" alt="Signature"
-                             style="width:80px; height:60px; object-fit:contain; mix-blend-mode:multiply; opacity:0.9; background:transparent; filter:contrast(1.2);">
-                    </div>
-                @endif
-                --}}
-            </div>
+        {{-- Cachet totalement à droite --}}
+        <div style="text-align:right;">
+            @if(file_exists(public_path('cacher.jpeg')))
+                <img src="{{ asset('cacher.jpeg') }}" alt="Cachet officiel"
+                     style="width:80px; height:80px; object-fit:contain; mix-blend-mode:multiply; opacity:0.8; background:transparent;">
+            @endif
+            {{--
+            @if(file_exists(public_path('signatur.jpeg')))
+                <img src="{{ asset('signatur.jpeg') }}" alt="Signature"
+                     style="width:80px; height:60px; object-fit:contain; mix-blend-mode:multiply; opacity:0.9; background:transparent; filter:contrast(1.2);">
+            @endif
+            --}}
         </div>
 
+    </div>
+
+    {{-- Texte officiel en dernier --}}
+    <div style="font-size:8pt; color:#555; margin-top:15px; line-height:1.3; right:0;">
+        Cette attestation lui est délivrée pour servir et valoir ce que de droit
     </div>
 
     {{-- Auto-ouvrir la boîte d’impression (optionnel) --}}
