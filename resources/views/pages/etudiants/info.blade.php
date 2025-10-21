@@ -290,7 +290,7 @@
                                                 <i class="bi bi-mortarboard-fill text-primary me-2 fs-5"></i>
                                                 <div>
                                                     <small class="text-muted text-uppercase fw-semibold">Niveau d'inscription</small>
-                                                    <div class="fw-bold">{{ $niveau }}  {{ $formation }}</div>
+                                                    <div class="fw-bold"> {{ $formation }}</div>
                                                 </div>
                                             </div>
                                         </div>
