@@ -34,8 +34,17 @@
                                     </div>
                                         <!-- Bloc Liens Téléchargement PDF -->
                                         <div class="row justify-content-center g-3 mt-4">
+                                            {{-- A V I S D’ P R O L O N G A T I O N D E S I N S C R I P T I O N S --}}
+
                                             <div class="col-md-3 col-6">
-                                            <a href="{{ asset('pdfs/avis_inscription.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                <a href="{{ asset('pdfs/prolongement.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.prolongement_inscription')</div>
+                                                </a>
+                                            </div>
+
+                                            <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/avis_inscription.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
                                                     <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
                                                     <div class="fw-bold">@lang('system.avis_insc')</div>
                                                 </a>
