@@ -175,7 +175,6 @@ return [
   // Footer / site labels (ajout باللغة العربية)
   'Description_courte' => 'ISPLTI - المعهد العالي المهني المتخصص في اللغات والترجمة والترجمة الفورية.',
   'Administrations' => 'الإدارة',
-  'Directeur' => 'المدير',
   'Secretaire_general' => 'الأمين العام',
   'Services' => 'الخدمات',
   'Service_financier' => 'الإدارة المالية',
@@ -452,4 +451,5 @@ return [
     'en' => 'English',
 'avis_insc' => "إعـــــــلان  التسجيل",
 "avis_resc" => "إعـــــــلان إعادة التسجيل",
+"prolongement_inscription"=>"اعلان تمديد التسجيل"
 ];

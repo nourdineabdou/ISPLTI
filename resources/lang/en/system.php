@@ -457,4 +457,7 @@ return [
 
 'avis_insc' => "Enrolment notice",
   "avis_resc" => "Re-enrolment notice",
+  "prolongement_inscription" => "Extension of enrolment period",
+  'Directrice' => 'Director',
+
 ];

@@ -441,4 +441,7 @@ return [
   'ar' => 'عربية',
   'avis_insc' => "Avis d’inscription",
   "avis_resc" => "Avis de réinscription",
+  "prolongement_inscription"=>"Avis de prolongement d'inscription",
+  "Directeur" => "Directeur",
+  'Directrice' => 'Directrice',
 ];
