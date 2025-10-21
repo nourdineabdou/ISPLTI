@@ -220,7 +220,7 @@
                         <h1 class="display-6 mb-2 fw-bold" style="color: #1a202c; font-size: 2.5rem;">{{ $etudiant->nom_fr ?? ($etudiant->nom ?? 'Nom non renseigné') }}</h1>
                         <p class="mb-0 opacity-75">Institut Supérieur Professionnel de Langues, de Traduction & d'Interprétariat</p>
                         <span class="badge-status mt-3 d-inline-block">
-                            <i class="bi bi-check-circle me-1"></i>Étudiant(e) inscrit(e)
+                            <i class="bi bi-check-circle me-1"></i>Étudiant(e) inscrit(e) pour l'année 2024-2025
                         </span>
                     </div>
 
@@ -259,19 +259,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-12 col-md-6 mb-2">
-                                        <div class="info-item p-3 rounded">
-                                            <div class="d-flex align-items-center">
-                                                <i class="bi bi-telephone-fill text-primary me-2 fs-5"></i>
-                                                <div>
-                                                    <small class="text-muted text-uppercase fw-semibold">Téléphone</small>
-                                                    <div class="fw-bold">{{ $etudiant->telephone ?? 'Non renseigné' }}</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <div class="col-12 col-md-6 mb-2">
                                         <div class="info-item p-3 rounded">
                                             <div class="d-flex align-items-center">
@@ -307,7 +294,6 @@
                                 <div class="stats-card mb-4">
                                     <i class="bi bi-award fs-1 mb-3 d-block"></i>
                                     <h5 class="mb-2">Étudiant(e) Actif</h5>
-                                    <p class="mb-0 opacity-75">Inscription validée pour l'année {{ date('Y') }}-{{ date('Y')+1 }}</p>
                                 </div>
 
                                 <div class="card info-card">
