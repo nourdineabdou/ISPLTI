@@ -36,7 +36,8 @@ class EtudiantController extends Controller
 
         return view('pages.etudiants.info', [
             'etudiant' => $etudiant,
-            'niveau' => InscriptionAdm::where('etudiant_id', $id)->with('specialite')->first()->specialite->niveau ?? 'N/A',
+            'niveau' => InscriptionAdm::where('etudiant_id', $id)->with('specialite')->first()?->specialite?->niveau ?? 'N/A',
+            'formation' => InscriptionAdm::where('etudiant_id', $id)->with('specialite')->first()?->specialite?->lib_annee_diplome_fr ?? 'N/A'
         ]);
     }
 
