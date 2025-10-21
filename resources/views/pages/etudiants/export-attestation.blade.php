@@ -195,8 +195,8 @@
     <div class="footer">
         {{-- QR Code totalement à gauche --}}
         <div style="text-align:left;">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://isplti.mr/"
-                 alt="QR Code ISPLTI"
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data={{ urlencode(route('etudiants.info', $etudiant['id'] ?? 1)) }}"
+                 alt="QR Code Profil Étudiant"
                  style="width:80px; height:80px; border:1px solid #ddd;">
         </div>
 

@@ -27,6 +27,19 @@ use Illuminate\Support\Facades\Mail as Email;
 class EtudiantController extends Controller
 {
 
+    // informations etudiant
+
+    public function infoEtudiant($id)
+    {
+        $etudiant = Etudiant::findOrFail($id);
+        // view
+
+        return view('pages.etudiants.info', [
+            'etudiant' => $etudiant,
+            'niveau' => InscriptionAdm::where('etudiant_id', $id)->with('specialite')->first()->specialite->niveau ?? 'N/A',
+        ]);
+    }
+
     public function importerStore(Request $request)
     {
         $request->validate([

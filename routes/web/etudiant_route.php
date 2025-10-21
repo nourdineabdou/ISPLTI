@@ -73,6 +73,8 @@ Route::group(['prefix' => 'bacheliers'], function () {
 Route::group(['prefix' => 'etudiants'], function () {
     Route::get('/image/{id}', [EtudiantController::class, 'getImage'])->name('etudiants.image');
   Route::get('/{id}/attestation', [EtudiantController::class, 'attestation'])->name('etudiants.attestation');
+  // info etudiant par ajax
+  Route::get('/info/{id}', [EtudiantController::class, 'infoEtudiant'])->name('etudiants.info');
 });
 
 
