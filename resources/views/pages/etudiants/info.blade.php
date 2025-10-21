@@ -178,7 +178,7 @@
         .section-title {
             color: var(--primary-color);
             font-weight: 700;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             position: relative;
             padding-bottom: 0.5rem;
         }
@@ -217,15 +217,15 @@
                                 </div>
                             @endif
                         </div>
-                        <h1 class="h2 mb-2 fw-bold">{{ $etudiant->nom_fr ?? ($etudiant->nom ?? 'Nom non renseigné') }}</h1>
+                        <h1 class="display-6 mb-2 fw-bold" style="color: #1a202c; font-size: 2.5rem;">{{ $etudiant->nom_fr ?? ($etudiant->nom ?? 'Nom non renseigné') }}</h1>
                         <p class="mb-0 opacity-75">Institut Supérieur Professionnel de Langues, de Traduction & d'Interprétariat</p>
                         <span class="badge-status mt-3 d-inline-block">
-                            <i class="bi bi-check-circle me-1"></i>Étudiant inscrit
+                            <i class="bi bi-check-circle me-1"></i>Étudiant(e) inscrit(e)
                         </span>
                     </div>
 
                     <!-- Content Section -->
-                    <div class="p-4">
+                    <div class="p-3">
                         <div class="row">
                             <!-- Informations personnelles -->
                             <div class="col-12 col-lg-8">
@@ -234,7 +234,7 @@
                                 </h3>
 
                                 <div class="row">
-                                    <div class="col-12 col-md-6 mb-3">
+                                    <div class="col-12 col-md-6 mb-2">
                                         <div class="info-item p-3 rounded">
                                             <div class="d-flex align-items-center">
                                                 <i class="bi bi-geo-alt-fill text-primary me-2 fs-5"></i>
@@ -246,7 +246,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 col-md-6 mb-3">
+                                    <div class="col-12 col-md-6 mb-2">
                                         <div class="info-item p-3 rounded">
                                             <div class="d-flex align-items-center">
                                                 <i class="bi bi-calendar-event text-primary me-2 fs-5"></i>
@@ -260,7 +260,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 col-md-6 mb-3">
+                                    <div class="col-12 col-md-6 mb-2">
                                         <div class="info-item p-3 rounded">
                                             <div class="d-flex align-items-center">
                                                 <i class="bi bi-telephone-fill text-primary me-2 fs-5"></i>
@@ -272,7 +272,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 col-md-6 mb-3">
+                                    <div class="col-12 col-md-6 mb-2">
                                         <div class="info-item p-3 rounded">
                                             <div class="d-flex align-items-center">
                                                 <i class="bi bi-card-text text-primary me-2 fs-5"></i>
@@ -284,7 +284,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 col-md-6 mb-3">
+                                    <div class="col-12 col-md-6 mb-2">
                                         <div class="info-item p-3 rounded">
                                             <div class="d-flex align-items-center">
                                                 <i class="bi bi-mortarboard-fill text-primary me-2 fs-5"></i>
@@ -306,7 +306,7 @@
 
                                 <div class="stats-card mb-4">
                                     <i class="bi bi-award fs-1 mb-3 d-block"></i>
-                                    <h5 class="mb-2">Étudiant Actif</h5>
+                                    <h5 class="mb-2">Étudiant(e) Actif</h5>
                                     <p class="mb-0 opacity-75">Inscription validée pour l'année {{ date('Y') }}-{{ date('Y')+1 }}</p>
                                 </div>
 
