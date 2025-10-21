@@ -52,7 +52,9 @@
             <div class="motto">Honneur – Fraternité – Justice</div>
             <div class="ministry">Ministère de l'Enseignement Supérieur et de la Recherche Scientifique</div>
             <div class="institute">INSTITUT SUPÉRIEUR PROFESSIONNEL DE LANGUES, DE TRADUCTION & D'INTERPRÉTARIAT</div>
+            {{--
             <div class="service">SERVICE DES AFFAIRES ÉTUDIANTINES</div>
+            --}}
         </div>
 
         {{-- Logo au centre --}}
@@ -66,7 +68,7 @@
             <div class="motto">شرف – إخاء – عدل</div>
             <div class="ministry">وزارة التعليم العالي والبحث العلمي</div>
             <div class="institute">المعهد العالي المهني للغات وللترجمة والترجمة الفورية</div>
-            <div class="service">مصلحة الشؤون الطلابية</div>
+            {{-- <div class="service">مصلحة الشؤون الطلابية</div> --}}
         </div>
     </header>
     <h2>Attestation d'inscription</h2>
@@ -87,7 +89,7 @@
         {{-- Contenu principal avec marge pour éviter la superposition avec la photo --}}
         <div style="margin-right:130px;">
             <p class="parag" style="margin-bottom:4px;">
-                Le Directeur de l'Institut Supérieur Professionnel de Langues, de Traduction et d'Interprétariat,<br>
+                La Directrice de l'Institut Supérieur Professionnel de Langues, de Traduction et d'Interprétariat,<br>
                 <strong>atteste que l'étudiant(e) :</strong>
             </p>
             <div style="margin-bottom:2px;">
@@ -114,7 +116,7 @@
                 en formation initiale <strong>{{ $etudiant['formation']  }}</strong>
                 niveau <strong>{{ $etudiant['niveau'] ?? '1' }}</strong>,
                 <strong>{{ $etudiant['tronc_commun'] ?? 'Tronc commun Langues' }}</strong> et pédagogiquement aux semestres, modules et éléments ci-dessous,
-                combinaison majeure : <strong>{{ $etudiant['combinaison_majeure'] ?? 'Anglais – Arabe' }}</strong>
+
             </p>
         </div>
         {{-- Numéro de référence en bas à droite
@@ -193,19 +195,20 @@
     --}}
 
     <div class="footer">
-        {{-- QR Code totalement à gauche --}}
-        <div style="text-align:left;">
+        {{-- QR Code au centre --}}
+        <div style="text-align:center; width:100%;">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data={{ urlencode(route('etudiants.info', $etudiant['id'] ?? 1)) }}"
                  alt="QR Code Profil Étudiant"
                  style="width:80px; height:80px; border:1px solid #ddd;">
         </div>
 
-        {{-- Cachet totalement à droite --}}
+        {{-- Cachet totalement à droite
         <div style="text-align:right;">
             @if(file_exists(public_path('cacher.jpeg')))
                 <img src="{{ asset('cacher.jpeg') }}" alt="Cachet officiel"
                      style="width:80px; height:80px; object-fit:contain; mix-blend-mode:multiply; opacity:0.8; background:transparent;">
             @endif
+        --}}
             {{--
             @if(file_exists(public_path('signatur.jpeg')))
                 <img src="{{ asset('signatur.jpeg') }}" alt="Signature"
