@@ -220,7 +220,7 @@
                         <h1 class="display-6 mb-2 fw-bold" style="color: #1a202c; font-size: 2.5rem;">{{ $etudiant->nom_fr ?? ($etudiant->nom ?? 'Nom non renseigné') }}</h1>
                         <p class="mb-0 opacity-75">Institut Supérieur Professionnel de Langues, de Traduction & d'Interprétariat</p>
                         <span class="badge-status mt-3 d-inline-block">
-                            <i class="bi bi-check-circle me-1"></i>Étudiant(e) inscrit(e) pour l'année 2024-2025
+                            <i class="bi bi-check-circle me-1"></i>Étudiant(e) inscrit(e) pour l'année académique 2024-2025
                         </span>
                     </div>
 
