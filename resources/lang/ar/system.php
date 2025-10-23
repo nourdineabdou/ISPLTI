@@ -451,5 +451,6 @@ return [
     'en' => 'English',
 'avis_insc' => "إعـــــــلان  التسجيل",
 "avis_resc" => "إعـــــــلان إعادة التسجيل",
-"prolongement_inscription"=>"اعلان تمديد التسجيل"
+"prolongement_inscription"=>"اعلان تمديد التسجيل",
+"debut_cours"=> "اعلان بداية الدروس",
 ];

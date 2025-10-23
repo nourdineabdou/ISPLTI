@@ -459,5 +459,6 @@ return [
   "avis_resc" => "Re-enrolment notice",
   "prolongement_inscription" => "Extension of enrolment period",
   'Directrice' => 'Director',
+  'debut_cours'=>'Course start date',
 
 ];
