@@ -66,12 +66,37 @@ class EtudiantController extends Controller
         );
     }
 
+public function copier_dossiers_bacheliers()
+{
+    $dir = "bacheliers/temp";
+    $bacheliers = \App\Models\BachelierOrientation::where('inscription', 1)->get();
+    foreach($bacheliers as $bachelier){
+
+        $bachelierDir = $dir . "/temp-" . $bachelier->id;
+        $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
+        if ($etudiant && Storage::disk('local')->exists($bachelierDir)) {
+            $dir = "etudiants/temp-$etudiant->id";
+            // Créer le dossier s'il n'existe pas
+            if (!Storage::disk('local')->exists($dir)) {
+                Storage::disk('local')->makeDirectory($dir);
+            }
+            // Récupérer tous les fichiers du dossier bachelier
+            $files = Storage::disk('local')->files($bachelierDir);
+            foreach ($files as $file) {
+                // copier chaque fichier vers le dossier de l'étudiant
+                Storage::disk('local')->copy($file, $dir . '/' . basename($file));
+            }
+        }
+    }
+}
+
 public function getImage($id)
 {
     $dir = "etudiants/temp-$id";
 
     // Vérifier si le dossier existe
     if (!Storage::disk('local')->exists($dir)) {
+
         abort(404, "Dossier introuvable");
     }
 

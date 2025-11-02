@@ -221,7 +221,7 @@
 
     {{-- Texte officiel en dernier --}}
     <div style="font-size:8pt; color:#555; margin-top:15px; line-height:1.3; right:0;">
-        Cette attestation lui est délivrée pour servir et valoir ce que de droit
+        Cette attestation lui est délivrée pour servir et valoir ce que de droit.
     </div>
 
     {{-- Auto-ouvrir la boîte d’impression (optionnel) --}}
