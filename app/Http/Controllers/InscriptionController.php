@@ -38,6 +38,7 @@ class InscriptionController extends Controller
             dd($etudiant);
             return view('inscriptions.reponse_etudiant', compact('etudiant'));
         }
+        dd(4444);
         return view('inscriptions.inscriptions');
     }
 
