@@ -112,7 +112,7 @@
                 </div>
             </div>
             <p class="parag" style="margin-top:2px; line-height:1.4;">
-                est inscrit administrativement
+                est inscrit(e)  administrativement
                 en formation initiale <strong>{{ $etudiant['formation']  }}</strong>
                 niveau <strong>{{ $etudiant['niveau'] ?? '1' }}</strong>,
                 <strong>{{ $etudiant['tronc_commun'] ?? 'Tronc commun Langues' }}</strong> et pédagogiquement aux semestres, modules et éléments ci-dessous,
@@ -138,9 +138,9 @@
         <table>
             <thead>
                 <tr>
-                    <th style="text-align:center; width:12%;">Sem.</th>
+                    <th style="text-align:center; width:12%;"></th>
                     <th style="text-align:center; width:35%;">Module</th>
-                    <th style="text-align:center; width:38%;">Éléments</th>
+                    <th style="text-align:center; width:38%;">Élément</th>
                     <th style="text-align:center; width:8%;">Vol. H</th>
                     <th style="text-align:center; width:7%;">Crédits</th>
                 </tr>
