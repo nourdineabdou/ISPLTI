@@ -68,11 +68,11 @@ class EtudiantController extends Controller
 
 public function copier_dossiers_bacheliers()
 {
-    $dir = "bacheliers/temp";
+    $dire = "bacheliers/temp";
     $bacheliers = \App\Models\BachelierOrientation::where('inscription', 1)->get();
     foreach($bacheliers as $bachelier){
-        dd($bachelier);
-        $bachelierDir = $dir . "/temp-" . $bachelier->id;
+        //dd($bachelier) ;
+        $bachelierDir = $dire . "-" . $bachelier->id;
         $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
         if ($etudiant && Storage::disk('local')->exists($bachelierDir)) {
             $dir = "etudiants/temp-$etudiant->id";
