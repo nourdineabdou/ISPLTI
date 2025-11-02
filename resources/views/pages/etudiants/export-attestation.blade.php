@@ -107,7 +107,7 @@
                         <span class="label">NNI :</span> <span class="val">{{ $etudiant['nni']  }}</span>
                     </div>
                     <div>
-                        <span class="label">Numéro d'inscription :</span> <span class="val">{{ $etudiant['nodos'] }}</span>
+                        <span class="label">Numéro d'inscription :</span> <span class="val">{{ $etudiant['matricule'] }}</span>
                     </div>
                 </div>
             </div>
