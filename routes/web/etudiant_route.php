@@ -75,6 +75,8 @@ Route::group(['prefix' => 'etudiants'], function () {
   Route::get('/{id}/attestation', [EtudiantController::class, 'attestation'])->name('etudiants.attestation');
   // info etudiant par ajax
   Route::get('/info/{id}/etudiant', [EtudiantController::class, 'infoEtudiant'])->name('etudiants.info');
+  //copier_dossiers_bacheliers
+  Route::get('/copier_dossiers/bacheliers', [EtudiantController::class, 'copier_dossiers_bacheliers'])->name('etudiants.copier_dossiers_bacheliers');
 });
 
 
