@@ -35,10 +35,10 @@ class InscriptionController extends Controller
             $bachelier = BachelierOrientation::find($bachelierId);
             // retourner la vue d'inscription avec les données du bachelier
             $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
-            dd($etudiant);
+           // dd($etudiant);
             return view('inscriptions.reponse_etudiant', compact('etudiant'));
         }
-        dd(4444);
+        //dd(4444);
         return view('inscriptions.inscriptions');
     }
 
@@ -159,7 +159,8 @@ class InscriptionController extends Controller
                 //supprimer la session de l'étudiant
                 Session::forget('etudiant_id');
                 if($bachelier && ($bachelier->inscription == 2 || $bachelier->inscription == 1)){
-                    return view('inscriptions.reponse_bachelier', compact('bachelier'));
+                    $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
+                    return view('inscriptions.reponse_etudiant', compact('etudiant'));
                 }
                 return view('inscriptions.inscriptions', compact('bachelier'));
 
