@@ -78,10 +78,11 @@ class InscriptionController extends Controller
 
          if($bachelierId) {
              $bachelier = BachelierOrientation::find($bachelierId);
+             // $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
+             $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
              // retourner la vue d'inscription avec les données du bachelier
-             if($bachelier->inscription == 2 || $bachelier->inscription == 1){
-
-                return view('inscriptions.reponse_bachelier', compact('bachelier'));
+             if($etudiant->inscription == 2 || $etudiant->inscription == 1){
+                return view('inscriptions.reponse_etudiant', compact('etudiant'));
              }
              return view('inscriptions.inscriptions', compact('bachelier'));
          }
