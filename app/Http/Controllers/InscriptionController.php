@@ -34,7 +34,9 @@ class InscriptionController extends Controller
         if($bachelierId) {
             $bachelier = BachelierOrientation::find($bachelierId);
             // retourner la vue d'inscription avec les données du bachelier
-            return view('inscriptions.reponse_bachelier', compact('bachelier'));
+            $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
+            dd($etudiant);
+            return view('inscriptions.reponse_etudiant', compact('etudiant'));
         }
         return view('inscriptions.inscriptions');
     }
@@ -53,13 +55,13 @@ class InscriptionController extends Controller
 
     public function login1()
     {
-        $user = User::firstOrCreate(['email' => 'visualiser@gmail.com'], [
-            'name'=>'visualiser',
-            'email'=>'visualiser@gmail.com',
-            'password'=>bcrypt('2025')
-        ]);
-        $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'Admin']);
-        $user->assignRole([$role->id]);
+        // $user = User::firstOrCreate(['email' => 'visualiser@gmail.com'], [
+        //     'name'=>'visualiser',
+        //     'email'=>'visualiser@gmail.com',
+        //     'password'=>bcrypt('2025')
+        // ]);
+        // $role = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'Admin']);
+        // $user->assignRole([$role->id]);
         // $permissions = ['bachelier-create', 'bachelier-edit', 'bachelier-export_attestation'];
         // // créer les permissions
         // foreach ($permissions as $permission) {
