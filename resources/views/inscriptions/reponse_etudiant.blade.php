@@ -66,7 +66,6 @@
 						Nous ne trouvons pas d'information sur votre inscription. Contactez le service des admissions si nécessaire.
 					@endif
 				</p>
-
 				<div class="d-flex gap-2 flex-wrap">
 					@if(isset($etudiant) && $etudiant->inscription == 1)
 

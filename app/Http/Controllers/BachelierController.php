@@ -113,8 +113,7 @@ public function getImage($id)
                                 'label' => 'Valider L\'inscription',
                                 'onclick' => 'confirmAction({ title: \'Confirmer la validation\', text: \'Voulez-vous vraiment valider l inscription de cet étudiant ?\', confirmButtonText: \'Oui, valider !\', url: \'' . route('bacheliers.valider', $bachelier->id) . '\', method: \'GET\' })',
                                 'permission' => $user->id == 9 ? false : true
-                            ]
-                            ,
+                            ],
                             // deque je rejeter le bachelier je veux qui mafiche visulier etudiant rejeter
                             [
                                 'label' => 'Rejeter L\'inscription',
@@ -135,7 +134,7 @@ public function getImage($id)
                                 'label' => 'Modifier le motif de rejet',
                                 'onclick' => 'openInModal({ link: \'' . route('bacheliers.edit', $bachelier->id) . '\', size: \'lg\' })',
                                 'permission' => $user->id == 9   ? false : true
-                            ],
+                            ] ,
                         ];
                     }
                     else
