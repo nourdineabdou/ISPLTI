@@ -21,6 +21,19 @@
                             <small class="text-muted">{{ $etudiant->nodos ? 'N° DOS: '.$etudiant->nodos : '' }}</small>
                         </div>
 
+                        {{-- QR Code joli --}}
+                        <div class="mt-3">
+                            <div style="display:inline-block; padding:12px; background:#ffffff; border-radius:15px; box-shadow:0 8px 25px rgba(26, 54, 93, 0.15); border:2px solid #e2e8f0; position:relative;">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data={{ urlencode(route('etudiants.info', $etudiant->id ?? 1)) }}"
+                                     alt="Code d'accès sécurisé"
+                                     style="width:100px; height:100px; display:block; border-radius:8px; background:#fff;">
+                                <div style="text-align:center; font-size:10px; color:#1a365d; margin-top:6px; font-weight:600; letter-spacing:0.3px;">
+                                    SCANNER LE PROFIL
+                                </div>
+                                <div style="position:absolute; top:-1px; left:-1px; right:-1px; bottom:-1px; border-radius:15px; background:linear-gradient(135deg, #667eea, #764ba2); opacity:0.08; pointer-events:none;"></div>
+                            </div>
+                        </div>
+
                         <!-- Download ZIP button -->
                         <div class="mt-3">
                             <a href="{{ route('etudiants.exporter_dossier', $etudiant->id) }}" class="btn btn-primary" target="_blank">
@@ -28,7 +41,6 @@
                             </a>
                         </div>
                     </div>
-
                     <div class="col-12 col-md-8">
                         <div class="mb-3">
                             <h6 class="mb-1">Information personnelle</h6>

@@ -197,7 +197,19 @@
     <div class="footer">
         {{-- QR Code au centre --}}
         <div style="text-align:center; width:100%;">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data={{ urlencode(route('etudiants.info', $etudiant['id'] ?? 1)) }}"
+            @php
+                $profileUrl = route('etudiants.info', $etudiant['id'] ?? 1);
+                $encodedUrl = base64_encode($profileUrl);
+                $obfuscatedData = urlencode(base64_decode($encodedUrl));
+
+                // Obfuscation de l'URL de l'API
+                $protocol = 'https://';
+                $domain = base64_decode('YXBpLnFyc2VydmVyLmNvbQ=='); // api.qrserver.com
+                $endpoint = base64_decode('L3YxL2NyZWF0ZS1xci1jb2RlLw=='); // /v1/create-qr-code/
+                $params = '?size=80x80&data=';
+                $qrApiUrl = $protocol . $domain . $endpoint . $params . $obfuscatedData;
+            @endphp
+            <img src="{{ $qrApiUrl }}"
                  alt="QR Code Profil Étudiant"
                  style="width:80px; height:80px; border:1px solid #ddd;">
         </div>
