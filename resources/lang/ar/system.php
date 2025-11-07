@@ -453,4 +453,5 @@ return [
 "avis_resc" => "إعـــــــلان إعادة التسجيل",
 "prolongement_inscription"=>"اعلان تمديد التسجيل",
 "debut_cours"=> "اعلان بداية الدروس",
+'avis_etudiant'=>"إعلان للطلاب",
 ];

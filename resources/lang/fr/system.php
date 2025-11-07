@@ -444,5 +444,6 @@ return [
   "prolongement_inscription"=>"Avis de prolongement d'inscription",
   "Directeur" => "Directeur",
   'Directrice' => 'Directrice',
-  'debut_cours'=>'Avis du début des cours'
+  'debut_cours'=>'Avis du début des cours',
+  'avis_etudiant'=>"Avis aux étudiants"
 ];
