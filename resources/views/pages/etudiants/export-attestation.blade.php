@@ -116,7 +116,6 @@
                 en formation initiale <strong>{{ $etudiant['formation']  }}</strong>
                 niveau <strong>{{ $etudiant['niveau'] ?? '1' }}</strong>,
                 <strong>{{ $etudiant['tronc_commun'] ?? 'Tronc commun Langues' }}</strong> et pédagogiquement aux semestres, modules et éléments ci-dessous,
-
             </p>
         </div>
         {{-- Numéro de référence en bas à droite

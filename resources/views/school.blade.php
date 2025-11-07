@@ -35,7 +35,12 @@
                                         <!-- Bloc Liens Téléchargement PDF -->
                                         <div class="row justify-content-center g-3 mt-4">
                                            {{-- debut cours --}}
-
+                                           <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/avis_rec.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.avis_etudiant')</div>
+                                                </a>
+                                            </div>
                                            <div class="col-md-3 col-6">
                                                 <a href="{{ asset('pdfs/debut_cours.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
                                                     <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-primary" style="font-size:2rem;"></i></div>
