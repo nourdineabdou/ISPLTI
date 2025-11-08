@@ -454,6 +454,6 @@ return [
 "prolongement_inscription"=>"اعلان تمديد التسجيل",
 "debut_cours"=> "اعلان بداية الدروس",
 'avis_etudiant'=>"إعلان للطلاب",
-'Notes' => 'العلامات',
+'Notes' => 'تنبيه',
 'charte_de_comportement'=>"ميثاق السلوك الحسن",
 ];
