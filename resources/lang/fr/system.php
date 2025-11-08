@@ -448,4 +448,13 @@ return [
   'avis_etudiant'=>"Avis aux étudiants",
   "Note"=>"Note",
   "charte_de_comportement"=>"Charte de comportement",
+  'S1 Arb-Fr-3'=>'S1 Arabe-Français 3',
+  "S1 Eng-Arb-3"=>"S1 Anglais-Arabe 3",
+  "S1 Eng-Fr-3"=>"S1 Anglais-Français 3",
+  "S3 Arb-Fr-1-3"=>"S3 Arabe-Français 1-3",
+  "S3 Eng-Arb 3-1"=>"S3 Anglais-Arabe 3-1",
+  "S3 Eng-Fr 1 3"=>"S3 Anglais-Français 1-3",
+  "S5 Arb-Fr 1 3"=>"S5 Arabe-Français 1-3",
+  "S5 Eng-Arb 3"=>"S5 Anglais-Arabe 3",
+  "S5 Eng-Fr 1 3"=>"S5 Anglais-Français 1-3",
 ];

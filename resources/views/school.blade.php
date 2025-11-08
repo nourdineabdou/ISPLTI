@@ -54,15 +54,52 @@
                                                 </a>
                                             </div>
                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/debut_cours.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                <a href="{{ asset('pdfs/S1 Eng-Arb3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
                                                     <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-primary" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.debut_cours')</div>
+                                                    <div class="fw-bold">@lang('system.S1 Eng-Arb-3')</div>
                                                 </a>
                                             </div>
                                             <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/avis_inscription.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                <a href="{{ asset('pdfs/S1 Eng-Fr 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
                                                     <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.avis_insc')</div>
+                                                    <div class="fw-bold">@lang('system.S1 Eng-Fr-3')</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/S3 Arb-Fr 1 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.S3 Arb-Fr-1-3')</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/S3 Eng-Arb 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.S3 Eng-Arb 3-1')</div>
+                                                </a>
+                                            </div>
+
+                                            <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/S3 Eng-Fr 1 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.S3 Eng-Fr 1 3')</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/S5 Arb-Fr 1 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.S5 Arb-Fr 1 3')</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/S5 Eng-Arb 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.S5 Eng-Arb 3')</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/S5 Eng-Fr 1 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.S5 Eng-Fr 1 3')</div>
                                                 </a>
                                             </div>
                                         </div>
