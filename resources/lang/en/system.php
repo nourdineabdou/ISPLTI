@@ -460,5 +460,7 @@ return [
   "prolongement_inscription" => "Extension of enrolment period",
   'Directrice' => 'Director',
   'debut_cours'=>'Course start date',
-  'avis_etudiant' => "Notice to Students"
+  'avis_etudiant' => "Notice to Students",
+  "Note"=>"Note",
+  "charte_de_comportement"=>"Code of Conduct",
 ];

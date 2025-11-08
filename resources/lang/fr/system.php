@@ -445,5 +445,7 @@ return [
   "Directeur" => "Directeur",
   'Directrice' => 'Directrice',
   'debut_cours'=>'Avis du début des cours',
-  'avis_etudiant'=>"Avis aux étudiants"
+  'avis_etudiant'=>"Avis aux étudiants",
+  "Note"=>"Note",
+  "charte_de_comportement"=>"Charte de comportement",
 ];
