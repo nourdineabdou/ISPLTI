@@ -53,6 +53,12 @@
                                                     <div class="fw-bold">@lang('system.avis_etudiant')</div>
                                                 </a>
                                             </div>
+                                            <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/S1 Arb-Fr 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-primary" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.S1 Arb-Fr-3')</div>
+                                                </a>
+                                            </div>
                                            <div class="col-md-3 col-6">
                                                 <a href="{{ asset('pdfs/S1 Eng-Arb3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
                                                     <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-primary" style="font-size:2rem;"></i></div>
