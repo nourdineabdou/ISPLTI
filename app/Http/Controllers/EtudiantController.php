@@ -535,4 +535,15 @@ public function getImage($id)
         return view('pages.etudiants.importer-pdg');
     }
 
+
+    // absences etudiant
+    public function absences($nodos){
+        $etudiant = Etudiant::where('nodos', $nodos)->firstOrFail();
+        $absences = \App\Models\Absence::where('matrucle', $nodos)->get();
+        return view('pages.etudiants.absences', [
+            'title' => __('etudiants.absences'),
+            'etudiant' => $etudiant,
+            'absences' => $absences
+        ]);
+    }
 }
