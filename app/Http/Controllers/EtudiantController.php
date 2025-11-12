@@ -537,9 +537,9 @@ public function getImage($id)
 
 
     // absences etudiant
-    public function absences($nodos){
-        $etudiant = Etudiant::where('nodos', $nodos)->firstOrFail();
-        $absences = \App\Models\Absence::where('matrucle', $nodos)->get();
+    public function absences($id){
+        $etudiant = Etudiant::findOrFail($id);
+        $absences = \App\Models\Absence::where('matrucle', $etudiant->nodos)->get();
         return view('pages.etudiants.absences', [
             'title' => __('etudiants.absences'),
             'etudiant' => $etudiant,

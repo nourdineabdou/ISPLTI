@@ -80,7 +80,7 @@
 												Télécharger l'attestation d'inscription
 										</a>
 
-										<a href="{{ route('etudiants.absences', $etudiant->nodos) }}" class="btn btn-info btn-lg">
+										<a href="{{ route('etudiants.absences', $etudiant->id) }}" class="btn btn-info btn-lg">
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-x me-2" viewBox="0 0 16 16">
 													<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 1 0V1zm10 2H2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zm-2.354 4.646a.5.5 0 0 1 .708 0L10 8.293l1.146 1.147a.5.5 0 0 1-.708.708L9.5 9.207l-1.146 1.147a.5.5 0 0 1-.708-.708L8.793 8.5 7.646 7.354a.5.5 0 1 1 .708-.708L9.5 7.793l1.146-1.147z"/>
 												</svg>
