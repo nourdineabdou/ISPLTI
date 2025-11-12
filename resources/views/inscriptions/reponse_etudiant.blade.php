@@ -69,18 +69,25 @@
 				<div class="d-flex gap-2 flex-wrap">
 					@if(isset($etudiant) && $etudiant->inscription == 1)
 
-                    @php
-							$downloadUrl = url('/inscriptions/' . ($etudiant->id ?? 'download') . '/download');
-						@endphp
+										@php
+												$downloadUrl = url('/inscriptions/' . ($etudiant->id ?? 'download') . '/download');
+										@endphp
 
-						<a  onclick="printObject({link:'{{ route('etudiants.attestation', $etudiant->id) }}' , title:'Attestation dinscription'  , width:4 , height:4})"  target="_blank" class="btn btn-success btn-lg">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-2" viewBox="0 0 16 16">
-							  <path d="M.5 9.9a.5.5 0 0 1 .5-.4H5V1.5a.5.5 0 0 1 1 0V9.5h3.999a.5.5 0 0 1 .354.854l-4.5 4.5a.5.5 0 0 1-.707 0l-4.5-4.5A.5.5 0 0 1 .5 9.9z"/>
-							</svg>
-                               Télécharger l'attestation d'inscription
-						</a>
+										<a onclick="printObject({link:'{{ route('etudiants.attestation', $etudiant->id) }}' , title:'Attestation dinscription'  , width:4 , height:4})" target="_blank" class="btn btn-success btn-lg">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-2" viewBox="0 0 16 16">
+													<path d="M.5 9.9a.5.5 0 0 1 .5-.4H5V1.5a.5.5 0 0 1 1 0V9.5h3.999a.5.5 0 0 1 .354.854l-4.5 4.5a.5.5 0 0 1-.707 0l-4.5-4.5A.5.5 0 0 1 .5 9.9z"/>
+												</svg>
+												Télécharger l'attestation d'inscription
+										</a>
 
-						<a href="{{ url('/') }}" class="btn btn-outline-secondary">Retour</a>
+										<a href="{{ route('etudiants.absences', $etudiant->nodos) }}" class="btn btn-info btn-lg">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-x me-2" viewBox="0 0 16 16">
+													<path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 1 0V1zm10 2H2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zm-2.354 4.646a.5.5 0 0 1 .708 0L10 8.293l1.146 1.147a.5.5 0 0 1-.708.708L9.5 9.207l-1.146 1.147a.5.5 0 0 1-.708-.708L8.793 8.5 7.646 7.354a.5.5 0 1 1 .708-.708L9.5 7.793l1.146-1.147z"/>
+												</svg>
+												Voir les absences
+										</a>
+
+										<a href="{{ url('/') }}" class="btn btn-outline-secondary">Retour</a>
 					@elseif(isset($etudiant) && $etudiant->inscription == 2)
 						<button class="btn btn-outline-primary" disabled>
 							<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
