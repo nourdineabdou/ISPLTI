@@ -81,7 +81,6 @@
                                     <th>Matière</th>
                                     <th>Spécialité</th>
                                     <th>Semestre</th>
-                                    <th>Semaine</th>
                                     <th>Horaire</th>
                                     <th>Date</th>
                                 </tr>
@@ -94,13 +93,12 @@
                                         <td>{{ $absence->matiere ?? '-' }}</td>
                                         <td>{{ $absence->specialite ?? '-' }}</td>
                                         <td>{{ $absence->semestre ?? '-' }}</td>
-                                        <td>{{ $absence->semaine ?? '-' }}</td>
                                         <td>{{ $absence->horaire ?? '-' }}</td>
                                         <td><span class="badge bg-gradient-primary text-white">{{ $absence->date ? \Carbon\Carbon::parse($absence->date)->format('d/m/Y') : '-' }}</span></td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="9" class="text-center text-muted">Aucune absence enregistrée pour cet étudiant.</td>
+                                        <td colspan="7" class="text-center text-muted">Aucune absence enregistrée pour cet étudiant.</td>
                                     </tr>
                                 @endforelse
                             </tbody>
