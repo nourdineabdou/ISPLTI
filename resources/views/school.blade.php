@@ -34,7 +34,19 @@
                                     </div>
                                         <!-- Bloc Liens Téléchargement PDF -->
                                         <div class="row justify-content-center g-3 mt-4">
-                                           {{-- debut cours --}}
+                                           <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/debate_announcment.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.debate_announcment')</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/old_debaters_announcment.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.old_debaters_announcment')</div>
+                                                </a>
+                                            </div>
+                                            {{-- debut cours --}}
                                             <div class="col-md-3 col-6">
                                                 <a href="{{ asset('pdfs/Note.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
                                                     <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>

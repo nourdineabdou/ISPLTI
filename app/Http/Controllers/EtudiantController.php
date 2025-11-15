@@ -535,7 +535,6 @@ public function getImage($id)
         return view('pages.etudiants.importer-pdg');
     }
 
-
     // absences etudiant
     public function absences($id){
         $etudiant = Etudiant::findOrFail($id);
