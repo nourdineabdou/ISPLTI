@@ -472,4 +472,6 @@ return [
   "S5 Arb-Fr 1 3"=>"S5 Arabe-Français",
   "S5 Eng-Arb 3"=>"S5 Anglais-Arabe 3",
   "S5 Eng-Fr 1 3"=>"S5 Anglais-Français",
+  'debate_announcment'=>'Debate Announcement',
+  'old_debaters_announcment'=>'Old Debaters Announcement',
 ];
