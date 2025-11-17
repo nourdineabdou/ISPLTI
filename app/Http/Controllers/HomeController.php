@@ -8,6 +8,9 @@ use App\Models\AnneeUniversitaire;
 use App\Models\InscriptionAdm;
 use App\Models\Etablissement;
 use App\Models\Auth\User;
+// profoesseur
+use App\Models\Professeur;
+
 //use Spatie\Permission\Models\Permission;
 //use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +58,16 @@ class HomeController extends Controller
                 }
                 return view('espace_etudiant', ['etudiant'=>$etudiant,'ndos'=>$ndos,'inscritEtat'=>$inscritEtat,'anneeActive'=>$this->anneeActive()] );
             } elseif (auth()->user()->hasRole('Professeur')) {
-                return view('espace_professeur');
+                $professeur=Professeur::where('user_id',auth()->user()->id)->get()->first();
+                $professeurEducations = $professeur->educations;
+                $professeurExperiences = $professeur->experiences;
+                $professeurLanguages = $professeur->languages;
+                return view('espace_professeur' , [
+                    'professeur'=>$professeur,
+                    'professeurEducations' => $professeurEducations,
+                    'professeurExperiences' => $professeurExperiences,
+                    'professeurLanguages' => $professeurLanguages
+                ]);
             }
         }
         return view('admin_espace');

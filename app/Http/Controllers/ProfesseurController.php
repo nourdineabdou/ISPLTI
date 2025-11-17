@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Professeur;
-//EmploisTempsProfesseur
 use App\Models\EmploisTempsProfesseur;
-// AnneeUniversitaire
 use App\Models\AnneeUniversitaire;
 use Illuminate\Support\Facades\File;
 use App\Models\Auth\User;

@@ -44,11 +44,16 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function orders()
+    // professeur relation
+    public function professeur()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasOne(Professeur::class);
     }
-
+    // etudiant relation
+    public function etudiant()
+    {
+        return $this->hasOne(Etudiant::class);
+    }
 
 
 }

@@ -111,9 +111,31 @@
                         <span class="menu-title">Mon Profil</span>
                     </a>
                 </li>
-                {{-- mes cours --}}
+                {{-- mes experiences --}}
                 <li class="nav-item ">
-                    <a href="#">
+                    <a href="{{ route('experiences.index') }}">
+                        <i class="la la-briefcase"></i>
+                        <span class="menu-title">Mes Expériences</span>
+                    </a>
+                </li>
+                {{-- mes formations --}}
+
+                <li class="nav-item ">
+                    <a href="{{ route('formations.index') }}">
+                        <i class="la la-graduation-cap"></i>
+                        <span class="menu-title">Mes Formations</span>
+                    </a>
+                </li>
+                {{-- langues --}}
+                <li class="nav-item">
+                    <a href="{{ route('languages.index') }}">
+                        <i class="la la-language"></i>
+                        <span class="menu-title">Mes Langues</span>
+                    </a>
+                </li>
+                {{-- cours --}}
+                <li class="nav-item">
+                    <a href="{{ route('mescours.index') }}">
                         <i class="la la-book"></i>
                         <span class="menu-title">Mes Cours</span>
                     </a>
