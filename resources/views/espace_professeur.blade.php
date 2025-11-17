@@ -10,7 +10,7 @@
                         <div class="card-body d-flex align-items-center">
                             <img src="{{ asset($professeur->image) }}" alt="Photo de profil" class="rounded-circle mr-4" width="100" height="100">
                             <div class="ml-4">
-                                <h3 class="mb-1">{{ $professeur->nom }} </h3>
+                                <h3 class="mb-1">{{ $professeur->nom }} {{ $professeur->prenom }}</h3>
                                 <p class="mb-0 text-muted">{{ $professeur->specialite }}</p>
                             </div>
                         </div>
