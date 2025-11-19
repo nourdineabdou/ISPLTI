@@ -27,7 +27,62 @@ use Illuminate\Support\Facades\Mail as Email;
 class EtudiantController extends Controller
 {
 
+    // updatePhoto
+    public function updatePhoto(Request $request, $id)
+    {
+        $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048', // max 2MB
+        ]);
+
+        $etudiant = Etudiant::findOrFail($id);
+        $dir = "etudiants/temp-$etudiant->id";
+
+        // Créer le dossier s'il n'existe pas
+        if (!Storage::disk('local')->exists($dir)) {
+            Storage::disk('local')->makeDirectory($dir);
+        }
+
+        // Supprimer l'ancienne photo si elle existe
+        $files = Storage::disk('local')->files($dir);
+        foreach ($files as $file) {
+            if (preg_match('/^.*photo\.(jpg|jpeg|png|gif|webp)$/i', basename($file))) {
+                Storage::disk('local')->delete($file);
+            }
+        }
+
+        // Stocker la nouvelle photo
+        $photoPath = $request->file('photo')->storeAs($dir, 'photo.' . $request->file('photo')->getClientOriginalExtension(), 'local');
+
+        return redirect()->route('etudiants.profil', $etudiant->id)->with('success', 'Photo mise à jour avec succès.');
+    }
+
     // informations etudiant
+    public function profil($id)
+    {
+        $etudiant = Etudiant::findOrFail($id);
+        $title = "Profil de l'étudiant";
+        return view('pages.etudiants.profil', compact('etudiant', 'title'));
+    }
+
+     //updatePassword
+
+
+
+    public function updatePassword(Request $request, $id)
+    {
+        // $request->validate([
+        //     'password' => 'required|string|confirmed',
+        // ]);
+
+        $etudiant = Etudiant::findOrFail($id);
+        $user = \App\Models\Auth\User::findOrFail($etudiant->user_id);
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
+
+        // redirect to home with message success
+        return redirect()->route('etudiants.profil', $etudiant->id)->with('success', 'Mot de passe mis à jour avec succès.');
+    }
+
 
     public function infoEtudiant($id)
     {
@@ -122,7 +177,24 @@ public function getImage($id)
 
     public function index()
     {
-        //index
+        // crrrer des users pour les etudiants
+        $etudiants = Etudiant::all();
+        foreach ($etudiants as $etudiant) {
+            if (!$etudiant->user_id) {
+                $user = new \App\Models\Auth\User();
+                $user->name = $etudiant->nom ;
+                $user->email = $etudiant->email;
+                $user->password = Hash::make($etudiant->nni); // Mot de passe par défaut, à changer
+                $user->save();
+
+                $etudiant->user_id = $user->id;
+                $etudiant->save();
+
+                $user->assignRole('Etudiant');
+            }
+        }
+
+
         if (request()->ajax()) {
             return datatables()->of(Etudiant::query())
                 ->addColumn('action', function ($etudiant) {

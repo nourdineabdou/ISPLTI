@@ -1,7 +1,7 @@
 <x-modal-header-body
     :title="__('cours.create')"
 >
-    <div id="create-cours-form">
+    <div id="create-professeur-form">
         <form
             action="{{ route('mescours.store') }}"
             method="POST"
@@ -11,20 +11,24 @@
         >
             @csrf
             <div class="row">
-                <x-forms.input
+                <x-forms.select
                     class="col-md-6"
                     label="matiére"
                     name="matiere_id"
                     required="required"
                     value="{{ old('matiere_id') }}"
+                    :options="$matieres"
+                    labelField="lib_element_fr"
                 />
                 {{-- specialite --}}
-                <x-forms.input
+                <x-forms.select
                     class="col-md-6"
                     label="Spécialité"
                     name="specialite_id"
                     required="required"
                     value="{{ old('specialite_id') }}"
+                    :options="$specialites"
+                    labelField="lib_annee_diplome_fr"
                 />
 
                 {{-- cours PDF --}}

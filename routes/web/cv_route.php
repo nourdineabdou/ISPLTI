@@ -33,13 +33,17 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'languages'], function () {
 // Route pour les cours
 Route::group(['middleware' => ['auth'], 'prefix' => 'mescours'], function ()
 {
-    Route::get('/', [CourController::class, 'index'])->name('mescours.index');
+    Route::get('/{etudiantId?}', [CourController::class, 'index'])->name('mescours.index');
     Route::get('/create', [CourController::class, 'create'])->name('mescours.create');
     Route::post('/', [CourController::class, 'store'])->name('mescours.store');
     Route::get('/{id}', [CourController::class, 'show'])->name('mescours.show');
     Route::get('/{id}/edit', [CourController::class, 'edit'])->name('mescours.edit');
     Route::put('/{id}', [CourController::class, 'update'])->name('mescours.update');
     Route::delete('/{id}', [CourController::class, 'destroy'])->name('mescours.destroy');
+    // Route pour télécharger le cours
+    Route::get('/{id}/download', [CourController::class, 'download'])->name('mescours.download');
+    // Route pour activer le cours
+    Route::get('/{id}/activer', [CourController::class, 'activer'])->name('mescours.activer');
 });
 
 // route groupe formations

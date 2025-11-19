@@ -15,4 +15,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'professeurs'], function () 
     // emploi du temps
     Route::get('emplois/du_temps', [ProfesseurController::class, 'emploiDuTemps'])->name('professeurs.emploi_du_temps');
     Route::post('emplois/du_temps', [ProfesseurController::class, 'storeEmploiDuTemps'])->name('professeurs.emploi_du_temps_store');
+    // update photo profil
+    Route::post('/{id}/update_photo', [ProfesseurController::class, 'updatePhoto'])->name('professeurs.updatePhoto');
+    // profil professeur
+    Route::get('/{id}/profil', [ProfesseurController::class, 'profil'])->name('professeurs.profil');
 });

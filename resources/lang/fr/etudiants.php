@@ -20,5 +20,15 @@ return [
     'telephone' => "Téléphone",
     'etat_inscription' => "État d'Inscription",
     'nodos' => "Numéro d'Inscription",
-    'emploi_du_temps'=>'Emploi du Temps'
+    'emploi_du_temps'=>'Emploi du Temps',
+    'num_inscription'=>'Numéro d\'Inscription',
+    'statut_inscription'=>'Statut d\'Inscription',
+    'valide'=>'Valide',
+    'non_valide'=>'Non Valide',
+    'imprimerATTESTATIONiNSCRIPTION'=>'Imprimer l\'Attestation d\'Inscription',
+    'anneeAcademique'=>'Année Académique',
+    'suvidepresence'=>'Suivi de Présence',
+    'resultats'=>'Résultats',
+    'semestre'=>'Semestre',
+    'emploidetemps'=>'Emploi de Temps',
 ];

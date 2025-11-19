@@ -32,7 +32,7 @@
                     label="Année de début"
                     name="start_year"
                     required="required"
-                    type="date"
+                    type="year"
                     value="{{ old('start_year') }}"
                 />
                 {{-- end_year --}}
@@ -40,7 +40,7 @@
                     class="col-md-6"
                     label="Année de fin"
                     name="end_year"
-                    type="date"
+                    type="year"
                     required="required"
                     value="{{ old('end_year') }}"
                 />

@@ -34,7 +34,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'etudiants'], function () {
     // import inscription pdg
     Route::get('/importer/inscriptions_pdg', [EtudiantController::class, 'importerInscriptionPdg'])->name('etudiants.importer.inscriptions_pdg');
     Route::post('/importer/inscriptions_pdg', [EtudiantController::class, 'importerInscriptionPdgStore'])->name('etudiants.importer.inscriptions_pdg.store');
-    // modal pour importer les etudiants
+    // updatePassword
+    Route::post('/{id}/updatePassword', [EtudiantController::class, 'updatePassword'])->name('etudiants.updatePassword');
+    // profil etudiant
+    Route::get('/{id}/profil', [EtudiantController::class, 'profil'])->name('etudiants.profil');
+
+    // updatePhoto
+    Route::post('/{id}/updatePhoto', [EtudiantController::class, 'updatePhoto'])->name('etudiants.updatePhoto');
+
 });
 
 // bacheliers routes
