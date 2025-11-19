@@ -180,25 +180,25 @@ public function getImage($id)
     public function index()
     {
         // crrrer des users pour les etudiants
-        $etudiants = Etudiant::where('inscription', 1)
-        ->whereNull("user_id")
-        ->orwhere("user_id", 0)
-        ->whereNotIn("id" , [382,436])
-        ->get();
-        foreach ($etudiants as $etudiant) {
-            if (!$etudiant->user_id && $etudiant->email ) {
-                $user = new \App\Models\Auth\User();
-                $user->name = $etudiant->nom_fr ;
-                $user->email = $etudiant->email;
-                $user->password = Hash::make($etudiant->nni); // Mot de passe par défaut, à changer
-                $user->save();
+        // $etudiants = Etudiant::where('inscription', 1)
+        // ->whereNull("user_id")
+        // ->orwhere("user_id", 0)
+        // ->whereNotIn("id" , [382,436])
+        // ->get();
+        // foreach ($etudiants as $etudiant) {
+        //     if (!$etudiant->user_id && $etudiant->email ) {
+        //         $user = new \App\Models\Auth\User();
+        //         $user->name = $etudiant->nom_fr ;
+        //         $user->email = $etudiant->email;
+        //         $user->password = Hash::make($etudiant->nni); // Mot de passe par défaut, à changer
+        //         $user->save();
 
-                $etudiant->user_id = $user->id;
-                $etudiant->save();
+        //         $etudiant->user_id = $user->id;
+        //         $etudiant->save();
 
-                $user->assignRole('Etudiant');
-            }
-        }
+        //         $user->assignRole('Etudiant');
+        //     }
+        // }
 
 
         if (request()->ajax()) {
