@@ -180,13 +180,13 @@ public function getImage($id)
     public function index()
     {
         // crrrer des users pour les etudiants
-        $etudiants = Etudiant::where('inscription', '1')
+        $etudiants = Etudiant::where('inscription', 1)
         ->whereNull("user_id")
         ->orwhere("user_id", 0)
         ->whereNotIn("id" , [382,436])
         ->get();
         foreach ($etudiants as $etudiant) {
-            if (!$etudiant->user_id) {
+            if (!$etudiant->user_id && $etudiant->email ) {
                 $user = new \App\Models\Auth\User();
                 $user->name = $etudiant->nom_fr ;
                 $user->email = $etudiant->email;
