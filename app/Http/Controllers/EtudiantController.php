@@ -12,6 +12,8 @@ use App\Models\Specialite;
 use App\Models\EmploisTempsSpecialite;
 use App\Models\InscriptionPdg;
 use App\Models\InscriptionAdm;
+// Hash
+use Illuminate\Support\Facades\Hash;
 // PDF
 use Barryvdh\DomPDF\Facade\Pdf;
 
