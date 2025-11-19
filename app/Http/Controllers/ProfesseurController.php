@@ -15,6 +15,45 @@ class ProfesseurController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    //ptofil professeur
+
+    public function profil($id)
+
+    {
+        $professeur = Professeur::findOrFail($id);
+        return view('pages.professeurs.profil', [
+            'professeur' => $professeur,
+            'title' => __('professeurs.profil_title', ['name' => $professeur->nom]),
+            // 'actions' => [
+            //     [
+            //         'label' => __('professeurs.edit'),
+            //         'onclick' => 'openInModal({ link: \'' . route('professeurs.edit', $professeur->id) . '\', size: \'lg\' })',
+            //         'permission' => true
+            //     ]
+            // ]
+        ]);
+    }
+
+    public function updatePhoto(Request $request, $id)
+    {
+        $professeur = Professeur::findOrFail($id);
+
+        $validated = $request->validate([
+            "image" => "required|file|mimes:jpeg,png,jpg,gif|max:2048",
+        ]);
+
+        if ($request->hasFile('image')) {
+            // faire le mouvement de fichier dans public/images_professeurs/
+            File::move($request->file('image')->getRealPath(), public_path('images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension()));
+            $professeur->image = 'images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension();
+        }
+
+        $professeur->save();
+
+        return redirect()->route('professeurs.profil', $professeur->id)->with('success', 'Photo de profil mise à jour avec succès');
+    }
+
     public function index()
     {
         // faire la partie index

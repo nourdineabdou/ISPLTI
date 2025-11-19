@@ -13,5 +13,7 @@ return [
     "image" => "Image",
     "email" => "Email",
     'prenom' => 'Prénom',
+    'profil' => 'Profil Professeur',
+    'profil_title' => 'Profil de :name',
 
 ];

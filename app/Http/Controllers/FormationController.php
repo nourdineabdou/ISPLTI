@@ -19,7 +19,7 @@ class FormationController extends Controller
         // faire la partie index
         if (request()->ajax()) {
               return datatables()->of(ProfesseurEducation::query())
-                  ->addColumn('action', function ($professeur) {
+                  ->addColumn('action', function ($formation) {
                       $actions = [
                           [
                               'label' => 'Modifier formation',
@@ -76,6 +76,9 @@ class FormationController extends Controller
         $formation->professeur_id = Professeur::where('user_id',auth()->user()->id)->first()->id;
         $formation->degree = $validated['degree'];
         $formation->institution = $validated['institution'];
+        // recupere l'année actuelle $validated['end_year']
+
+
         $formation->start_year = $validated['start_year'];
         $formation->end_year = $validated['end_year'];
         $formation->description = $validated['description'];

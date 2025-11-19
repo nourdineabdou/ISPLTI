@@ -13,7 +13,7 @@
                     label="Langue"
                     name="language"
                     required="required"
-                    value="{{ old('language') }}"
+                    value="{{ old('language' , $language->language) }}"
                 />
                 {{-- niveau --}}
                 <x-forms.input
@@ -21,7 +21,7 @@
                     label="Niveau"
                     name="niveau"
                     required="required"
-                    value="{{ old('niveau') }}"
+                    value="{{ old('niveau' , $language->niveau) }}"
                 />
             </div>
             <x-buttons.save

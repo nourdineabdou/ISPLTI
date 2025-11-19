@@ -44,6 +44,13 @@
                     </span></a>
             </li>
             @if(auth()->user()->hasRole('Admin'))
+               {{-- gestion des cours --}}
+                <li class="nav-item ">
+                    <a href="{{ route('mescours.index') }}">
+                        <i class="la la-book"></i>
+                        <span class="menu-title">Gestion des Cours</span>
+                    </a>
+                </li>
                 {{-- ajouter un etudiant --}}
                 <li class="nav-item ">
                     <a href="{{ route('etudiants.index') }}">
@@ -104,9 +111,13 @@
                     </a>
                 </li>
                 @elseif(auth()->user()->hasRole('Professeur'))
-                {{-- profill --}}
+                {{-- recupere profosseur --}}
+                @php
+                  $professeur = \App\Models\Professeur::where('user_id', auth()->user()->id)->first();
+                @endphp
+                {{-- profill  --}}
                 <li class="nav-item ">
-                    <a href="#">
+                    <a href="{{ route('professeurs.profil', $professeur->id) }}">
                         <i class="la la-user"></i>
                         <span class="menu-title">Mon Profil</span>
                     </a>
@@ -141,9 +152,13 @@
                     </a>
                 </li>
                 @elseif(auth()->user()->hasRole('Etudiant'))
+                {{-- recupere etudiant --}}
+                @php
+                  $etudiant = \App\Models\Etudiant::where('user_id', auth()->user()->id)->first();
+                @endphp
               {{-- profill --}}
                 <li class="nav-item ">
-                    <a href="#">
+                    <a href="{{ route('etudiants.profil', $etudiant->id) }}">
                         <i class="la la-user"></i>
                         <span class="menu-title">Mon Profil</span>
                     </a>
@@ -157,7 +172,7 @@
                 </li>
                 {{-- les  cours  --}}
                 <li class="nav-item ">
-                    <a href="#">
+                    <a href="{{ route('mescours.index', $etudiant->id) }}">
                         <i class="la la-book"></i>
                         <span class="menu-title">Mes Cours</span>
                     </a>
