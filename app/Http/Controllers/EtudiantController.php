@@ -180,11 +180,11 @@ public function getImage($id)
     public function index()
     {
         // crrrer des users pour les etudiants
-        $etudiants = Etudiant::all();
+        $etudiants = Etudiant::where('inscription', '1')->get();
         foreach ($etudiants as $etudiant) {
             if (!$etudiant->user_id) {
                 $user = new \App\Models\Auth\User();
-                $user->name = $etudiant->nom ;
+                $user->name = $etudiant->nom_fr ;
                 $user->email = $etudiant->email;
                 $user->password = Hash::make($etudiant->nni); // Mot de passe par défaut, à changer
                 $user->save();
