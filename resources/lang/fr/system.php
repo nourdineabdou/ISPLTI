@@ -459,4 +459,5 @@ return [
   "S5 Eng-Fr 1 3"=>"S5 Anglais-Français",
   'debate_announcment'=>'Annonce de débat',
   'old_debaters_announcment'=>'Annonce des anciens débatteurs',
+  "avis_test"=>"Avis test de positionnement",
 ];

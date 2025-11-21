@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'languages'], function () {
 Route::group(['middleware' => ['auth'], 'prefix' => 'mescours'], function ()
 {
     Route::get('/{etudiantId?}', [CourController::class, 'index'])->name('mescours.index');
-    Route::get('/create', [CourController::class, 'create'])->name('mescours.create');
+    Route::get('/cours/create', [CourController::class, 'create'])->name('mescours.create');
     Route::post('/', [CourController::class, 'store'])->name('mescours.store');
     Route::get('/{id}', [CourController::class, 'show'])->name('mescours.show');
     Route::get('/{id}/edit', [CourController::class, 'edit'])->name('mescours.edit');
