@@ -26,9 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $roleProfesseur = Role::firstOrCreate(['name' => 'Professeur']);
-        $user = User::find(384);
-        $user->assignRole([$roleProfesseur->id]);
+        // $roleProfesseur = Role::firstOrCreate(['name' => 'Professeur']);
+        // $user = User::find(384);
+        // $user->assignRole([$roleProfesseur->id]);
 
         // $etudiant =  User::firstOrCreate(['email' => 'Etudiant@gmail.com'], [
         //     'name' => 'Etudiant',

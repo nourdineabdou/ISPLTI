@@ -63,7 +63,7 @@ class CourController extends Controller
                           ],
                             [
                                 'label' => 'Télécharger cours',
-                                'onclick' => 'window.location.href = \'' . route('mescours.download', $cour->id) . '\')',
+                                'onclick' => '(window.location.href = \'' . route('mescours.download', $cour->id) . '\')',
                                 'permission' => true
                             ],
                             [
@@ -139,7 +139,7 @@ class CourController extends Controller
         $validated = $request->validate([
             'matiere_id' => 'required|string|max:255',
             'specialite_id' => 'required|string|max:255',
-            'chemain_pde' => 'required|file|max:2048',
+            'chemain_pde' => 'required|file',
         ]);
         $cours = new PdfProfe();
         $cours->professeur_id = Professeur::where('user_id',auth()->user()->id)->first()->id;

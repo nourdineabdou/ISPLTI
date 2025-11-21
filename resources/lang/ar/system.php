@@ -467,4 +467,5 @@ return [
   "S5 Eng-Fr 1 3"=>"س5 إنجليزية-فرنسية ",
   'debate_announcment'=>'إعلان المناظرة ',
   'old_debaters_announcment'=>'علان المناظرين القدامى',
+  "avis_test"=>"اعلان اختبار تحديد مستوى",
 ];
