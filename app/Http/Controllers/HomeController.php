@@ -11,8 +11,8 @@ use App\Models\Auth\User;
 // profoesseur
 use App\Models\Professeur;
 
-//use Spatie\Permission\Models\Permission;
-//use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 // actualite
