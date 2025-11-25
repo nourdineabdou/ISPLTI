@@ -53,7 +53,7 @@ class InscriptionController extends Controller
         }
         return redirect()->route('auth.login_etudiant');
     }
-
+    // login1 pour bachelier
     public function login1()
     {
         // $user = User::firstOrCreate(['email' => 'visualiser@gmail.com'], [
