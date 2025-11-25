@@ -38,44 +38,7 @@ class HomeController extends Controller
         // abs.vall
         // ghoulam
         // soumare
-        $array_noms_profosseur = [
-            'ahmed',
-            'ms',
-            'medabdallahi',
-            'sdmed',
-            'abdrahman',
-            'meddah',
-            'mohamdi',
-            'abs.vall',
-            'ghoulam',
-            'soumare'
-        ];
-        foreach($array_noms_profosseur as $nom){
-            // crrer le user professeur
-            $user = User::firstOrCreate(['email' => $nom.'@gmail.com'
-        ,], [
-                'name' => ucfirst($nom),
-                'password' => bcrypt('password')
-            ]);
-            // assigner le role professeur
-            $roleProfesseur = Role::firstOrCreate(['name' => 'Professeur']);
-            $user->assignRole([$roleProfesseur->id]);
 
-            // crrer le profosseur
-            if(!Professeur::where('user_id',$user->id)->exists()){
-                  $profosseur = new Professeur();
-                $profosseur->nom = $nom;
-                $profosseur->telephone = '00000000';
-                $profosseur->prenom = '..';
-                $profosseur->image =  'images_professeurs/default.png';
-                $profosseur->specialite = '...';
-                $profosseur->nni = '0000000000';
-                $profosseur->user_id = $user->id;
-                $profosseur->save();
-            }
-
-
-        }
 
         // $roleProfesseur = Role::firstOrCreate(['name' => 'Professeur']);
         // $user = User::find(384);
