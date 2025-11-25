@@ -460,4 +460,5 @@ return [
   'debate_announcment'=>'Annonce de débat',
   'old_debaters_announcment'=>'Annonce des anciens débatteurs',
   "avis_test"=>"Avis test de positionnement",
+  'avis_doc'=>'AVIS DE PROLONGATION DES INSCRIPTIONS',
 ];

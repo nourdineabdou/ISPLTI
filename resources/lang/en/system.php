@@ -474,5 +474,6 @@ return [
   "S5 Eng-Fr 1 3"=>"S5 Anglais-Français",
   'debate_announcment'=>'Debate Announcement',
   'old_debaters_announcment'=>'Old Debaters Announcement',
-  "avis_test"=>"Placement Test Announcement"
+  "avis_test"=>"Placement Test Announcement",
+  "avis_doc"=>"Extension of Registration Announcement",
 ];
