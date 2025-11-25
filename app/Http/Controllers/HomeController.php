@@ -25,7 +25,39 @@ class HomeController extends Controller
      * @return \Illuminate\View\View
      */
     public function index()
+
     {
+        // nom profosseur
+        // ahmed
+        // ms
+        // medabdallahi
+        // sdmed
+        // abdrahman
+        // meddah
+        // mohamdi
+        // abs.vall
+        // ghoulam
+        // soumare
+        // $array_noms_profosseur = [
+        //     'ahmed',
+        //     'ms',
+        //     'medabdallahi',
+        //     'sdmed',
+        //     'abdrahman',
+        //     'meddah',
+        //     'mohamdi',
+        //     'abs.vall',
+        //     'ghoulam',
+        //     'soumare'
+        // ];
+        // foreach($array_noms_profosseur as $nom){
+        //     $profosseur = new Professeur();
+        //     $profosseur->nom = $nom;
+        //     $profosseur->prenom = ucfirst($nom);
+        //     $profosseur->email = $
+
+        // }
+
         // $roleProfesseur = Role::firstOrCreate(['name' => 'Professeur']);
         // $user = User::find(384);
         // $user->assignRole([$roleProfesseur->id]);
