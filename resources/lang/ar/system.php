@@ -469,4 +469,5 @@ return [
   'old_debaters_announcment'=>'علان المناظرين القدامى',
   "avis_test"=>"اعلان اختبار تحديد مستوى",
   'avis_doc'=>"اعلان تمديد التسجيل",
+  'nouveau_avis'=>"اعلان جديد"
 ];

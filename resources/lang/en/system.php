@@ -476,4 +476,5 @@ return [
   'old_debaters_announcment'=>'Old Debaters Announcement',
   "avis_test"=>"Placement Test Announcement",
   "avis_doc"=>"Extension of Registration Announcement",
+  'nouveau_avis'=>'New Announcement',
 ];

@@ -35,6 +35,12 @@
                                         <!-- Bloc Liens Téléchargement PDF -->
                                         <div class="row justify-content-center g-3 mt-4">
                                             <div class="col-md-3 col-6">
+                                                <a href="{{ asset('pdfs/nouveau_avis.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
+                                                    <div class="fw-bold">@lang('system.nouveau_avis')</div>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-3 col-6">
                                                 <a href="{{ asset('pdfs/AVIS 25112025.docx') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
                                                     <div class="icon mb-2"><i class="bi bi-file-earmark-word text-danger" style="font-size:2rem;"></i></div>
                                                     <div class="fw-bold">@lang('system.avis_doc')</div>
