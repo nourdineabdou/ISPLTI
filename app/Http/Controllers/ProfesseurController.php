@@ -19,7 +19,6 @@ class ProfesseurController extends Controller
     //ptofil professeur
 
     public function profil($id)
-
     {
         $professeur = Professeur::findOrFail($id);
         return view('pages.professeurs.profil', [
@@ -44,9 +43,9 @@ class ProfesseurController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            // faire le mouvement de fichier dans public/images_professeurs/
-            File::move($request->file('image')->getRealPath(), public_path('images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension()));
-            $professeur->image = 'images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension();
+            // faire le mouvement de fichier dans public/professeurs/
+            File::move($request->file('image')->getRealPath(), public_path('professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension()));
+            $professeur->image = 'professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension();
         }
 
         $professeur->save();
