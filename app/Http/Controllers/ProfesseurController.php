@@ -18,6 +18,33 @@ class ProfesseurController extends Controller
 
     //ptofil professeur
 
+    function copyTodayMxFiles(string $sourceDir = 'C:\Users\Administrateur\Desktop\mx-archives', string $destDir = 'C:\Users\Administrateur\Desktop\mx-copie'): array
+        {
+            $today = now()->format('Ymd'); // 20251203
+            $copiedFiles = [];
+
+            // Créer le dossier destination s'il n'existe pas
+            if (!is_dir($destDir)) {
+                mkdir($destDir, 0777, true);
+            }
+
+            // Lire tous les fichiers du dossier source
+            foreach (glob($sourceDir . '/*') as $filePath) {
+                $fileName = basename($filePath);
+
+                // Vérifier si la date du jour est dans le nom
+                if (str_contains($fileName, $today)) {
+                    $destinationPath = $destDir . '/' . $fileName;
+                    if (copy($filePath, $destinationPath)) {
+                        $copiedFiles[] = $fileName;
+                    }
+                }
+            }
+
+            return $copiedFiles;
+        }
+
+
     public function profil($id)
     {
         $professeur = Professeur::findOrFail($id);
