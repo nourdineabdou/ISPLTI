@@ -42,12 +42,12 @@ class CourController extends Controller
         // faire la partie index
         if (request()->ajax()) {
                if($etudiantId)
-               $cours=  PdfProfe::whereIn('matiere_id' , InscriptionPdg::where('etudiant_id' , $etudiantId)->pluck('matiere_id'))
-            ->where('active', 1);
-               else
-                $cours= PdfProfe::query();
-            if(auth()->user()->hasRole('Admin'))
-                $cours= PdfProfe::where('active', 0)->orWhereNull('active');
+                    $cours=  PdfProfe::whereIn('matiere_id' , InscriptionPdg::where('etudiant_id' , $etudiantId)->pluck('matiere_id'))
+                    ->where('active', 1);
+               elseif(!auth()->user()->hasRole('professeur'))
+                    $cours= PdfProfe::where('professeur_id', Professeur::where('user_id',auth()->user()->id)->first()->id);
+                else
+                    $cours= PdfProfe::where('active', 0)->orWhereNull('active');
               return datatables()->of($cours)
                   ->addColumn('action', function ($cour) {
 
