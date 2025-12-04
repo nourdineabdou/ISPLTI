@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 // actualite
 use App\Models\Actualite;
+use App\Models\ProfesseurEducation;
+use App\Models\ProfesseurLanguage;
+use App\Models\ProfesseurExperience;
 class HomeController extends Controller
 {
     /**
