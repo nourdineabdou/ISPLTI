@@ -18,7 +18,8 @@ class FormationController extends Controller
     {
         // faire la partie index
         if (request()->ajax()) {
-              return datatables()->of(ProfesseurEducation::query())
+
+              return datatables()->of(ProfesseurEducation::query()->where('professeur_id', Professeur::where('user_id',auth()->user()->id)->first()->id))
                   ->addColumn('action', function ($formation) {
                       $actions = [
                           [
