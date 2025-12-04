@@ -16,27 +16,27 @@ class ExperienceController extends Controller
      */
     public function index()
     {
-        // faire la partie index
+        // // faire la partie index
 
-        $professeur_user = User::firstOrCreate(['email' => 'safia@gmail.com'], [
-            'name' => 'Safia amar',
-            'email' => 'safia@gmail.com',
-            'password' => bcrypt('password')
-        ]);
-        $role = Role::firstOrCreate(['name' => 'Professeur']);
-        $professeur_user->assignRole([$role->id]);
-        $profosseur = Professeur::firstOrCreate(['user_id' => $professeur_user->id], [
-            'user_id' => $professeur_user->id,
-            'nom' => 'Safia',
-            'prenom' => 'amar',
-            'nni' => '1234567890',
-            "email" => 'safia@gmail.com',
-            "telephone" => '41419393',
-            'specialite' => 'Linguistique',
-            'image' => 'images_professeurs/default.png',
-        ]);
+        // $professeur_user = User::firstOrCreate(['email' => 'safia@gmail.com'], [
+        //     'name' => 'Safia amar',
+        //     'email' => 'safia@gmail.com',
+        //     'password' => bcrypt('password')
+        // ]);
+        // $role = Role::firstOrCreate(['name' => 'Professeur']);
+        // $professeur_user->assignRole([$role->id]);
+        // $profosseur = Professeur::firstOrCreate(['user_id' => $professeur_user->id], [
+        //     'user_id' => $professeur_user->id,
+        //     'nom' => 'Safia',
+        //     'prenom' => 'amar',
+        //     'nni' => '1234567890',
+        //     "email" => 'safia@gmail.com',
+        //     "telephone" => '41419393',
+        //     'specialite' => 'Linguistique',
+        //     'image' => 'images_professeurs/default.png',
+        // ]);
         if (request()->ajax()) {
-              return datatables()->of(ProfesseurExperience::query())
+              return datatables()->of(ProfesseurExperience::query()->where('professeur_id', Professeur::where('user_id',auth()->user()->id)->first()->id))
                   ->addColumn('action', function ($experience) {
                       $actions = [
                           [

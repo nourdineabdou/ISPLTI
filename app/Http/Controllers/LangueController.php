@@ -18,7 +18,7 @@ class LangueController extends Controller
     {
         // faire la partie index
         if (request()->ajax()) {
-              return datatables()->of(ProfesseurLanguage::query())
+              return datatables()->of(ProfesseurLanguage::query()->where('professeur_id', Professeur::where('user_id',auth()->user()->id)->first()->id))
                   ->addColumn('action', function ($language) {
                       $actions = [
                           [
