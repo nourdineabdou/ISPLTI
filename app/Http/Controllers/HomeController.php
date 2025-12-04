@@ -77,9 +77,10 @@ class HomeController extends Controller
                 return view('espace_etudiant', ['etudiant'=>$etudiant,'ndos'=>$ndos,'inscritEtat'=>$inscritEtat,'anneeActive'=>$this->anneeActive()] );
             } elseif (auth()->user()->hasRole('Professeur')) {
                 $professeur=Professeur::where('user_id',auth()->user()->id)->get()->first();
-                $professeurEducations = $professeur->educations;
-                $professeurExperiences = $professeur->experiences;
-                $professeurLanguages = $professeur->languages;
+                $professeurEducations = ProfesseurEducation::where('professeur_id', $professeur->id)->get();
+                $professeurExperiences = ProfesseurEducation::where('professeur_id', $professeur->id)->get();
+
+                $professeurLanguages = ProfesseurLanguage::where('professeur_id', $professeur->id)->get();
                 return view('espace_professeur' , [
                     'professeur'=>$professeur,
                     'professeurEducations' => $professeurEducations,
