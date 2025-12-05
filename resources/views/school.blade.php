@@ -168,6 +168,47 @@
                     </div>
                 </div>
             </section><!-- /Section Héros -->
+
+
+             <!-- Section Actualités -->
+            <section id="recent-news" class="recent-news section">
+
+            <!-- Section Title -->
+            <div class="container section-title @if(app()->getLocale() == 'ar') text-end @endif" data-aos="fade-up">
+                <h2>@lang('system.Actualites')</h2>
+                <p>@lang('system.Actualites_desc')</p>
+            </div><!-- End Section Title -->
+
+            <div class="container @if(app()->getLocale() == 'ar') text-end @endif">
+
+                <div class="row gy-4 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
+
+                    @foreach (\App\Models\Actualite::where('statut', 'publie')->orderBy('id', 'desc')->limit(3)->get() as $actualite)
+                        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                                <article>
+                                <div class="post-img">
+                                    <img src="{{ asset($actualite->image) }}" alt="" class="img-fluid">
+                                </div>
+
+                                <p class="post-category">{{ app()->getLocale() == 'fr' ? $actualite->titre_fr : (app()->getLocale() == 'en' ? $actualite->titre_en : $actualite->titre_ar) }}</p>
+                                <h2 class="title">
+                                    <a href="#">{{ app()->getLocale() == 'fr' ? $actualite->contenu_fr : (app()->getLocale() == 'en' ? $actualite->contenu_en : $actualite->contenu_ar) }}</a>
+                                </h2>
+                                <div class="d-flex align-items-center">
+                                    <div class="post-meta">
+                                    <p class="post-author-name">{{ $actualite->auteur }}</p>
+                                    <p class="post-date">
+                                        <time datetime="2023-01-01">{{ \Carbon\Carbon::parse($actualite->created_at)->locale(app()->getLocale())->isoFormat('LL') }}</time>
+                                    </p>
+                                    </div>
+                                </article>
+                            </div>
+                    @endforeach
+                <!-- End post list item -->
+                </div><!-- End recent posts list -->
+            </div>
+            </section><!-- /Recent News Section -->
+            <!-- Section Événements -->
             {{--
             <!-- Section À propos -->
             <section id="about" class="about section">
@@ -733,45 +774,7 @@
 
             </section><!-- /Stats Section -->
 
-            <!-- Section Actualités -->
-            <section id="recent-news" class="recent-news section">
 
-            <!-- Section Title -->
-            <div class="container section-title @if(app()->getLocale() == 'ar') text-end @endif" data-aos="fade-up">
-                <h2>@lang('system.Actualites')</h2>
-                <p>@lang('system.Actualites_desc')</p>
-            </div><!-- End Section Title -->
-
-            <div class="container @if(app()->getLocale() == 'ar') text-end @endif">
-
-                <div class="row gy-4 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
-
-                    @foreach (\App\Models\Actualite::where('statut', 'publie')->orderBy('id', 'desc')->limit(3)->get() as $actualite)
-                        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                                <article>
-                                <div class="post-img">
-                                    <img src="{{ asset($actualite->image) }}" alt="" class="img-fluid">
-                                </div>
-
-                                <p class="post-category">{{ app()->getLocale() == 'fr' ? $actualite->titre_fr : (app()->getLocale() == 'en' ? $actualite->titre_en : $actualite->titre_ar) }}</p>
-                                <h2 class="title">
-                                    <a href="#">{{ app()->getLocale() == 'fr' ? $actualite->contenu_fr : (app()->getLocale() == 'en' ? $actualite->contenu_en : $actualite->contenu_ar) }}</a>
-                                </h2>
-                                <div class="d-flex align-items-center">
-                                    <div class="post-meta">
-                                    <p class="post-author-name">{{ $actualite->auteur }}</p>
-                                    <p class="post-date">
-                                        <time datetime="2023-01-01">{{ \Carbon\Carbon::parse($actualite->created_at)->locale(app()->getLocale())->isoFormat('LL') }}</time>
-                                    </p>
-                                    </div>
-                                </article>
-                            </div>
-                    @endforeach
-                <!-- End post list item -->
-                </div><!-- End recent posts list -->
-            </div>
-            </section><!-- /Recent News Section -->
-            <!-- Section Événements -->
             <section id="events" class="events section">
 
                 <!-- Section Title -->
