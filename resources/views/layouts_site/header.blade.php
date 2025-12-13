@@ -4,7 +4,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- <img src="assets-lib/img/logo.webp" alt=""> -->
-        
+
         <h1 class="sitename">ISPLTI</h1>
       </a>
 
@@ -24,7 +24,7 @@
           </li>
 
           <li><a class="link-disabled" href="{{ route('pages.viesEstudiantine') }}" class="{{ request()->routeIs('pages.viesEstudiantine') ? 'active' : '' }}">@lang('system.Vie_Etudiante')</a></li>
-          <li><a class="link-disabled" href="{{ route('pages.actualite') }}" class="{{ request()->routeIs('pages.actualite') ? 'active' : '' }}">@lang('system.Actualites')</a></li>
+          <li><a  href="{{ route('pages.actualite') }}" class="{{ request()->routeIs('pages.actualite') ? 'active' : '' }}">@lang('system.Actualites')</a></li>
           <li><a class="link-disabled" href="{{ route('pages.events') }}" class="{{ request()->routeIs('pages.events') ? 'active' : '' }}">@lang('system.Evenements')</a></li>
           {{--
           <li><a href="alumni.html">Anciens Élèves</a></li>
@@ -78,9 +78,9 @@
 					<li><a href="{{ route('language.switch', ['locale' => 'en']) }}"><i class="bi bi-globe"></i>@lang('system.en')</a></li>
 		 @elseif(app()->getLocale() == 'en')
 					<li><a href="{{ route('language.switch', ['locale' => 'ar']) }}"><i class="bi bi-globe"></i>@lang('system.ar')</a></li>
-				    <li><a href="{{ route('language.switch', ['locale' => 'fr']) }}"><i class="bi bi-globe"></i>@lang('system.fr')</a></li>         	
+				    <li><a href="{{ route('language.switch', ['locale' => 'fr']) }}"><i class="bi bi-globe"></i>@lang('system.fr')</a></li>
 		 @endif
-		    
+
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 

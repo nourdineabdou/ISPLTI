@@ -44,8 +44,8 @@ class CourController extends Controller
                if($etudiantId)
                     $cours=  PdfProfe::whereIn('matiere_id' , InscriptionPdg::where('etudiant_id' , $etudiantId)->pluck('matiere_id'))
                     ->where('active', 1);
-               elseif(!auth()->user()->hasRole('professeur'))
-                    $cours= PdfProfe::where('professeur_id', Professeur::where('user_id',auth()->user()->id)->first()->id);
+               elseif(auth()->user()->hasRole('professeur'))
+                    $cours= PdfProfe::where('professeur_id', Professeur::where('user_id',auth()->user()->id)->first()?->id);
                 else
                     $cours= PdfProfe::where('active', 0)->orWhereNull('active');
               return datatables()->of($cours)
