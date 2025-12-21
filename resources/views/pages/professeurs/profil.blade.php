@@ -13,13 +13,13 @@
             <div class="card shadow-lg border-0 mb-4">
                 <div class="card-body text-center">
                     <div class="position-relative d-inline-block mb-3">
-                        <img src="{{ asset($professeur->image) }}" alt="Photo de profil" class="rounded-circle border border-3" style="width:120px;height:120px;object-fit:cover;">
+                        <img src="{{ route('professeurs.getImage', $professeur->id) }}" alt="Photo de profil" class="rounded-circle border border-3" style="width:120px;height:120px;object-fit:cover;">
                         <form action="{{ route('professeurs.updatePhoto', $professeur->id) }}" method="POST" enctype="multipart/form-data" class="mt-2">
                             @csrf
                             <label class="btn btn-sm btn-outline-primary position-absolute bottom-0 start-50 translate-middle-x" style="z-index:2;">
                                 <i class="bi bi-pencil-square"></i> Modifier la photo
                                 <input type="file" name="image" accept="image/*" class="d-none" onchange="this.form.submit()">
-                            </label> 
+                            </label>
                         </form>
                     </div>
                     <h2 class="mb-1">{{ $professeur->nom }}</h2>

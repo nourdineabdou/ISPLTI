@@ -19,4 +19,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'professeurs'], function () 
     Route::post('/{id}/update_photo', [ProfesseurController::class, 'updatePhoto'])->name('professeurs.updatePhoto');
     // profil professeur
     Route::get('/{id}/profil', [ProfesseurController::class, 'profil'])->name('professeurs.profil');
+
+    // get images professeurs
+    Route::get('/images/{professeur_id}', [ProfesseurController::class, 'getImage'])->name('professeurs.getImage');
 });
