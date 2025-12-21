@@ -49,7 +49,7 @@ class ProfesseurController extends Controller
             // faire le mouvement de fichier dans public/professeurs/
             // je vais utliser le strorage/professeurs/
 
-            File::move($request->file('image')->getRealPath(), storage_path('app/profosseurs/') . '/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension());
+            File::move($request->file('image')->getRealPath(), storage_path('app/profosseurs') . '/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension());
             $professeur->image = 'profosseurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension();
         }
 
