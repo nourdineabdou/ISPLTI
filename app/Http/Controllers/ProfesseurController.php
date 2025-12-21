@@ -47,9 +47,10 @@ class ProfesseurController extends Controller
 
         if ($request->hasFile('image')) {
             // faire le mouvement de fichier dans public/professeurs/
+            // je vais utliser le strorage/professeurs/
 
-            File::move($request->file('image')->getRealPath(), public_path('professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension()));
-            $professeur->image = 'professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension();
+            File::move($request->file('image')->getRealPath(), storage_path('app/profosseurs/') . '/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension());
+            $professeur->image = 'profosseurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension();
         }
 
         $professeur->save();
@@ -99,6 +100,22 @@ class ProfesseurController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    // get image from request and store in storage/app/professeurs/
+
+   public function getImage($professeur_id)
+    {
+
+        $professeur = Professeur::findOrFail($professeur_id);
+        //dd($professeur->image);
+        if ($professeur->image && File::exists(storage_path('app/' . $professeur->image))) {
+            return response()->file(storage_path('app/' . $professeur->image));
+        } else {
+            return response()->file(storage_path('app/profosseurs/default.png'));
+        }
+    }
+
+
     public function store(Request $request)
     {
         $validated = $request->validate([
