@@ -41,13 +41,23 @@ class CourController extends Controller
     {
         // faire la partie index
         if (request()->ajax()) {
+            // voir le nom du role de l'utilisateur connecté
+                // $nomRole = auth()->user()->getRoleNames()->first();
+                // dd($nomRole);
                if($etudiantId)
                     $cours=  PdfProfe::whereIn('matiere_id' , InscriptionPdg::where('etudiant_id' , $etudiantId)->pluck('matiere_id'))
                     ->where('active', 1);
-               elseif(auth()->user()->hasRole('professeur'))
+               elseif(auth()->user()->hasRole('Professeur')){
                     $cours= PdfProfe::where('professeur_id', Professeur::where('user_id',auth()->user()->id)->first()?->id);
-                else
+
+               }
+
+
+                else{
                     $cours= PdfProfe::where('active', 0)->orWhereNull('active');
+
+                }
+
               return datatables()->of($cours)
                   ->addColumn('action', function ($cour) {
 
