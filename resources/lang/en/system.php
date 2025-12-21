@@ -477,4 +477,6 @@ return [
   "avis_test"=>"Placement Test Announcement",
   "avis_doc"=>"Extension of Registration Announcement",
   'nouveau_avis'=>'New Announcement',
+  "News_Title"=>"Latest News",
+  "News_Desc"=>" Stay updated with the latest news and announcements from our institute.",
 ];
