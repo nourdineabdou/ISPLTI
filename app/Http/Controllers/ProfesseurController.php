@@ -107,11 +107,11 @@ class ProfesseurController extends Controller
     {
 
         $professeur = Professeur::findOrFail($professeur_id);
-        //dd($professeur->image);
+       // dd(storage_path());
         if ($professeur->image && File::exists(storage_path('app/' . $professeur->image))) {
             return response()->file(storage_path('app/' . $professeur->image));
         } else {
-            return response()->file(storage_path('app/profosseurs/default.png'));
+            return response()->file(storage_path('app/profosseurs/default.webp'));
         }
     }
 
