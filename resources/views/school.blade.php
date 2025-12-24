@@ -29,8 +29,10 @@
                                     </h1>
                                     <p>@lang('system.Institut_slogan')</p>
                                     <div class="cta-buttons">
+                                        {{--
                                     <a href="{{ route('inscriptions.login1') }}" class="btn-primary">@lang('system.inscription')</a>
                                     <a  href="{{ route('inscriptions.login2') }}" class="btn-secondary">@lang('system.rescription')</a>
+                                     --}}
                                     </div>
                                         <!-- Bloc Liens Téléchargement PDF -->
                                         <div class="row justify-content-center g-3 mt-4">
