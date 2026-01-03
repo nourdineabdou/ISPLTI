@@ -31,5 +31,5 @@ return [
     'resultats'=>'Résultats',
     'semestre'=>'Semestre',
     'emploidetemps'=>'Emploi de Temps',
-    'programmes'=>'Programmes',
+    'programmes'=>'Heures des convocations pour les controles (cc ou cf)',
 ];
