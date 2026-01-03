@@ -21,12 +21,16 @@
                                 @csrf
                                 <fieldset class="form-group position-relative has-icon-left">
                                     <input type="text"
-                                           name="email"
-                                           class="form-control @error('email') is-invalid @enderror" id="user-name"
-                                           placeholder="Entrer l'adresse email" required>
+                                           name="login"
+                                           value="{{ old('login') }}"
+                                           class="form-control @error('login') is-invalid @enderror" id="user-name"
+                                           placeholder="Email ou NNI" required>
                                     <div class="form-control-position">
                                         <i class="la la-user"></i>
                                     </div>
+                                    @error('login')
+                                        <span class="invalid-feedback d-block" role="alert"><strong>{{ $message }}</strong></span>
+                                    @enderror
                                 </fieldset>
                                 <fieldset class="form-group position-relative has-icon-left">
                                     <input type="password"

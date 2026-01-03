@@ -31,4 +31,5 @@ return [
     'resultats'=>'Résultats',
     'semestre'=>'Semestre',
     'emploidetemps'=>'Emploi de Temps',
+    'programmes'=>'Programmes',
 ];
