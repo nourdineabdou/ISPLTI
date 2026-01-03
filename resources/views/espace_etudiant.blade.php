@@ -40,8 +40,8 @@
             $programes = \App\Models\Programme::where('matrucle', $etudiant->nodos)->get();
         @endphp
         <div class="card shadow mb-4">
-            <div class="card-header bg-dark text-white">
-                <h5 class="mb-0"><i class="bi bi-journal-bookmark"></i> @lang('etudiants.programmes')</h5>
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0 fw-bold"><i class="bi bi-journal-bookmark"></i> @lang('etudiants.programmes')</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
