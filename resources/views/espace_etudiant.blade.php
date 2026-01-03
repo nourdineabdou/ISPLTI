@@ -35,6 +35,54 @@
             </div>
         </div>
 
+        {{-- programmes --}}
+        @php
+            $programes = \App\Models\Programme::where('matrucle', $etudiant->nodos)->get();
+        @endphp
+        <div class="card shadow mb-4">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0"><i class="bi bi-journal-bookmark"></i> @lang('etudiants.programmes')</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Matricule</th>
+                                <th>Jour</th>
+                                <th>Matière</th>
+                                <th>Spécialité</th>
+                                <th>Semestre</th>
+                                <th>Semaine</th>
+                                <th>Horaire</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($programes as $programme)
+                                <tr>
+                                    <td>{{ $programme->matrucle }}</td>
+                                    <td>{{ $programme->jour  }}</td>
+                                    <td>{{ $programme->matiere }}</td>
+                                    <td>{{ $programme->specialite }}</td>
+                                    <td>{{ $programme->semestre }}</td>
+                                    <td>{{ $programme->semaine  }}</td>
+                                    <td>{{ $programme->horaire  }}</td>
+                                    <td><span class="badge bg-gradient-secondary text-white">{{ $programme->date  }}</span></td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center">Aucun programme trouvé.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        {{-- suivi absences --}}
+
         <div class="card shadow mb-4">
             <div class="card-header bg-primary text-white">
                 <h5 class="mb-0"><i class="bi bi-calendar-week"></i>  @lang('etudiants.suvidepresence') </h5>

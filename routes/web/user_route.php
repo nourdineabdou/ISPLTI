@@ -10,6 +10,10 @@ Route::group(['prefix' => 'auth', 'middleware' => ['auth']], function () {
     })->name('auth.profile');
 });
 
+// login required routes
+
+//Route::post('login', [UserController::class, 'login'])->name('users.login');
+
 Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
     Route::get('/', [UserController::class, 'index'])->name('users.index');
     Route::get('create', [UserController::class, 'create'])->name('users.create');

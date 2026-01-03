@@ -464,4 +464,5 @@ return [
   'nouveau_avis'=>'NOUVEL AVIS',
   "News_Title"=>"Titre des nouvelles",
   "News_Desc"=>"Description des nouvelles",
+
 ];

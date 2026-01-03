@@ -42,13 +42,48 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+
         if ($user->status == 'suspended') {
             Auth::logout();
             return redirect()->route('login')->withErrors([
-                'email' => 'Your account is suspended. Please contact support.',
+                'login' => 'Your account is suspended. Please contact support.',
             ]);
         }
+
         return redirect()->intended($this->redirectPath());
+    }
+
+    /**
+     * Get the needed authentication credentials from the request.
+     * Allow login by email or by NNI.
+     */
+    protected function credentials(Request $request)
+    {
+        $login = $request->input('login');
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'nni';
+        return [
+            $field => $login,
+            'password' => $request->input('password'),
+        ];
+    }
+
+    /**
+     * Return the login field name used by the controller.
+     */
+    public function username()
+    {
+        return 'login';
+    }
+
+    /**
+     * Validate the user login request.
+     */
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            'login' => 'required|string',
+            'password' => 'required|string',
+        ]);
     }
 
 }
