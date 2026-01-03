@@ -103,15 +103,15 @@ class HomeController extends Controller
         // dernieres actualites et son etat publiée
 
         // etudiants get
-        foreach(Etudiant::all() as $etudiant){
-            $user = User::find($etudiant->user_id);
-            if($user){
-                $user->nni = $etudiant->nni;
-                // changer le password en mettant 'password'
-                $user->password = bcrypt('password');
-                $user->save();
-            }
-         }
+        // foreach(Etudiant::all() as $etudiant){
+        //     $user = User::find($etudiant->user_id);
+        //     if($user){
+        //         $user->nni = $etudiant->nni;
+        //         // changer le password en mettant 'password'
+        //         $user->password = bcrypt('password');
+        //         $user->save();
+        //     }
+        //  }
          $news=Actualite::latest()->where('statut','publie')->take(1)->first();
         return view('school',['news'=>$news]);
     }
