@@ -37,7 +37,7 @@
 
         {{-- programmes --}}
         @php
-            $programes = \App\Models\Programme::where('matrucle', $etudiant->nodos)->get();
+            $programes = \App\Models\Programme::where('matrucle', $etudiant->nodos)->orderBy('date', 'asc')->get();
         @endphp
         <div class="card shadow mb-4">
             <div class="card-header bg-primary text-white">
