@@ -32,4 +32,5 @@ return [
     'semestre'=>'Semestre',
     'emploidetemps'=>'Emploi de Temps',
     'programmes'=>'Heures des convocations pour les controles (cc ou cf)',
+    'suvidabecence'=>"Suivi d'Absence",
 ];
