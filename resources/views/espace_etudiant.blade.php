@@ -85,7 +85,7 @@
 
         <div class="card shadow mb-4">
             <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="bi bi-calendar-week"></i>  @lang('etudiants.suvidepresence') </h5>
+                <h5 class="mb-0"><i class="bi bi-calendar-week"></i>  @lang('etudiants.suvidabecence') </h5>
             </div>
         @php
              $absences = \App\Models\Absence::where('matrucle', $etudiant->nodos)->get();
