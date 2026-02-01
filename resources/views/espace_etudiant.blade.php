@@ -8,7 +8,15 @@
                 <img src="{{ route('etudiants.image', $etudiant->id) }}" alt="Photo étudiant.." class="rounded-circle shadow" width="80" height="80">
             </div>
             <div class="col-md-10">
-                <h2 class="mb-1">Bienvenue <span class="text-primary"> {{$etudiant->nom_fr}}</span></h2>
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <h2 class="mb-0">Bienvenue <span class="text-primary"> {{$etudiant->nom_fr}}</span></h2>
+                    <a class="btn btn-success btn-sm px-3 py-2 shadow-sm d-inline-flex align-items-center"
+                       style="font-size:1rem;gap:0.5rem;"
+                       onclick="printObject({link:'{{ route('etudiants.convocation', $etudiant->id) }}', title:'Convocation', width:8.27, height:11.7})"
+                       target="_blank">
+                        <i class="bi bi-download"></i> <span class="d-none d-sm-inline">Télécharger la convocation</span>
+                    </a>
+                </div>
                 <div class="d-flex align-items-center mb-2">
                     <span class="me-2">@lang('etudiants.num_inscription') </span>
                     <span class="badge bg-success">{{ $etudiant->nodos }}</span>
@@ -85,7 +93,7 @@
 
         <div class="card shadow mb-4">
             <div class="card-header bg-primary text-white">
-                <h5 class="mb-0"><i class="bi bi-calendar-week"></i>  @lang('etudiants.suvidabecence') </h5>
+                <h5 class="mb-2 mb-md-0"><i class="bi bi-calendar-week"></i>  @lang('etudiants.suvidabecence')</h5>
             </div>
         @php
              $absences = \App\Models\Absence::where('matrucle', $etudiant->nodos)->get();
