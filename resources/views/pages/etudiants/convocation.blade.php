@@ -73,9 +73,9 @@
         <div style="margin-top:2px; font-size:8pt; color:#444;">
             @if($semestre)
                 @if($semestre->etat == 1)
-                    Semestre Impaire
+                    SEMESTRES IMPAIRES
                 @else
-                    Semestre Paire
+                    SEMESTRES PAIRES
                 @endif
             @endif
         </div>
