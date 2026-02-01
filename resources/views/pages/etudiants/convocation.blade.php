@@ -80,24 +80,32 @@
             @endif
         </div>
     </div>
-    <section class="bloc" style="position:relative;">
-        <div style="position:absolute; top:8px; right:8px; text-align:center;">
-            @if(!empty($etudiant->id))
-                <img src="{{ $photoUrl }}" alt="Photo {{ $etudiant->nom_fr ?? $etudiant->nom }}" class="student-photo">
-            @else
-                <div class="student-photo" style="display:flex; align-items:center; justify-content:center; color:#999; font-size:9pt; text-align:center;">
-                    Photo<br>étudiant
-                </div>
-            @endif
+    <section class="bloc" style="padding:12px 8px;">
+        <div style="display:flex; flex-wrap:wrap; gap:18px; align-items:flex-start;">
+            <div style="flex:1 1 220px; min-width:180px;">
+                <p class="parag" style="margin-bottom:4px;">
+                    L'étudiant(e) Mr(Mme): <strong>{{ $etudiant->nom_fr ?? $etudiant->nom }}</strong>, NNI <strong>{{ $etudiant->nni }}</strong>, Né(e) le <strong>{{ !empty($etudiant->date_naissance) ? \Carbon\Carbon::parse($etudiant->date_naissance)->format('d/m/Y') : '' }}</strong>
+                    à/en <strong>{{ $etudiant->lieu_naissance }}</strong><br>
+                    inscrit(e) administrativement sous le numéro <strong>{{ $etudiant->nodos }}</strong> en formation initiale <strong>{{ $formation }}</strong> niveau <strong>{{ $niveau ?? '1' }}</strong>{{ isset($etudiant->tronc_commun) ? ', ' . $etudiant->tronc_commun : '' }}<br>
+                    est convoqué(e) aux épreuves du contrôle final des éléments suivants :
+                </p>
+            </div>
+            <div style="flex:0 0 120px; max-width:120px; width:100%; display:flex; justify-content:center; align-items:flex-start;">
+                @if(!empty($etudiant->id))
+                    <img src="{{ $photoUrl }}" alt="Photo {{ $etudiant->nom_fr ?? $etudiant->nom }}" class="student-photo" style="margin-bottom:8px;">
+                @else
+                    <div class="student-photo" style="display:flex; align-items:center; justify-content:center; color:#999; font-size:9pt; text-align:center; margin-bottom:8px;">
+                        Photo<br>étudiant
+                    </div>
+                @endif
+            </div>
         </div>
-        <div style="margin-right:130px;">
-            <p class="parag" style="margin-bottom:4px;">
-                L'étudiant(e) Mr(Mme): <strong>{{ $etudiant->nom_fr ?? $etudiant->nom }}</strong>, NNI <strong>{{ $etudiant->nni }}</strong>, Né(e) le <strong>{{ !empty($etudiant->date_naissance) ? \Carbon\Carbon::parse($etudiant->date_naissance)->format('d/m/Y') : '' }}</strong>
-                à/en <strong>{{ $etudiant->lieu_naissance }}</strong><br>
-                inscrit(e) administrativement sous le numéro <strong>{{ $etudiant->nodos }}</strong> en formation initiale <strong>{{ $formation }}</strong> niveau <strong>{{ $niveau ?? '1' }}</strong>{{ isset($etudiant->tronc_commun) ? ', ' . $etudiant->tronc_commun : '' }}<br>
-                est convoqué(e) aux épreuves du contrôle final des éléments suivants :
-            </p>
-        </div>
+        <style>
+            @media (max-width: 600px) {
+                .bloc > div { flex-direction: column !important; gap: 8px !important; }
+                .student-photo { margin: 0 auto 8px auto !important; }
+            }
+        </style>
     </section>
     <div class="container">
         <table>
