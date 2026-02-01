@@ -78,14 +78,16 @@ Route::group(['prefix' => 'bacheliers'], function () {
 
 });
 Route::group(['prefix' => 'etudiants'], function () {
-    // absences etudiant
-    Route::get('/{nodos}/absences', [EtudiantController::class, 'absences'])->name('etudiants.absences');
-    Route::get('/image/{id}', [EtudiantController::class, 'getImage'])->name('etudiants.image');
-  Route::get('/{id}/attestation', [EtudiantController::class, 'attestation'])->name('etudiants.attestation');
-  // info etudiant par ajax
-  Route::get('/info/{id}/etudiant', [EtudiantController::class, 'infoEtudiant'])->name('etudiants.info');
-  //copier_dossiers_bacheliers
-  Route::get('/copier_dossiers/bacheliers', [EtudiantController::class, 'copier_dossiers_bacheliers'])->name('etudiants.copier_dossiers_bacheliers');
+        // absences etudiant
+        Route::get('/{nodos}/absences', [EtudiantController::class, 'absences'])->name('etudiants.absences');
+        Route::get('/image/{id}', [EtudiantController::class, 'getImage'])->name('etudiants.image');
+        Route::get('/{id}/attestation', [EtudiantController::class, 'attestation'])->name('etudiants.attestation');
+        // nouvelle route convocation
+        Route::get('/{id}/convocation', [EtudiantController::class, 'convocation'])->name('etudiants.convocation');
+        // info etudiant par ajax
+        Route::get('/info/{id}/etudiant', [EtudiantController::class, 'infoEtudiant'])->name('etudiants.info');
+        //copier_dossiers_bacheliers
+        Route::get('/copier_dossiers/bacheliers', [EtudiantController::class, 'copier_dossiers_bacheliers'])->name('etudiants.copier_dossiers_bacheliers');
 });
 
 

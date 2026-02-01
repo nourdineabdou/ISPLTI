@@ -623,4 +623,17 @@ public function getImage($id)
             'absences' => $absences
         ]);
     }
+
+    // Affiche la convocation de l'étudiant
+    public function convocation($id)
+    {
+        $etudiant = \App\Models\Etudiant::findOrFail($id);
+        // recuperer la model convocation
+        $convecations = \App\Models\Convocation::where('matrucle', $etudiant->nodos)->get();
+        // annese universitaire en cours
+        $annee_en_cours = AnneeUniversitaire::where('etat', 1)->first();
+         $niveau = InscriptionAdm::where('etudiant_id', $id)->with('specialite')->first()?->specialite?->niveau ?? 'N/A';
+        $formation = InscriptionAdm::where('etudiant_id', $id)->with('specialite')->first()?->specialite?->lib_annee_diplome_fr ?? 'N/A';
+        return view('pages.etudiants.convocation', compact('etudiant', 'convecations', 'annee_en_cours', 'niveau', 'formation'));
+    }
 }

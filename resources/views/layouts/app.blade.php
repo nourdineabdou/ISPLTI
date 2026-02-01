@@ -13,6 +13,8 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="/assets-lib/vendor/bootstrap-icons/bootstrap-icons.css">
     <!-- Scripts -->
 {{--    @vite(['resources/sass/app.scss', 'resources/js/app.js'])--}}
 </head>
