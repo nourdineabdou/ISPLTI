@@ -42,6 +42,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'etudiants'], function () {
     // updatePhoto
     Route::post('/{id}/updatePhoto', [EtudiantController::class, 'updatePhoto'])->name('etudiants.updatePhoto');
 
+    // téléchargement des bulletins (S1, S3, S5)
+    Route::get('/bulletins/{semestre}/download', [EtudiantController::class, 'downloadBulletin'])->name('etudiants.bulletin.download');
+
 });
 
 // bacheliers routes

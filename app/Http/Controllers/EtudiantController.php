@@ -176,6 +176,40 @@ public function getImage($id)
     return response($file, 200)->header('Content-Type', $type);
 }
 
+public function downloadBulletin($semestre)
+{
+    $user = auth()->user();
+
+    if (!$user || !$user->hasRole('Etudiant')) {
+        abort(403, 'Accès non autorisé.');
+    }
+
+    $etudiant = Etudiant::where('user_id', $user->id)->first();
+
+    if (!$etudiant) {
+        abort(404, 'Étudiant introuvable.');
+    }
+
+    $semestre = strtoupper((string) $semestre);
+    if (!in_array($semestre, ['S1', 'S3', 'S5'])) {
+        abort(404, 'Semestre invalide.');
+    }
+
+    $suffix = $etudiant->nodos_suffix;
+    if ($suffix === '') {
+        abort(404, 'Code dossier introuvable.');
+    }
+
+    $fileName = $suffix . $semestre . '.png';
+    $path = 'bultin/' . $fileName;
+
+    if (!Storage::disk('local')->exists($path)) {
+        abort(404, 'Bulletin introuvable.');
+    }
+
+    return Storage::disk('local')->download($path, $fileName);
+}
+
 
     public function index()
     {

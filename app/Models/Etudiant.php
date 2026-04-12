@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 class Etudiant extends Model
 {
      use SoftDeletes;
@@ -38,5 +39,48 @@ class Etudiant extends Model
      public function inscriptions()
     {
         return $this->hasMany(InscriptionAdm::class, 'etudiant_id');
+    }
+
+    public function getNodosSuffixAttribute()
+    {
+        $nodos = (string) $this->nodos;
+
+        if ($nodos === '') {
+            return '';
+        }
+
+        if (str_contains($nodos, '/')) {
+            $parts = explode('/', $nodos);
+            return trim((string) end($parts));
+        }
+
+        return trim($nodos);
+    }
+
+    public function getAvailableBulletins(array $semestres = ['S1', 'S3', 'S5'])
+    {
+        $suffix = $this->nodos_suffix;
+
+        if ($suffix === '') {
+            return [];
+        }
+
+        $available = [];
+
+        foreach ($semestres as $semestre) {
+            $semestre = strtoupper((string) $semestre);
+            $fileName = $suffix . $semestre . '.png';
+            $path = 'bultin/' . $fileName;
+
+            if (Storage::disk('local')->exists($path)) {
+                $available[$semestre] = [
+                    'semestre' => $semestre,
+                    'filename' => $fileName,
+                    'path' => $path,
+                ];
+            }
+        }
+
+        return $available;
     }
 }
