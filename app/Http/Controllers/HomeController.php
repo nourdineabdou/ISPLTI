@@ -74,10 +74,11 @@ class HomeController extends Controller
                 $ndos=substr($etudiant->nodos,-4);
                 $inscrit=InscriptionAdm::where('annee_univ_id',$this->anneeActive()->id)->where('etudiant_id',$etudiant->id)->get();
                 $inscritEtat=0;
+                $bulletins = $etudiant ? $etudiant->getAvailableBulletins(['S1', 'S3', 'S5']) : [];
                 if($inscrit->count()>0){
                         $inscritEtat=1;
                 }
-                return view('espace_etudiant', ['etudiant'=>$etudiant,'ndos'=>$ndos,'inscritEtat'=>$inscritEtat,'anneeActive'=>$this->anneeActive()] );
+                return view('espace_etudiant', ['etudiant'=>$etudiant,'ndos'=>$ndos,'inscritEtat'=>$inscritEtat,'anneeActive'=>$this->anneeActive(), 'bulletins' => $bulletins] );
             } elseif (auth()->user()->hasRole('Professeur')) {
                 $professeur=Professeur::where('user_id',auth()->user()->id)->get()->first();
                 $professeurEducations = ProfesseurEducation::where('professeur_id', $professeur->id)->get();
