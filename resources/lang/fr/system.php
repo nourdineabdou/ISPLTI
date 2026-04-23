@@ -464,5 +464,6 @@ return [
   'nouveau_avis'=>'NOUVEL AVIS',
   "News_Title"=>"Titre des nouvelles",
   "News_Desc"=>"Description des nouvelles",
-
+    "Project_Proposal_Template"=>"Modèle de proposition de projet",
+  "Proposed_Themes"=>"Thèmes proposés",
 ];
