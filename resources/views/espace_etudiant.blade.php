@@ -43,6 +43,50 @@
             </div>
         </div>
 
+        <div class="card shadow mb-4">
+            <div class="card-header bg-warning text-white">
+                <h5 class="mb-0"><i class="bi bi-file-earmark-arrow-down"></i> @lang('etudiants.resultats')</h5>
+            </div>
+            <div class="card-body">
+                @php
+                    $desiredSemestres = ['S1', 'S3', 'S5'];
+                @endphp
+
+                <div class="row g-3">
+                    @foreach($desiredSemestres as $semestre)
+                        @php
+                            $exists = isset($bulletins[$semestre]);
+                        @endphp
+                        <div class="col-12 col-md-4">
+                            <div class="border rounded p-3 h-100 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Bulletin {{ $semestre }}</h6>
+                                    <small class="text-muted">
+                                        @if($exists)
+                                            Fichier disponible
+                                        @else
+                                            Fichier non disponible
+                                        @endif
+                                    </small>
+                                </div>
+                                <div class="mt-3">
+                                    @if($exists)
+                                        <a href="{{ route('etudiants.bulletin.download', ['semestre' => $semestre]) }}" class="btn btn-outline-success btn-sm w-100">
+                                            <i class="bi bi-download"></i> Télécharger {{ $semestre }}
+                                        </a>
+                                    @else
+                                        <button type="button" class="btn btn-outline-secondary btn-sm w-100" disabled>
+                                            Non disponible
+                                        </button>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
         {{-- programmes --}}
         @php
             $programes = \App\Models\Programme::where('matrucle', $etudiant->nodos)->orderBy('date', 'asc')->get();
@@ -131,7 +175,6 @@
                 </div>
             </div>
         </div>
-
 
 
         {{--
