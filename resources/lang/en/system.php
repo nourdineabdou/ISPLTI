@@ -479,4 +479,6 @@ return [
   'nouveau_avis'=>'New Announcement',
   "News_Title"=>"Latest News",
   "News_Desc"=>" Stay updated with the latest news and announcements from our institute.",
+  "Project_Proposal_Template"=>"Project Proposal Template",
+  "Proposed_Themes"=>"Proposed Themes",
 ];
