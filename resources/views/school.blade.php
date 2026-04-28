@@ -10,7 +10,7 @@
                         <div class="row align-items-center @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
                             <div class="col-lg-12 @if(app()->getLocale() == 'ar') order-2 @endif" data-aos="zoom-out" data-aos-delay="100">
                                 <div class="hero-content">
-                                <h1>
+                                    <h1>
                                     @if($news)
                                         @if(app()->getLocale() == 'ar')
                                         <marquee direction="right"  scrollamount="5" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;font-size: 14px;" >
@@ -29,10 +29,10 @@
                                     </h1>
                                     <p>@lang('system.Institut_slogan')</p>
                                     <div class="cta-buttons">
-                                        {{--
-                                    <a href="{{ route('inscriptions.login1') }}" class="btn-primary">@lang('system.inscription')</a>
-                                    <a  href="{{ route('inscriptions.login2') }}" class="btn-secondary">@lang('system.rescription')</a>
-                                     --}}
+
+                                    <a href="{{ route('login') }}" class="btn-primary">@lang('system.connexion')</a>
+                                 {{--     <a  href="{{ route('inscriptions.login2') }}" class="btn-secondary">@lang('system.rescription')</a>--}}
+
                                     </div>
                                         <!-- Bloc Liens Téléchargement PDF -->
                                         <div class="row justify-content-center g-3 mt-4">
@@ -49,32 +49,34 @@
                                                 </a>
                                             </div>
 
+                                        </div>
+                                </div>
+                                <div class="col-lg-5 @if(app()->getLocale() == 'ar') order-1 @endif" data-aos="zoom-out" data-aos-delay="200">
+
                                 </div>
                             </div>
-                            <div class="col-lg-5 @if(app()->getLocale() == 'ar') order-1 @endif" data-aos="zoom-out" data-aos-delay="200">
+                        </div>
+                    </div>
 
+                    <div class="event-ticker">
+                        <div class="container">
+                            <div class="row gy-4">
+                                <div class="col-md-6 col-xl-4 col-12 ticker-item">
+                                    <span class="title">@lang('system.connexion_desc')</span>
+                                    <a  href="{{route('login')}}" class="btn-register">@lang('system.connexion')</a>
+                                </div>
+                                {{--
+                                <div class="col-md-6 col-12 col-xl-4  ticker-item">
+                                    <span class="title"></span>
+                                    <a href="#" class="btn-register"></a>
+                                </div>
+                                <div class="col-md-6 col-12 col-xl-4 ticker-item">
+                                    <span class="title"></span>
+                                    <a href="#" class="btn-register"></a>
+                                </div>
+                                --}}
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="event-ticker">
-                    <div class="container">
-                    <div class="row gy-4">
-                        <div class="col-md-6 col-xl-4 col-12 ticker-item">
-                        <span class="title">@lang('system.connexion_desc')</span>
-                            <a  href="{{route('login')}}" class="btn-register">@lang('system.connexion')</a>
-                        </div>
-                        {{--
-                        <div class="col-md-6 col-12 col-xl-4  ticker-item">
-                            <span class="title"></span>
-                            <a href="#" class="btn-register"></a>
-                        </div>
-                        <div class="col-md-6 col-12 col-xl-4 ticker-item">
-                            <span class="title"></span>
-                            <a href="#" class="btn-register"></a>
-                        </div>
-                        --}}
-                    </div>
                     </div>
                 </div>
             </section><!-- /Section Héros -->
