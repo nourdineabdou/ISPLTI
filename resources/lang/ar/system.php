@@ -472,4 +472,6 @@ return [
   'nouveau_avis'=>"اعلان جديد",
    "News_Title"=>" الأخبار",
   "News_Desc"=>" اكتشف آخر الأخبار والفعاليات في معهدنا",
+  "Project_Proposal_Template"=>"نموذج اقتراح المشروع",
+  "Proposed_Themes"=>"المواضيع المقترحة",
 ];

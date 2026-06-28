@@ -10,7 +10,7 @@
                         <div class="row align-items-center @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
                             <div class="col-lg-12 @if(app()->getLocale() == 'ar') order-2 @endif" data-aos="zoom-out" data-aos-delay="100">
                                 <div class="hero-content">
-                                <h1>
+                                    <h1>
                                     @if($news)
                                         @if(app()->getLocale() == 'ar')
                                         <marquee direction="right"  scrollamount="5" style="background-color: yellow; color: maroon; padding: 15px; white-space: nowrap; display: block;font-size: 14px;" >
@@ -29,144 +29,54 @@
                                     </h1>
                                     <p>@lang('system.Institut_slogan')</p>
                                     <div class="cta-buttons">
-                                        {{--
-                                    <a href="{{ route('inscriptions.login1') }}" class="btn-primary">@lang('system.inscription')</a>
-                                    <a  href="{{ route('inscriptions.login2') }}" class="btn-secondary">@lang('system.rescription')</a>
-                                     --}}
+
+                                    <a href="{{ route('login') }}" class="btn-primary">@lang('system.connexion')</a>
+                                 {{--     <a  href="{{ route('inscriptions.login2') }}" class="btn-secondary">@lang('system.rescription')</a>--}}
+
                                     </div>
                                         <!-- Bloc Liens Téléchargement PDF -->
                                         <div class="row justify-content-center g-3 mt-4">
                                             <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/nouveau_avis.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                <a href="{{ asset('pdfs/Project Proposal Template.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
                                                     <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.nouveau_avis')</div>
+                                                    <div class="fw-bold">@lang('system.Project_Proposal_Template')</div>
                                                 </a>
                                             </div>
                                             <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/AVIS 25112025.docx') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-word text-danger" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.avis_doc')</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/avis_test.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.avis_test')</div>
-                                                </a>
-                                            </div>
-                                           <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/debate_announcment.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.debate_announcment')</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/old_debaters_announcment.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.old_debaters_announcment')</div>
-                                                </a>
-                                            </div>
-                                            {{-- debut cours --}}
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/Note.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.Notes')</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/chart.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-success" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.charte_de_comportement')</div>
-                                                </a>
-                                            </div>
-                                           <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/avis_rec.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.avis_etudiant')</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/S1 Arb-Fr 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
+                                                <a href="{{ asset('pdfs/Proposed Themes.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
                                                     <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-primary" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.S1 Arb-Fr-3')</div>
-                                                </a>
-                                            </div>
-                                           <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/S1 Eng-Arb3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-primary" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.S1 Eng-Arb-3')</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/S1 Eng-Fr 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.S1 Eng-Fr-3')</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/S3 Arb-Fr 1 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.S3 Arb-Fr-1-3')</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/S3 Eng-Arb 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.S3 Eng-Arb 3-1')</div>
+                                                    <div class="fw-bold">@lang('system.Proposed_Themes')</div>
                                                 </a>
                                             </div>
 
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/S3 Eng-Fr 1 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.S3 Eng-Fr 1 3')</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/S5 Arb-Fr 1 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.S5 Arb-Fr 1 3')</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/S5 Eng-Arb 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.S5 Eng-Arb 3')</div>
-                                                </a>
-                                            </div>
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/S5 Eng-Fr 1 3.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-warning" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.S5 Eng-Fr 1 3')</div>
-                                                </a>
-                                            </div>
                                         </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-5 @if(app()->getLocale() == 'ar') order-1 @endif" data-aos="zoom-out" data-aos-delay="200">
+                                <div class="col-lg-5 @if(app()->getLocale() == 'ar') order-1 @endif" data-aos="zoom-out" data-aos-delay="200">
 
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="event-ticker">
-                    <div class="container">
-                    <div class="row gy-4">
-                        <div class="col-md-6 col-xl-4 col-12 ticker-item">
-                        <span class="title">@lang('system.connexion_desc')</span>
-                            <a  href="{{route('login')}}" class="btn-register">@lang('system.connexion')</a>
+
+                    <div class="event-ticker">
+                        <div class="container">
+                            <div class="row gy-4">
+                                <div class="col-md-6 col-xl-4 col-12 ticker-item">
+                                    <span class="title">@lang('system.connexion_desc')</span>
+                                    <a  href="{{route('login')}}" class="btn-register">@lang('system.connexion')</a>
+                                </div>
+                                {{--
+                                <div class="col-md-6 col-12 col-xl-4  ticker-item">
+                                    <span class="title"></span>
+                                    <a href="#" class="btn-register"></a>
+                                </div>
+                                <div class="col-md-6 col-12 col-xl-4 ticker-item">
+                                    <span class="title"></span>
+                                    <a href="#" class="btn-register"></a>
+                                </div>
+                                --}}
+                            </div>
                         </div>
-                        {{--
-                        <div class="col-md-6 col-12 col-xl-4  ticker-item">
-                            <span class="title"></span>
-                            <a href="#" class="btn-register"></a>
-                        </div>
-                        <div class="col-md-6 col-12 col-xl-4 ticker-item">
-                            <span class="title"></span>
-                            <a href="#" class="btn-register"></a>
-                        </div>
-                        --}}
-                    </div>
                     </div>
                 </div>
             </section><!-- /Section Héros -->
