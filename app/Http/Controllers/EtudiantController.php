@@ -191,7 +191,7 @@ public function downloadBulletin($semestre)
     }
 
     $semestre = strtoupper((string) $semestre);
-    if (!in_array($semestre, ['S1', 'S3', 'S5'])) {
+    if (!in_array($semestre, ['S1', 'S3', 'S5' , 'S2', 'S4', 'S6'])) {
         abort(404, 'Semestre invalide.');
     }
 
