@@ -74,7 +74,7 @@ class HomeController extends Controller
                 $ndos=substr($etudiant->nodos,-4);
                 $inscrit=InscriptionAdm::where('annee_univ_id',$this->anneeActive()->id)->where('etudiant_id',$etudiant->id)->get();
                 $inscritEtat=0;
-                $bulletins = $etudiant ? $etudiant->getAvailableBulletins(['S1', 'S3', 'S5']) : [];
+                $bulletins = $etudiant ? $etudiant->getAvailableBulletins(['S1', 'S3', 'S5', 'S6' , 'S2' , 'S4']) : [];
                 if($inscrit->count()>0){
                         $inscritEtat=1;
                 }
