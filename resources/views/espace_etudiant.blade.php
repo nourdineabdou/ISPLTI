@@ -49,7 +49,7 @@
             </div>
             <div class="card-body">
                 @php
-                    $desiredSemestres = ['S1', 'S3', 'S5'];
+                    $desiredSemestres = ['S1', 'S3', 'S5' , 'S2', 'S4', 'S6'];
                 @endphp
 
                 <div class="row g-3">
