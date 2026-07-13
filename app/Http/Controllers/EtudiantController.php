@@ -199,12 +199,19 @@ public function downloadBulletin($semestre)
     if ($suffix === '') {
         abort(404, 'Code dossier introuvable.');
     }
-
+        // mena utiise le dosier la S1S3S5 ou S2S4S6 pour les bulletins
+        // donc on doit verifier si le semestre est S1S3S5 ou S2S4S6
     $fileName = $suffix . $semestre . '.png';
-    $path = 'bultin/' . $fileName;
+    $path = 'S1S3S5/' . $fileName;
+    $path2 = 'S2S4S6/' . $fileName;
 
-    if (!Storage::disk('local')->exists($path)) {
+
+
+
+    if (!Storage::disk('local')->exists($path) && !Storage::disk('local')->exists($path2)) {
         abort(404, 'Bulletin introuvable.');
+    } else {
+        $path = Storage::disk('local')->exists($path) ? $path : $path2;
     }
 
     return Storage::disk('local')->download($path, $fileName);
