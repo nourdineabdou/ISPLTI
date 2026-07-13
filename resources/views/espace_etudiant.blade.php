@@ -51,7 +51,6 @@
                 @php
                     $desiredSemestres = ['S1', 'S3', 'S5' , 'S2', 'S4', 'S6'];
                 @endphp
-
                 <div class="row g-3">
                     @foreach($desiredSemestres as $semestre)
                         @php
