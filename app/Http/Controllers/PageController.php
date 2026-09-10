@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ComptesExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Actualite;
 use App\Models\Etablissement;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,12 @@ class PageController extends Controller
    {
 
        return view('pages_sites.actualite');
+   }
+
+   public function actualiteShow(Actualite $actualite)
+   {
+       $actualite->load(['images', 'videos', 'fichiers']);
+       return view('pages_sites.actualite-details', compact('actualite'));
    }
 
    public function contact()

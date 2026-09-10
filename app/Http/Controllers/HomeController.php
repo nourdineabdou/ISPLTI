@@ -113,7 +113,7 @@ class HomeController extends Controller
         //         $user->save();
         //     }
         //  }
-         $news=Actualite::latest()->where('statut','publie')->take(1)->first();
+         $news=Actualite::with('fichiers')->latest()->where('statut','publie')->take(1)->first();
         return view('school',['news'=>$news]);
     }
 

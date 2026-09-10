@@ -167,7 +167,117 @@ function initJs() {
 
     });
 
+    if (typeof tinymce !== 'undefined' && ($('.tinymce-editor').length || $('.tinymce-editor-rtl').length)) {
+        tinymce.remove();
+        tinymce.init({
+            selector: '.tinymce-editor',
+            base_url: '/app-assets/vendors/js/editors/tinymce',
+            suffix: '.min',
+            height: 220,
+            menubar: false,
+            branding: false,
+            plugins: 'lists link emoticons directionality autoresize',
+            toolbar: 'bold italic underline | bullist numlist | link emoticons | ltr rtl',
+            directionality: 'ltr'
+        });
+        $('.tinymce-editor-rtl').each(function () {
+            tinymce.init({
+                selector: '#' + $(this).attr('id'),
+                base_url: '/app-assets/vendors/js/editors/tinymce',
+                suffix: '.min',
+                height: 220,
+                menubar: false,
+                branding: false,
+                plugins: 'lists link emoticons directionality autoresize',
+                toolbar: 'bold italic underline | bullist numlist | link emoticons | ltr rtl',
+                directionality: 'rtl'
+            });
+        });
+    }
 }
+
+// selection de plusieurs fichiers en une fois (ex: fichiers a telecharger d'une actualite)
+// usage: <input type="file" multiple class="js-multi-file-input"> suivi d'un container ".fichiers-rows"
+// une ligne (nom FR/AR + description FR/AR) est generee automatiquement pour chaque fichier choisi
+function renderFichiersRows(input) {
+    const rows = $(input).closest('.fichiers-uploader').find('.fichiers-rows');
+    rows.empty();
+    Array.from(input.files).forEach(function (file) {
+        const row = $('<div class="fichier-row card mb-2"></div>');
+        const header = $('<div class="d-flex justify-content-between align-items-center card-header py-1 px-2"></div>');
+        header.append($('<span class="text-truncate small fw-bold"></span>').text('📄 ' + file.name));
+        header.append('<button type="button" class="btn btn-sm btn-outline-danger py-0 js-remove-fichier-row" title="Retirer">&times;</button>');
+        const body = $('<div class="row g-2 p-2"></div>');
+        body.append('<div class="col-md-6"><input type="text" class="form-control form-control-sm" name="fichiers_nom_fr[]" placeholder="Nom (FR)"></div>');
+        body.append('<div class="col-md-6"><input type="text" class="form-control form-control-sm" name="fichiers_nom_ar[]" placeholder="الاسم (AR)" dir="rtl"></div>');
+        body.append('<div class="col-md-6"><input type="text" class="form-control form-control-sm" name="fichiers_description_fr[]" placeholder="Description (FR)"></div>');
+        body.append('<div class="col-md-6"><input type="text" class="form-control form-control-sm" name="fichiers_description_ar[]" placeholder="الوصف (AR)" dir="rtl"></div>');
+        row.append(header).append(body);
+        rows.append(row);
+    });
+}
+
+$(document).on('change', '.js-multi-file-input', function () {
+    renderFichiersRows(this);
+});
+
+$(document).on('click', '.js-remove-fichier-row', function () {
+    const row = $(this).closest('.fichier-row');
+    const wrapper = row.closest('.fichiers-uploader');
+    const input = wrapper.find('.js-multi-file-input').get(0);
+    const index = row.index();
+    const dataTransfer = new DataTransfer();
+    Array.from(input.files).forEach(function (file, i) {
+        if (i !== index) {
+            dataTransfer.items.add(file);
+        }
+    });
+    input.files = dataTransfer.files;
+    // on retire uniquement la ligne concernee (sans tout regenerer) pour garder
+    // le nom/description deja saisis sur les autres fichiers
+    row.remove();
+});
+
+// apercu simple (miniature/nom + bouton retirer) pour les champs multi-fichiers
+// qui n'ont pas besoin de nom/description (photos, videos d'une actualite)
+// usage: <input type="file" multiple class="js-simple-multi-file-input"> dans un
+// wrapper ".simple-file-uploader" contenant un container ".files-preview"
+function renderSimpleFilePreview(input) {
+    const container = $(input).closest('.simple-file-uploader').find('.files-preview');
+    container.empty();
+    Array.from(input.files).forEach(function (file) {
+        const item = $('<div class="file-preview-item d-inline-flex align-items-center border rounded p-1 me-2 mb-2"></div>');
+        if (file.type && file.type.startsWith('image/')) {
+            item.append($('<img alt="">').attr('src', URL.createObjectURL(file)).css({
+                width: '36px', height: '36px', objectFit: 'cover', borderRadius: '4px'
+            }).addClass('me-2'));
+        } else {
+            item.append('<span class="me-2">🎬</span>');
+        }
+        item.append($('<span class="small text-truncate d-inline-block align-middle"></span>').css('max-width', '140px').text(file.name));
+        item.append('<button type="button" class="btn btn-sm btn-link text-danger py-0 px-1 js-remove-simple-file" title="Retirer">&times;</button>');
+        container.append(item);
+    });
+}
+
+$(document).on('change', '.js-simple-multi-file-input', function () {
+    renderSimpleFilePreview(this);
+});
+
+$(document).on('click', '.js-remove-simple-file', function () {
+    const item = $(this).closest('.file-preview-item');
+    const wrapper = item.closest('.simple-file-uploader');
+    const input = wrapper.find('.js-simple-multi-file-input').get(0);
+    const index = item.index();
+    const dataTransfer = new DataTransfer();
+    Array.from(input.files).forEach(function (file, i) {
+        if (i !== index) {
+            dataTransfer.items.add(file);
+        }
+    });
+    input.files = dataTransfer.files;
+    item.remove();
+});
 
 
 //removeElement(this)

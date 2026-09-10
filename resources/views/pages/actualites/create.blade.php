@@ -34,38 +34,6 @@
                     required="required"
                     value="{{ old('titre_ar') }}"
                 />
-                {{-- contenu (FR) --}}
-                <x-forms.textarea
-                    class="col-md-6"
-                    label="Contenu (FR)"
-                    name="contenu_fr"
-                    required="required"
-                    value="{{ old('contenu_fr') }}"
-                />
-                {{-- contenu (EN) --}}
-                <x-forms.textarea
-                    class="col-md-6"
-                    label="Contenu (EN)"
-                    name="contenu_en"
-                    required="required"
-                    value="{{ old('contenu_en') }}"
-                />
-                {{-- contenu (AR) --}}
-                <x-forms.textarea
-                    class="col-md-6"
-                    label="Contenu (AR)"
-                    name="contenu_ar"
-                    required="required"
-                    value="{{ old('contenu_ar') }}"
-                />
-                {{-- contenu (AR) --}}
-                <x-forms.textarea
-                    class="col-md-6"
-                    label="Contenu (AR)"
-                    name="contenu_ar"
-                    required="required"
-                    value="{{ old('contenu_ar') }}"
-                />
                 {{-- auteur --}}
                 <x-forms.input
                     class="col-md-6"
@@ -73,6 +41,33 @@
                     name="auteur"
                     required="required"
                     value="{{ old('auteur') }}"
+                />
+                {{-- contenu (FR) --}}
+                <x-forms.textarea
+                    class="col-md-12"
+                    editorClass="tinymce-editor"
+                    label="Contenu (FR) 😀"
+                    name="contenu_fr"
+                    required="required"
+                    value="{{ old('contenu_fr') }}"
+                />
+                {{-- contenu (EN) --}}
+                <x-forms.textarea
+                    class="col-md-12"
+                    editorClass="tinymce-editor"
+                    label="Contenu (EN) 😀"
+                    name="contenu_en"
+                    required="required"
+                    value="{{ old('contenu_en') }}"
+                />
+                {{-- contenu (AR) --}}
+                <x-forms.textarea
+                    class="col-md-12"
+                    editorClass="tinymce-editor-rtl"
+                    label="Contenu (AR) 😀"
+                    name="contenu_ar"
+                    required="required"
+                    value="{{ old('contenu_ar') }}"
                 />
                 {{-- statut  --}}
                 <x-forms.select
@@ -86,13 +81,43 @@
                     ]"
                 />
 
-                {{-- image --}}
+                {{-- image de couverture --}}
                 <x-forms.input
                     class="col-md-6"
-                    label="Image"
+                    label="Image de couverture"
                     name="image"
                     type="file"
                 />
+
+                {{-- photos --}}
+                <x-forms.file
+                    class="col-md-6"
+                    label="📷 Photos (sélection multiple possible)"
+                    name="images[]"
+                    accept="image/*"
+                    :multiple="true"
+                    :previewMultiple="true"
+                />
+
+                {{-- videos --}}
+                <x-forms.file
+                    class="col-md-6"
+                    label="🎥 Vidéos (sélection multiple possible)"
+                    name="videos[]"
+                    accept="video/*"
+                    :multiple="true"
+                    :previewMultiple="true"
+                />
+
+                {{-- fichiers telechargeables --}}
+                <div class="col-12 mb-3">
+                    <label class="d-block fw-bold">📎 Fichiers téléchargeables</label>
+                    <p class="text-muted small mb-2">Sélectionnez plusieurs fichiers en une seule fois, puis complétez le nom et la description de chacun (FR / AR).</p>
+                    <div class="fichiers-uploader">
+                        <input type="file" name="fichiers[]" class="js-multi-file-input form-control mb-2" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.zip,.rar">
+                        <div class="fichiers-rows"></div>
+                    </div>
+                </div>
             </div>
             <x-buttons.save
                 container="create-actualite-form"

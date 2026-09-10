@@ -466,4 +466,9 @@ return [
   "News_Desc"=>"Description des nouvelles",
     "Project_Proposal_Template"=>"Modèle de proposition de projet",
   "Proposed_Themes"=>"Thèmes proposés",
+  "Photos"=>"Photos",
+  "Videos"=>"Vidéos",
+  "Fichiers"=>"Fichiers à télécharger",
+  "Retour"=>"Retour aux actualités",
+  "Lire_plus"=>"Lire la suite",
 ];

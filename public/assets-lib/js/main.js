@@ -168,4 +168,73 @@
     selector: '.glightbox'
   });
 
+  /**
+   * Marquer en rouge (Bootstrap .is-invalid) tout champ invalide des qu'on
+   * tente de valider/soumettre le formulaire qui le contient, et retirer
+   * ce marquage des que le champ redevient valide.
+   */
+  document.addEventListener('invalid', function (e) {
+    if (e.target && e.target.classList) {
+      e.target.classList.add('is-invalid');
+    }
+  }, true); // phase de capture : l'evenement "invalid" ne remonte pas (bubbles: false)
+
+  ['input', 'change'].forEach(function (eventName) {
+    document.addEventListener(eventName, function (e) {
+      const field = e.target;
+      if (field && field.classList && field.classList.contains('is-invalid') && typeof field.checkValidity === 'function' && field.checkValidity()) {
+        field.classList.remove('is-invalid');
+      }
+    });
+  });
+
+  /**
+   * Desactiver le bouton d'envoi et afficher un spinner "en traitement"
+   * des qu'un formulaire est reellement soumis (evite le double-clic).
+   * Ne se declenche que si le formulaire est valide (l'evenement submit
+   * n'est pas emis par le navigateur tant qu'il reste des champs invalides).
+   */
+  document.addEventListener('submit', function (e) {
+    const form = e.target;
+    if (!(form instanceof HTMLFormElement)) return;
+    const btn = form.querySelector('button[type="submit"]:not([data-no-spinner])');
+    if (!btn || btn.disabled) return;
+    btn.dataset.originalHtml = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + (btn.dataset.loadingText || 'Traitement en cours...');
+  });
+
+  /**
+   * Sur une page en arabe (RTL), un champ texte/textarea contenant une
+   * valeur en français/latin s'affichait coupe/inverse (le navigateur
+   * alignait le texte a droite comme le reste de la page). On force
+   * dir="auto" sur les champs de saisie pour que chacun s'aligne selon
+   * sa propre langue detectee, y compris les lignes ajoutees dynamiquement
+   * (repeteurs diplomes/langues/experiences...).
+   */
+  function applyAutoDirection(el) {
+    if (el.hasAttribute && !el.hasAttribute('dir')) {
+      const tag = el.tagName;
+      const type = (el.getAttribute('type') || 'text').toLowerCase();
+      const textLikeTypes = ['text', 'email', 'tel', 'search', 'url'];
+      if (tag === 'TEXTAREA' || (tag === 'INPUT' && textLikeTypes.includes(type))) {
+        el.setAttribute('dir', 'auto');
+      }
+    }
+  }
+
+  document.querySelectorAll('input, textarea').forEach(applyAutoDirection);
+
+  new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      mutation.addedNodes.forEach(function (node) {
+        if (node.nodeType !== 1) return;
+        applyAutoDirection(node);
+        if (node.querySelectorAll) {
+          node.querySelectorAll('input, textarea').forEach(applyAutoDirection);
+        }
+      });
+    });
+  }).observe(document.body, { childList: true, subtree: true });
+
 })();

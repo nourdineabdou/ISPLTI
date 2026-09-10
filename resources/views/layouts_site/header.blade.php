@@ -25,6 +25,7 @@
 
           <li><a class="link-disabled" href="{{ route('pages.viesEstudiantine') }}" class="{{ request()->routeIs('pages.viesEstudiantine') ? 'active' : '' }}">@lang('system.Vie_Etudiante')</a></li>
           <li><a  href="{{ route('pages.actualite') }}" class="{{ request()->routeIs('pages.actualite') ? 'active' : '' }}">@lang('system.Actualites')</a></li>
+          <li><a href="{{ route('candidature.intro') }}" class="{{ request()->routeIs('candidature.*') ? 'active' : '' }}">🎓 @lang('candidature.nav_candidature')</a></li>
           <li><a class="link-disabled" href="{{ route('pages.events') }}" class="{{ request()->routeIs('pages.events') ? 'active' : '' }}">@lang('system.Evenements')</a></li>
           {{--
           <li><a href="alumni.html">Anciens Élèves</a></li>

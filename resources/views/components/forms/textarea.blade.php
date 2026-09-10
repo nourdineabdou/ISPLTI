@@ -1,3 +1,4 @@
+@props(['name', 'label' => null, 'required' => false, 'value' => null, 'editorClass' => ''])
 <div {{ $attributes->merge(['class' => 'form-group mb-3']) }}>
     @if(isset($label))
         <label for="{{ $name }}">{{ $label }}
@@ -8,8 +9,7 @@
     @endif
     <textarea
         name="{{ $name }}"
-{{--        {{ $attributes->merge(['class' => 'form-control'])}}--}}
-        class="form-control"
+        class="form-control {{ $editorClass }}"
         id="{{ $name }}"
     >{{ $value ?? '' }}</textarea>
 </div>

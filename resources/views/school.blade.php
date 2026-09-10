@@ -31,25 +31,20 @@
                                     <div class="cta-buttons">
 
                                     <a href="{{ route('login') }}" class="btn-primary">@lang('system.connexion')</a>
-                                 {{--     <a  href="{{ route('inscriptions.login2') }}" class="btn-secondary">@lang('system.rescription')</a>--}}
+                                    <a href="{{ route('candidature.intro') }}" class="btn-secondary">🎓 @lang('candidature.postuler_master')</a>
 
                                     </div>
-                                        <!-- Bloc Liens Téléchargement PDF -->
-                                        <div class="row justify-content-center g-3 mt-4">
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/Project Proposal Template.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-danger" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.Project_Proposal_Template')</div>
-                                                </a>
+                                        {{-- Bloc Liens Téléchargement : fichiers de la derniere actualite, en raccourci --}}
+                                        @if($news && $news->fichiers->count())
+                                            <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+                                                @foreach($news->fichiers as $fichierAccueil)
+                                                    <a href="{{ asset($fichierAccueil->chemin) }}" target="_blank" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 text-center" style="width:160px;">
+                                                        <div class="icon mb-2"><i class="bi {{ $fichierAccueil->iconClass() }}" style="font-size:2rem;"></i></div>
+                                                        <div class="fw-bold small text-truncate">{{ $fichierAccueil->nom(app()->getLocale()) }}</div>
+                                                    </a>
+                                                @endforeach
                                             </div>
-                                            <div class="col-md-3 col-6">
-                                                <a href="{{ asset('pdfs/Proposed Themes.pdf') }}" class="download-card text-decoration-none shadow-sm rounded-3 d-block p-3 h-100 text-center" target="_blank">
-                                                    <div class="icon mb-2"><i class="bi bi-file-earmark-pdf text-primary" style="font-size:2rem;"></i></div>
-                                                    <div class="fw-bold">@lang('system.Proposed_Themes')</div>
-                                                </a>
-                                            </div>
-
-                                        </div>
+                                        @endif
                                 </div>
                                 <div class="col-lg-5 @if(app()->getLocale() == 'ar') order-1 @endif" data-aos="zoom-out" data-aos-delay="200">
 
@@ -57,7 +52,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="event-ticker">
                         <div class="container">
                             <div class="row gy-4">
@@ -93,31 +87,58 @@
 
             <div class="container @if(app()->getLocale() == 'ar') text-end @endif">
 
-                <div class="row gy-4 @if(app()->getLocale() == 'ar') flex-row-reverse text-end @endif">
-
-                    @foreach (\App\Models\Actualite::where('statut', 'publie')->orderBy('id', 'desc')->limit(3)->get() as $actualite)
-                        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                                <article>
-                                <div class="post-img">
-                                    <img src="{{ asset($actualite->image) }}" alt="" class="img-fluid">
-                                </div>
-
-                                <p class="post-category">{{ app()->getLocale() == 'fr' ? $actualite->titre_fr : (app()->getLocale() == 'en' ? $actualite->titre_en : $actualite->titre_ar) }}</p>
-                                <h2 class="title">
-                                    <a href="#">{{ app()->getLocale() == 'fr' ? $actualite->contenu_fr : (app()->getLocale() == 'en' ? $actualite->contenu_en : $actualite->contenu_ar) }}</a>
-                                </h2>
-                                <div class="d-flex align-items-center">
-                                    <div class="post-meta">
-                                    <p class="post-author-name">{{ $actualite->auteur }}</p>
-                                    <p class="post-date">
+                @foreach (\App\Models\Actualite::with(['images', 'videos', 'fichiers'])->where('statut', 'publie')->orderBy('id', 'desc')->limit(3)->get() as $actualite)
+                    @php
+                        $titreNews = app()->getLocale() == 'fr' ? $actualite->titre_fr : (app()->getLocale() == 'en' ? $actualite->titre_en : $actualite->titre_ar);
+                        $contenuNews = app()->getLocale() == 'fr' ? $actualite->contenu_fr : (app()->getLocale() == 'en' ? $actualite->contenu_en : $actualite->contenu_ar);
+                        $galleryKeyHome = 'actualite-accueil-' . $actualite->id;
+                        $mediaHome = $actualite->images->map(fn($i) => ['type' => 'image', 'url' => asset($i->chemin)])
+                            ->concat($actualite->videos->map(fn($v) => ['type' => 'video', 'url' => asset($v->chemin)]));
+                    @endphp
+                    {{-- sur ordinateur : image + infos cote a cote sur toute la largeur / sur mobile : empile --}}
+                    <div class="row g-0 align-items-stretch mb-4 shadow-sm rounded-3 overflow-hidden bg-white @if(app()->getLocale() == 'ar') flex-md-row-reverse @endif" data-aos="fade-up" data-aos-delay="100">
+                        <div class="col-md-5 col-lg-4">
+                            <img src="{{ asset($actualite->image) }}" alt="{{ $titreNews }}" class="w-100 h-100" style="object-fit:cover;min-height:220px;">
+                        </div>
+                        <div class="col-md-7 col-lg-8 p-3 p-md-4" style="min-width:0;">
+                            <p class="post-category mb-1 text-break">{{ $titreNews }}</p>
+                            <h2 class="title h5 text-break">
+                                <a href="{{ route('pages.actualite.show', $actualite) }}">{{ \Illuminate\Support\Str::limit(strip_tags($contenuNews), 140) }}</a>
+                            </h2>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="post-meta">
+                                    <p class="post-author-name mb-0">{{ $actualite->auteur }}</p>
+                                    <p class="post-date mb-0">
                                         <time datetime="2023-01-01">{{ \Carbon\Carbon::parse($actualite->created_at)->locale(app()->getLocale())->isoFormat('LL') }}</time>
                                     </p>
-                                    </div>
-                                </article>
+                                </div>
                             </div>
-                    @endforeach
-                <!-- End post list item -->
-                </div><!-- End recent posts list -->
+
+                            {{-- photos + videos : grille adaptative type Facebook --}}
+                            <x-actualite.media-grid :media="$mediaHome" :galleryKey="$galleryKeyHome" :max="4" />
+
+                            {{-- fichiers telechargeables : icone selon le type (pdf, excel, word...) --}}
+                            @if($actualite->fichiers->count())
+                                <div class="d-flex flex-wrap gap-2 mb-3">
+                                    @foreach($actualite->fichiers as $fichier)
+                                        <a href="{{ asset($fichier->chemin) }}" target="_blank" class="download-card text-decoration-none shadow-sm rounded-3 d-flex align-items-center p-2" style="max-width:260px;">
+                                            <i class="bi {{ $fichier->iconClass() }} me-2" style="font-size:1.5rem;"></i>
+                                            <div class="text-truncate">
+                                                <div class="small fw-bold text-truncate">{{ $fichier->nom(app()->getLocale()) }}</div>
+                                                @if($fichier->description(app()->getLocale()))
+                                                    <div class="small text-muted text-truncate">{{ $fichier->description(app()->getLocale()) }}</div>
+                                                @endif
+                                            </div>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            <a href="{{ route('pages.actualite.show', $actualite) }}" class="btn btn-sm btn-outline-primary">@lang('system.Lire_plus') &rarr;</a>
+                        </div>
+                    </div>
+                @endforeach
+
             </div>
             </section><!-- /Recent News Section -->
             <!-- Section Événements -->
