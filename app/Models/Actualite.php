@@ -21,8 +21,21 @@ class Actualite extends Model
         'date_publication',
         'auteur',
         'image',
-        'lien',
-        'fichier',
         'statut',
     ];
+
+    public function images()
+    {
+        return $this->hasMany(ActualiteImage::class)->orderBy('ordre');
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(ActualiteVideo::class)->orderBy('ordre');
+    }
+
+    public function fichiers()
+    {
+        return $this->hasMany(ActualiteFichier::class)->orderBy('ordre');
+    }
 }

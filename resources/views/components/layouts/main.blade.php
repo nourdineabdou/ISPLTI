@@ -198,8 +198,9 @@
 <script src="{{ asset('app-assets/vendors/js/tables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('app-assets/vendors/js/editors/tinymce/tinymce.min.js') }}"></script>
 
-<script src="{{asset('assets/js/scripts.js')}}"></script>
+<script src="{{ asset('assets/js/scripts.js') }}?v={{ filemtime(public_path('assets/js/scripts.js')) }}"></script>
 <script src="{{asset('assets/js/scripts2.js')}}"></script>
 <!-- END: Theme JS-->
 

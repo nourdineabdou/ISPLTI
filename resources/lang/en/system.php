@@ -481,4 +481,9 @@ return [
   "News_Desc"=>" Stay updated with the latest news and announcements from our institute.",
   "Project_Proposal_Template"=>"Project Proposal Template",
   "Proposed_Themes"=>"Proposed Themes",
+  "Photos"=>"Photos",
+  "Videos"=>"Videos",
+  "Fichiers"=>"Downloadable files",
+  "Retour"=>"Back to news",
+  "Lire_plus"=>"Read more",
 ];

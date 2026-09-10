@@ -62,6 +62,7 @@ Route::get('/language/switch/{locale}', [LanguageController::class, 'switchLangu
 // routes des pages des site web
 Route::group(['prefix' => 'pages'], function () {
     Route::get('actualite', [App\Http\Controllers\PageController::class, 'actualite'])->name('pages.actualite');
+    Route::get('actualite/{actualite}', [App\Http\Controllers\PageController::class, 'actualiteShow'])->name('pages.actualite.show');
     Route::get('contact', [App\Http\Controllers\PageController::class, 'contact'])->name('pages.contact');
     Route::get('about', [App\Http\Controllers\PageController::class, 'about'])->name('pages.about');
     // events
@@ -103,3 +104,32 @@ Route::get('comptes-from-file', [App\Http\Controllers\PageController::class, 'co
         // post rescriptions etudiant
         Route::post('rescriptions/{etudiantID}', [App\Http\Controllers\InscriptionController::class, 'update'])->name('inscriptions.update');
     });
+
+// candidature en ligne (master) - tunnel public, sans compte
+Route::group(['prefix' => 'candidature'], function () {
+    Route::get('', [App\Http\Controllers\CandidatureController::class, 'intro'])->name('candidature.intro');
+    Route::get('etape1', [App\Http\Controllers\CandidatureController::class, 'etape1'])->name('candidature.etape1');
+    Route::post('etape1', [App\Http\Controllers\CandidatureController::class, 'storeEtape1'])->name('candidature.etape1.store');
+    Route::get('reprendre/{token}', [App\Http\Controllers\CandidatureController::class, 'reprendre'])->name('candidature.reprendre');
+    Route::get('mot-de-passe', [App\Http\Controllers\CandidatureController::class, 'definirMotDePasse'])->name('candidature.definirMotDePasse');
+    Route::post('mot-de-passe', [App\Http\Controllers\CandidatureController::class, 'definirMotDePasseStore'])->name('candidature.definirMotDePasse.store');
+    Route::get('connexion', [App\Http\Controllers\CandidatureController::class, 'connexion'])->name('candidature.connexion');
+    Route::post('connexion', [App\Http\Controllers\CandidatureController::class, 'connexionStore'])->middleware('throttle:6,1')->name('candidature.connexion.store');
+    Route::get('deconnexion', [App\Http\Controllers\CandidatureController::class, 'deconnexion'])->name('candidature.deconnexion');
+    Route::get('espace', [App\Http\Controllers\CandidatureController::class, 'espace'])->name('candidature.espace');
+    Route::post('espace/photo', [App\Http\Controllers\CandidatureController::class, 'mettreAJourPhoto'])->name('candidature.photo.update');
+    Route::get('suite', [App\Http\Controllers\CandidatureController::class, 'suite'])->name('candidature.suite');
+    Route::post('suite', [App\Http\Controllers\CandidatureController::class, 'storeSuite'])->name('candidature.suite.store');
+    Route::get('image/{id}', [App\Http\Controllers\CandidatureController::class, 'image'])->name('candidature.image');
+});
+
+// candidatures - back-office admin
+Route::group(['middleware' => ['auth'], 'prefix' => 'candidatures'], function () {
+    Route::get('', [App\Http\Controllers\CandidatureAdminController::class, 'index'])->name('candidatures.index');
+    Route::get('{id}', [App\Http\Controllers\CandidatureAdminController::class, 'show'])->name('candidatures.show');
+    Route::get('{id}/zip', [App\Http\Controllers\CandidatureAdminController::class, 'telechargerZip'])->name('candidatures.zip');
+    Route::get('{id}/document/{documentId}', [App\Http\Controllers\CandidatureAdminController::class, 'document'])->name('candidatures.document');
+    Route::get('{id}/fichier', [App\Http\Controllers\CandidatureAdminController::class, 'fichier'])->name('candidatures.fichier');
+    Route::get('{id}/statut/{statut}', [App\Http\Controllers\CandidatureAdminController::class, 'changerStatut'])->name('candidatures.statut');
+    Route::post('{id}/decision', [App\Http\Controllers\CandidatureAdminController::class, 'decision'])->name('candidatures.decision');
+});
