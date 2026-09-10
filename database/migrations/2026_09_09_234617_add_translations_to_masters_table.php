@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -19,13 +18,8 @@ return new class extends Migration
             $table->text('description_en')->nullable()->after('description_ar');
         });
 
-        // traduction du master deja existant (TTCN)
-        DB::table('masters')->where('code', 'TTCN')->update([
-            'intitule_ar' => 'تقنيات الترجمة والاتصال الرقمي',
-            'intitule_en' => 'Translation Technologies and Digital Communication',
-            'description_ar' => 'ماستر متعدد التخصصات يجمع بين الخبرة اللغوية والترجمة والترجمة الفورية والاتصال الرقمي وتقنيات الترجمة.',
-            'description_en' => "An interdisciplinary Master's program combining linguistic expertise, translation, interpreting, digital communication, and translation technologies.",
-        ]);
+        // la traduction du master TTCN est peuplee a part via :
+        // php artisan db:seed --class=CandidatureFeatureSeeder
     }
 
     /**
