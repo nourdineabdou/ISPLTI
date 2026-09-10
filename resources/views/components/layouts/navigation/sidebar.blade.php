@@ -110,6 +110,13 @@
                         <span class="menu-title">Actualités</span>
                     </a>
                 </li>
+                {{-- candidatures master --}}
+                <li class="nav-item ">
+                    <a href="{{ route('candidatures.index') }}">
+                        <i class="la la-file-signature"></i>
+                        <span class="menu-title">Candidatures</span>
+                    </a>
+                </li>
                 @elseif(auth()->user()->hasRole('Professeur'))
                 {{-- recupere profosseur --}}
                 @php
