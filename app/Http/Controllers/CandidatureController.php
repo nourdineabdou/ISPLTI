@@ -44,7 +44,9 @@ class CandidatureController extends Controller
         // sur mobile la connexion est souvent moins stable : si le telephone perd
         // le reseau ou que l'utilisateur quitte la page juste apres avoir valide,
         // le script serait sinon interrompu avant l'envoi de l'email
-        ignore_user_abort(true);
+        if ($this->estMobile($request)) {
+            ignore_user_abort(true);
+        }
 
         $validated = $request->validate([
             'master_id' => 'required|exists:masters,id',
@@ -446,6 +448,14 @@ class CandidatureController extends Controller
         Session::forget('candidature_id');
 
         return view('pages_sites.candidature.confirmation', compact('candidature'));
+    }
+
+    private function estMobile(Request $request): bool
+    {
+        return (bool) preg_match(
+            '/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Windows Phone/i',
+            $request->userAgent() ?? ''
+        );
     }
 
     private function candidatureDeSession(): ?CandidatureMaster
