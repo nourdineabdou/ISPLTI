@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -17,14 +16,8 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::table('langues')->insert([
-            ['id' => 1, 'code' => 'AR', 'langue' => 'Arabe', 'actif' => true, 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 2, 'code' => 'EN', 'langue' => 'Anglais', 'actif' => true, 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 3, 'code' => 'FR', 'langue' => 'Français', 'actif' => true, 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 4, 'code' => 'ES', 'langue' => 'Espagnol', 'actif' => true, 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 5, 'code' => 'TR', 'langue' => 'Turc', 'actif' => true, 'created_at' => now(), 'updated_at' => now()],
-            ['id' => 6, 'code' => 'ZH', 'langue' => 'Chinois', 'actif' => true, 'created_at' => now(), 'updated_at' => now()],
-        ]);
+        // les langues de reference sont peuplees a part via :
+        // php artisan db:seed --class=CandidatureFeatureSeeder
     }
 
     public function down(): void

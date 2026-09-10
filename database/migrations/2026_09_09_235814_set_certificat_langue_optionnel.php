@@ -1,28 +1,22 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Cette migration ne modifie plus de donnees : le caractere facultatif du
+     * certificat de langue est desormais defini directement dans le seeder
+     * CandidatureFeatureSeeder (obligatoire => false). Conservee vide pour ne
+     * pas casser l'historique des migrations deja executees.
      */
     public function up(): void
     {
-        // un candidat peut ne pas avoir de certificat de langue : on ne l'exige plus
-        DB::table('pieces_obligatoires_master')
-            ->where('code_document', 'certificat_langue')
-            ->update(['obligatoire' => false]);
+        //
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        DB::table('pieces_obligatoires_master')
-            ->where('code_document', 'certificat_langue')
-            ->update(['obligatoire' => true]);
+        //
     }
 };
