@@ -16,6 +16,7 @@ use App\Models\ProjetRecherche;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -40,6 +41,11 @@ class CandidatureController extends Controller
 
     public function storeEtape1(Request $request)
     {
+        // sur mobile la connexion est souvent moins stable : si le telephone perd
+        // le reseau ou que l'utilisateur quitte la page juste apres avoir valide,
+        // le script serait sinon interrompu avant l'envoi de l'email
+        ignore_user_abort(true);
+
         $validated = $request->validate([
             'master_id' => 'required|exists:masters,id',
             'nom' => 'required|string|max:100',
@@ -69,7 +75,15 @@ class CandidatureController extends Controller
         $candidature->token_expire_at = now()->addDays(7);
         $candidature->save();
 
-        Mail::to($candidature->email)->send(new CandidatureLienMail($candidature));
+        try {
+            Mail::to($candidature->email)->send(new CandidatureLienMail($candidature));
+        } catch (\Throwable $e) {
+            Log::error('Echec envoi email candidature (lien)', [
+                'candidature_id' => $candidature->id,
+                'email' => $candidature->email,
+                'erreur' => $e->getMessage(),
+            ]);
+        }
 
         return view('pages_sites.candidature.verifiez-email', compact('candidature'));
     }

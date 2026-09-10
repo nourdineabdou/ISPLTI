@@ -7,6 +7,7 @@ use App\Mail\CandidatureRefuseeMail;
 use App\Models\CandidatureMaster;
 use App\Models\DocumentCandidature;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -147,10 +148,19 @@ class CandidatureAdminController extends Controller
         $candidature->commentaire_admin = $request->input('commentaire_admin');
         $candidature->save();
 
-        if ($request->input('decision') === 'accepte') {
-            Mail::to($candidature->email)->send(new CandidatureAccepteeMail($candidature));
-        } else {
-            Mail::to($candidature->email)->send(new CandidatureRefuseeMail($candidature));
+        try {
+            if ($request->input('decision') === 'accepte') {
+                Mail::to($candidature->email)->send(new CandidatureAccepteeMail($candidature));
+            } else {
+                Mail::to($candidature->email)->send(new CandidatureRefuseeMail($candidature));
+            }
+        } catch (\Throwable $e) {
+            Log::error('Echec envoi email decision candidature', [
+                'candidature_id' => $candidature->id,
+                'email' => $candidature->email,
+                'erreur' => $e->getMessage(),
+            ]);
+            return back()->with('error', 'Décision enregistrée mais l\'email n\'a pas pu être envoyé au candidat.');
         }
 
         return back()->with('success', 'Décision enregistrée et email envoyé au candidat.');
