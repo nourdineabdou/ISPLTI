@@ -138,6 +138,12 @@ class CandidatureAdminController extends Controller
 
     public function decision(Request $request, $id)
     {
+        // sur mobile la connexion est souvent moins stable : on evite que l'envoi
+        // de l'email soit interrompu si l'admin quitte la page juste apres avoir valide
+        if ($this->estMobile($request)) {
+            ignore_user_abort(true);
+        }
+
         $request->validate([
             'decision' => 'required|in:accepte,refuse',
             'commentaire_admin' => 'nullable|string|max:2000',
@@ -164,5 +170,13 @@ class CandidatureAdminController extends Controller
         }
 
         return back()->with('success', 'Décision enregistrée et email envoyé au candidat.');
+    }
+
+    private function estMobile(Request $request): bool
+    {
+        return (bool) preg_match(
+            '/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Windows Phone/i',
+            $request->userAgent() ?? ''
+        );
     }
 }
