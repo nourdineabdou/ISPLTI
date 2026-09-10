@@ -57,7 +57,7 @@ class Etudiant extends Model
         return trim($nodos);
     }
 
-    public function getAvailableBulletins(array $semestres = ['S1', 'S3', 'S5'])
+    public function getAvailableBulletins(array $semestres = ['S1', 'S3', 'S5' , 'S2', 'S4', 'S6'])
     {
         $suffix = $this->nodos_suffix;
 
@@ -70,17 +70,18 @@ class Etudiant extends Model
         foreach ($semestres as $semestre) {
             $semestre = strtoupper((string) $semestre);
             $fileName = $suffix . $semestre . '.png';
-            $path = 'bultin/' . $fileName;
+            $path = 'S1S3S5/' . $fileName;
+            $path2 = 'S2S4S6/' . $fileName;
 
-            if (Storage::disk('local')->exists($path)) {
+            if (Storage::disk('local')->exists($path) || Storage::disk('local')->exists($path2)) {
+
                 $available[$semestre] = [
                     'semestre' => $semestre,
                     'filename' => $fileName,
-                    'path' => $path,
+                    'path' => Storage::disk('local')->exists($path) ? $path : $path2,
                 ];
             }
         }
-
         return $available;
     }
 }
