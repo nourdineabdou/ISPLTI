@@ -42,7 +42,7 @@
         <h6 class="fw-semibold">@lang('system.Contact')</h6>
         <p class="small muted mb-1">@lang('system.Adresse') : </p>
         <p class="small muted mb-1">@lang('system.Telephone') : </p>
-        <p class="small muted mb-1">Email : <a href="mailto:istisplti16@gmail.com" class="text-white">istisplti16@gmail.com</a></p>
+        <p class="small muted mb-1">Email : <a href="mailto:{{ config('mail.from.address') }}" class="text-white">{{ config('mail.from.address') }}</a></p>
       </div>
 
       <div class="col-lg-3 col-md-6">

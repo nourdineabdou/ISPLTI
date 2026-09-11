@@ -24,12 +24,16 @@
                 <div class="col-lg-8">
                     <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5 text-center">
                         <h2 class="h3 mb-3" style="color:#08915e;">{{ $master->intituleLocalise() }}</h2>
-                        <p class="text-muted mb-1">{{ $master->code }} — @lang('candidature.annee_universitaire') {{ $master->annee_universitaire }} — @lang('candidature.campus') {{ $master->campus }}</p>
+                        <p class="text-muted mb-1">
+                            @lang('candidature.annee_universitaire') : {{ $master->annee_universitaire }}<br>
+                            @lang('candidature.parcours_label') : {{ $master->intituleLocalise() }} ({{ $master->code }})<br>
+                            @lang('candidature.campus') : {{ $master->campus }}
+                        </p>
                         @if($master->descriptionLocalisee())
                             <p class="mt-3">{{ $master->descriptionLocalisee() }}</p>
                         @endif
                         <div class="d-flex justify-content-center gap-4 my-4 flex-wrap">
-                            <div><i class="bi bi-calendar-event text-success"></i> @lang('candidature.candidatures_du') {{ \Carbon\Carbon::parse($master->date_debut_candidature)->format('d/m/Y') }} @lang('candidature.au') {{ \Carbon\Carbon::parse($master->date_fin_candidature)->format('d/m/Y') }}</div>
+                            <div><i class="bi bi-calendar-event text-success"></i> @lang('candidature.periode_candidature', ['debut' => \Carbon\Carbon::parse($master->date_debut_candidature)->format('d/m/Y'), 'fin' => \Carbon\Carbon::parse($master->date_fin_candidature)->format('d/m/Y')])</div>
                         </div>
                         <a href="{{ route('candidature.etape1') }}" class="btn btn-lg text-white fw-bold px-5 py-3 rounded-pill mx-auto" style="background:#08915e;width:fit-content;">
                             ✍️ @lang('candidature.postuler_maintenant')

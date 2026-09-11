@@ -111,6 +111,7 @@ Route::group(['prefix' => 'candidature'], function () {
     Route::get('etape1', [App\Http\Controllers\CandidatureController::class, 'etape1'])->name('candidature.etape1');
     Route::post('etape1', [App\Http\Controllers\CandidatureController::class, 'storeEtape1'])->name('candidature.etape1.store');
     Route::get('reprendre/{token}', [App\Http\Controllers\CandidatureController::class, 'reprendre'])->name('candidature.reprendre');
+    Route::post('renvoyer/{token}', [App\Http\Controllers\CandidatureController::class, 'renvoyerLien'])->middleware('throttle:3,1')->name('candidature.renvoyer');
     Route::get('mot-de-passe', [App\Http\Controllers\CandidatureController::class, 'definirMotDePasse'])->name('candidature.definirMotDePasse');
     Route::post('mot-de-passe', [App\Http\Controllers\CandidatureController::class, 'definirMotDePasseStore'])->name('candidature.definirMotDePasse.store');
     Route::get('connexion', [App\Http\Controllers\CandidatureController::class, 'connexion'])->name('candidature.connexion');
@@ -120,6 +121,9 @@ Route::group(['prefix' => 'candidature'], function () {
     Route::post('espace/photo', [App\Http\Controllers\CandidatureController::class, 'mettreAJourPhoto'])->name('candidature.photo.update');
     Route::get('suite', [App\Http\Controllers\CandidatureController::class, 'suite'])->name('candidature.suite');
     Route::post('suite', [App\Http\Controllers\CandidatureController::class, 'storeSuite'])->name('candidature.suite.store');
+    Route::post('suite/etape1', [App\Http\Controllers\CandidatureController::class, 'sauvegarderEtape1'])->name('candidature.suite.etape1');
+    Route::post('suite/etape2', [App\Http\Controllers\CandidatureController::class, 'sauvegarderEtape2'])->name('candidature.suite.etape2');
+    Route::post('suite/etape3', [App\Http\Controllers\CandidatureController::class, 'sauvegarderEtape3'])->name('candidature.suite.etape3');
     Route::get('image/{id}', [App\Http\Controllers\CandidatureController::class, 'image'])->name('candidature.image');
 });
 
@@ -132,4 +136,5 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'candidatures'], function ()
     Route::get('{id}/fichier', [App\Http\Controllers\CandidatureAdminController::class, 'fichier'])->name('candidatures.fichier');
     Route::get('{id}/statut/{statut}', [App\Http\Controllers\CandidatureAdminController::class, 'changerStatut'])->name('candidatures.statut');
     Route::post('{id}/decision', [App\Http\Controllers\CandidatureAdminController::class, 'decision'])->name('candidatures.decision');
+    Route::post('{id}/renvoyer-email', [App\Http\Controllers\CandidatureAdminController::class, 'renvoyerEmail'])->middleware('throttle:3,1')->name('candidatures.renvoyerEmail');
 });
