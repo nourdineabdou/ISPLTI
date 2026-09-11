@@ -1,6 +1,6 @@
 @extends('layouts_site.main')
 @section('content')
-    <div class="page-title dark-background" style="background-image: url( {{ asset('assets-lib/img/education/showcase-1.webp') }});">
+    <div class="page-title dark-background" style="background-image: url( {{ asset('isptli_apparences.png') }});">
       <div class="container position-relative">
         <h1>🔐 @lang('candidature.definir_mdp_titre')</h1>
       </div>

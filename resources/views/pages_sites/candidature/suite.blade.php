@@ -1,6 +1,6 @@
 @extends('layouts_site.main')
 @section('content')
-    <div class="page-title dark-background" style="background-image: url( {{ asset('assets-lib/img/education/showcase-1.webp') }});">
+    <div class="page-title dark-background" style="background-image: url( {{ asset('isptli_apparences.png') }});">
       <div class="container position-relative">
         <h1>🎓 @lang('candidature.breadcrumb_candidature') — {{ $candidature->numero_candidature }}</h1>
         <p>{{ $candidature->prenom }} {{ $candidature->nom }} — {{ $candidature->master->intituleLocalise() }}</p>
@@ -119,9 +119,14 @@
                                         <div class="col-md-3">
                                             <select name="langues[{{ $i }}][niveau]" class="form-select">
                                                 <option value="">@lang('candidature.niveau')</option>
-                                                @foreach(['A1','A2','B1','B2','C1','C2'] as $niveau)
+                                                @foreach(['C1','C2'] as $niveau)
                                                     <option value="{{ $niveau }}" {{ $l->niveau == $niveau ? 'selected' : '' }}>{{ $niveau }}</option>
                                                 @endforeach
+                                                {{-- niveau enregistre avant la restriction a C1/C2 : on le garde affiche
+                                                     tel quel plutot que de le remplacer silencieusement au rechargement --}}
+                                                @if($l->niveau && !in_array($l->niveau, ['C1', 'C2']))
+                                                    <option value="{{ $l->niveau }}" selected>{{ $l->niveau }}</option>
+                                                @endif
                                             </select>
                                         </div>
                                         <div class="col-md-5">
@@ -391,7 +396,7 @@
                 <div class="col-md-3">
                     <select name="langues[__INDEX__][niveau]" class="form-select">
                         <option value="">@lang('candidature.niveau')</option>
-                        @foreach(['A1','A2','B1','B2','C1','C2'] as $niveau)
+                        @foreach(['C1','C2'] as $niveau)
                             <option value="{{ $niveau }}">{{ $niveau }}</option>
                         @endforeach
                     </select>

@@ -418,7 +418,7 @@ return [
   'Employment_Opportunity_7' => 'Tourisme',
   'Employment_Opportunity_8' => 'Enseignement',
   'download_cv_prof' => 'Télécharger CV ',
-  'connexion' => 'Connexion',
+  'connexion' => 'Espace étudiants Licence',
   "inscription" => "S'inscrire",
   "rescription" => "Réinscription",
   'inscription_desc' => 'Inscrivez-vous dès maintenant pour rejoindre notre institut et commencer votre parcours éducatif.',
