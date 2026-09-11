@@ -10,7 +10,7 @@
         ];
         $style = $statutStyles[$candidature->statut] ?? $statutStyles['brouillon'];
     @endphp
-    <div class="page-title dark-background" style="background-image: url( {{ asset('assets-lib/img/education/showcase-1.webp') }});">
+    <div class="page-title dark-background" style="background-image: url( {{ asset('isptli_apparences.png') }});">
       <div class="container position-relative">
         <h1>🗂️ @lang('candidature.espace_titre')</h1>
         <p>{{ $candidature->prenom }} {{ $candidature->nom }} — {{ $candidature->numero_candidature }}</p>
@@ -83,8 +83,12 @@
                     <div class="row">
                         <div class="col-sm-6 mb-2"><strong>@lang('candidature.email') :</strong> {{ $candidature->email }}</div>
                         <div class="col-sm-6 mb-2"><strong>@lang('candidature.telephone') :</strong> {{ $candidature->telephone ?? '-' }}</div>
+                        <div class="col-sm-6 mb-2"><strong>@lang('candidature.whatsapp') :</strong> {{ $candidature->whatsapp ?? '-' }}</div>
                         <div class="col-sm-6 mb-2"><strong>@lang('candidature.date_naissance') :</strong> {{ optional($candidature->date_naissance)->format('d/m/Y') ?? '-' }}</div>
+                        <div class="col-sm-6 mb-2"><strong>@lang('candidature.lieu_naissance') :</strong> {{ $candidature->lieu_naissance ?? '-' }}</div>
                         <div class="col-sm-6 mb-2"><strong>@lang('candidature.nationalite') :</strong> {{ $candidature->nationalite ?? '-' }}</div>
+                        <div class="col-sm-6 mb-2"><strong>@lang('candidature.nni') :</strong> {{ $candidature->nni ?? '-' }}</div>
+                        <div class="col-sm-6 mb-2"><strong>@lang('candidature.adresse') :</strong> {{ $candidature->adresse ?? '-' }}</div>
                     </div>
                 </div>
 

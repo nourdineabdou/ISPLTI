@@ -108,8 +108,8 @@ return [
     'projet_recherche_titre' => 'Research project',
     'titre_projet' => 'Project title *',
     'discipline' => 'Discipline',
-    'resume_projet' => 'Summary (3 to 6 pages recommended in the file)',
-    'fichier_projet' => 'Project file (PDF)',
+    'resume_projet' => 'Summary',
+    'fichier_projet' => 'Project file (3 to 6 pages recommended, PDF)',
     'lettre_motivation_titre' => 'Motivation letter',
     'contenu' => 'Content',
     'lettre_signee' => 'Or upload your signed letter (PDF)',
@@ -129,7 +129,7 @@ return [
 
     // navigation / home
     'nav_candidature' => 'Application',
-    'postuler_master' => 'Apply to the Master',
+    'postuler_master' => 'Master Application Space',
 
     // email
     'email_sujet' => 'Continue your application - :numero',

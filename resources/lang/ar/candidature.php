@@ -76,7 +76,7 @@ return [
     'organisme' => 'الجهة',
     'ajouter_formation' => 'إضافة تكوين',
     'diplomes_titre' => 'الشهادات',
-    'diplomes_note' => 'أضف شهادة واحدة على الأقل مع نسخة مصادق عليها وكشف النقاط (إلزامي).',
+    'diplomes_note' => 'أضف شهادة واحدة على الأقل مع نسخة مصادق عليها وكشوف الدرجات (إلزامي).',
     'type_diplome' => 'نوع الشهادة',
     'type_diplome_licence' => 'ليسانس',
     'type_diplome_maitrise' => 'اجازة',
@@ -88,7 +88,7 @@ return [
     'pays' => 'البلد',
     'mention' => 'التقدير',
     'fichier_diplome' => 'الشهادة (PDF/صورة)',
-    'fichier_releve' => 'كشف النقاط',
+    'fichier_releve' => 'كشوف الدرجات',
     'ajouter_diplome' => 'إضافة شهادة',
     'fichier_deja_envoye' => 'تم رفع الملف مسبقًا',
     'fichier_conserver_note' => 'اترك هذا الحقل فارغًا للاحتفاظ بهذا الملف، أو اختر ملفًا جديدًا لاستبداله.',
@@ -108,9 +108,9 @@ return [
     'projet_recherche_titre' => 'مشروع البحث',
     'titre_projet' => 'عنوان المشروع *',
     'discipline' => 'التخصص',
-    'resume_projet' => 'ملخص (يُفضل 3 إلى 6 صفحات في الملف)',
-    'fichier_projet' => 'ملف المشروع (PDF)',
-    'lettre_motivation_titre' => 'رسالة الدافعية',
+    'resume_projet' => 'ملخص',
+    'fichier_projet' => 'ملف المشروع (يُفضل 3 إلى 6 صفحات، PDF)',
+    'lettre_motivation_titre' => 'تحميل وثيقة دوافع موقعة',
     'contenu' => 'المحتوى',
     'lettre_signee' => 'أو أرفق رسالتك الموقعة (PDF)',
     'photo_pieces_titre' => 'الوثائق المطلوبة',
@@ -129,7 +129,7 @@ return [
 
     // التنقل / الصفحة الرئيسية
     'nav_candidature' => 'الترشح',
-    'postuler_master' => 'قدم ترشحك للماستر',
+    'postuler_master' => 'مساحة الترشح للماستر',
 
     // البريد الإلكتروني
     'email_sujet' => 'تابع ترشحك - :numero',

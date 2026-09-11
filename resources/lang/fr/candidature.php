@@ -108,8 +108,8 @@ return [
     'projet_recherche_titre' => 'Projet de recherche',
     'titre_projet' => 'Titre du projet *',
     'discipline' => 'Discipline',
-    'resume_projet' => 'Résumé (3 à 6 pages recommandé dans le fichier)',
-    'fichier_projet' => 'Fichier du projet (PDF)',
+    'resume_projet' => 'Résumé',
+    'fichier_projet' => 'Fichier du projet (3 à 6 pages recommandé, PDF)',
     'lettre_motivation_titre' => 'Lettre de motivation',
     'contenu' => 'Contenu',
     'lettre_signee' => 'Ou déposez votre lettre signée (PDF)',
@@ -129,7 +129,7 @@ return [
 
     // navigation / accueil
     'nav_candidature' => 'Candidature',
-    'postuler_master' => 'Postuler au Master',
+    'postuler_master' => 'Espace de candidature au Master',
 
     // email
     'email_sujet' => 'Continuez votre candidature - :numero',

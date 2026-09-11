@@ -559,6 +559,11 @@ class CandidatureController extends Controller
             'langues' => 'nullable|array',
             'langues.*.id' => ['nullable', Rule::exists('candidature_langues', 'id')->where('candidature_id', $candidature->id)],
             'langues.*.langue_id' => 'nullable|exists:langues,id',
+            // le menu ne propose plus que C1/C2 pour toute nouvelle saisie, mais on ne
+            // rejette pas ici une valeur differente : quelques candidats ont deja enregistre
+            // un niveau plus bas avant cette restriction, et une validation stricte les
+            // bloquerait a chaque resauvegarde sans qu'ils puissent la corriger (leur select
+            // n'offre plus que C1/C2 - voir la vue, qui reaffiche leur ancienne valeur telle quelle)
             'langues.*.niveau' => 'nullable|string|max:10',
             'langues.*.type' => 'nullable|string|max:30',
             'langues.*.fichier_certificat' => 'nullable|file|mimes:pdf,jpg,jpeg,png',

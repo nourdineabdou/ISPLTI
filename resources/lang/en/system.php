@@ -444,7 +444,7 @@ return [
   'Employment_Opportunity_7' => 'Tourisme',
   'Employment_Opportunity_8' => 'Enseignement',
   'download_cv_prof'=>"Download CV",
-'connexion' => "Login",
+'connexion' => "Licence Students Space",
 'inscription'  => "Registration",
 'rescription' => "Subscription",
 'inscription_desc' => "Create a new account to get started.",
