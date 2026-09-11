@@ -97,6 +97,7 @@
                         <div id="repeater-langues">
                             @foreach($candidature->langues as $i => $l)
                                 <div class="repeater-row border rounded-3 p-3 mb-2">
+                                    <input type="hidden" name="langues[{{ $i }}][id]" value="{{ $l->id }}">
                                     <div class="row g-2">
                                         <div class="col-md-4">
                                             <select name="langues[{{ $i }}][langue_id]" class="form-select">
@@ -135,6 +136,7 @@
                         <div id="repeater-diplomes">
                             @foreach($candidature->diplomes as $i => $d)
                                 <div class="repeater-row border rounded-3 p-3 mb-2">
+                                    <input type="hidden" name="diplomes[{{ $i }}][id]" value="{{ $d->id }}">
                                     <div class="row g-2">
                                         <div class="col-md-3">
                                             <select name="diplomes[{{ $i }}][type_diplome]" class="form-select" required>
@@ -179,6 +181,7 @@
                         <div id="repeater-formations">
                             @foreach($candidature->formations as $i => $f)
                                 <div class="repeater-row border rounded-3 p-3 mb-2">
+                                    <input type="hidden" name="formations[{{ $i }}][id]" value="{{ $f->id }}">
                                     <div class="row g-2">
                                         <div class="col-md-5"><input type="text" name="formations[{{ $i }}][intitule]" class="form-control" placeholder="@lang('candidature.intitule')" value="{{ $f->intitule }}"></div>
                                         <div class="col-md-3"><input type="text" name="formations[{{ $i }}][organisme]" class="form-control" placeholder="@lang('candidature.organisme')" value="{{ $f->organisme }}"></div>
@@ -195,6 +198,7 @@
                         <div id="repeater-experiences">
                             @foreach($candidature->experiencesProfessionnelles as $i => $exp)
                                 <div class="repeater-row border rounded-3 p-3 mb-2">
+                                    <input type="hidden" name="experiences[{{ $i }}][id]" value="{{ $exp->id }}">
                                     <div class="row g-2">
                                         <div class="col-md-4"><input type="text" name="experiences[{{ $i }}][employeur]" class="form-control" placeholder="@lang('candidature.employeur')" value="{{ $exp->employeur }}"></div>
                                         <div class="col-md-4"><input type="text" name="experiences[{{ $i }}][poste]" class="form-control" placeholder="@lang('candidature.poste')" value="{{ $exp->poste }}"></div>
@@ -411,7 +415,20 @@
 
             document.addEventListener('click', function (e) {
                 if (e.target.classList.contains('js-remove-row')) {
-                    e.target.closest('.repeater-row').remove();
+                    var row = e.target.closest('.repeater-row');
+                    // si la ligne existe deja en base (elle a un id), on previent explicitement
+                    // le serveur de la supprimer, plutot que de compter sur son absence dans
+                    // le formulaire (ambigu : absence = supprime ? oublie ? bug ?)
+                    var idInput = row.querySelector('input[type="hidden"][name$="[id]"]');
+                    if (idInput && idInput.value) {
+                        var collection = idInput.name.split('[')[0];
+                        var champSupprime = document.createElement('input');
+                        champSupprime.type = 'hidden';
+                        champSupprime.name = collection + '_supprimes[]';
+                        champSupprime.value = idInput.value;
+                        document.getElementById('candidature-form').appendChild(champSupprime);
+                    }
+                    row.remove();
                 }
             });
 
