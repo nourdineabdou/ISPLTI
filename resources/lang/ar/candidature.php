@@ -104,6 +104,7 @@ return [
     'enregistrement_en_cours' => 'جارٍ الحفظ...',
     'enregistre' => 'تم حفظ التعديلات ✓',
     'echec_enregistrement' => 'فشل الحفظ، تحقق من اتصالك',
+    'erreur_serveur' => 'حدث خطأ في الخادم. أعد المحاولة بعد قليل، وإذا استمرت المشكلة تواصل معنا.',
     'projet_recherche_titre' => 'مشروع البحث',
     'titre_projet' => 'عنوان المشروع *',
     'discipline' => 'التخصص',
@@ -164,6 +165,7 @@ return [
     'pas_encore_candidat' => 'لم تقدم ترشحًا بعد؟',
 
     // مساحة المترشح
+    'connecte_en_tant_que' => 'متصل باسم:',
     'espace_titre' => 'مساحتي كمترشح',
     'mon_dossier' => 'ملفي',
     'completer_mon_dossier' => 'استكمال ملفي',

@@ -360,13 +360,18 @@ class CandidatureController extends Controller
             'langues.*.fichier_certificat' => __('candidature.certificat_optionnel'),
         ]);
 
-        $this->enregistrerEtape2($request, $candidature);
+        // on renvoie systematiquement les ids reellement attribues en base (meme en cas
+        // d'erreur de validation ci-dessous) : les donnees ont deja ete enregistrees a ce
+        // stade, et le navigateur doit connaitre ces ids pour qu'un futur clic sur "Retirer"
+        // (sans rechargement de page) puisse effectivement etre transmis au serveur
+        $ids = $this->enregistrerEtape2($request, $candidature);
 
         // au moins 2 langues (avec langue + niveau) sont obligatoires
         if ($candidature->langues()->count() < 2) {
             return response()->json([
                 'success' => false,
                 'message' => __('candidature.minimum_deux_langues'),
+                'ids' => $ids,
             ], 422);
         }
 
@@ -380,6 +385,7 @@ class CandidatureController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => __('candidature.diplome_incomplet') . ' ' . implode(', ', $champsManquants),
+                    'ids' => $ids,
                 ], 422);
             }
         }
@@ -390,20 +396,26 @@ class CandidatureController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => __('candidature.pieces_manquantes') . ' ' . $pieceCertificatLangue->libelle,
+                'ids' => $ids,
             ], 422);
         }
 
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'ids' => $ids]);
     }
 
     /**
-     * Verifie le premier diplome renseigne champ par champ, et renvoie la liste
-     * des libelles des champs manquants (vide si tout est complet).
+     * Verifie tous les diplomes renseignes champ par champ et renvoie la liste
+     * des libelles des champs manquants (vide des qu'au moins un diplome est complet).
+     *
+     * Ne se limite pas au premier diplome : un candidat peut avoir laisse une
+     * ancienne ligne incomplete (essai precedent, ligne oubliee) tout en ayant
+     * rempli une nouvelle ligne complete via le bouton "+ Ajouter un diplome" -
+     * cette nouvelle ligne doit suffire a valider l'etape.
      */
     private function champsDiplomeManquants(CandidatureMaster $candidature): array
     {
-        $diplome = $candidature->diplomes()->first();
-        if (!$diplome) {
+        $diplomes = $candidature->diplomes;
+        if ($diplomes->isEmpty()) {
             return [
                 __('candidature.type_diplome'),
                 __('candidature.intitule_requis'),
@@ -413,23 +425,34 @@ class CandidatureController extends Controller
             ];
         }
 
-        $manquants = [];
-        if (empty($diplome->type_diplome)) {
-            $manquants[] = __('candidature.type_diplome');
+        $meilleursManquants = null;
+        foreach ($diplomes as $diplome) {
+            $manquants = [];
+            if (empty($diplome->type_diplome)) {
+                $manquants[] = __('candidature.type_diplome');
+            }
+            if (empty($diplome->intitule)) {
+                $manquants[] = __('candidature.intitule_requis');
+            }
+            if (empty($diplome->etablissement)) {
+                $manquants[] = __('candidature.etablissement');
+            }
+            if (empty($diplome->fichier_diplome)) {
+                $manquants[] = __('candidature.fichier_diplome');
+            }
+            if (empty($diplome->fichier_releve)) {
+                $manquants[] = __('candidature.fichier_releve');
+            }
+
+            if (empty($manquants)) {
+                // au moins un diplome est complet : c'est suffisant
+                return [];
+            }
+            if ($meilleursManquants === null || count($manquants) < count($meilleursManquants)) {
+                $meilleursManquants = $manquants;
+            }
         }
-        if (empty($diplome->intitule)) {
-            $manquants[] = __('candidature.intitule_requis');
-        }
-        if (empty($diplome->etablissement)) {
-            $manquants[] = __('candidature.etablissement');
-        }
-        if (empty($diplome->fichier_diplome)) {
-            $manquants[] = __('candidature.fichier_diplome');
-        }
-        if (empty($diplome->fichier_releve)) {
-            $manquants[] = __('candidature.fichier_releve');
-        }
-        return $manquants;
+        return $meilleursManquants;
     }
 
     private function pieceEstFournie(PieceObligatoireMaster $piece, CandidatureMaster $candidature, ?ProjetRecherche $projet = null, ?LettreMotivation $lettre = null): bool
@@ -526,7 +549,7 @@ class CandidatureController extends Controller
             'diplomes.*.specialite' => 'nullable|string|max:255',
             'diplomes.*.etablissement' => 'nullable|string|max:255',
             'diplomes.*.pays' => 'nullable|string|max:100',
-            'diplomes.*.annee_obtention' => 'nullable|integer|min:1950|max:2100',
+            'diplomes.*.annee_obtention' => 'nullable|string|max:20',
             'diplomes.*.mention' => 'nullable|string|max:100',
             'diplomes.*.fichier_diplome' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
             'diplomes.*.fichier_releve' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
@@ -583,7 +606,16 @@ class CandidatureController extends Controller
      * Enregistre uniquement les champs de l'etape 2 (situation pro, diplomes,
      * langues, experiences, formations). Independant des etapes 1 et 3.
      */
-    private function enregistrerEtape2(Request $request, CandidatureMaster $candidature): void
+    /**
+     * @return array<string, array<string, int>> ids reellement attribues en base, indexes
+     *         par la cle client (index du formulaire) pour chaque collection - le navigateur
+     *         n'a jamais rechargement la page apres un ajout via "+", donc il ne connait pas
+     *         encore l'id reel d'une ligne tout juste creee ; sans ce retour, un "Retirer"
+     *         sur cette ligne (avant tout rechargement de page) ne peut pas etre transmis
+     *         au serveur (le champ cache [id] reste introuvable/vide cote JS), et la ligne
+     *         (et ses fichiers) restent orphelins en base malgre le clic de suppression.
+     */
+    private function enregistrerEtape2(Request $request, CandidatureMaster $candidature): array
     {
         $baseDir = "candidatures/{$candidature->id}";
         Storage::disk('local')->makeDirectory($baseDir);
@@ -604,8 +636,10 @@ class CandidatureController extends Controller
         // deja saisies disparaissent si une sauvegarde ne renvoie pas exactement le meme instantane
         // (ex: chevauchement de requetes, ligne pas encore rechargee cote client, etc.)
 
+        $ids = ['diplomes' => [], 'langues' => [], 'experiences' => [], 'formations' => []];
+
         // diplomes
-        $candidature->diplomes()->whereIn('id', $request->input('diplomes_supprimes', []))->delete();
+        $this->supprimerLignesEtLeursFichiers($candidature->diplomes(), $request->input('diplomes_supprimes', []), ['fichier_diplome', 'fichier_releve']);
         foreach ($request->input('diplomes', []) as $index => $diplome) {
             $idExistant = $diplome['id'] ?? null;
             $ligneExistante = $idExistant ? $candidature->diplomes()->find($idExistant) : null;
@@ -634,10 +668,11 @@ class CandidatureController extends Controller
             }
             $this->enregistrerFichier($request, "diplomes.$index.fichier_diplome", "$baseDir/diplomes", $ligne, 'fichier_diplome');
             $this->enregistrerFichier($request, "diplomes.$index.fichier_releve", "$baseDir/diplomes", $ligne, 'fichier_releve');
+            $ids['diplomes'][$index] = $ligne->id;
         }
 
         // langues
-        $candidature->langues()->whereIn('id', $request->input('langues_supprimes', []))->delete();
+        $this->supprimerLignesEtLeursFichiers($candidature->langues(), $request->input('langues_supprimes', []), ['fichier_certificat']);
         foreach ($request->input('langues', []) as $index => $langue) {
             if (empty($langue['langue_id']) || empty($langue['niveau'])) {
                 continue;
@@ -657,11 +692,12 @@ class CandidatureController extends Controller
                 $ligne = CandidatureLangue::create($donnees);
             }
             $this->enregistrerFichier($request, "langues.$index.fichier_certificat", "$baseDir/langues", $ligne, 'fichier_certificat');
+            $ids['langues'][$index] = $ligne->id;
         }
 
         // experiences professionnelles structurees
-        $candidature->experiencesProfessionnelles()->whereIn('id', $request->input('experiences_supprimes', []))->delete();
-        foreach ($request->input('experiences', []) as $experience) {
+        $this->supprimerLignesEtLeursFichiers($candidature->experiencesProfessionnelles(), $request->input('experiences_supprimes', []), []);
+        foreach ($request->input('experiences', []) as $index => $experience) {
             if (empty($experience['employeur'])) {
                 continue;
             }
@@ -677,14 +713,16 @@ class CandidatureController extends Controller
             $ligneExistante = $idExistant ? $candidature->experiencesProfessionnelles()->find($idExistant) : null;
             if ($ligneExistante) {
                 $ligneExistante->update($donnees);
+                $ligne = $ligneExistante;
             } else {
-                ExperienceProfessionnelle::create($donnees);
+                $ligne = ExperienceProfessionnelle::create($donnees);
             }
+            $ids['experiences'][$index] = $ligne->id;
         }
 
         // formations complementaires
-        $candidature->formations()->whereIn('id', $request->input('formations_supprimes', []))->delete();
-        foreach ($request->input('formations', []) as $formation) {
+        $this->supprimerLignesEtLeursFichiers($candidature->formations(), $request->input('formations_supprimes', []), []);
+        foreach ($request->input('formations', []) as $index => $formation) {
             if (empty($formation['intitule'])) {
                 continue;
             }
@@ -699,10 +737,14 @@ class CandidatureController extends Controller
             $ligneExistante = $idExistant ? $candidature->formations()->find($idExistant) : null;
             if ($ligneExistante) {
                 $ligneExistante->update($donnees);
+                $ligne = $ligneExistante;
             } else {
-                FormationCandidat::create($donnees);
+                $ligne = FormationCandidat::create($donnees);
             }
+            $ids['formations'][$index] = $ligne->id;
         }
+
+        return $ids;
     }
 
     /**
@@ -783,7 +825,13 @@ class CandidatureController extends Controller
                 if (!empty($sousTableau)) {
                     $resultat[$cle] = $sousTableau;
                 }
-            } elseif ($valeur instanceof \Illuminate\Http\UploadedFile) {
+            } elseif ($valeur instanceof \Symfony\Component\HttpFoundation\File\UploadedFile) {
+                // NB: $request->files->all() renvoie des UploadedFile Symfony (classe de base),
+                // pas des Illuminate\Http\UploadedFile (qui n'existent qu'apres conversion via
+                // $request->file()/allFiles()) - tester la sous-classe Laravel ici faisait
+                // echouer l'instanceof pour CHAQUE vrai fichier envoye par un navigateur, et
+                // donc supprimer silencieusement tous les fichiers avant meme la validation.
+                //
                 // on ne retire que les champs vraiment vides (aucun fichier choisi).
                 // un fichier choisi mais rejete (trop volumineux, transfert incomplet...)
                 // doit rester pour que Laravel affiche une vraie erreur, au lieu de
@@ -818,12 +866,40 @@ class CandidatureController extends Controller
         if (!$request->hasFile($champ)) {
             return null;
         }
+        // si un fichier existait deja pour ce champ (remplacement), on le supprime du disque
+        // pour ne pas accumuler des fichiers orphelins a chaque nouvel upload
+        $ancienChemin = $modele->{$colonne};
+        if ($ancienChemin) {
+            Storage::disk('local')->delete($ancienChemin);
+        }
         $file = $request->file($champ);
         Storage::disk('local')->makeDirectory($dossier);
         $nomFichier = Str::uuid() . '.' . $file->getClientOriginalExtension();
         $file->storeAs($dossier, $nomFichier, 'local');
         $modele->update([$colonne => "$dossier/$nomFichier"]);
         return "$dossier/$nomFichier";
+    }
+
+    /**
+     * Supprime les lignes explicitement retirees par le candidat (via *_supprimes[]),
+     * en effacant d'abord leurs fichiers du disque : un simple ->delete() sur la
+     * relation ne supprime que la ligne en base (soft delete), jamais les fichiers
+     * qu'elle referencait, qui restaient orphelins sur le disque indefiniment.
+     */
+    private function supprimerLignesEtLeursFichiers($relationQuery, array $idsASupprimer, array $colonnesFichiers): void
+    {
+        if (empty($idsASupprimer)) {
+            return;
+        }
+        $lignes = (clone $relationQuery)->whereIn('id', $idsASupprimer)->get();
+        foreach ($lignes as $ligne) {
+            foreach ($colonnesFichiers as $colonne) {
+                if ($ligne->{$colonne}) {
+                    Storage::disk('local')->delete($ligne->{$colonne});
+                }
+            }
+        }
+        $relationQuery->whereIn('id', $idsASupprimer)->delete();
     }
 
     private function enregistrerDocument($file, CandidatureMaster $candidature, string $typeDocument, string $dossier): void

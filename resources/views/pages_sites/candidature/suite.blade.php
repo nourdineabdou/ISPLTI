@@ -10,6 +10,15 @@
     <section class="posts">
       <div class="container" data-aos="fade-up">
 
+        {{-- rappel visible du compte connecte, pour eviter toute confusion sur les
+             informations affichees (surtout si plusieurs candidats partagent le meme
+             appareil/navigateur) --}}
+        <div class="d-flex justify-content-end align-items-center flex-wrap gap-3 mb-3 small">
+            <span class="text-muted">🔒 @lang('candidature.connecte_en_tant_que') <strong>{{ $candidature->prenom }} {{ $candidature->nom }}</strong></span>
+            <a href="{{ route('candidature.espace') }}" class="text-decoration-none">@lang('candidature.mon_dossier')</a>
+            <a href="{{ route('candidature.deconnexion') }}" class="text-decoration-none text-danger">@lang('candidature.deconnexion')</a>
+        </div>
+
         {{-- indicateur d'etapes (cliquables pour naviguer librement) --}}
         <div class="d-flex justify-content-center gap-3 mb-4" id="candidature-progress">
             <span class="badge rounded-pill px-3 py-2 step-badge bg-secondary" data-step-badge="1" data-label="1. @lang('candidature.step_identite')" role="button">1. @lang('candidature.step_identite')</span>
@@ -420,15 +429,23 @@
                     // le serveur de la supprimer, plutot que de compter sur son absence dans
                     // le formulaire (ambigu : absence = supprime ? oublie ? bug ?)
                     var idInput = row.querySelector('input[type="hidden"][name$="[id]"]');
-                    if (idInput && idInput.value) {
+                    var idAsupprimer = idInput ? idInput.value : null;
+                    if (idAsupprimer) {
                         var collection = idInput.name.split('[')[0];
                         var champSupprime = document.createElement('input');
                         champSupprime.type = 'hidden';
                         champSupprime.name = collection + '_supprimes[]';
-                        champSupprime.value = idInput.value;
+                        champSupprime.value = idAsupprimer;
                         document.getElementById('candidature-form').appendChild(champSupprime);
                     }
                     row.remove();
+                    // la suppression doit etre effective tout de suite, sans attendre que le
+                    // candidat clique sur "Suivant" : sinon un simple rechargement de page
+                    // (ou une navigation directe vers une autre etape) avant ce clic fait
+                    // reapparaitre la ligne, qui n'a jamais ete supprimee cote serveur
+                    if (idAsupprimer) {
+                        sauvegarderProgression('2');
+                    }
                 }
             });
 
@@ -453,6 +470,7 @@
             var texteEnregistrement = @json(__('candidature.enregistrement_en_cours'));
             var texteEnregistre = @json(__('candidature.enregistre'));
             var texteEchecEnregistrement = @json(__('candidature.echec_enregistrement'));
+            var texteErreurServeur = @json(__('candidature.erreur_serveur'));
 
             function marquerEtapeValidee(stepNumber) {
                 var badge = document.querySelector('.step-badge[data-step-badge="' + stepNumber + '"]');
@@ -497,6 +515,34 @@
             // informations deja saisies (langues, diplomes...) peuvent disparaitre
             var dernierePromesseSauvegarde = Promise.resolve();
 
+            // une ligne ajoutee via "+" n'a pas de champ cache [id] (elle n'existe pas
+            // encore en base) : sans mise a jour, le bouton "Retirer" ne trouverait jamais
+            // d'id a signaler au serveur et la ligne (et ses fichiers) resteraient orphelins
+            // en base malgre la suppression visible a l'ecran. On applique ici les ids
+            // reellement attribues, renvoyes par le serveur apres chaque sauvegarde de
+            // l'etape 2, en les injectant dans le formulaire pour chaque ligne concernee.
+            function appliquerIdsRecus(idsParCollection) {
+                if (!idsParCollection) return;
+                Object.keys(idsParCollection).forEach(function (collection) {
+                    var idsParIndex = idsParCollection[collection];
+                    Object.keys(idsParIndex).forEach(function (index) {
+                        var prefixe = collection + '[' + index + ']';
+                        var champReference = form.querySelector('[name^="' + prefixe + '["]');
+                        if (!champReference) return;
+                        var row = champReference.closest('.repeater-row');
+                        if (!row) return;
+                        var champId = row.querySelector('input[type="hidden"][name="' + prefixe + '[id]"]');
+                        if (!champId) {
+                            champId = document.createElement('input');
+                            champId.type = 'hidden';
+                            champId.name = prefixe + '[id]';
+                            row.prepend(champId);
+                        }
+                        champId.value = idsParIndex[index];
+                    });
+                });
+            }
+
             // renvoie une Promise<boolean> : true si la sauvegarde a reussi
             function sauvegarderProgression(stepNumber) {
                 dernierePromesseSauvegarde = dernierePromesseSauvegarde.then(function () {
@@ -516,6 +562,7 @@
                         }
                         if (response.status === 422) {
                             return response.json().then(function (data) {
+                                appliquerIdsRecus(data.ids);
                                 var messageAffiche = data.message;
                                 // format de validation standard Laravel : { errors: { champ: [messages] } }
                                 if (data.errors) {
@@ -526,10 +573,21 @@
                                 return false;
                             });
                         }
-                        saveStatus.textContent = response.ok ? texteEnregistre : texteEchecEnregistrement;
-                        return response.ok;
+                        if (response.ok) {
+                            return response.json().then(function (data) {
+                                appliquerIdsRecus(data.ids);
+                                saveStatus.textContent = texteEnregistre;
+                                return true;
+                            });
+                        }
+                        // erreur serveur (500...) : bien distincte d'un probleme de connexion,
+                        // pour ne pas induire le candidat en erreur sur la cause reelle
+                        saveStatus.className = 'text-center small text-danger fw-bold mb-4';
+                        saveStatus.textContent = texteErreurServeur;
+                        return false;
                     }).catch(function () {
                         reactiverNavigation();
+                        saveStatus.className = 'text-center small text-danger fw-bold mb-4';
                         saveStatus.textContent = texteEchecEnregistrement;
                         return false;
                     });
