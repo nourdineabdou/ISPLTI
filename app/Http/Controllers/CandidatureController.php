@@ -280,28 +280,11 @@ class CandidatureController extends Controller
             return redirect()->route('candidature.espace')->with('error', __('candidature.deja_soumise_note'));
         }
 
-        $detailFichiers = [];
-        foreach (['documents.acte_naissance', 'documents.carte_identite', 'documents.memoire_rapport_projet', 'projet_fichier', 'lettre_fichier'] as $champ) {
-            if ($request->hasFile($champ)) {
-                $f = $request->file($champ);
-                $detailFichiers[$champ] = ['nom' => $f->getClientOriginalName(), 'taille' => $f->getSize(), 'valide' => $f->isValid(), 'erreur' => $f->getError()];
-            } else {
-                $detailFichiers[$champ] = 'ABSENT';
-            }
-        }
-        Log::info('DEBUG storeSuite fichiers recus', $detailFichiers);
-
         $this->retirerFichiersVides($request);
 
         $request->validate($this->reglesEtape3(true), [], $this->attributsPiecesEtape3($candidature));
 
         [$piecesObligatoires, $projet, $lettre] = $this->enregistrerEtape3($request, $candidature);
-
-        Log::info('DEBUG storeSuite apres enregistrement', [
-            'documents_en_base' => $candidature->documents()->get(['type_document', 'chemin_fichier'])->toArray(),
-            'projet_fichier' => $projet->fichier_projet,
-            'lettre_fichier' => $lettre->fichier,
-        ]);
 
         // verification des pieces obligatoires avant soumission finale
         $manquantes = [];
@@ -371,7 +354,11 @@ class CandidatureController extends Controller
 
         $this->retirerFichiersVides($request);
 
-        $request->validate($this->reglesEtape2());
+        $request->validate($this->reglesEtape2(), [], [
+            'diplomes.*.fichier_diplome' => __('candidature.fichier_diplome'),
+            'diplomes.*.fichier_releve' => __('candidature.fichier_releve'),
+            'langues.*.fichier_certificat' => __('candidature.certificat_optionnel'),
+        ]);
 
         $this->enregistrerEtape2($request, $candidature);
 
@@ -540,14 +527,14 @@ class CandidatureController extends Controller
             'diplomes.*.pays' => 'nullable|string|max:100',
             'diplomes.*.annee_obtention' => 'nullable|integer|min:1950|max:2100',
             'diplomes.*.mention' => 'nullable|string|max:100',
-            'diplomes.*.fichier_diplome' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
-            'diplomes.*.fichier_releve' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'diplomes.*.fichier_diplome' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
+            'diplomes.*.fichier_releve' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
 
             'langues' => 'nullable|array',
             'langues.*.langue_id' => 'nullable|exists:langues,id',
             'langues.*.niveau' => 'nullable|string|max:10',
             'langues.*.type' => 'nullable|string|max:30',
-            'langues.*.fichier_certificat' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:5120',
+            'langues.*.fichier_certificat' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
 
             'experiences' => 'nullable|array',
             'experiences.*.employeur' => 'nullable|string|max:255',
@@ -570,13 +557,13 @@ class CandidatureController extends Controller
             'projet_titre' => $projetRequis ? 'required|string|max:500' : 'nullable|string|max:500',
             'projet_discipline' => 'nullable|string|max:255',
             'projet_resume' => 'nullable|string',
-            'projet_fichier' => 'nullable|file|mimes:pdf|max:10240',
+            'projet_fichier' => 'nullable|file|mimes:pdf|max:102400',
 
             'lettre_contenu' => 'nullable|string',
-            'lettre_fichier' => 'nullable|file|mimes:pdf|max:5120',
+            'lettre_fichier' => 'nullable|file|mimes:pdf|max:102400',
 
             'documents' => 'nullable|array',
-            'documents.*' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:10240',
+            'documents.*' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:102400',
         ];
     }
 
@@ -753,8 +740,14 @@ class CandidatureController extends Controller
                 if (!empty($sousTableau)) {
                     $resultat[$cle] = $sousTableau;
                 }
-            } elseif ($valeur instanceof \Illuminate\Http\UploadedFile && $valeur->isValid()) {
-                $resultat[$cle] = $valeur;
+            } elseif ($valeur instanceof \Illuminate\Http\UploadedFile) {
+                // on ne retire que les champs vraiment vides (aucun fichier choisi).
+                // un fichier choisi mais rejete (trop volumineux, transfert incomplet...)
+                // doit rester pour que Laravel affiche une vraie erreur, au lieu de
+                // disparaitre silencieusement et faire croire qu'aucun fichier n'a ete envoye
+                if ($valeur->getError() !== UPLOAD_ERR_NO_FILE) {
+                    $resultat[$cle] = $valeur;
+                }
             }
         }
         return $resultat;
