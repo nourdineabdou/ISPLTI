@@ -354,7 +354,7 @@ class CandidatureController extends Controller
 
         $this->retirerFichiersVides($request);
 
-        $request->validate($this->reglesEtape2(), [], [
+        $request->validate($this->reglesEtape2($candidature), [], [
             'diplomes.*.fichier_diplome' => __('candidature.fichier_diplome'),
             'diplomes.*.fichier_releve' => __('candidature.fichier_releve'),
             'langues.*.fichier_certificat' => __('candidature.certificat_optionnel'),
@@ -509,7 +509,7 @@ class CandidatureController extends Controller
         ];
     }
 
-    private function reglesEtape2(): array
+    private function reglesEtape2(CandidatureMaster $candidature): array
     {
         return [
             'situation_professionnelle' => 'nullable|string|max:100',
@@ -519,6 +519,7 @@ class CandidatureController extends Controller
             'experience_recherche' => 'nullable|string',
 
             'diplomes' => 'nullable|array',
+            'diplomes.*.id' => ['nullable', Rule::exists('candidature_diplomes', 'id')->where('candidature_id', $candidature->id)],
             'diplomes.*.type_diplome' => 'nullable|string|max:100',
             'diplomes.*.intitule' => 'nullable|string|max:255',
             'diplomes.*.domaine' => 'nullable|string|max:255',
@@ -529,25 +530,36 @@ class CandidatureController extends Controller
             'diplomes.*.mention' => 'nullable|string|max:100',
             'diplomes.*.fichier_diplome' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
             'diplomes.*.fichier_releve' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
+            'diplomes_supprimes' => 'nullable|array',
+            'diplomes_supprimes.*' => ['integer', Rule::exists('candidature_diplomes', 'id')->where('candidature_id', $candidature->id)],
 
             'langues' => 'nullable|array',
+            'langues.*.id' => ['nullable', Rule::exists('candidature_langues', 'id')->where('candidature_id', $candidature->id)],
             'langues.*.langue_id' => 'nullable|exists:langues,id',
             'langues.*.niveau' => 'nullable|string|max:10',
             'langues.*.type' => 'nullable|string|max:30',
             'langues.*.fichier_certificat' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
+            'langues_supprimes' => 'nullable|array',
+            'langues_supprimes.*' => ['integer', Rule::exists('candidature_langues', 'id')->where('candidature_id', $candidature->id)],
 
             'experiences' => 'nullable|array',
+            'experiences.*.id' => ['nullable', Rule::exists('experiences_professionnelles', 'id')->where('candidature_id', $candidature->id)],
             'experiences.*.employeur' => 'nullable|string|max:255',
             'experiences.*.poste' => 'nullable|string|max:255',
             'experiences.*.date_debut' => 'nullable|date',
             'experiences.*.date_fin' => 'nullable|date',
             'experiences.*.description' => 'nullable|string',
+            'experiences_supprimes' => 'nullable|array',
+            'experiences_supprimes.*' => ['integer', Rule::exists('experiences_professionnelles', 'id')->where('candidature_id', $candidature->id)],
 
             'formations' => 'nullable|array',
+            'formations.*.id' => ['nullable', Rule::exists('formations_candidat', 'id')->where('candidature_id', $candidature->id)],
             'formations.*.intitule' => 'nullable|string|max:255',
             'formations.*.organisme' => 'nullable|string|max:255',
             'formations.*.date_debut' => 'nullable|date',
             'formations.*.date_fin' => 'nullable|date',
+            'formations_supprimes' => 'nullable|array',
+            'formations_supprimes.*' => ['integer', Rule::exists('formations_candidat', 'id')->where('candidature_id', $candidature->id)],
         ];
     }
 
@@ -584,18 +596,26 @@ class CandidatureController extends Controller
         // diplomes : on repart de zero a chaque enregistrement (le candidat peut revenir plusieurs fois),
         // mais on garde le fichier deja envoye si aucun nouveau n'est fourni cette fois-ci
         // (sinon un simple "Suivant" sans reselectionner de fichier effacerait le fichier deja envoye)
-        $diplomesExistants = $candidature->diplomes()->orderBy('id')->get()->values();
-        $candidature->diplomes()->delete();
+        //
+        // NOTE IMPORTANTE : chaque ligne (diplome, langue, experience, formation) est identifiee
+        // par son id (champ cache dans le formulaire). On ne supprime QUE les lignes explicitement
+        // marquees comme retirees (via *_supprimes[]), et on met a jour les lignes existantes au
+        // lieu de tout supprimer/recreer a chaque enregistrement. Cela evite que des informations
+        // deja saisies disparaissent si une sauvegarde ne renvoie pas exactement le meme instantane
+        // (ex: chevauchement de requetes, ligne pas encore rechargee cote client, etc.)
+
+        // diplomes
+        $candidature->diplomes()->whereIn('id', $request->input('diplomes_supprimes', []))->delete();
         foreach ($request->input('diplomes', []) as $index => $diplome) {
-            $ancien = $diplomesExistants->get($index);
+            $idExistant = $diplome['id'] ?? null;
+            $ligneExistante = $idExistant ? $candidature->diplomes()->find($idExistant) : null;
             $aUnFichierMaintenant = $request->hasFile("diplomes.$index.fichier_diplome") || $request->hasFile("diplomes.$index.fichier_releve");
-            $avaitDejaUnFichier = optional($ancien)->fichier_diplome || optional($ancien)->fichier_releve;
-            // on ignore seulement une ligne vraiment vide (ni intitule, ni type, ni fichier) ;
+            // on ignore seulement une ligne vraiment vide (ni intitule, ni type, ni fichier, ni ligne existante) ;
             // sinon un fichier deja choisi serait perdu si l'intitule est reste vide
-            if (empty($diplome['intitule']) && empty($diplome['type_diplome']) && !$aUnFichierMaintenant && !$avaitDejaUnFichier) {
+            if (empty($diplome['intitule']) && empty($diplome['type_diplome']) && !$aUnFichierMaintenant && !$ligneExistante) {
                 continue;
             }
-            $ligne = CandidatureDiplome::create([
+            $donnees = [
                 'candidature_id' => $candidature->id,
                 'type_diplome' => $diplome['type_diplome'] ?? '',
                 'intitule' => $diplome['intitule'] ?? '',
@@ -605,60 +625,83 @@ class CandidatureController extends Controller
                 'pays' => $diplome['pays'] ?? null,
                 'annee_obtention' => $diplome['annee_obtention'] ?? null,
                 'mention' => $diplome['mention'] ?? null,
-                'fichier_diplome' => optional($ancien)->fichier_diplome,
-                'fichier_releve' => optional($ancien)->fichier_releve,
-            ]);
+            ];
+            if ($ligneExistante) {
+                $ligneExistante->update($donnees);
+                $ligne = $ligneExistante;
+            } else {
+                $ligne = CandidatureDiplome::create($donnees);
+            }
             $this->enregistrerFichier($request, "diplomes.$index.fichier_diplome", "$baseDir/diplomes", $ligne, 'fichier_diplome');
             $this->enregistrerFichier($request, "diplomes.$index.fichier_releve", "$baseDir/diplomes", $ligne, 'fichier_releve');
         }
 
-        // langues (meme logique : on garde le certificat deja envoye si aucun nouveau n'est fourni)
-        $languesExistantes = $candidature->langues()->orderBy('id')->get()->values();
-        $candidature->langues()->delete();
+        // langues
+        $candidature->langues()->whereIn('id', $request->input('langues_supprimes', []))->delete();
         foreach ($request->input('langues', []) as $index => $langue) {
             if (empty($langue['langue_id']) || empty($langue['niveau'])) {
                 continue;
             }
-            $ancienne = $languesExistantes->get($index);
-            $ligne = CandidatureLangue::create([
+            $idExistant = $langue['id'] ?? null;
+            $ligneExistante = $idExistant ? $candidature->langues()->find($idExistant) : null;
+            $donnees = [
                 'candidature_id' => $candidature->id,
                 'langue_id' => $langue['langue_id'],
                 'niveau' => $langue['niveau'],
                 'type' => $langue['type'] ?? 'langue_travail',
-                'fichier_certificat' => optional($ancienne)->fichier_certificat,
-            ]);
+            ];
+            if ($ligneExistante) {
+                $ligneExistante->update($donnees);
+                $ligne = $ligneExistante;
+            } else {
+                $ligne = CandidatureLangue::create($donnees);
+            }
             $this->enregistrerFichier($request, "langues.$index.fichier_certificat", "$baseDir/langues", $ligne, 'fichier_certificat');
         }
 
         // experiences professionnelles structurees
-        $candidature->experiencesProfessionnelles()->delete();
+        $candidature->experiencesProfessionnelles()->whereIn('id', $request->input('experiences_supprimes', []))->delete();
         foreach ($request->input('experiences', []) as $experience) {
             if (empty($experience['employeur'])) {
                 continue;
             }
-            ExperienceProfessionnelle::create([
+            $idExistant = $experience['id'] ?? null;
+            $donnees = [
                 'candidature_id' => $candidature->id,
                 'employeur' => $experience['employeur'],
                 'poste' => $experience['poste'] ?? null,
                 'date_debut' => $experience['date_debut'] ?? null,
                 'date_fin' => $experience['date_fin'] ?? null,
                 'description' => $experience['description'] ?? null,
-            ]);
+            ];
+            $ligneExistante = $idExistant ? $candidature->experiencesProfessionnelles()->find($idExistant) : null;
+            if ($ligneExistante) {
+                $ligneExistante->update($donnees);
+            } else {
+                ExperienceProfessionnelle::create($donnees);
+            }
         }
 
         // formations complementaires
-        $candidature->formations()->delete();
+        $candidature->formations()->whereIn('id', $request->input('formations_supprimes', []))->delete();
         foreach ($request->input('formations', []) as $formation) {
             if (empty($formation['intitule'])) {
                 continue;
             }
-            FormationCandidat::create([
+            $idExistant = $formation['id'] ?? null;
+            $donnees = [
                 'candidature_id' => $candidature->id,
                 'intitule' => $formation['intitule'],
                 'organisme' => $formation['organisme'] ?? null,
                 'date_debut' => $formation['date_debut'] ?? null,
                 'date_fin' => $formation['date_fin'] ?? null,
-            ]);
+            ];
+            $ligneExistante = $idExistant ? $candidature->formations()->find($idExistant) : null;
+            if ($ligneExistante) {
+                $ligneExistante->update($donnees);
+            } else {
+                FormationCandidat::create($donnees);
+            }
         }
     }
 
