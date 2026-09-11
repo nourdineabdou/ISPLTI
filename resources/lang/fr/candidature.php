@@ -104,6 +104,7 @@ return [
     'enregistrement_en_cours' => 'Enregistrement...',
     'enregistre' => 'Modifications enregistrées ✓',
     'echec_enregistrement' => "Échec de l'enregistrement, vérifiez votre connexion",
+    'erreur_serveur' => "Une erreur est survenue sur le serveur. Réessayez dans un instant ; si le problème persiste, contactez-nous.",
     'projet_recherche_titre' => 'Projet de recherche',
     'titre_projet' => 'Titre du projet *',
     'discipline' => 'Discipline',
@@ -164,6 +165,7 @@ return [
     'pas_encore_candidat' => "Pas encore candidat ?",
 
     // espace candidat
+    'connecte_en_tant_que' => "Connecté en tant que :",
     'espace_titre' => "Mon espace candidat",
     'mon_dossier' => "Mon dossier",
     'completer_mon_dossier' => "Compléter mon dossier",

@@ -104,6 +104,7 @@ return [
     'enregistrement_en_cours' => 'Saving...',
     'enregistre' => 'Changes saved ✓',
     'echec_enregistrement' => 'Save failed, check your connection',
+    'erreur_serveur' => 'A server error occurred. Please try again in a moment; if the problem persists, contact us.',
     'projet_recherche_titre' => 'Research project',
     'titre_projet' => 'Project title *',
     'discipline' => 'Discipline',
@@ -164,6 +165,7 @@ return [
     'pas_encore_candidat' => "Not applied yet?",
 
     // applicant account
+    'connecte_en_tant_que' => "Logged in as:",
     'espace_titre' => "My applicant account",
     'mon_dossier' => "My file",
     'completer_mon_dossier' => "Complete my file",
