@@ -117,7 +117,7 @@
                                         <div class="col-md-5">
                                             <label class="form-label small mb-0">@lang('candidature.certificat_optionnel')</label>
                                             <input type="file" name="langues[{{ $i }}][fichier_certificat]" class="form-control form-control-sm" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png">
-                                            <div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image')</div>
+                                            <div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image_sans_limite')</div>
                                             @if($l->fichier_certificat)
                                                 <div class="small text-success mt-1">📎 @lang('candidature.fichier_deja_envoye') : {{ basename($l->fichier_certificat) }}</div>
                                                 <div class="small text-muted">@lang('candidature.fichier_conserver_note')</div>
@@ -153,7 +153,7 @@
                                         <div class="col-md-6">
                                             <label class="form-label small mb-0">@lang('candidature.fichier_diplome') <span class="text-danger">*</span></label>
                                             <input type="file" name="diplomes[{{ $i }}][fichier_diplome]" class="form-control form-control-sm" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png">
-                                            <div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image')</div>
+                                            <div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image_sans_limite')</div>
                                             @if($d->fichier_diplome)
                                                 <div class="small text-success mt-1">📎 @lang('candidature.fichier_deja_envoye') : {{ basename($d->fichier_diplome) }}</div>
                                                 <div class="small text-muted">@lang('candidature.fichier_conserver_note')</div>
@@ -162,7 +162,7 @@
                                         <div class="col-md-6">
                                             <label class="form-label small mb-0">@lang('candidature.fichier_releve') <span class="text-danger">*</span></label>
                                             <input type="file" name="diplomes[{{ $i }}][fichier_releve]" class="form-control form-control-sm" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png">
-                                            <div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image')</div>
+                                            <div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image_sans_limite')</div>
                                             @if($d->fichier_releve)
                                                 <div class="small text-success mt-1">📎 @lang('candidature.fichier_deja_envoye') : {{ basename($d->fichier_releve) }}</div>
                                                 <div class="small text-muted">@lang('candidature.fichier_conserver_note')</div>
@@ -358,8 +358,8 @@
                 <div class="col-md-3"><input type="text" name="diplomes[__INDEX__][domaine]" class="form-control" placeholder="@lang('candidature.domaine')"></div>
                 <div class="col-md-3"><input type="text" name="diplomes[__INDEX__][pays]" class="form-control" placeholder="@lang('candidature.pays')"></div>
                 <div class="col-md-3"><input type="text" name="diplomes[__INDEX__][mention]" class="form-control" placeholder="@lang('candidature.mention')"></div>
-                <div class="col-md-6"><label class="form-label small mb-0">@lang('candidature.fichier_diplome') <span class="text-danger">*</span></label><input type="file" name="diplomes[__INDEX__][fichier_diplome]" class="form-control form-control-sm" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image')</div></div>
-                <div class="col-md-6"><label class="form-label small mb-0">@lang('candidature.fichier_releve') <span class="text-danger">*</span></label><input type="file" name="diplomes[__INDEX__][fichier_releve]" class="form-control form-control-sm" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image')</div></div>
+                <div class="col-md-6"><label class="form-label small mb-0">@lang('candidature.fichier_diplome') <span class="text-danger">*</span></label><input type="file" name="diplomes[__INDEX__][fichier_diplome]" class="form-control form-control-sm" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image_sans_limite')</div></div>
+                <div class="col-md-6"><label class="form-label small mb-0">@lang('candidature.fichier_releve') <span class="text-danger">*</span></label><input type="file" name="diplomes[__INDEX__][fichier_releve]" class="form-control form-control-sm" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image_sans_limite')</div></div>
             </div>
             <button type="button" class="btn btn-sm btn-outline-danger mt-2 js-remove-row">✕ @lang('candidature.retirer')</button>
         </div>
@@ -383,7 +383,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-5"><label class="form-label small mb-0">@lang('candidature.certificat_optionnel')</label><input type="file" name="langues[__INDEX__][fichier_certificat]" class="form-control form-control-sm" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image')</div></div>
+                <div class="col-md-5"><label class="form-label small mb-0">@lang('candidature.certificat_optionnel')</label><input type="file" name="langues[__INDEX__][fichier_certificat]" class="form-control form-control-sm" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"><div class="small text-muted">@lang('candidature.formats_acceptes_pdf_image_sans_limite')</div></div>
             </div>
             <button type="button" class="btn btn-sm btn-outline-danger mt-2 js-remove-row">✕ @lang('candidature.retirer')</button>
         </div>
@@ -464,38 +464,60 @@
                 '3': '{{ route('candidature.suite.etape3') }}',
             };
 
+            function elementsNavigation() {
+                return document.querySelectorAll('.js-next-step, .js-prev-step, .step-badge');
+            }
+            function desactiverNavigation() {
+                elementsNavigation().forEach(function (el) { el.style.pointerEvents = 'none'; el.style.opacity = '0.6'; });
+            }
+            function reactiverNavigation() {
+                elementsNavigation().forEach(function (el) { el.style.pointerEvents = ''; el.style.opacity = ''; });
+            }
+
+            // toutes les sauvegardes sont chainees les unes apres les autres :
+            // jamais deux requetes en meme temps, sinon celle qui finit en dernier
+            // peut ecraser l'autre avec un instantane du formulaire perime, et des
+            // informations deja saisies (langues, diplomes...) peuvent disparaitre
+            var dernierePromesseSauvegarde = Promise.resolve();
+
             // renvoie une Promise<boolean> : true si la sauvegarde a reussi
             function sauvegarderProgression(stepNumber) {
-                saveStatus.className = 'text-center small text-muted mb-4';
-                saveStatus.textContent = texteEnregistrement;
-                return fetch(urlsSauvegarde[String(stepNumber)], {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' },
-                }).then(function (response) {
-                    // session expiree (401) : on redirige vers la connexion, pas la peine d'afficher une erreur generique
-                    if (response.status === 401) {
-                        window.location.href = '{{ route('candidature.connexion') }}';
-                        return false;
-                    }
-                    if (response.status === 422) {
-                        return response.json().then(function (data) {
-                            var messageAffiche = data.message;
-                            // format de validation standard Laravel : { errors: { champ: [messages] } }
-                            if (data.errors) {
-                                messageAffiche = Object.values(data.errors).flat().join(' ');
-                            }
-                            saveStatus.className = 'text-center small text-danger fw-bold mb-4';
-                            saveStatus.textContent = messageAffiche || texteEchecEnregistrement;
+                dernierePromesseSauvegarde = dernierePromesseSauvegarde.then(function () {
+                    desactiverNavigation();
+                    saveStatus.className = 'text-center small text-muted mb-4';
+                    saveStatus.textContent = texteEnregistrement;
+                    return fetch(urlsSauvegarde[String(stepNumber)], {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' },
+                    }).then(function (response) {
+                        reactiverNavigation();
+                        // session expiree (401) : on redirige vers la connexion, pas la peine d'afficher une erreur generique
+                        if (response.status === 401) {
+                            window.location.href = '{{ route('candidature.connexion') }}';
                             return false;
-                        });
-                    }
-                    saveStatus.textContent = response.ok ? texteEnregistre : texteEchecEnregistrement;
-                    return response.ok;
-                }).catch(function () {
-                    saveStatus.textContent = texteEchecEnregistrement;
-                    return false;
+                        }
+                        if (response.status === 422) {
+                            return response.json().then(function (data) {
+                                var messageAffiche = data.message;
+                                // format de validation standard Laravel : { errors: { champ: [messages] } }
+                                if (data.errors) {
+                                    messageAffiche = Object.values(data.errors).flat().join(' ');
+                                }
+                                saveStatus.className = 'text-center small text-danger fw-bold mb-4';
+                                saveStatus.textContent = messageAffiche || texteEchecEnregistrement;
+                                return false;
+                            });
+                        }
+                        saveStatus.textContent = response.ok ? texteEnregistre : texteEchecEnregistrement;
+                        return response.ok;
+                    }).catch(function () {
+                        reactiverNavigation();
+                        saveStatus.textContent = texteEchecEnregistrement;
+                        return false;
+                    });
                 });
+                return dernierePromesseSauvegarde;
             }
 
             document.querySelectorAll('.js-next-step').forEach(function (btn) {
