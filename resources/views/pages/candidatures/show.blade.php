@@ -58,10 +58,16 @@
                             </div>
                         </form>
                     @else
-                        <div class="alert alert-{{ $candidature->statut === 'accepte' ? 'success' : 'danger' }} small mb-0">
+                        <div class="alert alert-{{ $candidature->statut === 'accepte' ? 'success' : 'danger' }} small mb-2">
                             Décision déjà envoyée : <strong>{{ $candidature->statut === 'accepte' ? 'Acceptée' : 'Refusée' }}</strong>
                             @if($candidature->commentaire_admin)<br>{{ $candidature->commentaire_admin }}@endif
                         </div>
+                        <form action="{{ route('candidatures.renvoyerEmail', $candidature->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-outline-secondary w-100" data-loading-text="Envoi en cours...">
+                                📤 Renvoyer l'email au candidat
+                            </button>
+                        </form>
                     @endif
                 </div>
             </div>

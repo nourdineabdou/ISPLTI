@@ -18,7 +18,7 @@ class CandidatureFeatureSeeder extends Seeder
         $master = Master::updateOrCreate(
             ['code' => 'TTCN'],
             [
-                'intitule' => 'Technologies de la Traduction et Communication Numérique',
+                'intitule' => 'Techniques de traduction et de communication numérique',
                 'intitule_ar' => 'تقنيات الترجمة والاتصال الرقمي',
                 'intitule_en' => 'Translation Technologies and Digital Communication',
                 'annee_universitaire' => '2026/2027',
@@ -46,7 +46,6 @@ class CandidatureFeatureSeeder extends Seeder
 
         $pieces = [
             ['code_document' => 'acte_naissance', 'libelle' => 'Extrait d’acte de naissance', 'obligatoire' => true, 'ordre' => 1],
-            ['code_document' => 'certificat_nationalite', 'libelle' => 'Certificat de nationalité', 'obligatoire' => true, 'ordre' => 2],
             ['code_document' => 'carte_identite', 'libelle' => 'Copie de la carte nationale d’identité', 'obligatoire' => true, 'ordre' => 3],
             ['code_document' => 'diplome', 'libelle' => 'Copie certifiée conforme des diplômes', 'obligatoire' => true, 'ordre' => 4],
             ['code_document' => 'releve_notes', 'libelle' => 'Relevés de notes', 'obligatoire' => true, 'ordre' => 5],

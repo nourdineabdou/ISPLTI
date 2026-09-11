@@ -172,6 +172,36 @@ class CandidatureAdminController extends Controller
         return back()->with('success', 'Décision enregistrée et email envoyé au candidat.');
     }
 
+    public function renvoyerEmail(Request $request, $id)
+    {
+        $candidature = CandidatureMaster::with('master')->findOrFail($id);
+
+        if (!in_array($candidature->statut, ['accepte', 'refuse'])) {
+            return back()->with('error', "Aucune décision n'a encore été envoyée pour cette candidature.");
+        }
+
+        if ($this->estMobile($request)) {
+            ignore_user_abort(true);
+        }
+
+        try {
+            if ($candidature->statut === 'accepte') {
+                Mail::to($candidature->email)->send(new CandidatureAccepteeMail($candidature));
+            } else {
+                Mail::to($candidature->email)->send(new CandidatureRefuseeMail($candidature));
+            }
+        } catch (\Throwable $e) {
+            Log::error('Echec renvoi email decision candidature', [
+                'candidature_id' => $candidature->id,
+                'email' => $candidature->email,
+                'erreur' => $e->getMessage(),
+            ]);
+            return back()->with('error', "L'email n'a pas pu être renvoyé au candidat.");
+        }
+
+        return back()->with('success', 'Email renvoyé au candidat.');
+    }
+
     private function estMobile(Request $request): bool
     {
         return (bool) preg_match(
@@ -179,4 +209,5 @@ class CandidatureAdminController extends Controller
             $request->userAgent() ?? ''
         );
     }
+
 }
