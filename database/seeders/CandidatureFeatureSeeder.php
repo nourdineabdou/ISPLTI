@@ -49,7 +49,7 @@ class CandidatureFeatureSeeder extends Seeder
             ['code_document' => 'carte_identite', 'libelle' => 'Copie de la carte nationale d’identité', 'obligatoire' => true, 'ordre' => 3],
             ['code_document' => 'diplome', 'libelle' => 'Copie certifiée conforme des diplômes', 'obligatoire' => true, 'ordre' => 4],
             ['code_document' => 'releve_notes', 'libelle' => 'Relevés de notes', 'obligatoire' => true, 'ordre' => 5],
-            ['code_document' => 'memoire_rapport_projet', 'libelle' => 'Mémoire, rapport ou projet de fin d’études', 'obligatoire' => true, 'ordre' => 6],
+            ['code_document' => 'memoire_rapport_projet', 'libelle' => 'Mémoire, rapport ou projet de fin d’études', 'obligatoire' => false, 'ordre' => 6],
             ['code_document' => 'certificat_formation', 'libelle' => 'Certificat de formation', 'obligatoire' => false, 'ordre' => 7],
             // le certificat de langue est optionnel : un candidat peut ne pas en avoir
             ['code_document' => 'certificat_langue', 'libelle' => 'Certificat de langue', 'obligatoire' => false, 'ordre' => 8],

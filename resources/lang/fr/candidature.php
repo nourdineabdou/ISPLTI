@@ -114,6 +114,18 @@ return [
     'contenu' => 'Contenu',
     'lettre_signee' => 'Ou déposez votre lettre signée (PDF)',
     'photo_pieces_titre' => 'Pièces à joindre',
+    // libelles des pieces obligatoires (par code_document) - le libelle stocke en base
+    // n'est jamais traduit (colonne unique), ces cles prennent le relais quand elles existent
+    'piece_acte_naissance' => "Extrait d'acte de naissance",
+    'piece_carte_identite' => "Copie de la carte nationale d'identité",
+    'piece_diplome' => 'Copie certifiée conforme des diplômes',
+    'piece_releve_notes' => 'Relevés de notes',
+    'piece_memoire_rapport_projet' => "Mémoire, rapport ou projet de fin d'études",
+    'piece_certificat_formation' => 'Certificat de formation',
+    'piece_certificat_langue' => 'Certificat de langue',
+    'piece_certificat_travail' => 'Certificat de travail',
+    'piece_projet_recherche' => 'Projet de recherche de 3 à 6 pages',
+    'piece_lettre_motivation' => 'Lettre de motivation signée',
     'piece_documents_note' => "Formats acceptés : PDF ou image (photo/scan) selon la pièce.",
     'sert_aussi_photo' => "sert aussi de photo de profil",
     'photo_identite' => "Photo d'identité *",

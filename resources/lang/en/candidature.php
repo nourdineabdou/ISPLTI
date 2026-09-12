@@ -114,6 +114,18 @@ return [
     'contenu' => 'Content',
     'lettre_signee' => 'Or upload your signed letter (PDF)',
     'photo_pieces_titre' => 'Documents to attach',
+    // labels for the mandatory pieces (by code_document) - the label stored in the
+    // database is never translated (single column), these keys take over when they exist
+    'piece_acte_naissance' => 'Birth certificate',
+    'piece_carte_identite' => 'Copy of national ID card',
+    'piece_diplome' => 'Certified true copy of degrees',
+    'piece_releve_notes' => 'Transcripts',
+    'piece_memoire_rapport_projet' => "Thesis, report or final year project",
+    'piece_certificat_formation' => 'Training certificate',
+    'piece_certificat_langue' => 'Language certificate',
+    'piece_certificat_travail' => 'Work certificate',
+    'piece_projet_recherche' => 'Research project (3 to 6 pages)',
+    'piece_lettre_motivation' => 'Signed motivation letter',
     'piece_documents_note' => "Accepted formats: PDF or image (photo/scan) depending on the document.",
     'sert_aussi_photo' => "also used as profile photo",
     'photo_identite' => "ID photo *",

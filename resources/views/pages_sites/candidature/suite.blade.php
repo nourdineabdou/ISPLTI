@@ -310,7 +310,7 @@
                                 @php $documentExistant = $candidature->documents->firstWhere('type_document', $piece->code_document); @endphp
                                 <div class="col-md-6">
                                     <label class="form-label">
-                                        {{ $piece->libelle }}
+                                        {{ $piece->libelleLocalise() }}
                                         @if($piece->code_document === 'carte_identite')<span class="text-muted small">(@lang('candidature.sert_aussi_photo'))</span>@endif
                                         @if($piece->obligatoire)<span class="text-danger">*</span>@else <span class="text-muted small">@lang('candidature.optionnel')</span>@endif
                                     </label>
