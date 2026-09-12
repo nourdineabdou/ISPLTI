@@ -63,5 +63,15 @@ class CandidatureFeatureSeeder extends Seeder
                 ['libelle' => $piece['libelle'], 'obligatoire' => $piece['obligatoire'], 'ordre' => $piece['ordre'], 'actif' => true]
             );
         }
+
+        // pieces retirees de la liste ci-dessus au fil du temps (ex: certificat_nationalite) :
+        // updateOrCreate ne supprime jamais une ligne qui n'est plus dans $pieces, donc un
+        // environnement deja seede avant ce retrait garde la ligne obsolete indefiniment tant
+        // qu'on ne la supprime pas explicitement ici. Sans impact sur les candidats : seule la
+        // definition de la piece disparait, aucun document deja televerse n'est touche.
+        $codesObsoletes = ['certificat_nationalite'];
+        PieceObligatoireMaster::where('master_id', $master->id)
+            ->whereIn('code_document', $codesObsoletes)
+            ->delete();
     }
 }
