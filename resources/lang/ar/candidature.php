@@ -114,6 +114,18 @@ return [
     'contenu' => 'المحتوى',
     'lettre_signee' => 'أو أرفق رسالتك الموقعة (PDF)',
     'photo_pieces_titre' => 'الوثائق المطلوبة',
+    // اسماء الوثائق الإلزامية (حسب code_document) - الاسم المخزن في قاعدة البيانات
+    // غير مترجم أبدًا (عمود واحد)، هذه المفاتيح تحل محله عند توفرها
+    'piece_acte_naissance' => 'مستخرج شهادة الميلاد',
+    'piece_carte_identite' => 'نسخة من البطاقة الوطنية للتعريف',
+    'piece_diplome' => 'نسخة مصادق عليها من الشهادات',
+    'piece_releve_notes' => 'كشوف الدرجات',
+    'piece_memoire_rapport_projet' => 'مذكرة أو تقرير أو مشروع نهاية الدراسة',
+    'piece_certificat_formation' => 'شهادة تكوين',
+    'piece_certificat_langue' => 'شهادة لغة',
+    'piece_certificat_travail' => 'شهادة عمل',
+    'piece_projet_recherche' => 'مشروع بحث من 3 إلى 6 صفحات',
+    'piece_lettre_motivation' => 'رسالة دوافع موقعة',
     'piece_documents_note' => 'الصيغ المقبولة: PDF أو صورة (صورة/مسح ضوئي) حسب الوثيقة.',
     'sert_aussi_photo' => 'تُستخدم أيضًا كصورة شخصية',
     'photo_identite' => 'صورة شخصية *',

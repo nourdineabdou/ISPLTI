@@ -294,7 +294,7 @@ class CandidatureController extends Controller
                 continue;
             }
             if (!$this->pieceEstFournie($piece, $candidature, $projet, $lettre)) {
-                $manquantes[] = $piece->libelle;
+                $manquantes[] = $piece->libelleLocalise();
                 $codesManquants[] = $piece->code_document;
             }
         }
@@ -395,7 +395,7 @@ class CandidatureController extends Controller
         if (optional($pieceCertificatLangue)->obligatoire && !$this->pieceEstFournie($pieceCertificatLangue, $candidature)) {
             return response()->json([
                 'success' => false,
-                'message' => __('candidature.pieces_manquantes') . ' ' . $pieceCertificatLangue->libelle,
+                'message' => __('candidature.pieces_manquantes') . ' ' . $pieceCertificatLangue->libelleLocalise(),
                 'ids' => $ids,
             ], 422);
         }
@@ -485,7 +485,7 @@ class CandidatureController extends Controller
             'lettre_fichier' => __('candidature.lettre_signee'),
         ];
         foreach ($candidature->master->piecesObligatoires as $piece) {
-            $attributs["documents.{$piece->code_document}"] = $piece->libelle;
+            $attributs["documents.{$piece->code_document}"] = $piece->libelleLocalise();
         }
         return $attributs;
     }
