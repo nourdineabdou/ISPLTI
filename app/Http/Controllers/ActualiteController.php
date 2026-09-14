@@ -59,12 +59,12 @@ class ActualiteController extends Controller
             'titre_fr' => 'required|string|max:255',
             'titre_en' => 'required|string|max:255',
             'titre_ar' => 'required|string|max:255',
-            'contenu_fr' => 'required|string',
-            'contenu_en' => 'required|string',
-            'contenu_ar' => 'required|string',
-            'statut' => 'required|in:publie,brouillon',
+            'contenu_fr' => 'nullable|string',
+            'contenu_en' => 'nullable|string',
+            'contenu_ar' => 'nullable|string',
+            'statut' => 'nullable|in:publie,brouillon',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'auteur' => 'required|string|max:255',
+            'auteur' => 'nullable|string|max:255',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
             'videos.*' => 'nullable|mimes:mp4,mov,ogg,webm|max:51200',
             'fichiers.*' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar|max:10240',
@@ -78,11 +78,11 @@ class ActualiteController extends Controller
         $actualite->titre_fr = $validated['titre_fr'];
         $actualite->titre_en = $validated['titre_en'];
         $actualite->titre_ar = $validated['titre_ar'];
-        $actualite->contenu_fr = $validated['contenu_fr'];
-        $actualite->contenu_en = $validated['contenu_en'];
-        $actualite->contenu_ar = $validated['contenu_ar'];
-        $actualite->statut = $validated['statut'];
-        $actualite->auteur = $validated['auteur'];
+        $actualite->contenu_fr = $validated['contenu_fr'] ?? null;
+        $actualite->contenu_en = $validated['contenu_en'] ?? null;
+        $actualite->contenu_ar = $validated['contenu_ar'] ?? null;
+        $actualite->statut = $validated['statut'] ?? 'brouillon';
+        $actualite->auteur = $validated['auteur'] ?? null;
         $actualite->date_publication = now();
         $actualite->save();
         if ($request->hasFile('image')) {
@@ -116,12 +116,12 @@ class ActualiteController extends Controller
             'titre_fr' => 'required|string|max:255',
             'titre_en' => 'required|string|max:255',
             'titre_ar' => 'required|string|max:255',
-            'contenu_fr' => 'required|string',
-            'contenu_en' => 'required|string',
-            'contenu_ar' => 'required|string',
-            'statut' => 'required|in:publie,brouillon',
+            'contenu_fr' => 'nullable|string',
+            'contenu_en' => 'nullable|string',
+            'contenu_ar' => 'nullable|string',
+            'statut' => 'nullable|in:publie,brouillon',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'auteur' => 'required|string|max:255',
+            'auteur' => 'nullable|string|max:255',
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
             'videos.*' => 'nullable|mimes:mp4,mov,ogg,webm|max:51200',
             'fichiers.*' => 'nullable|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,zip,rar|max:10240',
@@ -134,11 +134,11 @@ class ActualiteController extends Controller
         $actualite->titre_fr = $validated['titre_fr'];
         $actualite->titre_en = $validated['titre_en'];
         $actualite->titre_ar = $validated['titre_ar'];
-        $actualite->contenu_fr = $validated['contenu_fr'];
-        $actualite->contenu_en = $validated['contenu_en'];
-        $actualite->contenu_ar = $validated['contenu_ar'];
-        $actualite->statut = $validated['statut'];
-        $actualite->auteur = $validated['auteur'];
+        $actualite->contenu_fr = $validated['contenu_fr'] ?? null;
+        $actualite->contenu_en = $validated['contenu_en'] ?? null;
+        $actualite->contenu_ar = $validated['contenu_ar'] ?? null;
+        $actualite->statut = $validated['statut'] ?? $actualite->statut ?? 'brouillon';
+        $actualite->auteur = $validated['auteur'] ?? null;
         $actualite->date_publication = now();
         if ($request->hasFile('image')) {
             //faire le mouvement de fichier dans public/images/actualites/

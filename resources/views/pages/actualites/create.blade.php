@@ -39,7 +39,6 @@
                     class="col-md-6"
                     label="Auteur"
                     name="auteur"
-                    required="required"
                     value="{{ old('auteur') }}"
                 />
                 {{-- contenu (FR) --}}
@@ -48,7 +47,6 @@
                     editorClass="tinymce-editor"
                     label="Contenu (FR) 😀"
                     name="contenu_fr"
-                    required="required"
                     value="{{ old('contenu_fr') }}"
                 />
                 {{-- contenu (EN) --}}
@@ -57,7 +55,6 @@
                     editorClass="tinymce-editor"
                     label="Contenu (EN) 😀"
                     name="contenu_en"
-                    required="required"
                     value="{{ old('contenu_en') }}"
                 />
                 {{-- contenu (AR) --}}
@@ -66,7 +63,6 @@
                     editorClass="tinymce-editor-rtl"
                     label="Contenu (AR) 😀"
                     name="contenu_ar"
-                    required="required"
                     value="{{ old('contenu_ar') }}"
                 />
                 {{-- statut  --}}
@@ -74,7 +70,6 @@
                     class="col-md-6"
                     label="Statut"
                     name="statut"
-                    required="required"
                     :options="[
                         'publie' => 'Publié',
                         'brouillon' => 'Brouillon',
