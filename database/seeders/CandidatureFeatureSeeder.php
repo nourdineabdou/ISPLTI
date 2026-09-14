@@ -72,6 +72,6 @@ class CandidatureFeatureSeeder extends Seeder
         $codesObsoletes = ['certificat_nationalite'];
         PieceObligatoireMaster::where('master_id', $master->id)
             ->whereIn('code_document', $codesObsoletes)
-            ->delete();
+               ->delete();
     }
 }
