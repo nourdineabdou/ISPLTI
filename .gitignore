@@ -1,21 +1,41 @@
+# Public : tout ignorer sauf assets et assets-lib
+/public/*
+
+!/public/assets/
+!/public/assets/**
+
+!/public/assets-lib/
+!/public/assets-lib/**
+
+# Laravel
 /.phpunit.cache
 /node_modules
-/public/build
-/public/hot
-/public/storage
 /storage/*.key
 /vendor
+
+# Environment
 .env
 .env.backup
 .env.production
+
+# PHPUnit
 .phpunit.result.cache
+
+# Homestead
 Homestead.json
 Homestead.yaml
+
+# Composer
 auth.json
+
+# NPM / Yarn
 npm-debug.log
 yarn-error.log
+
+# IDE
 /.fleet
 /.idea
 /.vscode
 
+# Vercel
 .vercel
