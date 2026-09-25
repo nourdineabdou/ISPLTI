@@ -99,7 +99,7 @@
                     class="col-md-6"
                     label="🎥 Vidéos (sélection multiple possible)"
                     name="videos[]"
-                    accept="video/*"
+                    accept="video/*,.mp4,.mov,.avi,.webm,.mkv,.ogg"
                     :multiple="true"
                     :previewMultiple="true"
                 />
