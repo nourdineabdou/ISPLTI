@@ -35,10 +35,22 @@
                         <div class="d-flex justify-content-center gap-4 my-4 flex-wrap">
                             <div><i class="bi bi-calendar-event text-success"></i> @lang('candidature.periode_candidature', ['debut' => \Carbon\Carbon::parse($master->date_debut_candidature)->format('d/m/Y'), 'fin' => \Carbon\Carbon::parse($master->date_fin_candidature)->format('d/m/Y')])</div>
                         </div>
-                        <a href="{{ route('candidature.etape1') }}" class="btn btn-lg text-white fw-bold px-5 py-3 rounded-pill mx-auto" style="background:#08915e;width:fit-content;">
-                            ✍️ @lang('candidature.postuler_maintenant')
-                        </a>
-                        <p class="small text-muted mt-3 mb-0">@lang('candidature.info_3_etapes')</p>
+
+                        @if($candidatureOuverte)
+                            <a href="{{ route('candidature.etape1') }}" class="btn btn-lg text-white fw-bold px-5 py-3 rounded-pill mx-auto" style="background:#08915e;width:fit-content;">
+                                ✍️ @lang('candidature.postuler_maintenant')
+                            </a>
+                            <p class="small text-muted mt-3 mb-0">@lang('candidature.info_3_etapes')</p>
+                        @else
+                            <div class="alert alert-warning mx-auto mb-3" style="max-width:700px;">
+                                <strong>@lang('candidature.master_ferme_titre')</strong><br>
+                                @lang('candidature.master_ferme_message')
+                            </div>
+                            <button type="button" class="btn btn-lg fw-bold px-5 py-3 rounded-pill mx-auto disabled" style="background:#adb5bd;color:#fff;width:fit-content;" disabled>
+                                ✍️ @lang('candidature.master_ferme_bouton')
+                            </button>
+                        @endif
+
                         <p class="small mt-3 mb-0">
                             <a href="{{ route('candidature.connexion') }}" style="color:#08915e;">🔑 @lang('candidature.deja_candidat')</a>
                         </p>

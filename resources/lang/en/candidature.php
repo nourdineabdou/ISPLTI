@@ -13,6 +13,9 @@ return [
     'au' => 'to',
     'periode_candidature' => 'Application period: from :debut to :fin',
     'postuler_maintenant' => 'Submit my application now',
+    'master_ferme_titre' => 'Master applications are closed',
+    'master_ferme_bouton' => 'Applications closed',
+    'master_ferme_message' => 'Applications for the master are currently closed. Previously submitted files remain visible, but it is no longer possible to submit or complete a new application.',
     'info_3_etapes' => "The application process takes place in 3 simple steps. You will receive an email to follow up on your application.",
 
     // step 1

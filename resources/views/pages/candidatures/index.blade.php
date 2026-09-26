@@ -1,7 +1,20 @@
 <x-layouts.main
     :title="$title"
 >
-    <div class="card">
+    <div class="card datatable-container">
+        <div class="card-header">
+            <div class="row g-2 align-items-end">
+                <div class="col-md-3">
+                    <x-forms.select
+                        label="Statut"
+                        name="statut_filter"
+                        :options=['' => 'Tous', 'brouillon' => 'Brouillon', 'soumis' => 'Soumis']
+                        data-filter="statut"
+                        select-class="select2"
+                    />
+                </div>
+            </div>
+        </div>
         <div class="card-body">
             <div class="table-container">
                 <table

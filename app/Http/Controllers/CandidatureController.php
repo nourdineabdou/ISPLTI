@@ -26,14 +26,30 @@ use Illuminate\Validation\Rule;
 
 class CandidatureController extends Controller
 {
+    private function candidatureOuverte(): bool
+    {
+        return filter_var(env('CADIDATURE_MASTER', true), FILTER_VALIDATE_BOOLEAN);
+    }
+
+    private function candidatureFermeeMessage(): string
+    {
+        return __('candidature.master_ferme_message');
+    }
+
     public function intro()
     {
         $master = Master::where('statut', true)->orderByDesc('id')->first();
-        return view('pages_sites.candidature.intro', compact('master'));
+        $candidatureOuverte = $this->candidatureOuverte();
+
+        return view('pages_sites.candidature.intro', compact('master', 'candidatureOuverte'));
     }
 
     public function etape1()
     {
+        if (!$this->candidatureOuverte()) {
+            return redirect()->route('candidature.intro')->with('error', $this->candidatureFermeeMessage());
+        }
+
         $masters = Master::where('statut', true)->get();
         if ($masters->isEmpty()) {
             return redirect()->route('candidature.intro')->with('error', __('candidature.aucun_master'));
@@ -43,6 +59,10 @@ class CandidatureController extends Controller
 
     public function storeEtape1(Request $request)
     {
+        if (!$this->candidatureOuverte()) {
+            return redirect()->route('candidature.intro')->with('error', $this->candidatureFermeeMessage());
+        }
+
         // sur mobile la connexion est souvent moins stable : si le telephone perd
         // le reseau ou que l'utilisateur quitte la page juste apres avoir valide,
         // le script serait sinon interrompu avant l'envoi de l'email
@@ -262,6 +282,9 @@ class CandidatureController extends Controller
         if ($candidature->statut !== 'brouillon') {
             return redirect()->route('candidature.espace')->with('error', __('candidature.deja_soumise_note'));
         }
+        if (!$this->candidatureOuverte()) {
+            return redirect()->route('candidature.espace')->with('error', $this->candidatureFermeeMessage());
+        }
 
         $candidature->load(['diplomes', 'langues.langue', 'experiencesProfessionnelles', 'formations', 'projetsRecherche', 'lettreMotivation', 'documents']);
         $langues = Langue::where('actif', true)->get();
@@ -278,6 +301,9 @@ class CandidatureController extends Controller
         }
         if ($candidature->statut !== 'brouillon') {
             return redirect()->route('candidature.espace')->with('error', __('candidature.deja_soumise_note'));
+        }
+        if (!$this->candidatureOuverte()) {
+            return redirect()->route('candidature.espace')->with('error', $this->candidatureFermeeMessage());
         }
 
         $this->retirerFichiersVides($request);
@@ -327,6 +353,9 @@ class CandidatureController extends Controller
         if ($candidature->statut !== 'brouillon') {
             return response()->json(['success' => false], 403);
         }
+        if (!$this->candidatureOuverte()) {
+            return response()->json(['success' => false, 'message' => $this->candidatureFermeeMessage()], 403);
+        }
 
         $request->validate($this->reglesIdentite($candidature));
 
@@ -350,6 +379,9 @@ class CandidatureController extends Controller
         }
         if ($candidature->statut !== 'brouillon') {
             return response()->json(['success' => false], 403);
+        }
+        if (!$this->candidatureOuverte()) {
+            return response()->json(['success' => false, 'message' => $this->candidatureFermeeMessage()], 403);
         }
 
         $this->retirerFichiersVides($request);
@@ -505,6 +537,9 @@ class CandidatureController extends Controller
         }
         if ($candidature->statut !== 'brouillon') {
             return response()->json(['success' => false], 403);
+        }
+        if (!$this->candidatureOuverte()) {
+            return response()->json(['success' => false, 'message' => $this->candidatureFermeeMessage()], 403);
         }
 
         $this->retirerFichiersVides($request);

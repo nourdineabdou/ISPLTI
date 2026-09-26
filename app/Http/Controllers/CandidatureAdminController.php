@@ -18,9 +18,15 @@ class CandidatureAdminController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return datatables()->of(CandidatureMaster::with('master')->select([
-                    'id', 'master_id', 'numero_candidature', 'nom', 'prenom', 'email', 'statut', 'created_at',
-                ]))
+            $query = CandidatureMaster::with('master')->select([
+                'id', 'master_id', 'numero_candidature', 'nom', 'prenom', 'email', 'statut', 'created_at',
+            ]);
+
+            if (request()->filled('statut')) {
+                $query->where('statut', request('statut'));
+            }
+
+            return datatables()->of($query)
                 ->addColumn('master', fn($c) => $c->master->code ?? '-')
                 ->addColumn('action', function ($c) {
                     $actions = [

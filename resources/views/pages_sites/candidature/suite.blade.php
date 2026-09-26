@@ -37,6 +37,13 @@
             </div>
         @endif
 
+        @if(!filter_var(env('CADIDATURE_MASTER', true), FILTER_VALIDATE_BOOLEAN))
+            <div class="alert alert-warning text-center mb-4">
+                <strong>@lang('candidature.master_ferme_titre')</strong><br>
+                @lang('candidature.master_ferme_message')
+            </div>
+        @endif
+
         <div class="row justify-content-center">
             <div class="col-lg-9">
                 <form method="POST" action="{{ route('candidature.suite.store') }}" enctype="multipart/form-data" id="candidature-form">
@@ -326,7 +333,13 @@
 
                         <div class="d-flex justify-content-between mt-4">
                             <button type="button" class="btn btn-outline-secondary px-4 py-2 rounded-pill js-prev-step" data-prev="2">← @lang('candidature.precedent')</button>
-                            <button type="submit" class="btn text-white fw-bold px-4 py-2 rounded-pill" style="background:#08915e;" data-loading-text="@lang('candidature.traitement_en_cours')">@lang('candidature.envoyer_candidature') ✅</button>
+                            @php $candidatureOuverte = filter_var(env('CADIDATURE_MASTER', true), FILTER_VALIDATE_BOOLEAN); @endphp
+                            <button type="submit" class="btn text-white fw-bold px-4 py-2 rounded-pill" style="background:{{ $candidatureOuverte ? '#08915e' : '#adb5bd' }};" data-loading-text="@lang('candidature.traitement_en_cours')" {{ $candidatureOuverte ? '' : 'disabled' }}>
+                                @lang('candidature.envoyer_candidature') ✅
+                            </button>
+                            @if(!$candidatureOuverte)
+                                <div class="small text-muted mt-2">@lang('candidature.master_ferme_message')</div>
+                            @endif
                         </div>
                     </div>
                 </form>

@@ -24,7 +24,32 @@
                 {responsivePriority: 1, targets: -1}
             ],
             ajax: {
-                // Pass filters as data to your server
+                url: url,
+                type: 'GET',
+                data: function (d) {
+                    const container = table.closest('.datatable-container');
+                    if (container.length) {
+                        container.find('[data-filter]').each(function () {
+                            const filter = $(this).data('filter');
+                            const value = $(this).val();
+                            if (filter) {
+                                if (value !== '' && value !== null && value !== undefined) {
+                                    d[filter] = value;
+                                } else {
+                                    delete d[filter];
+                                }
+                            }
+                        });
+                    }
+
+                    if (params) {
+                        Object.keys(params).forEach(function (key) {
+                            d[key] = params[key];
+                        });
+                    }
+
+                    return d;
+                }
             },
             columns: columns.map(function (col) {
                 return {

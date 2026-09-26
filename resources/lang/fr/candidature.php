@@ -13,6 +13,9 @@ return [
     'au' => 'au',
     'periode_candidature' => 'Période de candidature : du :debut au :fin',
     'postuler_maintenant' => 'Déposer ma candidature maintenant',
+    'master_ferme_titre' => 'Candidatures au master fermées',
+    'master_ferme_bouton' => 'Candidature fermée',
+    'master_ferme_message' => 'Les candidatures pour le master sont actuellement fermées. Les dossiers déjà soumis restent consultables, mais il n\'est plus possible de soumettre ou de compléter un dossier de candidature.',
     'info_3_etapes' => "La procédure de candidature se déroule en 3 étapes simples. Vous recevrez un message par courrier électronique vous permettant de suivre votre demande de candidature.",
 
     // etape 1
