@@ -5,13 +5,17 @@
         <div class="card-header">
             <div class="row g-2 align-items-end">
                 <div class="col-md-3">
-                    <x-forms.select
-                        label="Statut"
+                    <label for="statut_filter">Statut</label>
+                    <select
+                        id="statut_filter"
                         name="statut_filter"
-                        :options=['' => 'Tous', 'brouillon' => 'Brouillon', 'soumis' => 'Soumis']
+                        class="form-control select2"
                         data-filter="statut"
-                        select-class="select2"
-                    />
+                    >
+                        <option value="">Tous</option>
+                        <option value="brouillon">Brouillon</option>
+                        <option value="soumis">Soumis</option>
+                    </select>
                 </div>
             </div>
         </div>
