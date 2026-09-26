@@ -553,6 +553,11 @@ function saveForm({element, afterSave = null, autoClose = true, modal = 'main'})
     const container = $(element).attr('container');
     const activeModal = $('#' + modal + '-modal');
     const form = $('#' + container + ' form');
+
+    if (typeof tinymce !== 'undefined') {
+        tinymce.triggerSave();
+    }
+
     //console.log(new FormData(form[0]))
     $(element).attr('disabled', 'disabled');
     const mainIcon = $('#' + container + ' .main-icon');
