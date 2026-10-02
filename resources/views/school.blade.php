@@ -28,10 +28,12 @@
                                         @endif
                                     </h1>
                                     <p>@lang('system.Institut_slogan')</p>
-                                    <div class="cta-buttons">
+                                    <div class="cta-buttons" style="flex-wrap: wrap;">
 
                                     <a href="{{ route('login') }}" class="btn-primary">@lang('system.connexion')</a>
                                     <a href="{{ route('candidature.intro') }}" class="btn-secondary">🎓 @lang('candidature.postuler_master')</a>
+                                    <a href="{{ route('inscriptions.login1') }}" class="btn-primary">@lang('system.inscription')</a>
+                                    <a href="{{ route('inscriptions.login2') }}" class="btn-secondary">@lang('system.rescription')</a>
 
                                     </div>
                                         {{-- Bloc Liens Téléchargement : fichiers de la derniere actualite, en raccourci --}}
@@ -59,16 +61,14 @@
                                     <span class="title">@lang('system.connexion_desc')</span>
                                     <a  href="{{route('login')}}" class="btn-register">@lang('system.connexion')</a>
                                 </div>
-                                {{--
                                 <div class="col-md-6 col-12 col-xl-4  ticker-item">
-                                    <span class="title"></span>
-                                    <a href="#" class="btn-register"></a>
+                                    <span class="title">@lang('system.inscription_desc')</span>
+                                    <a href="{{ route('inscriptions.login1') }}" class="btn-register">@lang('system.inscription')</a>
                                 </div>
                                 <div class="col-md-6 col-12 col-xl-4 ticker-item">
-                                    <span class="title"></span>
-                                    <a href="#" class="btn-register"></a>
+                                    <span class="title">@lang('system.rescription_desc')</span>
+                                    <a href="{{ route('inscriptions.login2') }}" class="btn-register">@lang('system.rescription')</a>
                                 </div>
-                                --}}
                             </div>
                         </div>
                     </div>

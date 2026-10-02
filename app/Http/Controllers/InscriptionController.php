@@ -51,7 +51,7 @@ class InscriptionController extends Controller
             // retourner la vue de réinscription avec les données de l'étudiant
             return view('inscriptions.rescription', compact('etudiant'));
         }
-        return redirect()->route('auth.login_etudiant');
+        return redirect()->route('inscriptions.login2');
     }
     // login1 pour bachelier
     public function login1()
@@ -79,12 +79,12 @@ class InscriptionController extends Controller
         // get session bachelier
          $bachelierId = Session::get('bachelier_id');
 
-         if($bachelierId) {
-             $bachelier = BachelierOrientation::find($bachelierId);
+         $bachelier = $bachelierId ? BachelierOrientation::find($bachelierId) : null;
+         if($bachelier) {
              // $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
              $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
              // retourner la vue d'inscription avec les données du bachelier
-             if($etudiant->inscription == 2 || $etudiant->inscription == 1){
+             if($etudiant && ($etudiant->inscription == 2 || $etudiant->inscription == 1)){
                 return view('inscriptions.reponse_etudiant', compact('etudiant'));
              }
              return view('inscriptions.inscriptions', compact('bachelier'));
@@ -97,13 +97,16 @@ class InscriptionController extends Controller
     {
         $etudiantId = Session::get('etudiant_id');
         //dd($etudiantId);
-        if($etudiantId) {
-            $etudiant = Etudiant::find($etudiantId);
+        $etudiant = $etudiantId ? Etudiant::find($etudiantId) : null;
+        if($etudiant) {
             if($etudiant->inscription == 2 || $etudiant->inscription == 1){
+                dd($etudiant);
                 return view('inscriptions.reponse_etudiant', compact('etudiant') );
             }
-            else
+            else{
+              
                 return view('inscriptions.rescription', compact('etudiant'));
+            }
         }
         return view('auth.login_etudiant');
     }

@@ -26,6 +26,11 @@
                                     <div class="form-control-position">
                                         <i class="la la-user"></i>
                                     </div>
+                                    @error('bac')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </fieldset>
                                 <fieldset class="form-group position-relative has-icon-left">
                                     <input type="nii"
@@ -36,6 +41,11 @@
                                     <div class="form-control-position">
                                         <i class="la la-key"></i>
                                     </div>
+                                    @error('nii')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </fieldset>
                                 {{--
                                 <div class="form-group row">

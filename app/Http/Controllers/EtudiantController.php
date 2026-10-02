@@ -243,7 +243,20 @@ public function downloadBulletin($semestre)
 
 
         if (request()->ajax()) {
-            return datatables()->of(Etudiant::query())
+            $query = Etudiant::query();
+
+            // filtre par etat d'inscription (0 = non soumis : null ou autre valeur)
+            if (request()->filled('inscription')) {
+                if (request('inscription') == '0') {
+                    $query->where(function ($q) {
+                        $q->whereNull('inscription')->orWhereNotIn('inscription', [1, 2, 3, 4]);
+                    });
+                } else {
+                    $query->where('inscription', request('inscription'));
+                }
+            }
+
+            return datatables()->of($query)
                 ->addColumn('action', function ($etudiant) {
                     $user = auth()->user();
                     // si etudiant est valider $etudiant->inscription==1 on cache le bouton  'label' => 'Valider L\'inscription'
