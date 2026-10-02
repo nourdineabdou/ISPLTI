@@ -935,6 +935,25 @@ section,
   }
 }
 
+/* mobile : 4 boutons en grille 2x2 compacte */
+@media (max-width: 576px) {
+  .hero .hero-container .hero-content .cta-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .hero .hero-container .hero-content .cta-buttons a {
+    max-width: none;
+    padding: 10px 8px;
+    font-size: 0.85rem;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .hero .hero-container .hero-content .cta-buttons .btn-primary {
   background-color: var(--accent-color);
   color: var(--contrast-color);

@@ -61,11 +61,12 @@
                                     <span class="title">@lang('system.connexion_desc')</span>
                                     <a  href="{{route('login')}}" class="btn-register">@lang('system.connexion')</a>
                                 </div>
-                                <div class="col-md-6 col-12 col-xl-4  ticker-item">
+                                {{-- caches sur mobile : deja presents dans les boutons du hero --}}
+                                <div class="col-md-6 col-12 col-xl-4 ticker-item d-none d-md-flex">
                                     <span class="title">@lang('system.inscription_desc')</span>
                                     <a href="{{ route('inscriptions.login1') }}" class="btn-register">@lang('system.inscription')</a>
                                 </div>
-                                <div class="col-md-6 col-12 col-xl-4 ticker-item">
+                                <div class="col-md-6 col-12 col-xl-4 ticker-item d-none d-md-flex">
                                     <span class="title">@lang('system.rescription_desc')</span>
                                     <a href="{{ route('inscriptions.login2') }}" class="btn-register">@lang('system.rescription')</a>
                                 </div>
