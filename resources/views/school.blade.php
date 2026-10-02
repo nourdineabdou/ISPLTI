@@ -48,6 +48,7 @@
                                             </div>
                                         @endif
                                 </div>
+                                </div>
                                 <div class="col-lg-5 @if(app()->getLocale() == 'ar') order-1 @endif" data-aos="zoom-out" data-aos-delay="200">
 
                                 </div>
@@ -73,7 +74,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
             </section><!-- /Section Héros -->
 
 

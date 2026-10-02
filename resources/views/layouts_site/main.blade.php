@@ -25,7 +25,7 @@
   <link href="{{ asset('assets-lib/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="{{ asset('assets-lib/css/main.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets-lib/css/main.css') }}?v={{ filemtime(public_path('assets-lib/css/main.css')) }}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceSchool
