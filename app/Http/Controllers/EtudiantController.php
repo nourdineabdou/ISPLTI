@@ -554,7 +554,7 @@ public function downloadBulletin($semestre)
             $file = $request->file('emplacement');
             // le path de l'emploi du temps doit être stocké dans public/emplois/ et le fichier porte le id EmploisTempsSpecialite
             $emloisTemps->emplacement = 'emplois_specialite/' . $emloisTemps->id . '.' . $file->getClientOriginalExtension();
-            File::move($file->getRealPath(), public_path($emloisTemps->emplacement));
+            File::copy($file->getRealPath(), public_path($emloisTemps->emplacement));
 
         }
 

@@ -159,7 +159,7 @@ class CourController extends Controller
          if ($request->hasFile('chemain_pde')) {
             //professeurs
             // faire le mouvement de fichier dans public/cvs_professeurs/
-            File::move($request->file('chemain_pde')->getRealPath(), public_path('/cours_professeurs/' . $cours->id . '.' . $request->file('chemain_pde')->getClientOriginalExtension()));
+            File::copy($request->file('chemain_pde')->getRealPath(), public_path('/cours_professeurs/' . $cours->id . '.' . $request->file('chemain_pde')->getClientOriginalExtension()));
             $cours->chemain_pde = 'cours_professeurs/' . $cours->id . '.' . $request->file('chemain_pde')->getClientOriginalExtension();
             $cours->save();
         }
@@ -212,10 +212,14 @@ class CourController extends Controller
         $cours->matiere_id = $validated['matiere_id'];
         $cours->specialite_id = $validated['specialite_id'];
         if ($request->hasFile('chemain_pde')) {
-            //professeurs
-            // faire le mouvement de fichier dans public/cvs_professeurs/
-            File::move($request->file('chemain_pde')->getRealPath(), public_path('/cours' . $cours->id . '.' . $request->file('chemain_pde')->getClientOriginalExtension()));
-            $cours->cv = 'cvs_professeurs/' . $cours->id . '.' . $request->file('chemain_pde')->getClientOriginalExtension();
+            // remplacer le fichier dans public/cours_professeurs/ (meme chemin que store)
+            $nouveauChemin = 'cours_professeurs/' . $cours->id . '.' . $request->file('chemain_pde')->getClientOriginalExtension();
+            // supprimer l'ancien fichier s'il avait une autre extension
+            if ($cours->chemain_pde && $cours->chemain_pde !== $nouveauChemin && File::exists(public_path($cours->chemain_pde))) {
+                File::delete(public_path($cours->chemain_pde));
+            }
+            File::copy($request->file('chemain_pde')->getRealPath(), public_path($nouveauChemin));
+            $cours->chemain_pde = $nouveauChemin;
         }
         $cours->save();
         return response()->json(

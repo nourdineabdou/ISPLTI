@@ -138,13 +138,13 @@ class ProfesseurController extends Controller
         if ($request->hasFile('cv')) {
             //professeurs
             // faire le mouvement de fichier dans public/cvs_professeurs/
-            File::move($request->file('cv')->getRealPath(), public_path('cvs_professeurs/' . $professeur->id . '.' . $request->file('cv')->getClientOriginalExtension()));
+            File::copy($request->file('cv')->getRealPath(), public_path('cvs_professeurs/' . $professeur->id . '.' . $request->file('cv')->getClientOriginalExtension()));
             $professeur->cv = 'cvs_professeurs/' . $professeur->id . '.' . $request->file('cv')->getClientOriginalExtension();
         }
 
         if ($request->hasFile('image')) {
             // faire le mouvement de fichier dans public/images_professeurs/
-            File::move($request->file('image')->getRealPath(), public_path('images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension()));
+            File::copy($request->file('image')->getRealPath(), public_path('images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension()));
             $professeur->image = 'images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension();
         }else{
             $professeur->image = 'images_professeurs/default.png';
@@ -211,12 +211,12 @@ class ProfesseurController extends Controller
         $professeur->email = $request->email;
         if ($request->hasFile('cv')) {
             // faire le mouvement de fichier dans public/cvs_professeurs/
-            File::move($request->file('cv')->getRealPath(), public_path('cvs_professeurs/' . $professeur->id . '.' . $request->file('cv')->getClientOriginalExtension()));
+            File::copy($request->file('cv')->getRealPath(), public_path('cvs_professeurs/' . $professeur->id . '.' . $request->file('cv')->getClientOriginalExtension()));
             $professeur->cv = 'cvs_professeurs/' . $professeur->id . '.' . $request->file('cv')->getClientOriginalExtension();
         }
         if ($request->hasFile('image')) {
             // faire le mouvement de fichier dans public/images_professeurs/
-            File::move($request->file('image')->getRealPath(), public_path('images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension()));
+            File::copy($request->file('image')->getRealPath(), public_path('images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension()));
             $professeur->image = 'images_professeurs/' . $professeur->id . '.' . $request->file('image')->getClientOriginalExtension();
         }elseif($professeur->image !== 'images_professeurs/default.png' ){
             // ne rien faire
@@ -281,7 +281,7 @@ class ProfesseurController extends Controller
 
             // movement de fichier d'emplois dans public/emplois/
             // utilise FILE class
-            File::move($file->getRealPath(), public_path($emloisTemps->emplacement));
+            File::copy($file->getRealPath(), public_path($emloisTemps->emplacement));
         }
 
         $emloisTemps->save();

@@ -87,7 +87,7 @@ class ActualiteController extends Controller
         $actualite->save();
         if ($request->hasFile('image')) {
             //faire le mouvement de fichier dans public/actualites/
-            File::move($request->file('image')->getRealPath(), public_path('actualites/' . $actualite->id . '.' . $request->file('image')->getClientOriginalExtension()));
+            File::copy($request->file('image')->getRealPath(), public_path('actualites/' . $actualite->id . '.' . $request->file('image')->getClientOriginalExtension()));
             $actualite->image = 'actualites/' . $actualite->id . '.' . $request->file('image')->getClientOriginalExtension();
             $actualite->save();
         }
@@ -142,7 +142,7 @@ class ActualiteController extends Controller
         $actualite->date_publication = now();
         if ($request->hasFile('image')) {
             //faire le mouvement de fichier dans public/images/actualites/
-            File::move($request->file('image')->getRealPath(), public_path('actualites/' . $actualite->id . '.' . $request->file('image')->getClientOriginalExtension()));
+            File::copy($request->file('image')->getRealPath(), public_path('actualites/' . $actualite->id . '.' . $request->file('image')->getClientOriginalExtension()));
             $actualite->image = 'actualites/' . $actualite->id . '.' . $request->file('image')->getClientOriginalExtension();
         }
         $actualite->save();
@@ -171,7 +171,7 @@ class ActualiteController extends Controller
             ]);
             $chemin = 'actualites/' . $actualite->id . '/images/' . $image->id . '.' . $file->getClientOriginalExtension();
             File::ensureDirectoryExists(public_path('actualites/' . $actualite->id . '/images'));
-            File::move($file->getRealPath(), public_path($chemin));
+            File::copy($file->getRealPath(), public_path($chemin));
             $image->update(['chemin' => $chemin]);
         }
     }
@@ -189,7 +189,7 @@ class ActualiteController extends Controller
             ]);
             $chemin = 'actualites/' . $actualite->id . '/videos/' . $video->id . '.' . $file->getClientOriginalExtension();
             File::ensureDirectoryExists(public_path('actualites/' . $actualite->id . '/videos'));
-            File::move($file->getRealPath(), public_path($chemin));
+            File::copy($file->getRealPath(), public_path($chemin));
             $video->update(['chemin' => $chemin]);
         }
     }
@@ -216,7 +216,7 @@ class ActualiteController extends Controller
             ]);
             $chemin = 'actualites/' . $actualite->id . '/fichiers/' . $fichier->id . '.' . $file->getClientOriginalExtension();
             File::ensureDirectoryExists(public_path('actualites/' . $actualite->id . '/fichiers'));
-            File::move($file->getRealPath(), public_path($chemin));
+            File::copy($file->getRealPath(), public_path($chemin));
             $fichier->update(['chemin' => $chemin]);
         }
     }
