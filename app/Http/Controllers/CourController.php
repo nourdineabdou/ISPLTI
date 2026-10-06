@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\Upload;
+
 use Illuminate\Http\Request;
 use App\Models\PdfProfe;
 use App\Models\Professeur;
@@ -159,7 +161,7 @@ class CourController extends Controller
          if ($request->hasFile('chemain_pde')) {
             //professeurs
             // faire le mouvement de fichier dans public/cvs_professeurs/
-            File::copy($request->file('chemain_pde')->getRealPath(), public_path('/cours_professeurs/' . $cours->id . '.' . $request->file('chemain_pde')->getClientOriginalExtension()));
+            Upload::save($request->file('chemain_pde'), public_path('/cours_professeurs/' . $cours->id . '.' . $request->file('chemain_pde')->getClientOriginalExtension()));
             $cours->chemain_pde = 'cours_professeurs/' . $cours->id . '.' . $request->file('chemain_pde')->getClientOriginalExtension();
             $cours->save();
         }
@@ -218,7 +220,7 @@ class CourController extends Controller
             if ($cours->chemain_pde && $cours->chemain_pde !== $nouveauChemin && File::exists(public_path($cours->chemain_pde))) {
                 File::delete(public_path($cours->chemain_pde));
             }
-            File::copy($request->file('chemain_pde')->getRealPath(), public_path($nouveauChemin));
+            Upload::save($request->file('chemain_pde'), public_path($nouveauChemin));
             $cours->chemain_pde = $nouveauChemin;
         }
         $cours->save();

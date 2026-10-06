@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\Upload;
+
 use Illuminate\Http\Request;
 use App\Models\Professeur;
 use App\Models\BachelierOrientation;
@@ -224,31 +226,31 @@ class InscriptionController extends Controller
         if ($request->hasFile('doc_bac')) {
             $path = $request->file('doc_bac');
             $newPath = $bachelierDir . '/doc_bac.' . $request->file('doc_bac')->getClientOriginalExtension();
-            File::move($path, $newPath);
+            Upload::save($path, $newPath);
         }
         // nni
         if ($request->hasFile('nni')) {
             $path = $request->file('nni');
             $newPath = $bachelierDir . '/nni.' . $request->file('nni')->getClientOriginalExtension();
-            File::move($path, $newPath);
+            Upload::save($path, $newPath);
         }
         if ($request->hasFile('cert_medical')) {
             $path = $request->file('cert_medical');
             $newPath = $bachelierDir . '/cert_medical.' . $request->file('cert_medical')->getClientOriginalExtension();
-            File::move($path, $newPath);
+            Upload::save($path, $newPath);
         }
         // photo
         if ($request->hasFile('photo')) {
             $path = $request->file('photo');
             $newPath = $bachelierDir . '/photo.' . $request->file('photo')->getClientOriginalExtension();
-            File::move($path, $newPath);
+            Upload::save($path, $newPath);
         }
 
         // capture_paiement
         if ($request->hasFile('capture_paiement')) {
             $path = $request->file('capture_paiement');
             $newPath = $bachelierDir . '/capture_paiement.' . $request->file('capture_paiement')->getClientOriginalExtension();
-            File::move($path, $newPath);
+            Upload::save($path, $newPath);
         }
         $bachelier->save();
         return view('inscriptions.reponse_bachelier', compact('bachelier'));
@@ -297,24 +299,24 @@ class InscriptionController extends Controller
         if ($request->hasFile('nni')) {
             $path = $request->file('nni');
             $newPath = $etudiantDir . '/nni.' . $request->file('nni')->getClientOriginalExtension();
-            File::move($path, $newPath);
+            Upload::save($path, $newPath);
         }
         // nni
         if ($request->hasFile('capture_paiement')) {
             $path = $request->file('capture_paiement');
             $newPath = $etudiantDir . '/capture_paiement.' . $request->file('capture_paiement')->getClientOriginalExtension();
-            File::move($path, $newPath);
+            Upload::save($path, $newPath);
         }
         if ($request->hasFile('attestation_reussite')) {
             $path = $request->file('attestation_reussite');
             $newPath = $etudiantDir . '/attestation_reussite.' . $request->file('attestation_reussite')->getClientOriginalExtension();
-            File::move($path, $newPath);
+            Upload::save($path, $newPath);
         }
         //photo
         if ($request->hasFile('photo')) {
             $path = $request->file('photo');
             $newPath = $etudiantDir . '/photo.' . $request->file('photo')->getClientOriginalExtension();
-            File::move($path, $newPath);
+            Upload::save($path, $newPath);
         }
         $etudiant->save();
         // créer le session etudiant_id

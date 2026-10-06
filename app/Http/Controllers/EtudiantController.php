@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\Upload;
+
 use Illuminate\Http\Request;
 use App\Models\Etudiant;
 // storage
@@ -554,7 +556,7 @@ public function downloadBulletin($semestre)
             $file = $request->file('emplacement');
             // le path de l'emploi du temps doit être stocké dans public/emplois/ et le fichier porte le id EmploisTempsSpecialite
             $emloisTemps->emplacement = 'emplois_specialite/' . $emloisTemps->id . '.' . $file->getClientOriginalExtension();
-            File::copy($file->getRealPath(), public_path($emloisTemps->emplacement));
+            Upload::save($file, public_path($emloisTemps->emplacement));
 
         }
 

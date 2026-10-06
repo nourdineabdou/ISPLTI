@@ -34,6 +34,11 @@ return [
             'driver' => 'local',
             'root' => storage_path('app'),
             'throw' => false,
+            // fichiers envoyes toujours lisibles (meme regle que App\Support\Upload)
+            'permissions' => [
+                'file' => ['public' => 0644, 'private' => 0644],
+                'dir' => ['public' => 0755, 'private' => 0755],
+            ],
         ],
 
         'public' => [
