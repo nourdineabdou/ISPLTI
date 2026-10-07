@@ -471,4 +471,5 @@ return [
   "Fichiers"=>"Fichiers à télécharger",
   "Retour"=>"Retour aux actualités",
   "Lire_plus"=>"Lire la suite",
+  "attestation_bientot"=>"Votre inscription a été enregistrée. L'attestation sera bientôt disponible ici.",
 ];

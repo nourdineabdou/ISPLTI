@@ -86,6 +86,13 @@ return [
    'locale' => 'ar',
 
     /*
+    | Telechargement de l'attestation d'inscription par l'etudiant.
+    | false = bouton gele + message "bientot disponible" (l'admin connecte peut toujours imprimer).
+    | Pour reactiver : ATTESTATION_INSCRIPTION_ACTIVE=true dans .env puis php artisan config:clear
+    */
+    'attestation_inscription_active' => env('ATTESTATION_INSCRIPTION_ACTIVE', false),
+
+    /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
     |--------------------------------------------------------------------------

@@ -486,4 +486,5 @@ return [
   "Fichiers"=>"Downloadable files",
   "Retour"=>"Back to news",
   "Lire_plus"=>"Read more",
+  "attestation_bientot"=>"Your registration has been recorded. The certificate will be available here soon.",
 ];

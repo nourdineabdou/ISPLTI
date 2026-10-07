@@ -470,6 +470,10 @@ public function downloadBulletin($semestre)
     // attestation pdf etudiant
     public function attestation($id)
     {
+        // attestation gelee pour les etudiants tant que l'admin ne l'a pas activee
+        if (!config('app.attestation_inscription_active') && !auth()->check()) {
+            abort(403, __('system.attestation_bientot'));
+        }
 
         $etudiant_ob = Etudiant::findOrFail($id);
 

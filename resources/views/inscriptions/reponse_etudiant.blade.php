@@ -59,7 +59,11 @@
 				</h3>
 				<p class="muted mb-3">
 					@if(isset($etudiant) && $etudiant->inscription == 1)
-						 Vous pouvez télécharger votre attestation d'inscription ci-dessous.
+						@if(config('app.attestation_inscription_active'))
+							Vous pouvez télécharger votre attestation d'inscription ci-dessous.
+						@else
+							<span class="alert alert-info d-block mb-0" dir="auto">@lang('system.attestation_bientot')</span>
+						@endif
 					@elseif(isset($etudiant) && $etudiant->inscription == 2)
 						Votre inscription est en cours d'étude. Merci pour votre dossier. Nous l'examinons et reviendrons vers vous dès que possible.
 					@else
@@ -73,7 +77,12 @@
 												$downloadUrl = url('/inscriptions/' . ($etudiant->id ?? 'download') . '/download');
 										@endphp
 
+										@if(config('app.attestation_inscription_active'))
 										<a onclick="printObject({link:'{{ route('etudiants.attestation', $etudiant->id) }}' , title:'Attestation dinscription'  , width:4 , height:4})" target="_blank" class="btn btn-success btn-lg">
+										@else
+										{{-- gele jusqu'a activation (ATTESTATION_INSCRIPTION_ACTIVE) --}}
+										<a class="btn btn-success btn-lg disabled" aria-disabled="true" tabindex="-1">
+										@endif
 												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-2" viewBox="0 0 16 16">
 													<path d="M.5 9.9a.5.5 0 0 1 .5-.4H5V1.5a.5.5 0 0 1 1 0V9.5h3.999a.5.5 0 0 1 .354.854l-4.5 4.5a.5.5 0 0 1-.707 0l-4.5-4.5A.5.5 0 0 1 .5 9.9z"/>
 												</svg>
