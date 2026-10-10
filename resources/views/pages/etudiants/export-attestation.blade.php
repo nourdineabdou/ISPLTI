@@ -72,7 +72,7 @@
         </div>
     </header>
     <h2>Attestation d'inscription</h2>
-    <div class="subtitle">Année universitaire {{ $annee ?? '2025-2026' }}</div>
+    <div class="subtitle">Année universitaire {{ $annee ?? '2026-2027' }}</div>
 
     <section class="bloc" style="position:relative;">
         {{-- Photo de l'étudiant positionnée en haut à droite --}}
@@ -146,6 +146,7 @@
             </thead>
             <tbody>
                 {{-- Boucle sur les semestres et leurs éléments --}}
+                
                 @if(!empty($programme) && is_array($programme))
                     @foreach($programme as $semestre)
                         @php
@@ -153,8 +154,8 @@
                             $elements = $semestre['elements'];
                             $elementCount = count($elements);
                         @endphp
-
-                                                @foreach($elements as $index => $element)
+                           // dd($elements);
+                        @foreach($elements as $index => $element)
                             <tr>
                                 @if($index === 0)
                                     <td style="text-align:center; vertical-align:top; font-weight:600; border-right:2px solid #1a365d; font-size:6pt; padding:1px 3px;" rowspan="{{ $elementCount }}">

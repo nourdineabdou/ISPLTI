@@ -30,15 +30,31 @@ class InscriptionController extends Controller
         return response()->json($nombresPremiers);
     }
 
+    /**
+     * Page a afficher a un bachelier connecte :
+     * - deja etudiant (meme NNI) inscrit/en cours -> reponse etudiant
+     * - dossier bachelier envoye (2) ou valide (1) -> reponse bachelier
+     * - sinon null : il doit remplir le formulaire d'inscription
+     */
+    private function reponseBachelier(BachelierOrientation $bachelier)
+    {
+        $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
+        if ($etudiant && in_array($etudiant->inscription, [1, 2])) {
+            return view('inscriptions.reponse_etudiant', compact('etudiant', 'bachelier'));
+        }
+        if (in_array($bachelier->inscription, [1, 2])) {
+            return view('inscriptions.reponse_bachelier', compact('bachelier'));
+        }
+        return null;
+    }
+
     public function inscriptions()
     {
         $bachelierId = Session::get('bachelier_id');
-        if($bachelierId) {
-            $bachelier = BachelierOrientation::find($bachelierId);
-            // retourner la vue d'inscription avec les données du bachelier
-            $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
-           // dd($etudiant);
-            return view('inscriptions.reponse_etudiant', compact('etudiant','bachelier'));
+        $bachelier = $bachelierId ? BachelierOrientation::find($bachelierId) : null;
+        if($bachelier) {
+            return $this->reponseBachelier($bachelier)
+                ?? view('inscriptions.inscriptions', compact('bachelier'));
         }
         //dd(4444);
         return view('inscriptions.inscriptions');
@@ -83,13 +99,8 @@ class InscriptionController extends Controller
 
          $bachelier = $bachelierId ? BachelierOrientation::find($bachelierId) : null;
          if($bachelier) {
-             // $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
-             $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
-             // retourner la vue d'inscription avec les données du bachelier
-             if($etudiant && ($etudiant->inscription == 2 || $etudiant->inscription == 1)){
-                return view('inscriptions.reponse_etudiant', compact('etudiant'));
-             }
-             return view('inscriptions.inscriptions', compact('bachelier'));
+             return $this->reponseBachelier($bachelier)
+                 ?? view('inscriptions.inscriptions', compact('bachelier'));
          }
 
         return view('auth.Login_bachelier');
@@ -163,11 +174,8 @@ class InscriptionController extends Controller
                 Session(['bachelier_id' => $bachelier->id]);
                 //supprimer la session de l'étudiant
                 Session::forget('etudiant_id');
-                if($bachelier && ($bachelier->inscription == 2 || $bachelier->inscription == 1)){
-                    $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
-                    return view('inscriptions.reponse_etudiant', compact('etudiant' , 'bachelier'));
-                }
-                return view('inscriptions.inscriptions', compact('bachelier'));
+                return $this->reponseBachelier($bachelier)
+                    ?? view('inscriptions.inscriptions', compact('bachelier'));
         }
 
     }
@@ -284,7 +292,8 @@ class InscriptionController extends Controller
         // numero correspondant
         $etudiant->num_correspondant = $request->input('num_correspondant');
         $etudiant->email = $request->input('email');
-        if($etudiant->inscription == 3 || $etudiant->inscription == 4)
+        // dossier envoye -> "dossier recu" (2), sauf si l'inscription est deja validee
+        if($etudiant->inscription != 1)
             $etudiant->inscription = 2;
         // créer un dossier pour l'étudiant dans app/etudiants
         $etudiantDir = storage_path('app/etudiants/temp-' . $etudiant->id);

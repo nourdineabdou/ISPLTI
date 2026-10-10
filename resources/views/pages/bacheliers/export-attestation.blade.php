@@ -38,6 +38,7 @@
 </style>
 </head>
 <body>
+    
     <header class="brand">
         @if(!empty($institution['logo_base64']))
             <img class="logo" src="{{ $institution['logo_base64'] }}" alt="Logo">
