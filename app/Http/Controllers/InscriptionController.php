@@ -39,10 +39,12 @@ class InscriptionController extends Controller
     private function reponseBachelier(BachelierOrientation $bachelier)
     {
         $etudiant = Etudiant::where('nni', $bachelier->nni)->first();
+       //dd($bachelier->nni);
         if ($etudiant && in_array($etudiant->inscription, [1, 2])) {
             return view('inscriptions.reponse_etudiant', compact('etudiant', 'bachelier'));
         }
         if (in_array($bachelier->inscription, [1, 2])) {
+            //dd($bachelier->inscription);
             return view('inscriptions.reponse_bachelier', compact('bachelier'));
         }
         return null;
@@ -52,6 +54,7 @@ class InscriptionController extends Controller
     {
         $bachelierId = Session::get('bachelier_id');
         $bachelier = $bachelierId ? BachelierOrientation::find($bachelierId) : null;
+        //dd($bachelier);
         if($bachelier) {
             return $this->reponseBachelier($bachelier)
                 ?? view('inscriptions.inscriptions', compact('bachelier'));
@@ -98,8 +101,10 @@ class InscriptionController extends Controller
          $bachelierId = Session::get('bachelier_id');
 
          $bachelier = $bachelierId ? BachelierOrientation::find($bachelierId) : null;
+
+         //dd($bachelier);
          if($bachelier) {
-            
+            //dd($bachelier);
              return $this->reponseBachelier($bachelier)
                  ?? view('inscriptions.inscriptions', compact('bachelier'));
          }
