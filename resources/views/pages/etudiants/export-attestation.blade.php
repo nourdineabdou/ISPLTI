@@ -72,7 +72,7 @@
         </div>
     </header>
     <h2>Attestation d'inscription</h2>
-    <div class="subtitle">Année universitaire {{ $annee ?? '2026-2027' }}</div>
+    <div class="subtitle">Année universitaire {{ '2026-2027' }}</div>
 
     <section class="bloc" style="position:relative;">
         {{-- Photo de l'étudiant positionnée en haut à droite --}}

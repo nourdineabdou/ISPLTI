@@ -50,7 +50,7 @@
     </header>
 
     <h2>Attestation d’inscription</h2>
-    <div class="subtitle">Année universitaire {{ $annee }}</div>
+    <div class="subtitle">Année universitaire {{ '2026-2027' }}</div>
 
     <section class="bloc">
         <div class="grid-2">
