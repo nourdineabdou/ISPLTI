@@ -154,7 +154,6 @@
                             $elements = $semestre['elements'];
                             $elementCount = count($elements);
                         @endphp
-                           // dd($elements);
                         @foreach($elements as $index => $element)
                             <tr>
                                 @if($index === 0)
@@ -202,7 +201,6 @@
                 $encodedUrl = base64_encode($profileUrl);
                 $obfuscatedData = urlencode(base64_decode($encodedUrl));
 
-                // Obfuscation de l'URL de l'API
                 $protocol = 'https://';
                 $domain = base64_decode('YXBpLnFyc2VydmVyLmNvbQ=='); // api.qrserver.com
                 $endpoint = base64_decode('L3YxL2NyZWF0ZS1xci1jb2RlLw=='); // /v1/create-qr-code/
