@@ -151,21 +151,20 @@ public function copier_dossiers_bacheliers()
 
 public function getImage($id)
 {
-    $dir = "etudiants/temp-$id";
+    // photo de reinscription de l'etudiant, sinon celle de son dossier bachelier (nouvel inscrit)
+    $photoFile = $this->trouverPhoto("etudiants/temp-$id");
 
-    // Vérifier si le dossier existe
-    if (!Storage::disk('local')->exists($dir)) {
-
-        abort(404, "Dossier introuvable");
+    if (!$photoFile) {
+        $etudiant = Etudiant::find($id);
+        if ($etudiant && $etudiant->nni) {
+            // meme NNI ; l'import a parfois perdu le 0 du debut cote etudiants
+            $nni = ltrim($etudiant->nni, '0');
+            $bachelier = \App\Models\BachelierOrientation::whereRaw("TRIM(LEADING '0' FROM nni) = ?", [$nni])->first();
+            if ($bachelier) {
+                $photoFile = $this->trouverPhoto("bacheliers/temp-{$bachelier->id}");
+            }
+        }
     }
-
-    // Récupérer tous les fichiers
-    $files = Storage::disk('local')->files($dir);
-
-    // Chercher un fichier qui commence par "photo."
-    $photoFile = collect($files)->first(function ($file) {
-        return preg_match('/^.*photo\.(jpg|jpeg|png|gif|webp)$/i', basename($file));
-    });
 
     if (!$photoFile) {
         abort(404, "Fichier photo introuvable");
@@ -176,6 +175,17 @@ public function getImage($id)
     $type = Storage::disk('local')->mimeType($photoFile);
 
     return response($file, 200)->header('Content-Type', $type);
+}
+
+// premier fichier "photo.(jpg|jpeg|png|gif|webp)" du dossier, ou null
+private function trouverPhoto(string $dir): ?string
+{
+    if (!Storage::disk('local')->exists($dir)) {
+        return null;
+    }
+    return collect(Storage::disk('local')->files($dir))->first(function ($file) {
+        return preg_match('/^.*photo\.(jpg|jpeg|png|gif|webp)$/i', basename($file));
+    });
 }
 
 public function downloadBulletin($semestre)

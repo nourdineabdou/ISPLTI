@@ -102,13 +102,11 @@ class InscriptionController extends Controller
 
          $bachelier = $bachelierId ? BachelierOrientation::find($bachelierId) : null;
 
-         //dd($bachelier);
          if($bachelier) {
             //dd($bachelier);
              return $this->reponseBachelier($bachelier)
                  ?? view('inscriptions.inscriptions', compact('bachelier'));
          }
-
         return view('auth.Login_bachelier');
     }
 
